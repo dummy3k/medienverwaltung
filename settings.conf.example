@@ -1,0 +1,4 @@
+[Amazon]
+#~ dir=%(dir)s/whatever
+AccessKeyID=CHANGE ME
+SecretAccessKey=CHANGE ME
