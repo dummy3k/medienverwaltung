@@ -1,0 +1,3 @@
+include medienverwaltungweb/config/deployment.ini_tmpl
+recursive-include medienverwaltungweb/public *
+recursive-include medienverwaltungweb/templates *
