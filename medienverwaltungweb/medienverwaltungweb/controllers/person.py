@@ -12,13 +12,16 @@ log = logging.getLogger(__name__)
 
 class PersonController(BaseController):
 
-    def index(self):
+    def index(self, id=None):
         # Return a rendered template
         #return render('/actor.mako')
         # or, return a response
-        return 'Hello World'
+        if id:
+            return self.edit(id)
+        else:
+            return 'Hello World. Need id.'
 
-    def display(self, id):
+    def edit(self, id):
         c.item = meta.find(model.Person, id)
         return render('person/display.mako')
 

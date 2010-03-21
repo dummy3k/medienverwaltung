@@ -19,7 +19,7 @@
         <td class='simple'>${_(subitem)}</td>
         <td class='simple'><ul>
         %for subsubitem in c.persons[subitem]:
-        <li><a href="${h.url_for(controller='person', action='display', id=subsubitem .id)}">
+        <li><a href="${h.url_for(controller='person', action='index', id=subsubitem.id)}">
                 ${subsubitem.name}
         </a></li>
         %endfor
