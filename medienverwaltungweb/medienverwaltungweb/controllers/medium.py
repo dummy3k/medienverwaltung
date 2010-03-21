@@ -1,5 +1,6 @@
 import logging
 
+from sqlalchemy.sql import select, and_, or_, not_
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
@@ -60,7 +61,7 @@ class MediumController(BaseController):
     def edit(self, id):
         log.debug("id: %s" % id)
         c.item = meta.find(model.Medium, id)
-        c.persons = {'Actor':['John', 'Peter', 'Tom'],
+        c.persons = {'Actor':[],
                      'Director':['Tom']}
 
         query = meta.Session.query(model.MediaToAsin)
@@ -69,8 +70,27 @@ class MediumController(BaseController):
         for item in result:
             c.asins.append(item.asin)
 
-        log.debug("FOLLOW ME: %s" % query.filter(model.MediaToAsin.media_id==id).all())
+        query = meta.Session.query(model.Person)
+        actor_relation = query.filter(model.RelationType.name=='Actor').first()
+        if not actor_relation:
+            abort(404)
+        log.debug("actor_relation: %s" % actor_relation)
 
+        query = meta.Session\
+            .query(model.Person)\
+            .join(model.PersonToMedia)\
+            .filter(model.PersonToMedia.medium_id==id)\
+            .all()
+        for item in query:
+            log.debug("Person: %s" % item)
+            c.persons['Actor'].append(item)
+
+        #~ query
+        #~ query.join(model.PersonToMedia)
+
+        #~ persons = select([persons,
+        #~ for item in persons:
+            #~ log.debug("!!!person: %s" % item)
 
         return render('medium/edit.mako')
 

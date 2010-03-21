@@ -53,12 +53,6 @@ class AmazonController(BaseController):
 
 
     def map_to_medium_post(self):
-        query = meta.Session.query(model.RelationType)
-        actor_relation = query.filter(model.RelationType.name=='Actor').first()
-        if not actor_relation:
-            abort(404)
-        log.debug("actor_relation: %s" % actor_relation)
-
         media_id = request.params.get('media_id', None)
         for item in h.checkboxes(request, 'item_id_'):
             record = model.MediaToAsin()
@@ -67,10 +61,6 @@ class AmazonController(BaseController):
             meta.Session.add(record)
             h.flash("attached %s to %s" % (item, media_id))
 
-            #~ node = self.api.item_lookup(item,
-                                        #~ ResponseGroup="Images,ItemAttributes")
-            #~ c.items = node.Items.Item
-            #~ log.debug("item: %s" % node.Items.Item[0].ASIN)
 
         meta.Session.commit()
 
@@ -86,3 +76,52 @@ class AmazonController(BaseController):
             ##~ meta.Session.delete(db_item)
 
         return redirect_to(controller='medium', action='edit')
+
+
+    def query_actors(self, id):
+        """ id = media.id """
+        query = meta.Session.query(model.MediaToAsin)
+        asins = query.filter(model.MediaToAsin.media_id==id).all()
+        log.debug("asins: %s" % asins)
+
+        query = meta.Session.query(model.RelationType)
+        actor_relation = query.filter(model.RelationType.name=='Actor').first()
+        if not actor_relation:
+            abort(404)
+        log.debug("actor_relation: %s" % actor_relation)
+
+        for item in asins:
+            node = self.api.item_lookup(item.asin,
+                                        ResponseGroup="Images,ItemAttributes")
+            item = node.Items.Item[0]
+            log.debug("item.title: %s" % item.ItemAttributes.Title)
+            if 'Actor' in dir(item.ItemAttributes):
+                for subitem in item.ItemAttributes.Actor:
+                    log.debug("Actor: %s" % subitem)
+                    query = meta.Session.query(model.Person)
+                    actor = query.filter(model.Person.name==str(subitem)).first()
+                    if not actor:
+                        log.info("new actor: %s" % str(subitem))
+                        actor = model.Person()
+                        actor.name = str(subitem)
+                        meta.Session.save(actor)
+                        meta.Session.commit()
+                        h.flash("added: %s" % actor)
+
+
+                    record = model.PersonToMedia()
+                    record.person_id = actor.id
+                    record.medium_id = id
+                    record.type_id = actor_relation.id
+                    meta.Session.save(record)
+                    h.flash("added2: %s" % record)
+
+
+            else:
+                log.warn("asin %s has now actors" % item.ASIN)
+
+            log.debug("item: %s" % item.ASIN)
+
+        meta.Session.commit()
+        return redirect_to(controller='medium', action='edit')
+

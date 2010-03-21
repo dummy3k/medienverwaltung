@@ -7,6 +7,7 @@ from medium import Medium, media_table
 from persons import Person, persons_table
 from persons import RelationType, relation_types_table
 from persons import MediaToAsin, media_to_asin_table
+from persons import PersonToMedia, person_to_media_table
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -23,3 +24,4 @@ orm.mapper(Medium, media_table)
 orm.mapper(RelationType, relation_types_table)
 orm.mapper(Person, persons_table)
 orm.mapper(MediaToAsin, media_to_asin_table)
+orm.mapper(PersonToMedia, person_to_media_table)
