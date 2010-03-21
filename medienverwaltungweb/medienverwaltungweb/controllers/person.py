@@ -1,6 +1,7 @@
 import logging
 
 from webhelpers import paginate
+import urllib
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
