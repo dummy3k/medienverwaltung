@@ -35,9 +35,11 @@ class MediumController(BaseController):
         h.flash("added: %s media" % count)
         return redirect_to(action='index')
 
-    def list(self):
+    def list(self, page=1):
         query = meta.Session.query(model.Medium)
         c.items = query.all()
+        c.page = paginate.Page(query, page)
+        log.debug("HEY THERE")
         return render('medium/list.mako')
 
     def delete(self):

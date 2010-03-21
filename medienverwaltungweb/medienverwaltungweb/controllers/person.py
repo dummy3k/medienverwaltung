@@ -1,5 +1,6 @@
 import logging
 
+from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
@@ -21,8 +22,9 @@ class PersonController(BaseController):
         c.item = meta.find(model.Person, id)
         return render('person/display.mako')
 
-    def list(self):
-        query = meta.Session.query(model.Person)
-        c.items = query.all()
+    def list(self, page=1):
+        query = meta.Session.query(model.Person).all()
+        #~ c.items = query.all()
+        c.page = paginate.Page(query, page)
         return render('person/list.mako')
 

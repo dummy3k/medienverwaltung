@@ -7,6 +7,8 @@
 ##<a href="${h.url_for(action='mass_add', id=None)}">Add Medium</a>
 </p>
 
+<p>${c.page.pager()}</p>
+
 <form id="signin-form" method="post" action="${h.url_for(action='delete')}">
 <table border=1 class='simple'>
     <tr>
@@ -16,7 +18,8 @@
 ##        <td class='simple'>${_('Actions')}</td>
     </tr>
 
-    % for item in c.items:
+    ##% for item in c.page.items:
+    % for item in c.page.items:
     <tr>
         <td class='simple'>
 ##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
@@ -30,8 +33,11 @@
 </table>
 
 <p>
+<p>${c.page.pager()}</p>
+
 <input type="submit" value="Delete marked Media"/>
 ##<a href="${h.url_for(action='delete', id=None)}">Delete marked Media</a>
 </p>
 </form>
+
 </%def>
