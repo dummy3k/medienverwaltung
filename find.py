@@ -9,6 +9,7 @@ def find(keywords, SearchIndex='DVD'):
     config = ConfigParser.ConfigParser()
     config.read('settings.conf')
 
+    actors = set()
     api = amazonproduct.API(config.get('Amazon', 'AccessKeyID'),
                             config.get('Amazon', 'SecretAccessKey'))
     #~ node = api.item_search('Books', Publisher='Terminator')
@@ -21,15 +22,20 @@ def find(keywords, SearchIndex='DVD'):
 
 
         #~ raw_input("Get Details...")
-        #~ details = api.item_lookup(item.ASIN, response_group='Images')
-        details = api.item_lookup(item.ASIN, ResponseGroup='Images')
+        details = api.item_lookup(item.ASIN, ResponseGroup='Images,ItemAttributes')
         item_detail = details.Items.Item[0]
         print item_detail.LargeImage.URL
-        #~ for link_item in item_detail.ItemLinks.ItemLink:
-            #~ print link_item.Description #, link_item.URL
+        try:
+            for sub_item in item_detail.ItemAttributes.Actor:
+                print sub_item #, link_item.URL
+                actors.add(str(sub_item))
+        except AttributeError:
+            print "Could not list actors"
+
         #~ h.ipython()()
         #~ break
 
+        print actors
 if __name__ == '__main__':
     optfunc.run(find)
     #~ optfunc.main([find_dvds,])
