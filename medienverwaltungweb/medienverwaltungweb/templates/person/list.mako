@@ -9,7 +9,7 @@
 
 <p>${c.page.pager()}</p>
 
-<form id="signin-form" method="post" action="${h.url_for(action='delete')}">
+<form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -23,7 +23,7 @@
     <tr>
         <td class='simple'>
 ##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit', id=item.id)}">Edit</a>
+            <a href="${h.url_for(action='edit', id=item.id, page=None)}">Edit</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.name}</td>
