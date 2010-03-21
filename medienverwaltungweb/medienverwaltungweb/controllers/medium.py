@@ -39,3 +39,18 @@ class MediumController(BaseController):
         query = meta.Session.query(model.Medium)
         c.items = query.all()
         return render('medium/list.mako')
+
+    def delete(self):
+        #~ log.debug("FOO: %s" % request.params.get('item_id'))
+        #~ ids = []
+        msg = ""
+        for item in request.params:
+            if item.startswith('item_id'):
+                id = request.params[item]
+                db_item = meta.find(model.Medium, id)
+                meta.Session.delete(db_item)
+                h.flash("deleted: %s" % db_item)
+
+        meta.Session.commit()
+
+        return redirect_to(action='index')
