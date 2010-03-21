@@ -1,15 +1,25 @@
-<h1>Add one</h1>
+<%inherit file="/layout-default.mako"/>\
 
-<form id="signin-form" method="post" action="${h.url_for(controller='amazon', action='add_one_post')}">
-    <input type="text" name="add_this" id="openid"/>
-    <input type="submit" value="Process"/>
-</form>
+<%def name="title()">All Media</%def>
 
-<h1>Add many</h1>
+<%def name="content()">
+<p>
+<a href="${h.url_for(action='mass_add', id=None)}">Add Medium</a>
+</p>
 
-<form id="signin-form" method="post" action="${h.url_for(controller='login', action='signin_POST')}">
-    <textarea name="user_eingabe" cols="50" rows="10"></textarea>
-    ##<input type="text" name="openid" id="openid" class="openid-identifier" />
-    <input type="submit" value="Process"/>
-</form>
+<table border=1 class='simple'>
+    <tr>
+        <td class='simple'>${_('Id')}</td>
+        <td class='simple'>${_('Title')}</td>
+##        <td class='simple'>${_('Actions')}</td>
+    </tr>
 
+    % for item in c.items:
+    <tr>
+        <td class='simple'>${item.id}</td>
+        <td class='simple'>${item.title}</td>
+##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
+    </tr>
+    %endfor
+</table>
+</%def>

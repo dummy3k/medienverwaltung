@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 class MediumController(BaseController):
 
     def index(self):
-        return self.mass_add()
+        return self.list()
 
     def mass_add(self):
         return render('medium/mass_add.mako')
@@ -31,3 +31,8 @@ class MediumController(BaseController):
 
         h.flash("added: %s" % record)
         return redirect_to(action='index')
+
+    def list(self):
+        query = meta.Session.query(model.Medium)
+        c.items = query.all()
+        return render('medium/list.mako')
