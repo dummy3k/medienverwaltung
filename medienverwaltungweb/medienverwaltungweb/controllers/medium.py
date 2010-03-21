@@ -1,6 +1,7 @@
 import logging
 
 from sqlalchemy.sql import select, and_, or_, not_
+from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
@@ -39,7 +40,6 @@ class MediumController(BaseController):
         query = meta.Session.query(model.Medium)
         c.items = query.all()
         c.page = paginate.Page(query, page)
-        log.debug("HEY THERE")
         return render('medium/list.mako')
 
     def delete(self):

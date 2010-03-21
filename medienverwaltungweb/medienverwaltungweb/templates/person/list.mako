@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">All Media</%def>
+<%def name="title()">All Persons</%def>
 
 <%def name="content()">
 <p>

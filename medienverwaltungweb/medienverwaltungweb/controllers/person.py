@@ -23,8 +23,7 @@ class PersonController(BaseController):
         return render('person/display.mako')
 
     def list(self, page=1):
-        query = meta.Session.query(model.Person).all()
-        #~ c.items = query.all()
+        query = meta.Session.query(model.Person)
         c.page = paginate.Page(query, page)
         return render('person/list.mako')
 
