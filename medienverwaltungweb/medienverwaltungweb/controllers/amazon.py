@@ -97,24 +97,32 @@ class AmazonController(BaseController):
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             if 'Actor' in dir(item.ItemAttributes):
                 for subitem in item.ItemAttributes.Actor:
-                    log.debug("Actor: %s" % subitem)
+                    #~ subitem = str(subitem).encode('utf-8')
+                    subitem = unicode(subitem)
                     query = meta.Session.query(model.Person)
-                    actor = query.filter(model.Person.name==str(subitem)).first()
+                    actor = query.filter(model.Person.name==subitem).first()
                     if not actor:
-                        log.info("new actor: %s" % str(subitem))
+                        log.info("new actor: %s" % subitem)
                         actor = model.Person()
-                        actor.name = str(subitem)
+                        actor.name = subitem
                         meta.Session.save(actor)
                         meta.Session.commit()
                         h.flash("added: %s" % actor)
+                    log.debug("!!!!!! Actor: %s" % actor)
 
 
-                    record = model.PersonToMedia()
-                    record.person_id = actor.id
-                    record.medium_id = id
-                    record.type_id = actor_relation.id
-                    meta.Session.save(record)
-                    h.flash("added2: %s" % record)
+                    query = meta.Session.query(model.PersonToMedia)
+                    record = query.filter(model.PersonToMedia.person_id==actor.id)\
+                                  .filter(model.PersonToMedia.medium_id==id).first()
+                    if record:
+                        log.info("!!!!!!! %s already exists" % record)
+                    else:
+                        record = model.PersonToMedia()
+                        record.person_id = actor.id
+                        record.medium_id = id
+                        record.type_id = actor_relation.id
+                        meta.Session.save(record)
+                        h.flash("added2: %s" % record)
 
 
             else:
