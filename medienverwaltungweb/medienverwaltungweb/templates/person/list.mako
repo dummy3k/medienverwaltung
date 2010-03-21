@@ -34,7 +34,6 @@
 
 <p>
 <p>${c.page.pager()}</p>
-
 <input type="submit" value="Delete marked Media"/>
 ##<a href="${h.url_for(action='delete', id=None)}">Delete marked Media</a>
 </p>

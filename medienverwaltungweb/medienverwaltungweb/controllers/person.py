@@ -21,12 +21,20 @@ class PersonController(BaseController):
         else:
             return 'Hello World. Need id.'
 
-    def edit(self, id):
+    def edit(self, id, page=1):
         c.item = meta.find(model.Person, id)
+
+        query = meta.Session\
+            .query(model.Medium)\
+            .join(model.PersonToMedia)\
+            .filter(model.PersonToMedia.person_id == id)
+        c.page = paginate.Page(query, page)
+
         return render('person/display.mako')
 
     def list(self, page=1):
         query = meta.Session.query(model.Person)
         c.page = paginate.Page(query, page)
+
         return render('person/list.mako')
 

@@ -21,4 +21,13 @@
 
 ##<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
 ##<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
+
+<h2>Actor in...</h2>
+<p>${c.page.pager()}</p>
+<ul>
+%for item in c.page.items:
+    <li><a href="${h.url_for(controller='medium', action='edit', id=item.id)}">${item.title}</a></li>
+%endfor
+</ul>
+<p>${c.page.pager()}</p>
 </%def>
