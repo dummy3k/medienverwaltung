@@ -69,7 +69,7 @@ class MediumController(BaseController):
         for item in result:
             c.asins.append(item.asin)
 
-        query = meta.Session.query(model.Person)
+        query = meta.Session.query(model.RelationType)
         actor_relation = query.filter(model.RelationType.name=='Actor').first()
         if not actor_relation:
             abort(404)
