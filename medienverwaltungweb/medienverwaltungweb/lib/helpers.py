@@ -30,3 +30,10 @@ def ipython():
         exit_msg = 'Leaving Interpreter, back to Pylons.')
     return ipshell
 
+def checkboxes(request, id):
+    retval = []
+    for item in request.params:
+        if item.startswith(id):
+            retval.append(request.params[item])
+
+    return retval

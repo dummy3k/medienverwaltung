@@ -8,7 +8,6 @@ import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
 from medienverwaltungweb.model import meta
 
-
 log = logging.getLogger(__name__)
 
 class MediumController(BaseController):
@@ -42,12 +41,17 @@ class MediumController(BaseController):
 
     def delete(self):
         msg = ""
-        for item in request.params:
-            if item.startswith('item_id'):
-                id = request.params[item]
-                db_item = meta.find(model.Medium, id)
-                meta.Session.delete(db_item)
-                h.flash("deleted: %s" % db_item)
+        #~ for item in request.params:
+            #~ if item.startswith('item_id'):
+                #~ id = request.params[item]
+                #~ db_item = meta.find(model.Medium, id)
+                #~ meta.Session.delete(db_item)
+                #~ h.flash("deleted: %s" % db_item)
+
+        for item in h.checkboxes(request, 'item_id_'):
+            db_item = meta.find(model.Medium, item)
+            meta.Session.delete(db_item)
+            h.flash("deleted: %s" % db_item)
 
         meta.Session.commit()
 
@@ -56,6 +60,18 @@ class MediumController(BaseController):
     def edit(self, id):
         log.debug("id: %s" % id)
         c.item = meta.find(model.Medium, id)
+        c.persons = {'Actor':['John', 'Peter', 'Tom'],
+                     'Director':['Tom']}
+
+        query = meta.Session.query(model.MediaToAsin)
+        result = query.filter(model.MediaToAsin.media_id==id).all()
+        c.asins = []
+        for item in result:
+            c.asins.append(item.asin)
+
+        log.debug("FOLLOW ME: %s" % query.filter(model.MediaToAsin.media_id==id).all())
+
+
         return render('medium/edit.mako')
 
     def edit_post(self):

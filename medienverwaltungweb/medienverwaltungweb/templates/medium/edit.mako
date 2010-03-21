@@ -14,9 +14,29 @@
         <td class='simple'>${_('Title')}</td>
         <td class='simple'><input type="text" name="title" value="${c.item.title}" /></td>
     </tr>
+    %for subitem in c.persons:
+    <tr>
+        <td class='simple'>${_(subitem)}</td>
+        <td class='simple'><ul>
+        %for subsubitem in c.persons[subitem]:
+        <li>${subsubitem}</li>
+        %endfor
+        </ul></td>
+    </tr>
+    %endfor
+
+    <tr>
+    <td class='simple'>${_('Asins')}</td>
+        <td class='simple'><ul>
+        %for subitem in c.asins:
+        <a href="${h.url_for(controller='amazon', action='show_asin', id=subitem)}">
+        <li>${subitem}</li>
+        %endfor
+    </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
 <input type="submit" value="Save"/>
 </form>
 
+<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
 </%def>

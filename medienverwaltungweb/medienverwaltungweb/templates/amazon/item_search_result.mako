@@ -3,11 +3,10 @@
 <%def name="title()">Item Search Results</%def>
 
 <%def name="content()">
-Query = ${c.query}
-
-<div class='simple'>
+<form id="signin-form" method="post" action="${h.url_for(action='map_to_medium_post')}">
 <table border=1 class='simple'>
     <tr>
+        <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('ASIN')}</td>
         <td class='simple'>${_('Title')}</td>
         <td class='simple'>${_('Image')}</td>
@@ -16,6 +15,9 @@ Query = ${c.query}
 
     % for item in c.items:
     <tr>
+        <td class='simple'>
+            <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}">
+        </td>
         <td class='simple'>${item.ASIN}</td>
         <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
         <td class='simple'><img src="${unicode(item.SmallImage.URL)}" /></td>
@@ -23,5 +25,7 @@ Query = ${c.query}
     </tr>
     %endfor
 </table>
-</div>
+<input type="hidden" name="media_id" value="${c.item.id}" />
+<input type="submit" value="Attach to '${c.item}'"/>
+</form>
 </%def>
