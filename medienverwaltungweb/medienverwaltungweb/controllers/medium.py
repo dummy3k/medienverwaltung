@@ -24,12 +24,15 @@ class MediumController(BaseController):
             h.flash("please specify name")
             return redirect_to(action='mass_add')
 
-        record = model.Medium()
-        record.title = request.params.get('title')
-        meta.Session.save(record)
+        count = 0
+        for item in request.params.get('title').split('\n'):
+            record = model.Medium()
+            record.title = item
+            meta.Session.save(record)
+            count += 1
         meta.Session.commit()
 
-        h.flash("added: %s" % record)
+        h.flash("added: %s media" % count)
         return redirect_to(action='index')
 
     def list(self):
