@@ -18,7 +18,10 @@
 
     % for item in c.items:
     <tr>
-        <td class='simple'><input type="checkbox" name="item_id_${item.id}" value="${item.id}"></td>
+        <td class='simple'>
+            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
+            <a href="${h.url_for(action='edit', id=item.id)}">Edit</a>
+        </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.title}</td>
 ##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>

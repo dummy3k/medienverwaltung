@@ -13,6 +13,6 @@ class Medium(object):
     __str__ = __unicode__
 
     def __repr__(self):
-        return "<Medium('%s')>" % (self.title)
+        return "<Medium(%s, '%s')>" % (self.id, self.title)
 
 

@@ -4,7 +4,6 @@
 
 <%def name="content()">
 
-<div class='simple'>
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('ASIN')}</td>
@@ -31,5 +30,4 @@
         </td>
     </tr>
 </table>
-</div>
 </%def>

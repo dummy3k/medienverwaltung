@@ -41,8 +41,6 @@ class MediumController(BaseController):
         return render('medium/list.mako')
 
     def delete(self):
-        #~ log.debug("FOO: %s" % request.params.get('item_id'))
-        #~ ids = []
         msg = ""
         for item in request.params:
             if item.startswith('item_id'):
@@ -53,4 +51,18 @@ class MediumController(BaseController):
 
         meta.Session.commit()
 
+        return redirect_to(action='index')
+
+    def edit(self, id):
+        log.debug("id: %s" % id)
+        c.item = meta.find(model.Medium, id)
+        return render('medium/edit.mako')
+
+    def edit_post(self):
+        id = request.params.get('id')
+        item = meta.find(model.Medium, id)
+        item.title = request.params.get('title')
+        meta.Session.update(item)
+        meta.Session.commit()
+        h.flash("updated: %s" % item)
         return redirect_to(action='index')
