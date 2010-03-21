@@ -20,10 +20,13 @@ def find(keywords, SearchIndex='DVD'):
                                 unicode(item.ItemAttributes.Title)[:70])
 
 
-        details = api.item_lookup(item.ASIN)
+        #~ raw_input("Get Details...")
+        #~ details = api.item_lookup(item.ASIN, response_group='Images')
+        details = api.item_lookup(item.ASIN, ResponseGroup='Images')
         item_detail = details.Items.Item[0]
-        for link_item in item_detail.ItemLinks.ItemLink:
-            print link_item.Description #, link_item.URL
+        print item_detail.LargeImage.URL
+        #~ for link_item in item_detail.ItemLinks.ItemLink:
+            #~ print link_item.Description #, link_item.URL
         #~ h.ipython()()
         #~ break
 
