@@ -6,6 +6,7 @@
     <title>${self.title()} - Medienverwaltung</title>
 
 	<link href="/css/default.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
 ##    <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
 ##    % for x in c.rss_feeds:
 ##    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
@@ -25,15 +26,15 @@
 ##        <a href="${h.url_for(controller='login', action='signin', id=None, return_to=h.url_for())}">Login</a>
 ##        % endif
 ##    </div>
-##    <% flashes = h.flash.pop_messages() %>
-##    % if flashes:
-##        % for flash in flashes:
-##            <div class="ui-state-highlight ui-corner-all">
-##                <span class="ui-icon ui-icon-info">&nbsp;</span>
-##                <span class="flash-text">${flash}</span>
-##            </div>
-##        % endfor
-##    % endif
+    <% flashes = h.flash.pop_messages() %>
+    % if flashes:
+        % for flash in flashes:
+            <div class="ui-state-highlight ui-corner-all">
+                <span class="ui-icon ui-icon-info">&nbsp;</span>
+                <span class="flash-text">${flash}</span>
+            </div>
+        % endfor
+    % endif
 
  <div class="main">
      ${self.content()}

@@ -20,3 +20,13 @@ td.simple
     background-color: #FFC;
 */
 }
+
+.ui-icon {
+    float: left;
+}
+
+.ui-state-highlight {
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
