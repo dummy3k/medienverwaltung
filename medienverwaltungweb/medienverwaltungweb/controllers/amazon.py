@@ -122,7 +122,7 @@ class AmazonController(BaseController):
                         record.medium_id = id
                         record.type_id = actor_relation.id
                         meta.Session.save(record)
-                        h.flash("added2: %s" % record)
+                        h.flash("added: %s" % record)
 
 
             else:

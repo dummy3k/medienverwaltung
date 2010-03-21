@@ -13,6 +13,7 @@
         <td class='simple'>${_('Title')}</td>
         <td class='simple'>${c.item.ItemAttributes.Title}</td>
     </tr>
+    %if 'Actor' in dir(c.item.ItemAttributes):
     <tr>
         <td class='simple'>${_('Actors')}</td>
         <td class='simple'><ul>
@@ -21,6 +22,7 @@
         %endfor
         </ul></td>
     </tr>
+    %endif
     <tr>
         <td class='simple'>${_('Images')}</td>
         <td class='simple'>
