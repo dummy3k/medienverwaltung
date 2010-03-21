@@ -61,8 +61,7 @@ class MediumController(BaseController):
     def edit(self, id):
         log.debug("id: %s" % id)
         c.item = meta.find(model.Medium, id)
-        c.persons = {'Actor':[],
-                     'Director':['Tom']}
+        c.persons = {'Actor':[]}
 
         query = meta.Session.query(model.MediaToAsin)
         result = query.filter(model.MediaToAsin.media_id==id).all()
