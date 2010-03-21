@@ -1,5 +1,6 @@
 import logging
 import amazonproduct
+import urllib
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -17,17 +18,14 @@ class AmazonController(BaseController):
 
     def add_one_post(self):
         add_this = request.params.get('add_this', None)
-
         api = amazonproduct.API(config['Amazon.AccessKeyID'],
                                 config['Amazon.SecretAccessKey'])
 
         SearchIndex = 'DVD'
+        log.debug("add_this: %s" % add_this)
         node = api.item_search(SearchIndex,
-                               Title=add_this,
+                               Title=add_this.encode('utf-8'),
                                ResponseGroup="Images,ItemAttributes")
         c.items = node.Items.Item
         c.query = add_this
         return render('/amazon/item_search_resqult.mako')
-
-        #~ h.ipython()()
-        #~ return "Hi: %s, %s" % (add_this, config['Amazon.AccessKeyID'])
