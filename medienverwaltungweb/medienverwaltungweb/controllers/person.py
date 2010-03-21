@@ -20,3 +20,9 @@ class PersonController(BaseController):
     def display(self, id):
         c.item = meta.find(model.Person, id)
         return render('person/display.mako')
+
+    def list(self):
+        query = meta.Session.query(model.Person)
+        c.items = query.all()
+        return render('person/list.mako')
+
