@@ -99,6 +99,7 @@ class MediumController(BaseController):
         id = request.params.get('id')
         item = meta.find(model.Medium, id)
         item.title = request.params.get('title')
+        item.image_url = request.params.get('image_url')
         meta.Session.update(item)
         meta.Session.commit()
         h.flash("updated: %s" % item)

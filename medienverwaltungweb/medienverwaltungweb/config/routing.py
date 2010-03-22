@@ -22,7 +22,7 @@ def make_map():
 
     #~ map.connect('/{controller}/{id}/page/{page}', controller='feed', action='show_feed')
     map.connect('/{controller}/{action}/page/{page}')
-    map.connect('/', controller='amazon', action='index')
+    map.connect('/', controller='medium', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
 

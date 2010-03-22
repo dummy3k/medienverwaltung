@@ -132,4 +132,9 @@ class AmazonController(BaseController):
 
         meta.Session.commit()
         return redirect_to(controller='medium', action='edit')
+    def query_images(self, id):
+        """ show the user a selection of available images """
 
+        return "show the user a selection of available images"
+        #~ return render("amazon/image_list.mako")
+        
