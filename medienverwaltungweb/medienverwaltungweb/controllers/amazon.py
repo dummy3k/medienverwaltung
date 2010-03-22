@@ -135,6 +135,28 @@ class AmazonController(BaseController):
     def query_images(self, id):
         """ show the user a selection of available images """
 
-        return "show the user a selection of available images"
-        #~ return render("amazon/image_list.mako")
+        query = meta.Session.query(model.MediaToAsin)
+        asins = query.filter(model.MediaToAsin.media_id==id).all()
+        log.debug("asins: %s" % asins)
+
+        c.items = []
+        for item in asins:
+            log.debug("fetching: %s" % item.asin)
+            node = self.api.item_lookup(item.asin,
+                                        ResponseGroup="Images")
+
+            c.items.append( node.Items.Item )
+            #~ break
+            #~ c.items.append( {'ASIN':item, 'image_url':""} )
+            
+        log.debug("c.items: %s" % c.items)
         
+        return render("amazon/image_list.mako")
+        
+    def query_images_post(self, id):
+        item = meta.find(model.Medium, id)
+        item.image_url = request.params.get('url', None)
+        meta.Session.update(item)
+        meta.Session.commit()
+        
+        return redirect_to(controller='medium', action='edit')

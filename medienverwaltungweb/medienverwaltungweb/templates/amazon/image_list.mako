@@ -1,0 +1,18 @@
+<%inherit file="/layout-default.mako"/>\
+
+<%def name="title()">Select image</%def>
+
+<%def name="content()">
+
+% for item in c.items:
+<form id="signin-form" method="post" action="${h.url_for(action='query_images_post')}">
+<input type="hidden" name="url" value="${unicode(item.LargeImage.URL)}">
+<input type="image" src="${unicode(item.LargeImage.URL)}">
+</form>
+
+##<img src="${unicode(item.LargeImage.URL)}" />
+% endfor
+##<input type="hidden" name="media_id" value="${c.media_id}" />
+##<input type="submit" value="Attach to '${c.item}'"/>
+</form>
+</%def>
