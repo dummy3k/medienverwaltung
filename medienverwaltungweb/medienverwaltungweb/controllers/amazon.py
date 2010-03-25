@@ -143,13 +143,16 @@ class AmazonController(BaseController):
         c.items = []
         for item in asins:
             log.debug("fetching: %s" % item.asin)
-            node = self.api.item_lookup(item.asin,
-                                        ResponseGroup="Images")
+            node = None
+            try:
+                node = self.api.item_lookup(item.asin,
+                                            ResponseGroup="Images")
+            except:
+                pass
 
-            c.items.append( node.Items.Item )
-            #~ break
-            #~ c.items.append( {'ASIN':item, 'image_url':""} )
-            
+            if node:
+                c.items.append( node.Items.Item )
+
         log.debug("c.items: %s" % c.items)
         
         return render("amazon/image_list.mako")
