@@ -4,7 +4,8 @@
 
 <%def name="content()">
 <p>
-##<a href="${h.url_for(action='mass_add', id=None)}">Add Medium</a>
+<a href="${h.url_for(role='Actor')}">Director</a>
+<a href="${h.url_for(role='Director')}">Director</a>
 </p>
 
 <p>${c.page.pager()}</p>
@@ -35,7 +36,6 @@
 <p>
 <p>${c.page.pager()}</p>
 <input type="submit" value="Delete marked Media"/>
-##<a href="${h.url_for(action='delete', id=None)}">Delete marked Media</a>
 </p>
 </form>
 

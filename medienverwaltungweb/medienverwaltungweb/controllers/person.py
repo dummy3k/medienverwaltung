@@ -14,9 +14,6 @@ log = logging.getLogger(__name__)
 class PersonController(BaseController):
 
     def index(self, id=None):
-        # Return a rendered template
-        #return render('/actor.mako')
-        # or, return a response
         if id:
             return self.edit(id)
         else:
@@ -34,7 +31,13 @@ class PersonController(BaseController):
         return render('person/display.mako')
 
     def list(self, page=1):
+        relation_type = request.params.get('role')
         query = meta.Session.query(model.Person)
+        if relation_type:
+            query = query.join(model.PersonToMedia)\
+                         .join(model.RelationType)\
+                         .filter(model.RelationType.name == relation_type)
+                         
         c.page = paginate.Page(query, page)
 
         return render('person/list.mako')
