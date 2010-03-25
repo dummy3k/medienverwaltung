@@ -104,20 +104,30 @@ class MediumController(BaseController):
         for item in result:
             c.asins.append(item.asin)
 
-        query = meta.Session.query(model.RelationType)
-        actor_relation = query.filter(model.RelationType.name=='Actor').first()
-        if not actor_relation:
-            abort(404)
-        log.debug("actor_relation: %s" % actor_relation)
-
+        log.debug("!!!!!!!!")
+        #~ query = meta.Session\
+            #~ .query(model.Person)\
+            #~ .join(model.PersonToMedia)\
+            #~ .join(model.RelationType)\
+            #~ .filter(model.PersonToMedia.medium_id==id)\
+            #~ .all()
         query = meta.Session\
-            .query(model.Person)\
-            .join(model.PersonToMedia)\
+            .query(model.PersonToMedia)\
             .filter(model.PersonToMedia.medium_id==id)\
             .all()
         for item in query:
-            log.debug("Person: %s" % item)
-            c.persons['Actor'].append(item)
+            log.debug("Person2: %s" % item.person)
+
+            #~ sub_query = meta.Session.query(model.RelationType)
+            #~ actor_relation = sub_query.filter(model.RelationType.name=='Actor').first()
+            #~ if not actor_relation:
+                #~ abort(404)
+            #~ log.debug("actor_relation: %s" % actor_relation)
+
+            if item.relation.name in c.persons:
+                c.persons[item.relation.name].append(item.person)
+            else:
+                c.persons[item.relation.name] = [item.person]
 
         #~ query
         #~ query.join(model.PersonToMedia)

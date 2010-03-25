@@ -28,5 +28,9 @@ orm.mapper(Medium, media_table, properties = {
 orm.mapper(RelationType, relation_types_table)
 orm.mapper(Person, persons_table)
 orm.mapper(MediaToAsin, media_to_asin_table)
-orm.mapper(PersonToMedia, person_to_media_table)
+
+orm.mapper(PersonToMedia, person_to_media_table, properties = {
+    'person' : orm.relation(Person),
+    'relation' : orm.relation(RelationType),
+    })
 
