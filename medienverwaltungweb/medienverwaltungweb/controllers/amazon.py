@@ -46,10 +46,13 @@ class AmazonController(BaseController):
     def map_to_medium(self, id):
         """ id is media.id """
         c.item = meta.find(model.Medium, id)
+
+        query  = request.params.get('query', c.item.title)
         node = self.api.item_search(self.SearchIndex,
-                                    Title=c.item.title.encode('utf-8'),
+                                    Title=query.encode('utf-8'),
                                     ResponseGroup="Images,ItemAttributes")
         c.items = node.Items.Item
+        c.query = query
         return render('/amazon/item_search_result.mako')
 
 

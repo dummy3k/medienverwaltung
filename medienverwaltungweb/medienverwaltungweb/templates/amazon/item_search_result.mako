@@ -3,6 +3,15 @@
 <%def name="title()">Item Search Results</%def>
 
 <%def name="content()">
+<form id="signin-form" method="post" action="${h.url_for(query=None)}">
+<p>
+    Query: <input type="text" name="query" value="${c.query}" />
+    <input type="submit" value="Search"/>
+</p>
+<p>${h.url_for(query=None)}</p>
+##<input type="hidden" name="id" value="${c.item.id}" />
+</form>
+
 <form id="signin-form" method="post" action="${h.url_for(action='map_to_medium_post')}">
 <table border=1 class='simple'>
     <tr>
