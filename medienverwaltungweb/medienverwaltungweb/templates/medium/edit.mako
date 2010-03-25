@@ -5,6 +5,9 @@
 <%def name="content()">
 <p>
 <a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
+% if len(c.item.asins) > 0:
+<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
+% endif
 </p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
@@ -62,9 +65,4 @@
     <input type="submit" value="Delete"/>
 </form>
 </p>
-
-% if len(c.item.asins) > 0:
-<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
-% endif
-
 </%def>

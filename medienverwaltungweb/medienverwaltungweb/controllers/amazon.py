@@ -82,7 +82,7 @@ class AmazonController(BaseController):
         return redirect_to(controller='medium', action='edit')
 
     def __add_persons__(self, item, relation_name, medium_id):
-        if relation_name in dir(item.ItemAttributes.__dict__):
+        if not relation_name in item.ItemAttributes.__dict__:
             log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
             return
 

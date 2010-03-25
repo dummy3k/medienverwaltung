@@ -69,7 +69,7 @@ class MediumController(BaseController):
             .filter(model.Medium.image_data != None)
             
         c.items = query.all()
-        c.page = paginate.Page(query, page)
+        c.page = paginate.Page(query, page, items_per_page=18)
         return render('medium/list_gallery.mako')
 
     def delete(self):
@@ -148,16 +148,8 @@ class MediumController(BaseController):
         h.flash("updated: %s" % item)
         return redirect_to(action='edit', id=id)
 
-
-    def foo(self):
-        return "Hello World!"
     def image(self, id, width, height):
         item = meta.find(model.Medium, id)
-        #~ log.debug(item.image_data.)
-
-        #~ mode = 'RGB'
-        #~ img = Image.frombuffer(mode, (100, 100), item.image_data.getvalue())
-        #~ log.debug("mode: %s" % mode)
 
         p = ImageFile.Parser()
         p.feed(item.image_data.getvalue())
