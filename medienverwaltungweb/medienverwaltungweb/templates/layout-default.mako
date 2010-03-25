@@ -36,6 +36,12 @@
         % endfor
     % endif
 
+<p>
+<a href="${h.url_for(controller='medium', action='list', id=None)}">Media</a>
+<a href="${h.url_for(controller='medium', action='list_gallery', id=None)}">Gallery</a>
+<a href="${h.url_for(controller='person', action='list', id=None)}">Persons</a>
+</p>
+
  <div class="main">
      ${self.content()}
  </div>

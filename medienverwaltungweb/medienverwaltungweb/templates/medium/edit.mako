@@ -18,8 +18,11 @@
         <td class='simple'>${_('Image')}</td>
         <td class='simple'>
             <p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
+            ##<p>Asins: ${len(c.item.asins)}</p>
+            % if len(c.item.asins) > 0:
             ##<p><input type="text" name="image_url" value="${c.item.image_url}" /></p>
             <p><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></p>
+            % endif
         </td>
     </tr>
     %for subitem in c.persons:
@@ -49,5 +52,9 @@
 </form>
 
 <a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
+
+% if len(c.item.asins) > 0:
 <a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
+% endif
+
 </%def>

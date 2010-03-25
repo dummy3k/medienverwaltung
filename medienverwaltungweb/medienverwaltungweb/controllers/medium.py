@@ -46,7 +46,7 @@ class MediumController(BaseController):
     def list_gallery(self, page=1):
         query = meta.Session\
             .query(model.Medium)\
-            .filter(model.Medium.image_url != None)
+            .filter(model.Medium.image_data != None)
             
         c.items = query.all()
         c.page = paginate.Page(query, page)

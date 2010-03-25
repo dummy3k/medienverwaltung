@@ -20,8 +20,13 @@ def init_model(engine):
     meta.Session.configure(bind=engine)
     meta.engine = engine
 
-orm.mapper(Medium, media_table)
+#~ orm.mapper(Medium, media_table)
+orm.mapper(Medium, media_table, properties = {
+    'asins' : orm.relation(MediaToAsin),
+    })
+
 orm.mapper(RelationType, relation_types_table)
 orm.mapper(Person, persons_table)
 orm.mapper(MediaToAsin, media_to_asin_table)
 orm.mapper(PersonToMedia, person_to_media_table)
+

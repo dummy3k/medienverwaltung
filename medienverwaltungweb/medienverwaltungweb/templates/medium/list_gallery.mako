@@ -10,9 +10,11 @@
 <p>${c.page.pager(controller='medium', action='gallery_list')}</p>
 
 % for item in c.page.items:
-<div>
-${item.image_url}
-</div>
+##<div>
+<a href="${h.url_for(action='image', id=item.id)}">
+<img class="plain" src="${h.url_for(action='image', id=item.id, width=400, height=300)}" />
+</a>
+##</div>
 % endfor
 
 ##<form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
