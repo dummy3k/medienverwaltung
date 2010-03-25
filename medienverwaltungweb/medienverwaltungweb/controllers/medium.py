@@ -41,6 +41,16 @@ class MediumController(BaseController):
         query = meta.Session.query(model.Medium)
         c.items = query.all()
         c.page = paginate.Page(query, page)
+        c.title = "All Media"
+        return render('medium/list.mako')
+
+    def list_no_image(self, page=1):
+        query = meta.Session\
+            .query(model.Medium)\
+            .filter(model.Medium.image_data == None)
+        c.items = query.all()
+        c.page = paginate.Page(query, page)
+        c.title = "Media without images"
         return render('medium/list.mako')
 
     def list_gallery(self, page=1):
@@ -113,7 +123,7 @@ class MediumController(BaseController):
         meta.Session.update(item)
         meta.Session.commit()
         h.flash("updated: %s" % item)
-        return redirect_to(action='index')
+        return redirect_to(action='edit', id=id)
 
 
     def foo(self):
@@ -143,3 +153,4 @@ class MediumController(BaseController):
         # set the response type to PNG, since we at least hope to return a PNG image here
         #~ return item.image_data.getvalue()
         #~ return img.tostring()
+
