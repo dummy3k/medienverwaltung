@@ -15,6 +15,10 @@ import medienverwaltungweb.model as model
 
 log = logging.getLogger(__name__)
 
+class RefHelper():
+    def __init__(self, value):
+        self.value = value
+        
 class AmazonController(BaseController):
     def __init__(self):
         BaseController.__init__(self)
@@ -81,7 +85,7 @@ class AmazonController(BaseController):
 
         return redirect_to(controller='medium', action='edit')
 
-    def __add_persons__(self, item, relation_name, medium_id):
+    def __add_persons__(self, item, relation_name, medium_id, msg):
         if not relation_name in item.ItemAttributes.__dict__:
             log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
             return
@@ -108,7 +112,8 @@ class AmazonController(BaseController):
                 actor.name = subitem
                 meta.Session.save(actor)
                 meta.Session.commit()
-                h.flash("added: %s" % actor)
+                #~ h.flash("added: %s" % actor)
+                msg.value += "%s, " % actor.name
             log.debug("!!!!!! Actor: %s" % actor)
 
 
@@ -123,7 +128,7 @@ class AmazonController(BaseController):
                 record.medium_id = medium_id
                 record.type_id = actor_relation.id
                 meta.Session.save(record)
-                h.flash("added: %s" % record)
+                #~ h.flash("added: %s" % record)
 
         
     def query_actors(self, id):
@@ -132,18 +137,34 @@ class AmazonController(BaseController):
         asins = query.filter(model.MediaToAsin.media_id==id).all()
         log.debug("asins: %s" % asins)
 
+        #~ stats = RefHelper({'Actor':0,
+                           #~ 'Creator':0,
+                           #~ 'Director':0,
+                           #~ 'Manufacturer':0,
+        msg = RefHelper(u"added: ")
+        
         for item in asins:
-            node = self.api.item_lookup(item.asin,
-                                        ResponseGroup="Images,ItemAttributes")
+            node = None
+            try:
+                node = self.api.item_lookup(item.asin,
+                                            ResponseGroup="Images,ItemAttributes")
+            except:
+                h.flash("lookup failed: %s" % item.asin)
+
+            if not node:
+                continue
+                
             item = node.Items.Item[0]
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
-            self.__add_persons__(item, 'Actor', id)
-            self.__add_persons__(item, 'Creator', id)
-            self.__add_persons__(item, 'Director', id)
-            self.__add_persons__(item, 'Manufacturer', id)
+            self.__add_persons__(item, 'Actor', id, msg)
+            self.__add_persons__(item, 'Creator', id, msg)
+            self.__add_persons__(item, 'Director', id, msg)
+            self.__add_persons__(item, 'Manufacturer', id, msg)
 
         meta.Session.commit()
+        if len(msg.value) > len(u"added: "):
+            h.flash(msg.value)
         return redirect_to(controller='medium', action='edit')
         
     def query_images(self, id):

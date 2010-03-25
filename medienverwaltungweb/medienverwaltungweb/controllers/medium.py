@@ -52,6 +52,7 @@ class MediumController(BaseController):
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "All Media"
+        c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_no_image(self, page=1):
@@ -61,6 +62,7 @@ class MediumController(BaseController):
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "Media without images"
+        c.pager_action = "list_no_image"
         return render('medium/list.mako')
 
     def list_gallery(self, page=1):

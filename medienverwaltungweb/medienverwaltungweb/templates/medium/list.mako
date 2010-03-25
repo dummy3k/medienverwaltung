@@ -7,7 +7,7 @@
 <a href="${h.url_for(action='mass_add', id=None, page=None)}">Add Medium</a>
 </p>
 
-<p>${c.page.pager(controller='medium', action='list')}</p>
+<p>${c.page.pager(controller='medium', action=c.pager_action)}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
 <table border=1 class='simple'>
@@ -32,7 +32,7 @@
     %endfor
 </table>
 
-<p>${c.page.pager(controller='medium', action='list')}</p>
+<p>${c.page.pager(controller='medium', action=c.pager_action)}</p>
 
 <p>
 <input type="submit" value="Delete marked Media"/>
