@@ -25,5 +25,6 @@ def make_map():
     map.connect('/', controller='medium', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
+    map.connect('/{controller}/{action}/{id}/{width}/{height}')
 
     return map

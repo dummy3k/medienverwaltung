@@ -4,7 +4,7 @@ from medienverwaltungweb.model import meta
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('title', String(100)),
-    Column('image_url', String(255)),
+    Column('image_data', PickleType),
 )
 
 class Medium(object):

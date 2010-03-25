@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Edit Item</%def>
+<%def name="title()">Edit Item - "${c.item.title}"</%def>
 
 <%def name="content()">
 
@@ -17,10 +17,8 @@
     <tr>
         <td class='simple'>${_('Image')}</td>
         <td class='simple'>
-            %if c.item.image_url:
-            <p><img src="${c.item.image_url}" /><p>
-            %endif
-            <p><input type="text" name="image_url" value="${c.item.image_url}" /></p>
+            <p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
+            ##<p><input type="text" name="image_url" value="${c.item.image_url}" /></p>
             <p><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></p>
         </td>
     </tr>

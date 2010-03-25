@@ -1,6 +1,7 @@
 import logging
 import amazonproduct
 import urllib
+from StringIO import StringIO
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -154,8 +155,13 @@ class AmazonController(BaseController):
         return render("amazon/image_list.mako")
         
     def query_images_post(self, id):
+        url = request.params.get('url', None)
+        webFile = urllib.urlopen(url)
+        buffer = StringIO()
+        buffer.write(webFile.read())
+
         item = meta.find(model.Medium, id)
-        item.image_url = request.params.get('url', None)
+        item.image_data = buffer
         meta.Session.update(item)
         meta.Session.commit()
         

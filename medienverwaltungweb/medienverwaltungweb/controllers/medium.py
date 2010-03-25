@@ -1,4 +1,6 @@
 import logging
+import Image, ImageFile
+from StringIO import StringIO
 
 from sqlalchemy.sql import select, and_, or_, not_
 from webhelpers import paginate
@@ -13,7 +15,6 @@ from medienverwaltungweb.model import meta
 log = logging.getLogger(__name__)
 
 class MediumController(BaseController):
-
     def index(self):
         return self.list()
 
@@ -41,6 +42,15 @@ class MediumController(BaseController):
         c.items = query.all()
         c.page = paginate.Page(query, page)
         return render('medium/list.mako')
+
+    def list_gallery(self, page=1):
+        query = meta.Session\
+            .query(model.Medium)\
+            .filter(model.Medium.image_url != None)
+            
+        c.items = query.all()
+        c.page = paginate.Page(query, page)
+        return render('medium/list_gallery.mako')
 
     def delete(self):
         msg = ""
@@ -104,3 +114,32 @@ class MediumController(BaseController):
         meta.Session.commit()
         h.flash("updated: %s" % item)
         return redirect_to(action='index')
+
+
+    def foo(self):
+        return "Hello World!"
+    def image(self, id, width, height):
+        item = meta.find(model.Medium, id)
+        #~ log.debug(item.image_data.)
+
+        #~ mode = 'RGB'
+        #~ img = Image.frombuffer(mode, (100, 100), item.image_data.getvalue())
+        #~ log.debug("mode: %s" % mode)
+
+        p = ImageFile.Parser()
+        p.feed(item.image_data.getvalue())
+        img = p.close()
+
+        log.debug("size: %s, %s" % (width, height))
+        size = int(width), int(height)
+        img.thumbnail(size)
+        log.debug("imgsize: %s, %s" % img.size)
+
+        buffer = StringIO()
+        img.save(buffer, format='png')
+        response.content_type = 'image/png'
+        return buffer.getvalue()
+
+        # set the response type to PNG, since we at least hope to return a PNG image here
+        #~ return item.image_data.getvalue()
+        #~ return img.tostring()

@@ -9,10 +9,11 @@ media_table = Table('media', meta.metadata,
     Column('title', String(100)),
 )
 
-image_url = Column('image_url', String(255))
+#~ image_url = Column('image_url', String(255))
+image_data = Column('image_data', PickleType)
 
 def upgrade():
-    image_url.create(media_table)
+    image_data.create(media_table)
 
 def downgrade():
     # Operations to reverse the above upgrade go here.
