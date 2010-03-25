@@ -3,6 +3,9 @@
 <%def name="title()">Edit Item - "${c.item.title}"</%def>
 
 <%def name="content()">
+<p>
+<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
+</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
 <table border=1 class='simple'>
@@ -48,10 +51,17 @@
     </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
+<p>
 <input type="submit" value="Save"/>
+</p>
 </form>
 
-<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
+<p>
+<form id="signin-form" method="post" action="${h.url_for(action='delete', id=None)}">
+    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}">
+    <input type="submit" value="Delete"/>
+</form>
+</p>
 
 % if len(c.item.asins) > 0:
 <a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>

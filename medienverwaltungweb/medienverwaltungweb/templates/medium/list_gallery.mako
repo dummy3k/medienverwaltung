@@ -11,7 +11,7 @@
 
 % for item in c.page.items:
 ##<div>
-<a href="${h.url_for(action='image', id=item.id)}">
+<a href="${h.url_for(controller='medium', action='index', id=item.id)}">
 <img class="plain" src="${h.url_for(action='image', id=item.id, width=400, height=300)}" />
 </a>
 ##</div>

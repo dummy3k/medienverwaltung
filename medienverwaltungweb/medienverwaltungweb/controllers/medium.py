@@ -15,8 +15,11 @@ from medienverwaltungweb.model import meta
 log = logging.getLogger(__name__)
 
 class MediumController(BaseController):
-    def index(self):
-        return self.list()
+    def index(self, id=None):
+        if id:
+            return self.edit(id)
+        else:
+            return self.list()
 
     def mass_add(self):
         return render('medium/mass_add.mako')
@@ -28,6 +31,13 @@ class MediumController(BaseController):
 
         count = 0
         for item in request.params.get('title').split('\n'):
+            query = meta.Session\
+                .query(model.Medium)\
+                .filter(model.Medium.title==item)
+            if query.first() != None:
+                h.flash("medium elready exists: %s" % query.first())
+                continue
+                
             record = model.Medium()
             record.title = item
             meta.Session.save(record)
@@ -64,17 +74,20 @@ class MediumController(BaseController):
 
     def delete(self):
         msg = ""
-        #~ for item in request.params:
-            #~ if item.startswith('item_id'):
-                #~ id = request.params[item]
-                #~ db_item = meta.find(model.Medium, id)
-                #~ meta.Session.delete(db_item)
-                #~ h.flash("deleted: %s" % db_item)
-
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
             h.flash("deleted: %s" % db_item)
+
+        meta.Session.commit()
+
+        return redirect_to(action='index')
+
+    def delete_one(self, id):
+        msg = ""
+        db_item = meta.find(model.Medium, id)
+        meta.Session.delete(db_item)
+        h.flash("deleted: %s" % db_item)
 
         meta.Session.commit()
 

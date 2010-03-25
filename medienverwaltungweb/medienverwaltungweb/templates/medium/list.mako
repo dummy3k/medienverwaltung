@@ -32,7 +32,7 @@
     %endfor
 </table>
 
-<p>${c.page.pager()}</p>
+<p>${c.page.pager(controller='medium', action='list')}</p>
 
 <p>
 <input type="submit" value="Delete marked Media"/>
