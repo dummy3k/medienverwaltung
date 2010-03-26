@@ -12,7 +12,7 @@ from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
-
+from medienverwaltungcommon.amazon import add_persons
 log = logging.getLogger(__name__)
 
 class RefHelper():
@@ -82,52 +82,6 @@ class AmazonController(BaseController):
         meta.Session.commit()
         return redirect_to(controller='medium', action='edit')
 
-    def __add_persons__(self, item, relation_name, medium_id, msg):
-        if not relation_name in item.ItemAttributes.__dict__:
-            log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
-            return
-
-        query = meta.Session.query(model.RelationType)
-        actor_relation = query.filter(model.RelationType.name==relation_name).first()
-        if not actor_relation:
-            actor_relation = model.RelationType()
-            actor_relation.name = relation_name
-            meta.Session.save(actor_relation)
-            log.info("created %s" % actor_relation)
-            #~ abort(404)
-            
-        log.debug("actor_relation: %s" % actor_relation)
-
-        for subitem in item.ItemAttributes.__dict__[relation_name]:
-            #~ subitem = str(subitem).encode('utf-8')
-            subitem = unicode(subitem)
-            query = meta.Session.query(model.Person)
-            actor = query.filter(model.Person.name==subitem).first()
-            if not actor:
-                log.info("new actor: %s" % subitem)
-                actor = model.Person()
-                actor.name = subitem
-                meta.Session.save(actor)
-                meta.Session.commit()
-                #~ h.flash("added: %s" % actor)
-                msg.value += "%s, " % actor.name
-            log.debug("!!!!!! Actor: %s" % actor)
-
-
-            query = meta.Session.query(model.PersonToMedia)
-            record = query.filter(model.PersonToMedia.person_id==actor.id)\
-                          .filter(model.PersonToMedia.medium_id==medium_id).first()
-            if record:
-                log.info("!!!!!!! %s already exists" % record)
-            else:
-                record = model.PersonToMedia()
-                record.person_id = actor.id
-                record.medium_id = medium_id
-                record.type_id = actor_relation.id
-                meta.Session.save(record)
-                #~ h.flash("added: %s" % record)
-
-        
     def query_actors(self, id):
         """ id = media.id """
         query = meta.Session.query(model.MediaToAsin)\
@@ -140,10 +94,10 @@ class AmazonController(BaseController):
         for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
-            self.__add_persons__(item, 'Actor', id, msg)
-            self.__add_persons__(item, 'Creator', id, msg)
-            self.__add_persons__(item, 'Director', id, msg)
-            self.__add_persons__(item, 'Manufacturer', id, msg)
+            add_persons(item, 'Actor', id, msg, meta.Session)
+            add_persons(item, 'Creator', id, msg, meta.Session)
+            add_persons(item, 'Director', id, msg, meta.Session)
+            add_persons(item, 'Manufacturer', id, msg, meta.Session)
 
         meta.Session.commit()
         if len(msg.value) > len(u"added: "):

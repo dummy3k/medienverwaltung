@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+medienverwaltung_common.egg-info/PKG-INFO
+medienverwaltung_common.egg-info/SOURCES.txt
+medienverwaltung_common.egg-info/dependency_links.txt
+medienverwaltung_common.egg-info/entry_points.txt
+medienverwaltung_common.egg-info/not-zip-safe
+medienverwaltung_common.egg-info/top_level.txt
+medienverwaltungcommon/__init__.py

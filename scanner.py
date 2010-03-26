@@ -52,7 +52,8 @@ def one(isbn):
     asin.media_id = medium.id
     asin.asin = item.ASIN
     session.add(asin)
-    
+
+    h.ipython()()
     session.commit()
 
 def for_ever():
