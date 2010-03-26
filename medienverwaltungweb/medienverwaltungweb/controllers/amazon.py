@@ -170,25 +170,16 @@ class AmazonController(BaseController):
     def query_images(self, id):
         """ show the user a selection of available images """
 
-        query = meta.Session.query(model.MediaToAsin)
-        asins = query.filter(model.MediaToAsin.media_id==id).all()
-        log.debug("asins: %s" % asins)
+        query = meta.Session.query(model.MediaToAsin)\
+                            .filter(model.MediaToAsin.media_id==id)
 
         c.items = []
-        for item in asins:
-            log.debug("fetching: %s" % item.asin)
-            node = None
-            try:
-                node = self.api.item_lookup(item.asin,
-                                            ResponseGroup="Images")
-            except:
-                pass
-
-            if node:
-                c.items.append( node.Items.Item )
-
-        log.debug("c.items: %s" % c.items)
-        
+        asins = map(lambda item: item.asin, query.all())
+        if len(asins) > 10:
+            log.warn("number of asins is greater 10")
+        node = self.api.item_lookup(",".join(asins),
+                                    ResponseGroup="Images")
+        c.items = node.Items.Item
         return render("amazon/image_list.mako")
         
     def query_images_post(self, id):
