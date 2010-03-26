@@ -22,6 +22,7 @@ class MediumController(BaseController):
             return self.list()
 
     def mass_add(self):
+        c.types = meta.Session.query(model.MediaType).all()
         return render('medium/mass_add.mako')
 
     def mass_add_post(self):

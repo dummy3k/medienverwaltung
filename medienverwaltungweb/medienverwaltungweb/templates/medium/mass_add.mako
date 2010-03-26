@@ -8,8 +8,9 @@
 <form id="signin-form" method="post" action="${h.url_for(action='mass_add_post')}">
     <p>Type:
         <select name="media_type">
-            <option value="1">DVD</option>
-            <option value="2">Book</option>
+            % for item in c.types:
+            <option value="${item.id}">${item.name}</option>
+            % endfor
         </select>
     </p>
     <input type="text" name="title"/>

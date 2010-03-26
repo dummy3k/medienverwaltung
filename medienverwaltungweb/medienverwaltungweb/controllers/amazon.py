@@ -54,6 +54,7 @@ class AmazonController(BaseController):
         query  = request.params.get('query', c.item.title)
         log.debug("c.item.type: %s" % c.item.type)
         search_index = c.item.type.amzon_search_index
+        log.debug("search_index: %s" % search_index)
         try:
             node = self.api.item_search(search_index,
                                         Title=query.encode('utf-8'),
