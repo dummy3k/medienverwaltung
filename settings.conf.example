@@ -2,3 +2,6 @@
 #~ dir=%(dir)s/whatever
 AccessKeyID=CHANGE ME
 SecretAccessKey=CHANGE ME
+
+[sqlalchemy]
+url = mysql://medienverwaltung:pass@localhost/medienverwaltung
