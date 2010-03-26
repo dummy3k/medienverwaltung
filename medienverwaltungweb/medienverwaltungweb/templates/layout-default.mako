@@ -37,10 +37,10 @@
     % endif
 
 <p>
-<a href="${h.url_for(controller='medium', action='list', id=None, page=None)}">Media</a>
-<a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None)}">Gallery</a>
-<a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None)}">Media without image</a>
-<a href="${h.url_for(controller='person', action='list', id=None, page=None)}">Persons</a>
+<a href="${h.url_for(controller='medium', action='list', id=None, page=None, type=None)}">Media</a>
+<a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type=None)}">Gallery</a>
+<a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, type=None)}">Media without image</a>
+<a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None)}">Persons</a>
 </p>
 
  <div class="main">

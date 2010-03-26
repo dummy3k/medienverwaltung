@@ -4,6 +4,8 @@
 
 <%def name="content()">
 <p>
+<a href="${h.url_for(action='list', id=None, page=None, type='books')}">Books</a>
+<a href="${h.url_for(action='list', id=None, page=None, type='dvds')}">DVDs</a>
 <a href="${h.url_for(action='mass_add', id=None, page=None)}">Add Medium</a>
 </p>
 

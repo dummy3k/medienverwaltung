@@ -24,6 +24,7 @@ def make_map():
     map.connect('/{controller}/{action}/page/{page}')
     map.connect('/', controller='medium', action='index')
     map.connect('/{controller}/{action}')
+    map.connect('/{controller}/{action}/{type}')
     map.connect('/{controller}/{action}/{id}')
     map.connect('/{controller}/{action}/{id}/{width}/{height}')
 

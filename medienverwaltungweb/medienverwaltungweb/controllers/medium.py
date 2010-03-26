@@ -48,8 +48,13 @@ class MediumController(BaseController):
         h.flash("added: %s media" % count)
         return redirect_to(action='index')
 
-    def list(self, page=1):
+    def list(self, type=None, page=1):
+        log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
+        if type:
+            mid = ['dvds', 'books'].index(type) + 1
+            log.debug("mid: %s" % mid)
+            query = query.filter(model.Medium.media_type_id==int(mid))
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "All Media"
