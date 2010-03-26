@@ -10,6 +10,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 import urllib
 from StringIO import StringIO
 import logging
+import os
 
 import helper as h
 import medienverwaltungweb.model as model
@@ -44,18 +45,21 @@ def one(isbn):
                         .filter(model.MediaType.name == 'book')\
                         .first()
 
-    url = str(item.LargeImage.URL)
-    print url
-    webFile = urllib.urlopen(url)
-    buffer = StringIO()
-    buffer.write(webFile.read())
 
     medium = model.Medium()
     medium.title = title
     medium.media_type_id = media_type.id
     medium.isbn = isbn
     #~ medium.image_data = buffer.getvalue()
-    medium.image_data = buffer
+    if not 'LargeImage' in dict(item):
+        log.warn("%s has no image" % medium)
+    else:
+        url = str(item.LargeImage.URL)
+        print url
+        webFile = urllib.urlopen(url)
+        buffer = StringIO()
+        buffer.write(webFile.read())
+        medium.image_data = buffer
     session.add(medium)
     session.commit()
 
@@ -72,6 +76,7 @@ def one(isbn):
 
     session.commit()
     print msg
+    os.system('mpg321 tack.mp3 -q')
 
 def for_ever():
     while True:
