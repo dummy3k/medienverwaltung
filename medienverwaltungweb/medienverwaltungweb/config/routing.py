@@ -24,7 +24,10 @@ def make_map():
     map.connect('/{controller}/{action}/page/{page}')
     map.connect('/', controller='medium', action='index')
     map.connect('/{controller}/{action}')
-    map.connect('/{controller}/{action}/{type}')
+    map.connect('/{controller}/{action}/t/{type}')
+    #~ map.connect('/{controller}/{action}/{type}')
+    #~ map.connect('/{controller}/{action}/books', type='books')
+    #~ map.connect('/{controller}/{action}/dvds', type='dvds')
     map.connect('/{controller}/{action}/{id}')
     map.connect('/{controller}/{action}/{id}/{width}/{height}')
 

@@ -32,7 +32,7 @@ class AmazonController(BaseController):
     def add_one_post(self):
         add_this = request.params.get('add_this', None)
 
-        SearchIndex = 'DVD'
+        #~ SearchIndex = 'DVD'
         log.debug("add_this: %s" % add_this)
         node = self.api.item_search(SearchIndex,
                                     Title=add_this.encode('utf-8'),
@@ -52,13 +52,18 @@ class AmazonController(BaseController):
         c.item = meta.find(model.Medium, id)
 
         query  = request.params.get('query', c.item.title)
-        node = self.api.item_search(self.SearchIndex,
-                                    Title=query.encode('utf-8'),
-                                    ResponseGroup="Images,ItemAttributes")
-        c.items = node.Items.Item
+        log.debug("c.item.type: %s" % c.item.type)
+        search_index = c.item.type.amzon_search_index
+        try:
+            node = self.api.item_search(search_index,
+                                        Title=query.encode('utf-8'),
+                                        ResponseGroup="Images,ItemAttributes")
+            c.items = node.Items.Item
+        except:
+            c.items = []
+            
         c.query = query
         return render('/amazon/item_search_result.mako')
-
 
     def map_to_medium_post(self):
         media_id = request.params.get('media_id', None)

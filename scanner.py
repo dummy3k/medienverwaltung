@@ -15,6 +15,10 @@ api = amazonproduct.API(config.get('Amazon', 'AccessKeyID'),
                         config.get('Amazon', 'SecretAccessKey'))
 SearchIndex='Books'
 
+engine = create_engine(config.get('sqlalchemy', 'url'))
+session = scoped_session(sessionmaker())
+session.configure(bind=engine)
+
 def one(isbn):
     print "ISBN: %s" % isbn
     node = api.item_lookup(isbn, IdType='ISBN', SearchIndex=SearchIndex)
@@ -24,32 +28,43 @@ def one(isbn):
     #~ title = item.ItemAttributes.Title
     print title
 
-    record = model.Medium()
-    record.title = title
-    record.media_type_id = 2
-    
-    engine = create_engine(config.get('sqlalchemy', 'url'))
-    session = scoped_session(sessionmaker())
-    session.configure(bind=engine)
-    session.add(record)
+    media_type = session.query(model.MediaType)\
+                        .filter(model.MediaType.name == 'book')\
+                        .first()
+                        
+
+    medium = model.Medium()
+    medium.title = title
+    medium.media_type_id = media_type.id
+    medium.isbn = isbn
+    session.add(medium)
     session.commit()
+
+    asin = model.MediaToAsin()
+    asin.media_id = medium.id
+    asin.asin = item.ASIN
+    session.add(asin)
+    session.commit()
+    
     #~ model.meta.Session.add(record)
     #~ model.meta.Session.commit()
 
 def for_ever():
     while True:
-        user_input = raw_input("ISBN:")
+        try:
+            user_input = raw_input("ISBN:")
+        except KeyboardInterrupt:
+            print "\nbye..."
+            break
+            
         print user_input
         if user_input == 'exit':
             break
 
         if not user_input:
             continue
-        
-        node = api.item_lookup(user_input, IdType='ISBN', SearchIndex=SearchIndex)
-        item = node.Items.Item
-        #~ h.ipython()()
-        print unicode(item.ItemAttributes.Title)
+
+        one(user_input)
 
 if __name__ == '__main__':
     #~ optfunc.run(find)
