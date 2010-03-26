@@ -53,9 +53,16 @@ class MediumController(BaseController):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
         if type:
-            mid = ['dvds', 'books'].index(type) + 1
-            log.debug("mid: %s" % mid)
-            query = query.filter(model.Medium.media_type_id==int(mid))
+            #~ mid = ['dvds', 'books'].index(type) + 1
+            #~ log.debug("mid: %s" % mid)
+            #~ query = query.filter(model.Medium.media_type_id==int(mid))
+            #~ log.debug("model.Medium.type[0].name: %s" % model.Medium.type.name)
+            if type[-1:] == 's':
+                type = type[:-1]
+                
+            query = query.join(model.MediaType)\
+                         .filter(model.MediaType.name==type)
+            
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "All Media"
