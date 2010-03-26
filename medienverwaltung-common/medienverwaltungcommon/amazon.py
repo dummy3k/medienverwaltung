@@ -38,7 +38,7 @@ def add_persons(item, relation_name, medium_id, msg, session):
             session.save(actor)
             session.commit()
             #~ h.flash("added: %s" % actor)
-            msg.value += "%s, " % actor.name
+            msg.value += "%s, " % unicode(actor.name)
         log.debug("!!!!!! Actor: %s" % actor)
 
 

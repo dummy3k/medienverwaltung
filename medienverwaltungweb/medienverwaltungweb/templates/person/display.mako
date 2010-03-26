@@ -3,7 +3,7 @@
     import urllib
 %>
 
-<%def name="title()">Edit Iser '${c.item.name}' (${c.item.id})</%def>
+<%def name="title()">Edit Iser '${unicode(c.item.name, errors='replace')}' (${c.item.id})</%def>
 
 <%def name="content()">
 <div style="float:right">
@@ -20,7 +20,7 @@
     </tr>
     <tr>
         <td class='simple'>${_('Name')}</td>
-        <td class='simple'><input type="text" name="title" value="${c.item.name}" /></td>
+        <td class='simple'><input type="text" name="title" value="${unicode(c.item.name, errors='replace')}" /></td>
     </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />

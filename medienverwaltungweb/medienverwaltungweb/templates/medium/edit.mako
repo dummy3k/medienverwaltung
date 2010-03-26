@@ -37,7 +37,7 @@
         <td class='simple'><ul>
         %for subsubitem in c.persons[subitem]:
         <li><a href="${h.url_for(controller='person', action='index', id=subsubitem.id)}">
-                ${subsubitem.name}
+                ${unicode(subsubitem.name, errors='replace')}
         </a></li>
         %endfor
         </ul></td>

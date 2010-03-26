@@ -37,6 +37,7 @@ def one(isbn):
                             ResponseGroup="Images,ItemAttributes")
     item = node.Items.Item
     title = unicode(item.ItemAttributes.Title)
+    #~ h.ipython()()
     print title
 
     media_type = session.query(model.MediaType)\
