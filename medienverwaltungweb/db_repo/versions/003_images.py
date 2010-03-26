@@ -9,7 +9,6 @@ media_table = Table('media', meta.metadata,
     Column('title', String(100)),
 )
 
-#~ image_url = Column('image_url', String(255))
 image_data = Column('image_data', PickleType)
 
 def upgrade():

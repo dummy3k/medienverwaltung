@@ -40,6 +40,7 @@ class MediumController(BaseController):
                 
             record = model.Medium()
             record.title = item
+            record.media_type_id = request.params.get('media_type')
             meta.Session.save(record)
             count += 1
         meta.Session.commit()

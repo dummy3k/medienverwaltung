@@ -6,6 +6,12 @@
 <h1>Add one</h1>
 
 <form id="signin-form" method="post" action="${h.url_for(action='mass_add_post')}">
+    <p>Type:
+        <select name="media_type">
+            <option value="1">DVD</option>
+            <option value="2">Book</option>
+        </select>
+    </p>
     <input type="text" name="title"/>
     <input type="submit" value="Process"/>
 </form>
