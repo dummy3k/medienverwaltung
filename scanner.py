@@ -3,7 +3,8 @@ import ConfigParser
 from optfunc import optfunc
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-#~ from sqlalchemy import *
+import urllib
+from StringIO import StringIO
 
 import helper as h
 import medienverwaltungweb.model as model
@@ -21,22 +22,29 @@ session.configure(bind=engine)
 
 def one(isbn):
     print "ISBN: %s" % isbn
-    node = api.item_lookup(isbn, IdType='ISBN', SearchIndex=SearchIndex)
+    node = api.item_lookup(isbn,
+                           IdType='ISBN',
+                           SearchIndex=SearchIndex,
+                            ResponseGroup="Images,ItemAttributes")
     item = node.Items.Item
-    #~ h.ipython()()
     title = unicode(item.ItemAttributes.Title)
-    #~ title = item.ItemAttributes.Title
     print title
 
     media_type = session.query(model.MediaType)\
                         .filter(model.MediaType.name == 'book')\
                         .first()
-                        
+
+    url = str(item.LargeImage.URL)
+    print url
+    webFile = urllib.urlopen(url)
+    buffer = StringIO()
+    buffer.write(webFile.read())
 
     medium = model.Medium()
     medium.title = title
     medium.media_type_id = media_type.id
     medium.isbn = isbn
+    medium.image_data = buffer
     session.add(medium)
     session.commit()
 
@@ -44,10 +52,8 @@ def one(isbn):
     asin.media_id = medium.id
     asin.asin = item.ASIN
     session.add(asin)
-    session.commit()
     
-    #~ model.meta.Session.add(record)
-    #~ model.meta.Session.commit()
+    session.commit()
 
 def for_ever():
     while True:
