@@ -162,6 +162,7 @@ class MediumController(BaseController):
 
         p = ImageFile.Parser()
         p.feed(item.image_data.getvalue())
+        #~ p.feed(StringIO(item.image_data.getvalue()))
         img = p.close()
 
         log.debug("size: %s, %s" % (width, height))

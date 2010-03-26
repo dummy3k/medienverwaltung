@@ -13,12 +13,9 @@ import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
 from medienverwaltungcommon.amazon import add_persons
+
 log = logging.getLogger(__name__)
 
-class RefHelper():
-    def __init__(self, value):
-        self.value = value
-        
 class AmazonController(BaseController):
     def __init__(self):
         BaseController.__init__(self)

@@ -1,3 +1,7 @@
+if __name__ == '__main__':
+    import logging.config
+    logging.config.fileConfig("settings.conf")
+
 import amazonproduct
 import ConfigParser
 from optfunc import optfunc
@@ -5,9 +9,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import urllib
 from StringIO import StringIO
+import logging
 
 import helper as h
 import medienverwaltungweb.model as model
+from medienverwaltungcommon.amazon import add_persons, RefHelper
+
+log = logging.getLogger(__name__)
 
 config = ConfigParser.ConfigParser()
 config.read('settings.conf')
@@ -22,6 +30,7 @@ session.configure(bind=engine)
 
 def one(isbn):
     print "ISBN: %s" % isbn
+    log.debug("ISBN: %s" % isbn)
     node = api.item_lookup(isbn,
                            IdType='ISBN',
                            SearchIndex=SearchIndex,
@@ -44,6 +53,7 @@ def one(isbn):
     medium.title = title
     medium.media_type_id = media_type.id
     medium.isbn = isbn
+    #~ medium.image_data = buffer.getvalue()
     medium.image_data = buffer
     session.add(medium)
     session.commit()
@@ -53,8 +63,14 @@ def one(isbn):
     asin.asin = item.ASIN
     session.add(asin)
 
-    h.ipython()()
+    # Languages
+    msg = RefHelper(u"added: ")
+    add_persons(item, 'Author', medium.id, msg, session)
+    add_persons(item, 'Creator', medium.id, msg, session)
+    add_persons(item, 'Manufacturer', medium.id, msg, session)
+
     session.commit()
+    print msg
 
 def for_ever():
     while True:

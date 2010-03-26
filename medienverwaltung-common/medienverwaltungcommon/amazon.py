@@ -3,6 +3,13 @@ import model
 
 log = logging.getLogger(__name__)
 
+class RefHelper():
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return self.value
+        
 def add_persons(item, relation_name, medium_id, msg, session):
     if not relation_name in item.ItemAttributes.__dict__:
         log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
