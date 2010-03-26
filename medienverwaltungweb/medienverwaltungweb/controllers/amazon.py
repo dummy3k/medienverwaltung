@@ -62,27 +62,18 @@ class AmazonController(BaseController):
 
     def map_to_medium_post(self):
         media_id = request.params.get('media_id', None)
+        asins = []
         for item in h.checkboxes(request, 'item_id_'):
             record = model.MediaToAsin()
             record.media_id = media_id
             record.asin = item
             meta.Session.add(record)
-            h.flash("attached %s to %s" % (item, media_id))
-
-
+            asins.append(item)
+            
+        h.flash("attached %s amazon ids to media id %s: %s"\
+                % (len(asins), media_id, ", ".join(asins)))
+                   
         meta.Session.commit()
-
-        #query = meta.Session.query(model.Person)
-        #actor = query.filter(model.RelationType.name=='Actor').first()
-        #if not actor_relation:
-            #abort(404)
-        #log.debug("actor: %s" % actor_relation)
-
-        #for item in h.checkboxes(request, 'item_id_'):
-            ##~ log.debug("item: %s" % item)
-            ##~ db_item = meta.find(model.Medium, item)
-            ##~ meta.Session.delete(db_item)
-
         return redirect_to(controller='medium', action='edit')
 
     def __add_persons__(self, item, relation_name, medium_id, msg):
