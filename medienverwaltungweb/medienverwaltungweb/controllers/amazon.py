@@ -133,28 +133,14 @@ class AmazonController(BaseController):
         
     def query_actors(self, id):
         """ id = media.id """
-        query = meta.Session.query(model.MediaToAsin)
-        asins = query.filter(model.MediaToAsin.media_id==id).all()
-        log.debug("asins: %s" % asins)
-
-        #~ stats = RefHelper({'Actor':0,
-                           #~ 'Creator':0,
-                           #~ 'Director':0,
-                           #~ 'Manufacturer':0,
+        query = meta.Session.query(model.MediaToAsin)\
+                            .filter(model.MediaToAsin.media_id==id)
+        asins = map(lambda item: item.asin, query.all())
         msg = RefHelper(u"added: ")
         
-        for item in asins:
-            node = None
-            try:
-                node = self.api.item_lookup(item.asin,
-                                            ResponseGroup="Images,ItemAttributes")
-            except:
-                h.flash("lookup failed: %s" % item.asin)
-
-            if not node:
-                continue
-                
-            item = node.Items.Item[0]
+        node = self.api.item_lookup(",".join(asins),
+                                    ResponseGroup="Images,ItemAttributes")
+        for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
             self.__add_persons__(item, 'Actor', id, msg)
