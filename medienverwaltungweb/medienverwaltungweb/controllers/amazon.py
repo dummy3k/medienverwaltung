@@ -48,13 +48,14 @@ class AmazonController(BaseController):
         """ id is media.id """
         c.item = meta.find(model.Medium, id)
 
-        query  = request.params.get('query', c.item.title)
+        query = request.params.get('query', c.item.title)
         log.debug("c.item.type: %s" % c.item.type)
-        search_index = c.item.type.amzon_search_index
+        search_index = str(c.item.type.amzon_search_index)
         log.debug("search_index: %s" % search_index)
+
         try:
             node = self.api.item_search(search_index,
-                                        Title=query.encode('utf-8'),
+                                        Title=query,
                                         ResponseGroup="Images,ItemAttributes")
             c.items = node.Items.Item
         except:
