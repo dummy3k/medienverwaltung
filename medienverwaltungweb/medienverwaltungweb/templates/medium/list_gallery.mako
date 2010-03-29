@@ -3,6 +3,23 @@
 <%def name="title()">All Media Gallery</%def>
 
 <%def name="content()">
+
+<script type="text/javascript">
+$(document).ready(function() {
+     $(window).keydown(function(event){
+        //alert(event.keyCode);
+        var current_page = ${c.page.page}
+        if (current_page > 1 && event.keyCode == 37) {
+            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page - 1)
+        } else if (event.keyCode == 39) {
+            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page + 1)
+        }
+
+    });
+});
+
+</script>
+
 <p>
 <a href="${h.url_for(action='mass_add', id=None, page=None)}">Add Medium</a>
 </p>

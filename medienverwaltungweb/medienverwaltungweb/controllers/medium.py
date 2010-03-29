@@ -85,7 +85,8 @@ class MediumController(BaseController):
             .filter(model.Medium.image_data != None)
             
         c.items = query.all()
-        c.page = paginate.Page(query, page, items_per_page=18)
+        c.page = paginate.Page(query, page, items_per_page=2)
+        #~ c.page = paginate.Page(query, page, items_per_page=18)
         return render('medium/list_gallery.mako')
 
     def delete(self):
