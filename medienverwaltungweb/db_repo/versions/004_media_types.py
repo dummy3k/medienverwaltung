@@ -26,7 +26,7 @@ def upgrade():
 
     inserter = media_types_table.insert()
     inserter.execute(name=u'book', amzon_search_index=u'books')
-    inserter.execute(name=u'dvd', amzon_search_index=u'dvds')
+    inserter.execute(name=u'dvd', amzon_search_index=u'DVD')
 
 def downgrade():
     media_type_id_colum.drop(media_table)

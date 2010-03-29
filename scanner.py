@@ -43,13 +43,6 @@ def one(isbn):
     #~ print title
     log.info("title: %s" % title)
 
-    #~ for item in item.ItemAttributes.Author:
-    for subitem in item.ItemAttributes.__dict__['Author']:
-        first_author = unicode(subitem)
-        log.info("first_author: %s" % first_author)
-    
-    #~ return
-    
     media_type = session.query(model.MediaType)\
                         .filter(model.MediaType.name == 'book')\
                         .first()
