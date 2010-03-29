@@ -4,9 +4,9 @@
 
 <%def name="content()">
 <p>
-<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
+<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}" class='button'>Attach to Amazon</a>
 % if len(c.item.asins) > 0:
-<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
+<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}" class='button'>Query Amazon</a>
 % endif
 </p>
 

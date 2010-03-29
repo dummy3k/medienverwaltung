@@ -8,6 +8,7 @@
 	<link href="/css/default.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/minimalistic/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/css/minimalistic/bigright.css" rel="stylesheet" type="text/css" media="screen" />
 ##    <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
 ##    % for x in c.rss_feeds:
 ##    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
@@ -54,30 +55,10 @@
 ##</div>
 
 <div id="content">
+
 <div id="right">
     <h2>${self.title()}</h2>
     ${self.content()}
-</div>
-	
-<div id="left">
-	<div class="box">
-			<h2>Filter</h2>	
-			<p>This XHTML/CSS Template was inspired by great NiftyCube layouts. It is released under GPL and it is xhtml/css valid.</p>
-	</div>
-			
-	<div class="box">
-				<h2>Links :</h2>
-				<ul>
-				<li><a href="http://www.minimalistic-design.info">Web Design Directory</a></li>
-				<li><a href="http://www.historyexplorer.net">History Timelines</a></li>
-				<li><a href="http://www.minimalistic-design.net">Free templates</a></li>
-				</ul>
-	</div>
-		
-    <div class="box">
-	   <div style="font-size: 0.8em;">Design by <a href="http://www.minimalistic-design.net">Minimalistic Design</a></div>
-	</div>
-</div>
 </div>
 
 </body>

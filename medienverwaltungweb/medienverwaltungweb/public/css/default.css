@@ -34,3 +34,11 @@ img.plain
 {
     border: hidden;
 }
+
+
+a.button
+{
+    border: 1px solid black;
+    padding: 5px;
+    margin-right: 5px;
+}
