@@ -6,7 +6,7 @@ media_table = Table('media', meta.metadata,
     Column('title', Unicode(100)),
     Column('image_data', PickleType),
     Column('media_type_id', Integer, ForeignKey('media_types.id')),
-    Column('isbn', String(15)),
+    Column('isbn', Unicode(15)),
 )
 
 class Medium(object):

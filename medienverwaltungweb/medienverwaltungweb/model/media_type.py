@@ -3,8 +3,8 @@ from medienverwaltungweb.model import meta
 
 media_types_table = Table('media_types', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    Column('amzon_search_index', String(10)),
+    Column('name', Unicode(50)),
+    Column('amzon_search_index', Unicode(10)),
 )
 
 class MediaType(object):

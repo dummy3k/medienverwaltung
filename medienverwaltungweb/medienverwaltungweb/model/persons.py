@@ -3,20 +3,20 @@ from medienverwaltungweb.model import meta
 
 relation_types_table = Table('relation_types', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)), # Actor, Director, Manufacturer
+    Column('name', Unicode(50)), # Actor, Director, Manufacturer
 )
 
 persons_table = Table('persons', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    #~ Column('wikipedia_url', String(255)),
-    #~ Column('image_url', String(255)),
+    Column('name', Unicode(50)),
+    #~ Column('wikipedia_url', Unicode(255)),
+    #~ Column('image_url', Unicode(255)),
 )
 
 media_to_asin_table = Table('media_to_asin', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('media_id', Integer, ForeignKey('media.id')),
-    Column('asin', String(10)),
+    Column('asin', Unicode(10)),
 )
 
 person_to_media_table = Table('person_to_media', meta.metadata,

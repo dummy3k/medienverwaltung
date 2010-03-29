@@ -5,27 +5,27 @@ meta = MetaData(migrate_engine)
 
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('title', String(100)),
+    Column('title', Unicode(100)),
 )
 
 ### New tables
 
 persons_table = Table('persons', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    #~ Column('wikipedia_url', String(255)),
-    #~ Column('image_url', String(255)),
+    Column('name', Unicode(50)),
+    #~ Column('wikipedia_url', Unicode(255)),
+    #~ Column('image_url', Unicode(255)),
 )
 
 relation_types_table = Table('relation_types', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)), # Actor, Director, Manufacturer
+    Column('name', Unicode(50)), # Actor, Director, Manufacturer
 )
 
 media_to_asin_table = Table('media_to_asin', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('media_id', Integer, ForeignKey('media.id')),
-    Column('asin', String(10)),
+    Column('asin', Unicode(10)),
 )
 
 person_to_media_table = Table('person_to_media', meta.metadata,
@@ -42,9 +42,9 @@ def upgrade():
     person_to_media_table.create()
 
     inserter = relation_types_table.insert()
-    inserter.execute(name='Actor')
-    inserter.execute(name='Director')
-    inserter.execute(name='Manufacturer')
+    inserter.execute(name=u'Actor')
+    inserter.execute(name=u'Director')
+    inserter.execute(name=u'Manufacturer')
 
 def downgrade():
     persons_table.drop()

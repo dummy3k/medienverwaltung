@@ -1,3 +1,4 @@
+## -*- coding: utf-8 -*-
 <%inherit file="/layout-default.mako"/>\
 
 <%def name="title()">All Persons</%def>

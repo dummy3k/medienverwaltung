@@ -29,16 +29,22 @@ def add_persons(item, relation_name, medium_id, msg, session):
     for subitem in item.ItemAttributes.__dict__[relation_name]:
         #~ subitem = str(subitem).encode('utf-8')
         subitem = unicode(subitem)
+        log.debug("AUTHOR: %s" % subitem)
+        #~ subitem = ("%s" % subitem).encode('utf-8')
         query = session.query(model.Person)
         actor = query.filter(model.Person.name==subitem).first()
         if not actor:
             log.info("new actor: %s" % subitem)
             actor = model.Person()
             actor.name = subitem
+            log.debug("Actor.name, bf commit: %s" % actor.name)
             session.save(actor)
             session.commit()
+            log.debug("Actor.name, after cm: %s" % actor.name)
             #~ h.flash("added: %s" % actor)
-            msg.value += u"%s, " % unicode(actor.name, errors='replace')
+            #~ msg.value += u"%s, " % unicode(actor.name, errors='replace')
+            msg.value += u"%s, " % actor.name
+            #~ msg.value += u"%s, " % subitem
         log.debug("!!!!!! Actor: %s" % actor)
 
 

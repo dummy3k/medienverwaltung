@@ -6,17 +6,17 @@ meta = MetaData(migrate_engine)
 
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('title', String(100)),
+    Column('title', Unicode(100)),
 )
 
 ### New tables and columns
 media_type_id_colum = Column('media_type_id', Integer, ForeignKey('media_types.id'))
-isbn_colum = Column('isbn', String(15))
+isbn_colum = Column('isbn', Unicode(15))
 
 media_types_table = Table('media_types', meta.metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    Column('amzon_search_index', String(10)),
+    Column('name', Unicode(50)),
+    Column('amzon_search_index', Unicode(10)),
 )
 
 def upgrade():
@@ -25,8 +25,8 @@ def upgrade():
     isbn_colum.create(media_table)
 
     inserter = media_types_table.insert()
-    inserter.execute(name='book', amzon_search_index='books')
-    inserter.execute(name='dvd', amzon_search_index='dvd')
+    inserter.execute(name=u'book', amzon_search_index=u'books')
+    inserter.execute(name=u'dvd', amzon_search_index=u'dvd')
 
 def downgrade():
     media_type_id_colum.drop(media_table)

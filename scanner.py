@@ -38,23 +38,36 @@ def one(isbn):
                             ResponseGroup="Images,ItemAttributes")
     item = node.Items.Item
     title = unicode(item.ItemAttributes.Title)
+    #~ title = item.ItemAttributes.Title
     #~ h.ipython()()
-    print title
+    #~ print title
+    log.info("title: %s" % title)
 
+    #~ for item in item.ItemAttributes.Author:
+    for subitem in item.ItemAttributes.__dict__['Author']:
+        first_author = unicode(subitem)
+        log.info("first_author: %s" % first_author)
+    
+    #~ return
+    
     media_type = session.query(model.MediaType)\
                         .filter(model.MediaType.name == 'book')\
                         .first()
 
-
     medium = model.Medium()
     medium.title = title
+    log.debug("medium.title: %s" % medium.title)
     medium.media_type_id = media_type.id
     medium.isbn = isbn
     #~ medium.image_data = buffer.getvalue()
-    if not 'LargeImage' in dict(item):
-        log.warn("%s has no image" % medium)
-    else:
+
+    try:
         url = str(item.LargeImage.URL)
+    except:
+        url = None
+        log.warn("%s has no image" % medium)
+        
+    if url:
         print url
         webFile = urllib.urlopen(url)
         buffer = StringIO()
@@ -75,7 +88,8 @@ def one(isbn):
     add_persons(item, 'Manufacturer', medium.id, msg, session)
 
     session.commit()
-    print msg
+    #~ print unicode(msg.value, errors='replace')
+    print msg.value
     os.system('mpg321 tack.mp3 -q')
 
 def for_ever():
