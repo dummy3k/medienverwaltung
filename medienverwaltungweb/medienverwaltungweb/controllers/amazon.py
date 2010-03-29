@@ -12,7 +12,7 @@ from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
-from medienverwaltungcommon.amazon import add_persons
+from medienverwaltungcommon.amazon import add_persons, RefHelper
 
 log = logging.getLogger(__name__)
 
@@ -123,6 +123,7 @@ class AmazonController(BaseController):
         buffer = StringIO()
         buffer.write(webFile.read())
 
+        log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
         meta.Session.update(item)

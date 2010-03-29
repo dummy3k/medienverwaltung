@@ -7,11 +7,8 @@
 <%def name="title()">Edit Iser '${c.item.name}' (${c.item.id})</%def>
 
 <%def name="content()">
-<div style="float:right">
-<iframe src="http://de.wikipedia.org/wiki/${urllib.quote(c.item.name)}" width="600" height="600" name="SELFHTML_in_a_box">
-  <p>no iframe</a></p>
-</iframe>
-</div>
+##<div style="float:right">
+##</div>
 
 <form id="signin-form" method="post" action="${h.url_for(controller='person', action='edit_post', id=None)}">
 <table border=1 class='simple'>
@@ -39,5 +36,9 @@
 %endfor
 </ul>
 <p>${c.page.pager()}</p>
+
+<iframe src="http://de.wikipedia.org/wiki/${urllib.quote(c.item.name)}" width="600" height="600" name="SELFHTML_in_a_box">
+  <p>no iframe</a></p>
+</iframe>
 
 </%def>

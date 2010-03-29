@@ -10,9 +10,10 @@ $(document).ready(function() {
         //alert(event.keyCode);
         var current_page = ${c.page.page}
         if (current_page > 1 && event.keyCode == 37) {
-            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page - 1)
+            location.href = "${c.prev_link}"
         } else if (event.keyCode == 39) {
-            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page + 1)
+            location.href = "${c.next_link}"
+##            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page + 1)
         }
 
     });
@@ -21,17 +22,26 @@ $(document).ready(function() {
 </script>
 
 <p>
-<a href="${h.url_for(action='mass_add', id=None, page=None)}">Add Medium</a>
+
 </p>
 
 <p>${c.page.pager(controller='medium', action='list_gallery')}</p>
 
 % for item in c.page.items:
-<a href="${h.url_for(controller='medium', action='index', id=item.id, page=None)}">
-<img class="plain" src="${h.url_for(action='image', id=item.id, width=100, height=175)}" />
+<a href="${h.url_for(controller='medium', action='index', id=item.id, page=None, type=None)}">
+<img class="plain" src="${h.url_for(action='image', id=item.id, width=100, height=175, type=None)}" />
 </a>
 % endfor
 
 <p>${c.page.pager(controller='medium', action='list_gallery')}</p>
 
+</%def>
+
+<%def name="side()">
+	<div class="box">
+        <h2>Gallery:</h2>
+        <ul>
+        <li><a href="${h.url_for(action='list', id=None, page=None)}">As List</a></li>
+        </ul>
+	</div>
 </%def>

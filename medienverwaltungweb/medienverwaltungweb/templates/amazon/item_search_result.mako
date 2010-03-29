@@ -14,9 +14,9 @@
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
+        <td class='simple'>${_('Image')}</td>
         <td class='simple'>${_('ASIN')}</td>
         <td class='simple'>${_('Title')}</td>
-        <td class='simple'>${_('Image')}</td>
         <td class='simple'>${_('Actions')}</td>
     </tr>
 
@@ -25,13 +25,13 @@
         <td class='simple'>
             <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}">
         </td>
-        <td class='simple'>${item.ASIN}</td>
-        <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
         %if 'SmallImage' in dir(item):
         <td class='simple'><img src="${unicode(item.SmallImage.URL)}" /></td>
         %else:
         <td class='simple'>No image available</td>
         %endif
+        <td class='simple'>${item.ASIN}</td>
+        <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
         <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
     </tr>
     %endfor

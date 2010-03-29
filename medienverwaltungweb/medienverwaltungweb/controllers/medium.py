@@ -53,16 +53,12 @@ class MediumController(BaseController):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
         if type:
-            #~ mid = ['dvds', 'books'].index(type) + 1
-            #~ log.debug("mid: %s" % mid)
-            #~ query = query.filter(model.Medium.media_type_id==int(mid))
-            #~ log.debug("model.Medium.type[0].name: %s" % model.Medium.type.name)
             if type[-1:] == 's':
                 type = type[:-1]
                 
             query = query.join(model.MediaType)\
                          .filter(model.MediaType.name==type)
-            
+
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "All Media"
@@ -73,20 +69,30 @@ class MediumController(BaseController):
         query = meta.Session\
             .query(model.Medium)\
             .filter(model.Medium.image_data == None)
+        query = query.order_by(model.Medium.id.desc())
         c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = "Media without images"
         c.pager_action = "list_no_image"
         return render('medium/list.mako')
 
-    def list_gallery(self, page=1):
+    def list_gallery(self, type=None, page=1):
         query = meta.Session\
             .query(model.Medium)\
             .filter(model.Medium.image_data != None)
             
+        if type:
+            if type[-1:] == 's':
+                type = type[:-1]
+                
+            query = query.join(model.MediaType)\
+                         .filter(model.MediaType.name==type)
+            
         c.items = query.all()
         #~ c.page = paginate.Page(query, page, items_per_page=2)
-        c.page = paginate.Page(query, page, items_per_page=18)
+        c.page = paginate.Page(query, page, items_per_page=14)
+        c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
+        c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
         return render('medium/list_gallery.mako')
 
     def delete(self):
@@ -113,7 +119,7 @@ class MediumController(BaseController):
     def edit(self, id):
         log.debug("id: %s" % id)
         c.item = meta.find(model.Medium, id)
-        c.persons = {'Actor':[]}
+        c.persons = {}
 
         query = meta.Session.query(model.MediaToAsin)
         result = query.filter(model.MediaToAsin.media_id==id).all()

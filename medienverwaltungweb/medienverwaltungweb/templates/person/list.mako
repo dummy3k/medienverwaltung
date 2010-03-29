@@ -4,11 +4,6 @@
 <%def name="title()">All Persons</%def>
 
 <%def name="content()">
-<p>
-<a href="${h.url_for(role='Actor')}">Director</a>
-<a href="${h.url_for(role='Director')}">Director</a>
-</p>
-
 <p>${c.page.pager()}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
@@ -40,4 +35,15 @@
 </p>
 </form>
 
+</%def>
+
+
+<%def name="side()">
+	<div class="box">
+        <h2>Filter:</h2>
+        <ul>
+        <li><a href="${h.url_for(role='Actor')}">Actor</a></li>
+        <li><a href="${h.url_for(role='Director')}">Director</a></li>
+        </ul>
+	</div>
 </%def>

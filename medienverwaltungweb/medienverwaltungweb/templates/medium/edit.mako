@@ -3,12 +3,11 @@
 <%def name="title()">Edit Item - "${c.item.title}"</%def>
 
 <%def name="content()">
-<p>
-<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}" class='button'>Attach to Amazon</a>
 % if len(c.item.asins) > 0:
-<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}" class='button'>Query Amazon</a>
+<div style="float:right">
+<p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
+</div>
 % endif
-</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
 <table border=1 class='simple'>
@@ -23,12 +22,6 @@
     <tr>
         <td class='simple'>${_('Image')}</td>
         <td class='simple'>
-            <p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
-            ##<p>Asins: ${len(c.item.asins)}</p>
-            % if len(c.item.asins) > 0:
-            ##<p><input type="text" name="image_url" value="${c.item.image_url}" /></p>
-            <p><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></p>
-            % endif
         </td>
     </tr>
     %for subitem in c.persons:
@@ -65,4 +58,18 @@
     <input type="submit" value="Delete"/>
 </form>
 </p>
+</%def>
+
+
+<%def name="side()">
+	<div class="box">
+        <h2>Actions:</h2>
+        <ul>
+        <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a></li>
+        % if len(c.item.asins) > 0:
+        <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
+        <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
+        % endif
+        </ul>
+	</div>
 </%def>

@@ -31,8 +31,9 @@
 <h1>Medienverwaltung</h1>
  <div id="menu">
   <ul id="nav">
-    <li><a href="${h.url_for(controller='medium', action='list', id=None, page=None, type=None)}">Media</a></li>
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type=None)}">Gallery</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books')}">Books</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds')}">DVDs</a></li>
+##    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type=None)}">Gallery</a></li>
 ##    <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, type=None)}">Media without image</a></li>
     <li><a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None)}">Persons</a></li>
   </ul>
@@ -49,7 +50,7 @@
     % endfor
 % endif
 
-<h1></h1>
+##<h1></h1>
 ##<div class="main">
 ##</div>
 
@@ -60,23 +61,11 @@
 </div>
 	
 <div id="left">
-	<div class="box">
-			<h2>Filter</h2>	
-			<p>This XHTML/CSS Template was inspired by great NiftyCube layouts. It is released under GPL and it is xhtml/css valid.</p>
-	</div>
-			
-	<div class="box">
-				<h2>Links :</h2>
-				<ul>
-				<li><a href="http://www.minimalistic-design.info">Web Design Directory</a></li>
-				<li><a href="http://www.historyexplorer.net">History Timelines</a></li>
-				<li><a href="http://www.minimalistic-design.net">Free templates</a></li>
-				</ul>
-	</div>
-		
-    <div class="box">
-	   <div style="font-size: 0.8em;">Design by <a href="http://www.minimalistic-design.net">Minimalistic Design</a></div>
-	</div>
+##	<div class="box">
+##			<h2>Filter</h2>	
+##			<p>This XHTML/CSS Template was inspired by great NiftyCube layouts. It is released under GPL and it is xhtml/css valid.</p>
+##	</div>
+    ${self.side()}
 </div>
 </div>
 
