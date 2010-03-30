@@ -21,4 +21,11 @@ class Medium(object):
 
 
     def get_tagstring(self):
-        return "FOO BAR"
+        retval = ""
+        for item in self.tags:
+            if len(retval) > 0:
+                retval += " "
+
+            retval += item.name
+            
+        return retval
