@@ -20,7 +20,7 @@
     <tr>
         <td class='simple'>
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit', id=item.id, page=None, type=None, tag=None)}">Edit</a>
+            <a href="${h.url_for(action='edit', id=item.id, page=None, type=None, tag=None, return_to=h.url_for())}">Edit</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.title}</td>

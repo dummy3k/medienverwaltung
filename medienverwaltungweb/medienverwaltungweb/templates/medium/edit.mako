@@ -39,20 +39,28 @@
     <td class='simple'>${_('Asins')}</td>
         <td class='simple'><ul>
         %for subitem in c.asins:
-        <a href="${h.url_for(controller='amazon', action='show_asin', id=subitem)}">
-        <li>${subitem}</li>
+        <li>
+            <a href="${h.url_for(controller='amazon', action='show_asin', id=subitem)}">
+                ${subitem}
+            </a>
+            <a href="${h.url_for(controller='amazon', action='remove_asin', asin=subitem)}">
+                [X]
+            </a>
+        </li>
         %endfor
     </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
 <p>
+<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 <input type="submit" value="Save"/>
 </p>
 </form>
 
 <p>
 <form id="signin-form" method="post" action="${h.url_for(action='delete', id=None)}">
-    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}">
+    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
+    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
     <input type="submit" value="Delete"/>
 </form>
 </p>

@@ -56,7 +56,7 @@ class AmazonController(BaseController):
 
         try:
             node = self.api.item_search(search_index,
-                                        Title=query,
+                                        Title=query.encode('utf-8'),
                                         ResponseGroup="Images,ItemAttributes")
             c.items = node.Items.Item
         except:
@@ -93,8 +93,17 @@ class AmazonController(BaseController):
         asins = map(lambda item: item.asin, query.all())
         msg = RefHelper(u"added: ")
 
-        node = self.api.item_lookup(",".join(asins),
-                                    ResponseGroup="Images,ItemAttributes")
+        log.debug("asins: %s" % asins)
+        #~ node = self.api.item_lookup(",".join(asins),
+                                    #~ ResponseGroup="Images,ItemAttributes")
+        try:
+            node = self.api.item_lookup(",".join(asins),
+                                        ResponseGroup="Images,ItemAttributes")
+        except Exception as ex:
+            #~ h.flash(dir(ex))
+            h.flash("%s: %s" % (type(ex), ex))
+            return redirect_to(controller='medium', action='edit') 
+            
         for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
@@ -152,4 +161,15 @@ class AmazonController(BaseController):
         meta.Session.update(item)
         meta.Session.commit()
 
+    def remove_asin(self, id):
+        asin_str = request.params.get('asin', None)
+        asin = meta.Session.query(model.MediaToAsin)\
+                           .filter(model.MediaToAsin.asin==asin_str)\
+                           .first()
 
+        meta.Session.delete(asin)
+        meta.Session.commit()
+        return redirect_to(controller='medium', action='index')
+        
+        
+        

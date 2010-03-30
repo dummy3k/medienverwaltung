@@ -50,18 +50,18 @@ class MediumController(BaseController):
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
-        self.__prepare_list__(type, page, tag)
+        self.__prepare_list__(False, type, page, tag)
         c.title = "All Media"
         c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
-        self.__prepare_list__(type, page, tag)
+        self.__prepare_list__(True, type, page, tag)
         c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
         c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
         return render('medium/list_gallery.mako')
     
-    def __prepare_list__(self, type=None, page=1, tag=None):
+    def __prepare_list__(self, with_images, type=None, page=1, tag=None):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
         
@@ -77,20 +77,26 @@ class MediumController(BaseController):
             query = query.join(model.Tag)\
                          .filter(model.Tag.name==tag)
 
+        if with_images:
+            query = query.filter(model.Medium.image_data!=None)
+
         c.items = query.all()
+        log.debug("c.items: %s" % len(c.items))
         c.page = paginate.Page(query, page)
 
-        if not type:
-            tag_query = select([model.tags_table.c.name]).distinct()
-        else:
-            tag_query = select([model.tags_table.c.name], from_obj=[
-                model.tags_table.join(model.media_table)\
-                                .join(model.media_types_table)
-            ]).where(model.media_types_table.c.name==type)\
-              .distinct()
+        if not tag:
+            if not type:
+                tag_query = select([model.tags_table.c.name]).distinct()
+                
+            else:
+                tag_query = select([model.tags_table.c.name], from_obj=[
+                    model.tags_table.join(model.media_table)\
+                                    .join(model.media_types_table)
+                ]).where(model.media_types_table.c.name==type)\
+                  .distinct()
 
-        tag_query.bind = meta.engine
-        c.tags = map(lambda x: x[0], tag_query.execute())
+            tag_query.bind = meta.engine
+            c.tags = map(lambda x: x[0], tag_query.execute())
 
     def list_no_image(self, page=1):
         query = meta.Session\
@@ -178,7 +184,16 @@ class MediumController(BaseController):
         meta.Session.update(item)
         meta.Session.commit()
         h.flash("updated: %s" % item)
-        return redirect_to(action='edit', id=id)
+
+        return_to = request.params.get('return_to')
+        log.debug("return_to: %s" % return_to)
+        if return_to:
+            return redirect_to(str(return_to))
+        else:
+            #~ return redirect_to()
+            return redirect_to(action='edit', id=id)
+            
+        #~ return redirect_to(action='edit', id=id)
 
     def image(self, id, width, height):
         item = meta.find(model.Medium, id)
