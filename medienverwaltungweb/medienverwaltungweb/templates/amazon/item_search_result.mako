@@ -36,7 +36,7 @@
         %endif
         <td class='simple'>${item.ASIN}</td>
         <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
-        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
+        <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">Details...</a></td>
     </tr>
     %endfor
 </table>
