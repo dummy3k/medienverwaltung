@@ -66,6 +66,7 @@
         <h2>Actions:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a></li>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">Next w/o Image</a></li>
         % if len(c.item.asins) > 0:
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>

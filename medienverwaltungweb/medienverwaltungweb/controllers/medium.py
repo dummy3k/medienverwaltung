@@ -193,3 +193,17 @@ class MediumController(BaseController):
         #~ return item.image_data.getvalue()
         #~ return img.tostring()
 
+    def next_without_image(self, id):
+        query = meta.Session\
+            .query(model.Medium)\
+            .filter(model.Medium.image_data == None)\
+            .filter(model.Medium.id < id)\
+            .order_by(model.Medium.id.desc())
+
+        medium = query.first()
+        if not medium:
+            h.flash("all media after this have a image")
+            return redirect_to(action='edit', id=id)
+            
+        return redirect_to(action='edit', id=medium.id)
+        
