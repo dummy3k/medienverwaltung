@@ -2,7 +2,7 @@ import logging
 import Image, ImageFile
 from StringIO import StringIO
 
-from sqlalchemy.sql import select, and_, or_, not_
+from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -52,8 +52,7 @@ class MediumController(BaseController):
     def list(self, type=None, page=1, tag=None):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
-        tag_query = select([model.tags_table.c.name]).distinct()
-        tag_query.bind = meta.engine
+        
         if type:
             if type[-1:] == 's':
                 type = type[:-1]
@@ -67,8 +66,20 @@ class MediumController(BaseController):
                          .filter(model.Tag.name==tag)
 
         c.items = query.all()
-        c.tags = map(lambda x: x[0], tag_query.execute())
         c.page = paginate.Page(query, page)
+
+        if not type:
+            tag_query = select([model.tags_table.c.name]).distinct()
+        else:
+            tag_query = select([model.tags_table.c.name], from_obj=[
+                model.tags_table.join(model.media_table)\
+                                .join(model.media_types_table)
+            ]).where(model.media_types_table.c.name==type)\
+              .distinct()
+
+        tag_query.bind = meta.engine
+        c.tags = map(lambda x: x[0], tag_query.execute())
+
         c.title = "All Media"
         c.pager_action = "list"
         return render('medium/list.mako')
