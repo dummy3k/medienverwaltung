@@ -50,6 +50,18 @@ class MediumController(BaseController):
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
+        self.__prepare_list__(type, page, tag)
+        c.title = "All Media"
+        c.pager_action = "list"
+        return render('medium/list.mako')
+
+    def list_gallery(self, type=None, page=1, tag=None):
+        self.__prepare_list__(type, page, tag)
+        c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
+        c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
+        return render('medium/list_gallery.mako')
+    
+    def __prepare_list__(self, type=None, page=1, tag=None):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
         
@@ -80,10 +92,6 @@ class MediumController(BaseController):
         tag_query.bind = meta.engine
         c.tags = map(lambda x: x[0], tag_query.execute())
 
-        c.title = "All Media"
-        c.pager_action = "list"
-        return render('medium/list.mako')
-
     def list_no_image(self, page=1):
         query = meta.Session\
             .query(model.Medium)\
@@ -94,30 +102,6 @@ class MediumController(BaseController):
         c.title = "Media without images"
         c.pager_action = "list_no_image"
         return render('medium/list.mako')
-
-    def list_gallery(self, type=None, page=1, tag=None):
-        query = meta.Session\
-            .query(model.Medium)\
-            .filter(model.Medium.image_data != None)
-            
-        if type:
-            if type[-1:] == 's':
-                type = type[:-1]
-                
-            query = query.join(model.MediaType)\
-                         .filter(model.MediaType.name==type)
-
-        log.debug("tag: %s" % tag)
-        if tag:
-            query = query.join(model.Tag)\
-                         .filter(model.Tag.name==tag)
-            
-        c.items = query.all()
-        #~ c.page = paginate.Page(query, page, items_per_page=2)
-        c.page = paginate.Page(query, page, items_per_page=14)
-        c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
-        c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
-        return render('medium/list_gallery.mako')
 
     def delete(self):
         msg = ""
