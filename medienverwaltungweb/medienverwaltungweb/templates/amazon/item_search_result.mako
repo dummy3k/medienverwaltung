@@ -10,7 +10,7 @@
 </p>
 </form>
 
-<form id="signin-form" method="post" action="${h.url_for(action='map_to_medium_post')}">
+<form id="signin-form" method="post" name="list" action="${h.url_for(action='map_to_medium_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -26,7 +26,11 @@
             <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}">
         </td>
         %if 'SmallImage' in dir(item):
-        <td class='simple'><img src="${unicode(item.SmallImage.URL)}" /></td>
+        <td class='simple'>
+            <a onclick="document.list.item_id_${item.ASIN}.checked = !document.list.item_id_${item.ASIN}.checked;">
+                <img src="${unicode(item.SmallImage.URL)}" />
+            </a>
+        </td>
         %else:
         <td class='simple'>No image available</td>
         %endif
