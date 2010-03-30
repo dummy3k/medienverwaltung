@@ -16,28 +16,13 @@
 ##    % endfor
 </head>
 <body>
-##    <div id="headmenu">
-##        % for x in c.actions:
-##        <a href="${x['link']}">${x['text']}</a> |
-##        % endfor
-##        <a href="${h.url_for(controller='feed', action='add', id=None)}">Add Feed</a> |
-##        <a href="${h.url_for(controller='feed', action='show_list', id=None)}">List Feeds</a> |
-##        %if c.user:
-##        <a href="${h.url_for(controller='login', action='signout', id=None, return_to=h.url_for())}">Logout</a>
-##        % else:
-##        <a href="${h.url_for(controller='login', action='signin', id=None, return_to=h.url_for())}">Login</a>
-##        % endif
-##    </div>
-
 <div id="header">
 <h1>Medienverwaltung</h1>
  <div id="menu">
   <ul id="nav">
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books')}">Books</a></li>
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds')}">DVDs</a></li>
-##    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type=None)}">Gallery</a></li>
-##    <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, type=None)}">Media without image</a></li>
-    <li><a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None)}">Persons</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">Books</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">DVDs</a></li>
+    <li><a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None, tag=None)}">Persons</a></li>
   </ul>
  </div>
 </div>
@@ -68,11 +53,21 @@
 ##			<p>This XHTML/CSS Template was inspired by great NiftyCube layouts. It is released under GPL and it is xhtml/css valid.</p>
 ##	</div>
     ${self.side()}
+    % if c.tags:
+	<div class="box">
+        <h2>Tags:</h2>
+        <ul>
+        % for item in c.tags:
+        <a href="${h.url_for(tag=item)}">${item}</a>
+        % endfor
+        </ul>
+	</div>
+    % endif
 	<div class="box">
         <h2>Todo:</h2>
         <ul>
-        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None)}">Add Medium</a></li>
-        <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None)}">Without Image</a></li>
+        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None, tag=None)}">Add Medium</a></li>
+        <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, tag=None)}">Without Image</a></li>
         </ul>
 	</div>
 </div>

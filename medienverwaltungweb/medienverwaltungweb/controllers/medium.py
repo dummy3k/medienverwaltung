@@ -49,9 +49,11 @@ class MediumController(BaseController):
         h.flash("added: %s media" % count)
         return redirect_to(action='index')
 
-    def list(self, type=None, page=1):
+    def list(self, type=None, page=1, tag=None):
         log.debug("type: %s" % type)
         query = meta.Session.query(model.Medium)
+        tag_query = select([model.tags_table.c.name]).distinct()
+        tag_query.bind = meta.engine
         if type:
             if type[-1:] == 's':
                 type = type[:-1]
@@ -59,7 +61,13 @@ class MediumController(BaseController):
             query = query.join(model.MediaType)\
                          .filter(model.MediaType.name==type)
 
+        log.debug("tag: %s" % tag)
+        if tag:
+            query = query.join(model.Tag)\
+                         .filter(model.Tag.name==tag)
+
         c.items = query.all()
+        c.tags = map(lambda x: x[0], tag_query.execute())
         c.page = paginate.Page(query, page)
         c.title = "All Media"
         c.pager_action = "list"
@@ -76,7 +84,7 @@ class MediumController(BaseController):
         c.pager_action = "list_no_image"
         return render('medium/list.mako')
 
-    def list_gallery(self, type=None, page=1):
+    def list_gallery(self, type=None, page=1, tag=None):
         query = meta.Session\
             .query(model.Medium)\
             .filter(model.Medium.image_data != None)
@@ -87,6 +95,11 @@ class MediumController(BaseController):
                 
             query = query.join(model.MediaType)\
                          .filter(model.MediaType.name==type)
+
+        log.debug("tag: %s" % tag)
+        if tag:
+            query = query.join(model.Tag)\
+                         .filter(model.Tag.name==tag)
             
         c.items = query.all()
         #~ c.page = paginate.Page(query, page, items_per_page=2)

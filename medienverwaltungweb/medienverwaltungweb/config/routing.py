@@ -21,11 +21,14 @@ def make_map():
     # CUSTOM ROUTES HERE
 
     #~ map.connect('/{controller}/{id}/page/{page}', controller='feed', action='show_feed')
-    map.connect('/{controller}/{action}/page/{page}')
-    map.connect('/', controller='medium', action='index')
+    map.connect('/', controller='medium', action='list_gallery')
     map.connect('/{controller}/{action}')
-    map.connect('/{controller}/{action}/t/{type}')
-    map.connect('/{controller}/{action}/t/{type}/page/{page}')
+    map.connect('/{controller}/{action}/page/{page}')
+    map.connect('/{controller}/{action}/type/{type}')
+    map.connect('/{controller}/{action}/tagged/{tag}')
+    map.connect('/{controller}/{action}/type/{type}/page/{page}')
+    map.connect('/{controller}/{action}/type/{type}/tagged/{tag}')
+    map.connect('/{controller}/{action}/type/{type}/tagged/{tag}/page/{page}')
     #~ map.connect('/{controller}/{action}/{type}')
     #~ map.connect('/{controller}/{action}/books', type='books')
     #~ map.connect('/{controller}/{action}/dvds', type='dvds')

@@ -12,7 +12,7 @@
         <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Id')}</td>
         <td class='simple'>${_('Title')}</td>
-##        <td class='simple'>${_('Actions')}</td>
+        <td class='simple'>${_('Tags')}</td>
     </tr>
 
     % for item in c.page.items:
@@ -24,6 +24,13 @@
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.title}</td>
+        <td class='simple'>
+            % for subitem in item.tags:
+            <a href="${h.url_for(tag=subitem.name, page=None)}">
+                ${subitem.name}
+            </a>
+            % endfor
+        </td>
 ##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
     </tr>
     %endfor
