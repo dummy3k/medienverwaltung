@@ -1,5 +1,6 @@
 from sqlalchemy import *
-from medienverwaltungweb.model import meta
+#~ from medienverwaltungweb.model import meta
+import meta
 
 relation_types_table = Table('relation_types', meta.metadata,
     Column('id', Integer, primary_key=True),

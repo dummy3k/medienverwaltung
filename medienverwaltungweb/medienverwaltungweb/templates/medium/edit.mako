@@ -19,6 +19,10 @@
         <td class='simple'>${_('Title')}</td>
         <td class='simple'><input type="text" name="title" value="${c.item.title}" /></td>
     </tr>
+    <tr>
+        <td class='simple'>${_('Tags')}</td>
+        <td class='simple'><input type="text" name="tags" value="${c.item.get_tagstring()}" /></td>
+    </tr>
     %for subitem in c.persons:
     <tr>
         <td class='simple'>${_(subitem)}</td>

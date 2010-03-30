@@ -10,6 +10,8 @@ import medienverwaltungweb.lib.app_globals as app_globals
 import medienverwaltungweb.lib.helpers
 from medienverwaltungweb.config.routing import make_map
 from medienverwaltungweb.model import init_model
+#~ from medienverwaltungcommon.model import init_model
+
 
 def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``

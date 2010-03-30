@@ -1,5 +1,6 @@
 from sqlalchemy import *
-from medienverwaltungweb.model import meta
+#~ from medienverwaltungweb.model import meta
+import meta
 
 media_types_table = Table('media_types', meta.metadata,
     Column('id', Integer, primary_key=True),

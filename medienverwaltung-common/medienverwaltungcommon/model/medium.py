@@ -1,5 +1,6 @@
 from sqlalchemy import *
-from medienverwaltungweb.model import meta
+#~ from medienverwaltungweb.model import meta
+import meta
 
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
@@ -19,3 +20,5 @@ class Medium(object):
         return "<Medium(%s, '%s')>" % (self.id, self.title)
 
 
+    def get_tagstring(self):
+        return "FOO BAR"
