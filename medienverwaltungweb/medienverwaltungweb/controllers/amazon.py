@@ -2,6 +2,7 @@ import logging
 import amazonproduct
 import urllib
 from StringIO import StringIO
+import pickle
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -78,9 +79,14 @@ class AmazonController(BaseController):
                 % (len(asins), media_id, ", ".join(asins)))
                    
         meta.Session.commit()
-        return redirect_to(controller='medium', action='edit')
+        self.__query_actors__(media_id)
+        return redirect_to(controller='amazon', action='query_images')
 
     def query_actors(self, id):
+        self.__query_actors__(id)
+        return redirect_to(controller='medium', action='edit')
+        
+    def __query_actors__(self, id):
         """ id = media.id """
         query = meta.Session.query(model.MediaToAsin)\
                             .filter(model.MediaToAsin.media_id==id)
@@ -100,7 +106,7 @@ class AmazonController(BaseController):
         meta.Session.commit()
         if len(msg.value) > len(u"added: "):
             h.flash(msg.value)
-        return redirect_to(controller='medium', action='edit')
+        
         
     def query_images(self, id):
         """ show the user a selection of available images """
@@ -123,9 +129,18 @@ class AmazonController(BaseController):
         buffer = StringIO()
         buffer.write(webFile.read())
 
+        if buffer.len >= 65536:
+            # 69198 defenitly fails. if the size is to blame.
+            # i dont know :(
+            h.flash('image is to big.')
+            return redirect_to(controller='amazon', action='query_images')
+            
+        #~ return str(buffer.len)
+        
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
+        #~ pickle.dump(buffer, item.image_data)
         meta.Session.update(item)
         meta.Session.commit()
         

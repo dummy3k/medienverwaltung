@@ -44,3 +44,13 @@
 <input type="submit" value="Attach to '${c.item}'"/>
 </form>
 </%def>
+
+
+<%def name="side()">
+	<div class="box">
+        <h2>Actions:</h2>
+        <ul>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">Next w/o Image</a></li>
+        </ul>
+	</div>
+</%def>
