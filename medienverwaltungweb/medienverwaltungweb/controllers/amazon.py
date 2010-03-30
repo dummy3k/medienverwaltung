@@ -61,7 +61,7 @@ class AmazonController(BaseController):
             c.items = node.Items.Item
         except:
             c.items = []
-            
+
         c.query = query
         return render('/amazon/item_search_result.mako')
 
@@ -74,10 +74,10 @@ class AmazonController(BaseController):
             record.asin = item
             meta.Session.add(record)
             asins.append(item)
-            
+
         h.flash("attached %s amazon ids to media id %s: %s"\
                 % (len(asins), media_id, ", ".join(asins)))
-                   
+
         meta.Session.commit()
         self.__query_actors__(media_id)
         return redirect_to(controller='amazon', action='query_images')
@@ -85,14 +85,14 @@ class AmazonController(BaseController):
     def query_actors(self, id):
         self.__query_actors__(id)
         return redirect_to(controller='medium', action='edit')
-        
+
     def __query_actors__(self, id):
         """ id = media.id """
         query = meta.Session.query(model.MediaToAsin)\
                             .filter(model.MediaToAsin.media_id==id)
         asins = map(lambda item: item.asin, query.all())
         msg = RefHelper(u"added: ")
-        
+
         node = self.api.item_lookup(",".join(asins),
                                     ResponseGroup="Images,ItemAttributes")
         for item in node.Items.Item:
@@ -106,8 +106,8 @@ class AmazonController(BaseController):
         meta.Session.commit()
         if len(msg.value) > len(u"added: "):
             h.flash(msg.value)
-        
-        
+
+
     def query_images(self, id):
         """ show the user a selection of available images """
 
@@ -121,10 +121,18 @@ class AmazonController(BaseController):
         node = self.api.item_lookup(",".join(asins),
                                     ResponseGroup="Images")
         c.items = node.Items.Item
+        if len(c.items) == 1:
+            self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
+            return redirect_to(controller='medium', action='edit')
+
         return render("amazon/image_list.mako")
-        
+
     def query_images_post(self, id):
         url = request.params.get('url', None)
+        self.__query_images_post__(id, url)
+        return redirect_to(controller='medium', action='edit')
+
+    def __query_images_post__(self, id, url):
         webFile = urllib.urlopen(url)
         buffer = StringIO()
         buffer.write(webFile.read())
@@ -134,14 +142,14 @@ class AmazonController(BaseController):
             # i dont know :(
             h.flash('image is to big.')
             return redirect_to(controller='amazon', action='query_images')
-            
+
         #~ return str(buffer.len)
-        
+
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
         #~ pickle.dump(buffer, item.image_data)
         meta.Session.update(item)
         meta.Session.commit()
-        
-        return redirect_to(controller='medium', action='edit')
+
+

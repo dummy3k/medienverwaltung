@@ -19,11 +19,6 @@
         <td class='simple'>${_('Title')}</td>
         <td class='simple'><input type="text" name="title" value="${c.item.title}" /></td>
     </tr>
-    <tr>
-        <td class='simple'>${_('Image')}</td>
-        <td class='simple'>
-        </td>
-    </tr>
     %for subitem in c.persons:
     <tr>
         <td class='simple'>${_(subitem)}</td>
@@ -36,7 +31,6 @@
         </ul></td>
     </tr>
     %endfor
-
     <tr>
     <td class='simple'>${_('Asins')}</td>
         <td class='simple'><ul>
