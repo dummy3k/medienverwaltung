@@ -1,6 +1,7 @@
 from sqlalchemy import *
 #~ from medienverwaltungweb.model import meta
 import meta
+import tag
 
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
@@ -29,3 +30,12 @@ class Medium(object):
             retval += item.name
             
         return retval
+
+    def set_tagstring(self, s):
+        tag_names = map(lambda x: x.name, self.tags)
+        for item in s.split(' '):
+            if not item in tag_names:
+                mytag = tag.Tag()
+                mytag.name = item
+                self.tags.append(mytag)
+
