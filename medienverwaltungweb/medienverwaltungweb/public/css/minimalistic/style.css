@@ -88,4 +88,9 @@ li { }
 .pager_curpage,.pager_link {
 	font-size:1.2em;
 }
+
  
+a.titel
+{
+    color: white;
+}

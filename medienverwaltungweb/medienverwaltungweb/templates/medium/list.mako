@@ -10,6 +10,7 @@
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
+        <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Id')}</td>
         <td class='simple'>${_('Title')}</td>
         <td class='simple'>${_('Tags')}</td>
@@ -21,6 +22,11 @@
         <td class='simple'>
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
             <a href="${h.url_for(action='edit', id=item.id, page=None, type=None, tag=None, return_to=h.url_for())}">Edit</a>
+        </td>
+        <td class='simple'>
+            % if item.image_data:
+            <img src="${h.url_for(action='image', id=item.id, page=None, type=None, tag=None, return_to=None, width=20, height=20)}">
+            % endif
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.title}</td>

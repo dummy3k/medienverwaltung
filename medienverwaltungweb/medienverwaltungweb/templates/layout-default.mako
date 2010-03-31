@@ -18,7 +18,11 @@
 <body>
 <div id="header">
 <div id="layoutImg"></div>
-<div id="titel">Medienverwaltung</div>
+<div id="titel">
+    <a class ="titel" href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">
+        Medienverwaltung
+    </a>
+</div>
  <div id="menu">
   <ul id="nav">
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">Books</a></li>
