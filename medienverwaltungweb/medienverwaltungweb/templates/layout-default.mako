@@ -17,7 +17,8 @@
 </head>
 <body>
 <div id="header">
-<h1>Medienverwaltung</h1>
+<div id="layoutImg"></div>
+<div id="titel">Medienverwaltung</div>
  <div id="menu">
   <ul id="nav">
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">Books</a></li>
@@ -36,15 +37,16 @@
         </div>
     % endfor
 % endif
+        
 
-<h1></h1>
+
 ##<div class="main">
 ##</div>
 
 <div id="content">
 
 <div id="right">
-    <h2>${self.title()}</h2>
+    <h1>${self.title()}</h1>
     ${self.content()}
 </div>
 <div id="left">
@@ -56,11 +58,11 @@
     % if c.tags:
 	<div class="box">
         <h2>Tags:</h2>
-        <ul>
+        <span class="tags">
         % for item in c.tags:
         <a href="${h.url_for(tag=item)}">${item}</a>
         % endfor
-        </ul>
+        </span>
 	</div>
     % endif
 	<div class="box">

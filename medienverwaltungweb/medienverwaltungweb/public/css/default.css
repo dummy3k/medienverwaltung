@@ -6,7 +6,6 @@ table.simple, td.simple
 
 table.simple
 {
-    border-width: 0 0 1px 1px;
     border-spacing: 0;
     border-collapse: collapse;
 }
@@ -15,7 +14,7 @@ td.simple
 {
     margin: 0;
     padding: 4px;
-    border-width: 1px 1px 0 0;
+    border: 1px solid #90B2D2;
 /*
     background-color: #FFC;
 */

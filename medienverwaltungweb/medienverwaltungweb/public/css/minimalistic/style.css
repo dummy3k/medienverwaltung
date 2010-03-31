@@ -1,16 +1,46 @@
+/* 31.03.2010 Ck 
+
+Farben
+#90B2D2 mittelblau
+#E7F1F8 hellblau
+#D4E37E hellgrün
+#036DA7 blau
+#02517B dunkleres blau für fonts
+#A3323C rot
+#D8AE36 orange
+#FFF6BF  hellgelb
+
+
+*/
 html,body{margin:0;padding:0}
 body{font: 85%/1.3 TrebuchetMS,Arial,sans-serif;
     text-align: left;background: #fff;padding-bottom:20px}
 a { color: #0066B3; background: inherit; text-decoration: none;}
-h1 { font: bold 2.1em Arial, Arial, Sans-Serif; color: #036DA7 }
-h2 { font: bold 1.1em Arial, Arial, Sans-Serif; padding: 0; margin: 0; }
+a:hover,a:active {text-decoration:underline; color:#A3323C;}
+h1 { font: bold 2.1em Arial, Arial, Sans-Serif; margin:0.5em 0; color: #036DA7; }
+h2 { font: bold 1.8em Arial, Arial, Sans-Serif; padding:0; margin:0.4em 0; color:#02517B; }
 
-div#header{width:100%;overflow:hidden;background: #BBD9EE; }
-div#header h1,div#menu{width:770px;margin:0 auto;text-align:left}
-div#header h1{padding: 30px 0 20px;color: #fff}
+div#header{overflow:hidden;background:url(/css/CD-trans.png) top right no-repeat #90B2D2; margin:0 0 1em 0; }
+div#header #titel,div#menu{width:770px;margin:0 auto;text-align:left; position:relative; z-index:6;}
+div#header #titel{font: bold 2.1em Arial, Arial, Sans-Serif; padding: 30px 0 20px 200px;color: #fff}
+
+div#layoutImg { 
+	background:url(/css/buecher-patrickgage.png) 0 0 no-repeat transparent;
+	width:237px; 
+	height:147px; 
+	float:left; 
+	position:absolute; top:0.3em; left:0.3em; 
+	z-index:5; 
+}
+.ui-corner-all {
+	position:relative; top:-1em; left:240px;
+	z-index:10;
+	width:70%;
+}
+
 
 ul#nav,ul#nav li{list-style-type:none;margin:0;padding:0}
-ul#nav{float:right;font-size: 80%}
+ul#nav{float:right;font-size: 100%}
 ul#nav li{float:left;margin-left: 3px;text-align: center}
 ul#nav a{float:left;width: 95px;padding: 5px 0;background: #E7F1F8;text-decoration:none;color: #666; border-top : 1px solid #fff; border-left : 1px solid #fff; border-right : 1px solid #fff;}
 ul#nav a:hover{background: #fff;color: #000}
@@ -21,33 +51,41 @@ ul#nav li.activelink a,ul#nav li.activelink a:hover{background: #FFF;color: #003
 	width: 76%;
 	padding: 1em;
 	margin-bottom: 1.2em;
-	background: #eee;
+	background: #E7F1F8;
 	text-align: justify;
+	position:relative;
+	z-index:4;
 }
 
 #left {
 	float: right;
 	width: 20%;
 	margin: 0 0 10px 0;
-	
 }
 
 #left .box {
-	
 	padding: 1em;
 	margin: 0 0 1em 0;
-	background : #FFF6BF;
+	background : #D4E37E;
+}
+#left .box h2 {
+	margin:0;
+	font-size:1.5em;
 }
 
 
 #content {
-font: 95%/1.3 TrebuchetMS,Arial,sans-serif;
+font: 100%/1.3 TrebuchetMS,Arial,sans-serif;
 	margin: 0 auto;
     padding: 15px;
 	background: #fff;
-	
-	
+	clear:left;
 }
 
-ul {  padding: 0; margin: 0;}
-li { list-style-type: none;}
+ul,.tags{ margin: 0; font-size:1.2em;}
+li { }
+
+.pager_curpage,.pager_link {
+	font-size:1.2em;
+}
+ 
