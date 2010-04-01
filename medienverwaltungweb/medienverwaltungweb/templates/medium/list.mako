@@ -6,8 +6,13 @@
 <%def name="content()">
 <%namespace name='js_pager' file='../js_pager.mako' />
 ${js_pager.js_pager(e)}
+${self.bare_content(c.page, c.pager_action)}
 
-<p>${c.page.pager(controller='medium', action=c.pager_action)}</p>
+</%def>
+
+<%def name="bare_content(pager, pager_action)">
+
+<p>${pager.pager(controller='medium', action=pager_action)}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
 <table border=1 class='simple'>
@@ -19,23 +24,22 @@ ${js_pager.js_pager(e)}
         <td class='simple'>${_('Tags')}</td>
     </tr>
 
-    % for item in c.page.items:
-    ##% for item in c.page.items:
+    % for item in pager.items:
     <tr>
         <td class='simple'>
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit', id=item.id, page=None, type=None, tag=None, return_to=h.url_for())}">Edit</a>
+            <a href="${h.url_for(controller='medium', action='edit', id=item.id, page=None, type=None, tag=None)}">Edit</a>
         </td>
         <td class='simple'>
             % if item.image_data:
-            <img src="${h.url_for(action='image', id=item.id, page=None, type=None, tag=None, return_to=None, width=20, height=20)}">
+            <img src="${h.url_for(controller='medium', action='image', id=item.id, page=None, type=None, tag=None, return_to=None, width=20, height=20)}">
             % endif
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.title}</td>
         <td class='simple'>
             % for subitem in item.tags:
-            <a href="${h.url_for(tag=subitem.name, page=None)}">
+            <a href="${h.url_for(controller='medium', action='list', tag=subitem.name, page=None)}">
                 ${subitem.name}
             </a>
             % endfor
@@ -45,7 +49,7 @@ ${js_pager.js_pager(e)}
     %endfor
 </table>
 
-<p>${c.page.pager(controller='medium', action=c.pager_action)}</p>
+<p>${pager.pager(controller='medium', action=pager_action)}</p>
 
 <p>
 <input type="submit" value="Delete marked Media"/>

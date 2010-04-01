@@ -7,6 +7,7 @@ from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
+from webhelpers import paginate
 
 log = logging.getLogger(__name__)
 
@@ -22,15 +23,17 @@ class SearchController(BaseController):
             return redirect_to(action='index')
 
         like_query = "%%%s%%" % query
+        c.query = query
+        
         media_query = meta.Session\
                           .query(model.Medium)\
                           .filter(model.Medium.title.like(like_query))
-        c.media_result = media_query.all()
+        c.media_page = paginate.Page(media_query)
+
 
         persons_query = meta.Session\
                           .query(model.Person)\
                           .filter(model.Person.name.like(like_query))
         c.persons_result = persons_query.all()
-
         return render('search/results.mako')
         

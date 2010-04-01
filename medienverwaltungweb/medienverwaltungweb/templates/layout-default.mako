@@ -73,6 +73,13 @@
         <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, tag=None)}">Without Image</a></li>
         </ul>
 	</div>
+	<div class="box">
+        <h2>Search:</h2>
+        <form id="signin-form" method="post" action="${h.url_for(controller='search', action='search_post', id=None, page=None, tag=None, type=None)}">
+            <input type="text" name="query"/>
+            <input type="submit" value="Find"/>
+        </form>
+	</div>
 </div>
 </div>
 
