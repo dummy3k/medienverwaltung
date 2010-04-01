@@ -60,15 +60,50 @@ class MediumController(BaseController):
         c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
         c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
         return render('medium/list_gallery.mako')
-    
+
+    def __get_tags__(self, tag_name, media_type_name):
+        """ get all tags from all media.
+            If tag_name is specified only media tagged with this is
+            considered.
+            If media_type_name is specified only media by this type
+            is considered
+        """
+        join_clause = model.tags_table.join(model.media_table)
+
+        if tag_name:
+            sub_tags_table = model.tags_table.alias('sub_tags')
+            join_clause = join_clause.join(sub_tags_table)
+
+        if media_type_name:
+            sub_media_types_table = model.media_types_table.alias('sub_media_types_table')
+            join_clause = join_clause.join(sub_media_types_table)
+
+        tag_query = select([model.tags_table.c.name], from_obj=[join_clause])
+
+        if tag_name:
+            tag_query = tag_query.where(sub_tags_table.c.name==tag_name)
+            
+        if media_type_name:
+            tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
+            
+        tag_query = tag_query.distinct()
+        tag_query.bind = meta.engine
+        retval = map(lambda x: x[0], tag_query.execute())
+        if tag_name in retval:
+            retval.remove(tag_name)
+        return retval
+        
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):
+        if type and type[-1:] == 's':
+            type = type[:-1]
+
         log.debug("type: %s" % type)
+        c.tags = self.__get_tags__(tag, type)
+        log.debug("c.tags: %s" % len(c.tags))
+        
         query = meta.Session.query(model.Medium)
         
         if type:
-            if type[-1:] == 's':
-                type = type[:-1]
-                
             query = query.join(model.MediaType)\
                          .filter(model.MediaType.name==type)
 
@@ -83,20 +118,6 @@ class MediumController(BaseController):
         c.items = query.all()
         log.debug("c.items: %s" % len(c.items))
         c.page = paginate.Page(query, page)
-
-        if not tag:
-            if not type:
-                tag_query = select([model.tags_table.c.name]).distinct()
-                
-            else:
-                tag_query = select([model.tags_table.c.name], from_obj=[
-                    model.tags_table.join(model.media_table)\
-                                    .join(model.media_types_table)
-                ]).where(model.media_types_table.c.name==type)\
-                  .distinct()
-
-            tag_query.bind = meta.engine
-            c.tags = map(lambda x: x[0], tag_query.execute())
 
     def list_no_image(self, page=1):
         query = meta.Session\
@@ -203,10 +224,10 @@ class MediumController(BaseController):
         #~ p.feed(StringIO(item.image_data.getvalue()))
         img = p.close()
 
-        log.debug("size: %s, %s" % (width, height))
+        #~ log.debug("size: %s, %s" % (width, height))
         size = int(width), int(height)
         img.thumbnail(size)
-        log.debug("imgsize: %s, %s" % img.size)
+        #~ log.debug("imgsize: %s, %s" % img.size)
 
         buffer = StringIO()
         img.save(buffer, format='png')
