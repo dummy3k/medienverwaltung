@@ -23,6 +23,14 @@
         <td class='simple'>${_('Tags')}</td>
         <td class='simple'><input type="text" name="tags" value="${c.item.get_tagstring()}" size=50 /></td>
     </tr>
+    <tr>
+        <td class='simple'>${_('Created')}</td>
+        <td class='simple'>${c.item.created_ts}</td>
+    </tr>
+    <tr>
+        <td class='simple'>${_('Updated')}</td>
+        <td class='simple'>${c.item.updated_ts}</td>
+    </tr>
     %for subitem in c.persons:
     <tr>
         <td class='simple'>${_(subitem)}</td>

@@ -87,7 +87,6 @@ def variant003():
         tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
         
     tag_query = tag_query.distinct()
-    #~ h.ipython()()
     print tag_query
     
     tag_query.bind = engine
@@ -96,4 +95,11 @@ def variant003():
         print item
     #~ print result
 
-variant003()
+def variant004():
+    t = model.media_table
+    foo = model.media_table.c.created_ts
+    t.update(values={'created_ts':datetime.now()})
+    h.ipython()()
+    pass
+
+variant004()

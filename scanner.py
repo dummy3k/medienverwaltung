@@ -11,6 +11,7 @@ import urllib
 from StringIO import StringIO
 import logging
 import os
+from datetime import datetime
 
 import helper as h
 import medienverwaltungweb.model as model
@@ -49,6 +50,8 @@ def one(isbn):
 
     medium = model.Medium()
     medium.title = title
+    medium.created_ts = datetime.now()
+    medium.updated_ts = datetime.now()
     log.debug("medium.title: %s" % medium.title)
     medium.media_type_id = media_type.id
     medium.isbn = isbn
@@ -65,7 +68,11 @@ def one(isbn):
         webFile = urllib.urlopen(url)
         buffer = StringIO()
         buffer.write(webFile.read())
-        medium.image_data = buffer
+        if buffer.len > 65536:
+            log.warn("image is too big")
+        else:
+            medium.image_data = buffer
+            
     session.add(medium)
     session.commit()
 

@@ -1,6 +1,7 @@
 import logging
 import Image, ImageFile
 from StringIO import StringIO
+from datetime import datetime
 
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
@@ -41,6 +42,8 @@ class MediumController(BaseController):
                 
             record = model.Medium()
             record.title = item
+            record.created_ts = datetime.now()
+            record.updated_ts = datetime.now()
             record.media_type_id = request.params.get('media_type')
             meta.Session.save(record)
             count += 1
@@ -201,6 +204,7 @@ class MediumController(BaseController):
         item = meta.find(model.Medium, id)
         item.title = request.params.get('title')
         item.image_url = request.params.get('image_url')
+        item.updated_ts = datetime.now()
         item.set_tagstring(request.params.get('tags'))
         meta.Session.update(item)
         meta.Session.commit()

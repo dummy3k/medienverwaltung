@@ -9,6 +9,8 @@ media_table = Table('media', meta.metadata,
     Column('image_data', PickleType),
     Column('media_type_id', Integer, ForeignKey('media_types.id')),
     Column('isbn', String(15)),
+    Column('created_ts', DateTime),
+    Column('updated_ts', DateTime),
 )
 
 class Medium(object):
