@@ -55,17 +55,13 @@
     ${self.content()}
 </div>
 <div id="left">
-##	<div class="box">
-##			<h2>Filter</h2>	
-##			<p>This XHTML/CSS Template was inspired by great NiftyCube layouts. It is released under GPL and it is xhtml/css valid.</p>
-##	</div>
     ${self.side()}
     % if c.tags:
 	<div class="box">
         <h2>Tags:</h2>
         <span class="tags">
         % for item in c.tags:
-        <a href="${h.url_for(tag=item)}">${item}</a>
+        <a href="${h.url_for(tag=item, page=None)}">${item}</a>
         % endfor
         </span>
 	</div>

@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons.controllers.util import abort, redirect_to, etag_cache
 
 import medienverwaltungweb.model as model
 import medienverwaltungweb.lib.helpers as h
@@ -236,6 +236,8 @@ class MediumController(BaseController):
         buffer = StringIO()
         img.save(buffer, format='png')
         response.content_type = 'image/png'
+
+        etag_cache(str(item.updated_ts))
         return buffer.getvalue()
 
         # set the response type to PNG, since we at least hope to return a PNG image here
