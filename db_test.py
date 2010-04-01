@@ -102,4 +102,12 @@ def variant004():
     h.ipython()()
     pass
 
-variant004()
+def variant005():
+    query = u"%term%"
+    media_query = session\
+                      .query(model.Medium)\
+                      .filter(model.Medium.title.like(query))
+    h.ipython()()
+    pass
+
+variant005()
