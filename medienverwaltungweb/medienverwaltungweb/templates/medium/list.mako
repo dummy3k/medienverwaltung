@@ -19,8 +19,8 @@ ${self.bare_content(c.page, c.pager_action)}
     <tr>
         <td class='simple'>&nbsp;</td>
         <td class='simple'>&nbsp;</td>
-        <td class='simple'>${_('Id')}</td>
-        <td class='simple'>${_('Title')}</td>
+        <td class='simple'><a href="${h.url_for(order=h.iif(c.order=='id', 'id_desc', 'id'))}">${_('Id')}</a></td>
+        <td class='simple'><a href="${h.url_for(order=h.iif(c.order=='title', 'title_desc', 'title'))}">${_('Title')}</a></td>
         <td class='simple'>${_('Tags')}</td>
     </tr>
 

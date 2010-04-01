@@ -22,7 +22,7 @@ ${js_pager.js_pager(e)}
 	<div class="box">
         <h2>Gallery:</h2>
         <ul>
-        <li><a href="${h.url_for(action='list', id=None, page=None, tag=None)}">As List</a></li>
+        <li><a href="${h.url_for(action='list', id=None, page=None)}">As List</a></li>
         </ul>
 	</div>
 </%def>

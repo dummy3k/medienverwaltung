@@ -36,4 +36,8 @@ def checkboxes(request, id):
         if item.startswith(id):
             retval.append(request.params[item])
 
-    return retval
+def iif(expr, a, b):
+    if expr:
+        return a
+    else:
+        return b

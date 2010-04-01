@@ -135,7 +135,17 @@ class MediumController(BaseController):
         if with_images:
             query = query.filter(model.Medium.image_data!=None)
 
-        c.items = query.all()
+        c.order = request.params.get('order')
+        if not c.order:
+            query = query.order_by(model.Medium.title)
+        elif c.order.endswith('_desc'):
+            #~ real_order = c.order[:-5]
+            #~ log.debug("real_order: %s" % real_order)
+            query = query.order_by(model.Medium.__dict__[c.order[:-5]].desc())
+        else:
+            query = query.order_by(model.Medium.__dict__[c.order])
+            
+        #~ c.items = query.all()
         log.debug("c.items: %s" % len(c.items))
         c.page = paginate.Page(query, page)
 
