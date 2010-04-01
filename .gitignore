@@ -1,2 +1,4 @@
 *.pyc
 *.conf
+*.bak
+*/local/*

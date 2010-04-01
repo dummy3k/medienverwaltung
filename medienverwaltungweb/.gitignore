@@ -1,5 +1,3 @@
 *.ini
 *.db
-*.bak
 data/*
-local/*
