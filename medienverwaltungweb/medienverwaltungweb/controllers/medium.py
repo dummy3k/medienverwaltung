@@ -57,12 +57,27 @@ class MediumController(BaseController):
 
     def list(self, type=None, page=1, tag=None):
         self.__prepare_list__(False, type, page, tag)
-        c.title = "All Media"
+        if type:
+            c.title = "All %s" % type.capitalize()
+        else:
+            c.title = "All Media"
+
+        if tag:
+            c.title += " tagged %s" % tag.capitalize()
+            
         c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
         self.__prepare_list__(True, type, page, tag)
+        if type:
+            c.title = "%s Gallery" % type.capitalize()
+        else:
+            c.title = "All Media Gallery"
+
+        if tag:
+            c.title += " tagged %s" % tag.capitalize()
+            
         c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
         c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
         return render('medium/list_gallery.mako')

@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">All Media Gallery</%def>
+<%def name="title()">${c.title}</%def>
 
 <%def name="content()">
 
