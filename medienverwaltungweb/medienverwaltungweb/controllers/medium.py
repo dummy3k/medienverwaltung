@@ -78,8 +78,7 @@ class MediumController(BaseController):
         if tag:
             c.title += " tagged %s" % tag.capitalize()
             
-        c.next_link = h.url_for(controller='medium', action='list_gallery', page=int(page)+1)
-        c.prev_link = h.url_for(controller='medium', action='list_gallery', page=int(page)-1)
+        c.pager_action = "list_gallery"
         return render('medium/list_gallery.mako')
 
     def __get_tags__(self, tag_name, media_type_name):

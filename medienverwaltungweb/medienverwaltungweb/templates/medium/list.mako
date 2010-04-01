@@ -4,6 +4,9 @@
 <%def name="title()">${c.title}</%def>
 
 <%def name="content()">
+<%namespace name='js_pager' file='../js_pager.mako' />
+${js_pager.js_pager(e)}
+
 <p>${c.page.pager(controller='medium', action=c.pager_action)}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">

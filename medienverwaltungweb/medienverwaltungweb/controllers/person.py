@@ -12,7 +12,6 @@ from medienverwaltungweb.model import meta
 log = logging.getLogger(__name__)
 
 class PersonController(BaseController):
-
     def index(self, id=None):
         if id:
             return self.edit(id)
@@ -40,5 +39,11 @@ class PersonController(BaseController):
                          
         c.page = paginate.Page(query, page)
 
+        if relation_type:
+            c.title = "All %ss" % relation_type
+        else:
+            c.title = "Every Person"
+            
+        c.pager_action = "list"
         return render('person/list.mako')
 

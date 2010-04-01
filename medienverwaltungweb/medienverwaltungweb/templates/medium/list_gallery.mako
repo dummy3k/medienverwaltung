@@ -3,27 +3,8 @@
 <%def name="title()">${c.title}</%def>
 
 <%def name="content()">
-
-<script type="text/javascript">
-$(document).ready(function() {
-     $(window).keydown(function(event){
-        //alert(event.keyCode);
-        var current_page = ${c.page.page}
-        if (current_page > 1 && event.keyCode == 37) {
-            location.href = "${c.prev_link}"
-        } else if (event.keyCode == 39) {
-            location.href = "${c.next_link}"
-##            location.href = 'http://127.0.0.1:5000/medium/list_gallery/page/' + (current_page + 1)
-        }
-
-    });
-});
-
-</script>
-
-<p>
-
-</p>
+<%namespace name='js_pager' file='../js_pager.mako' />
+${js_pager.js_pager(e)}
 
 <p>${c.page.pager(controller='medium', action='list_gallery')}</p>
 

@@ -1,9 +1,12 @@
 ## -*- coding: utf-8 -*-
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">All Persons</%def>
+<%def name="title()">${c.title}</%def>
 
 <%def name="content()">
+<%namespace name='js_pager' file='../js_pager.mako' />
+${js_pager.js_pager(e)}
+
 <p>${c.page.pager()}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
@@ -42,8 +45,8 @@
 	<div class="box">
         <h2>Filter:</h2>
         <ul>
-        <li><a href="${h.url_for(role='Actor')}">Actor</a></li>
-        <li><a href="${h.url_for(role='Director')}">Director</a></li>
+        <li><a href="${h.url_for(role='Actor', page=None)}">Actor</a></li>
+        <li><a href="${h.url_for(role='Director', page=None)}">Director</a></li>
         </ul>
 	</div>
 </%def>
