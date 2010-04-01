@@ -33,6 +33,9 @@ class MediumController(BaseController):
 
         count = 0
         for item in request.params.get('title').split('\n'):
+            if not item:
+                continue
+                
             query = meta.Session\
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
@@ -41,7 +44,7 @@ class MediumController(BaseController):
                 continue
                 
             record = model.Medium()
-            record.title = item
+            record.title = item.strip()
             record.created_ts = datetime.now()
             record.updated_ts = datetime.now()
             record.media_type_id = request.params.get('media_type')
