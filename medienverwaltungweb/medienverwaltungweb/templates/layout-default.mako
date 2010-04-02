@@ -60,8 +60,8 @@
 	<div class="box">
         <h2>Tags:</h2>
         <span class="tags">
-        % for item in c.tags:
-        <a href="${h.url_for(tag=item, page=None)}">${item}</a>
+        % for item in c.tags[:10]:
+        <a href="${h.url_for(tag=item[0], page=None)}">${item[0]}&nbsp;(${item[1]})</a>
         % endfor
         </span>
 	</div>

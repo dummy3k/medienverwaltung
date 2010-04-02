@@ -3,6 +3,7 @@ import Image, ImageFile
 from StringIO import StringIO
 from datetime import datetime
 
+from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
@@ -86,7 +87,8 @@ class MediumController(BaseController):
             If tag_name is specified only media tagged with this is
             considered.
             If media_type_name is specified only media by this type
-            is considered
+            is considered.
+            Returns a tuple (tag_name, count) for each tag.
         """
         join_clause = model.tags_table.join(model.media_table)
 
@@ -98,19 +100,24 @@ class MediumController(BaseController):
             sub_media_types_table = model.media_types_table.alias('sub_media_types_table')
             join_clause = join_clause.join(sub_media_types_table)
 
-        tag_query = select([model.tags_table.c.name], from_obj=[join_clause])
+        cnt_col = func.count()
+        tag_query = select([model.tags_table.c.name, cnt_col],
+                           from_obj=[join_clause])
 
         if tag_name:
             tag_query = tag_query.where(sub_tags_table.c.name==tag_name)
+            tag_query = tag_query.where(model.tags_table.c.name != tag_name)
             
         if media_type_name:
             tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
             
-        tag_query = tag_query.distinct()
+        #~ tag_query = tag_query.distinct()
+        tag_query = tag_query.group_by(model.tags_table.c.name)\
+                             .order_by(cnt_col.desc())
         tag_query.bind = meta.engine
-        retval = map(lambda x: x[0], tag_query.execute())
-        if tag_name in retval:
-            retval.remove(tag_name)
+        retval = map(lambda x: (x[0], x[1]), tag_query.execute())
+        #~ if tag_name in retval:
+            #~ retval.remove(tag_name)
         return retval
         
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):

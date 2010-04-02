@@ -5,7 +5,7 @@ if __name__ == '__main__':
 import amazonproduct
 import ConfigParser
 from optfunc import optfunc
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.sql import select, join, and_, or_, not_
 import urllib
@@ -63,9 +63,9 @@ def variant002():
     print result
 
 def variant003():
-    #~ tag_name = u'test'
-    tag_name = None
-    media_type_name = 'book'
+    tag_name = u'test'
+    #~ tag_name = None
+    #~ media_type_name = 'book'
     media_type_name = None
 
     join_clause = model.tags_table.join(model.media_table)
@@ -78,19 +78,25 @@ def variant003():
         sub_media_types_table = model.media_types_table.alias('sub_media_types_table')
         join_clause = join_clause.join(sub_media_types_table)
 
-    tag_query = select([model.tags_table.c.name], from_obj=[join_clause])
+    cnt_col = func.count()
+    tag_query = select([model.tags_table.c.name, cnt_col], from_obj=[join_clause])
+    #~ tag_query = select([model.tags_table.c.name], from_obj=[join_clause])
 
     if tag_name:
         tag_query = tag_query.where(sub_tags_table.c.name==tag_name)
+        tag_query = tag_query.where(model.tags_table.c.name != tag_name)
         
     if media_type_name:
         tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
         
-    tag_query = tag_query.distinct()
+    #~ tag_query = tag_query.distinct()
+    tag_query = tag_query.group_by(model.tags_table.c.name)\
+                         .order_by(cnt_col.desc())
     print tag_query
     
     tag_query.bind = engine
-    result = map(lambda x: x[0], tag_query.execute())
+    #~ result = map(lambda x: x[0], tag_query.execute())
+    result = map(lambda x: (x[0], x[1]), tag_query.execute())
     for item in result:
         print item
 
@@ -107,9 +113,15 @@ def variant005():
                       .filter(model.Medium.title.like(query))
     h.ipython()()
 
+def dump_results(r):
+    for item in r:
+        print item
+        
 def variant006():
-    tag_query = select([model.tags_table.c.name])
+    tag_query = select([model.tags_table.c.name, func.count()])
+    tag_query = tag_query.group_by(model.tags_table.c.name)
     tag_query.bind = engine
-    h.ipython()()
+    dump_results(tag_query.execute())
+    #~ h.ipython()()
 
-variant005()
+variant003()
