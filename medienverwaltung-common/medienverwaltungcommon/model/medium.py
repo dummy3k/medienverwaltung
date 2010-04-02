@@ -22,7 +22,6 @@ class Medium(object):
     def __repr__(self):
         return "<Medium(%s, '%s')>" % (self.id, self.title)
 
-
     def get_tagstring(self):
         retval = ""
         for item in self.tags:
@@ -36,7 +35,7 @@ class Medium(object):
     def set_tagstring(self, s):
         tag_names = map(lambda x: x.name, self.tags)
         for item in s.split(' '):
-            if not item in tag_names:
+            if item and not item in tag_names:
                 mytag = tag.Tag()
                 mytag.name = item
                 self.tags.append(mytag)

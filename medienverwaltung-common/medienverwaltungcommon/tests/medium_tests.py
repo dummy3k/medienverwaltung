@@ -37,6 +37,13 @@ class TestTracerouteParser(unittest.TestCase):
         self.assertEqual(m.tags[2].name, 'test')
         self.assertEqual(m.get_tagstring(), 'foo bar test')
 
+    def testSetEmptyTags(self):
+        m = model.Medium()
+        m.set_tagstring('foo  ')
+        self.assertEqual(len(m.tags), 1)
+        self.assertEqual(m.tags[0].name, 'foo')
+        self.assertEqual(m.get_tagstring(), 'foo')
+
 
 if __name__ == '__main__':
     unittest.main()
