@@ -29,7 +29,7 @@
 <h2>Borrowed Items</h2>
 <form id="signin-form" method="post" action="${h.url_for(action='checkin_post')}">
 <table>
-% for item in c.borrowed_meda:
+% for item in c.borrowed_media:
     <tr>
         <td>
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
@@ -51,7 +51,7 @@
 	<div class="box">
         <h2>Actions:</h2>
         <ul>
-            <li><a href="${h.url_for(controller='borrow', action='show_history', id=None)}">Borrow History</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='show_history')}">Borrow History</a></li>
             <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
             <li><a href="${h.url_for(controller='borrow', action='delete_borrower_post')}">Delete '${c.item.first_name} ${c.item.last_name}'</a></li>
         </ul>

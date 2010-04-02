@@ -74,7 +74,7 @@ class BorrowController(BaseController):
     
     def edit_borrower(self, id):
         c.item = meta.find(model.Borrower, id)
-        c.borrowed_meda = meta.Session\
+        c.borrowed_media = meta.Session\
                           .query(model.Medium)\
                           .join(model.BorrowAct)\
                           .filter(model.BorrowAct.borrower_id == id)\
@@ -102,3 +102,14 @@ class BorrowController(BaseController):
 
         h.flash("deleted: %s" % record)
         return redirect_to(controller='borrow', action='list_borrowers')
+
+    def show_history(self, id, page=1):
+        c.item = meta.find(model.Borrower, id)
+        query = meta.Session\
+                          .query(model.BorrowAct)\
+                          .filter(model.BorrowAct.borrower_id == id)\
+                          .order_by(model.BorrowAct.id.desc())
+        
+        c.page = paginate.Page(query, page)
+        c.title = "Borrow History"
+        return render('borrow/history.mako')
