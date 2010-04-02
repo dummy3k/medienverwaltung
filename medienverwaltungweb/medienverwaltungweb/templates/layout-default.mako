@@ -29,6 +29,7 @@
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">Books</a></li>
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">DVDs</a></li>
     <li><a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None, tag=None)}">Persons</a></li>
+    <li><a href="${h.url_for(controller='borrow', action='list_borrowers', id=None, page=None, type=None, tag=None)}">Borrow</a></li>
   </ul>
  </div>
 </div>

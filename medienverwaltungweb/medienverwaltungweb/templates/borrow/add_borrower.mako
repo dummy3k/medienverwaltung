@@ -1,10 +1,10 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">Add Borrower</%def>
+<%def name="title()">Add new Borrower</%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(action='add_borrower_post', id=None)}">
+<form id="signin-form" method="post" action="${h.url_for(action='add_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'><nobr>${_('First Name')}</nobr></td>

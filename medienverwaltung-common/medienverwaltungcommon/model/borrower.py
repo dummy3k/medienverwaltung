@@ -10,15 +10,6 @@ borrowers_table = Table('borrowers', meta.metadata,
     Column('updated_ts', DateTime),
 )
 
-borrow_history_table = Table('borrow_history', meta.metadata,
-    Column('id', Integer, primary_key=True),
-    Column('media_id', Integer, ForeignKey('media.id')),
-    Column('borrower_id', Integer, ForeignKey('borrowers.id')),
-    Column('borrowed_ts', DateTime),
-    Column('returned_ts', DateTime),
-)
-
-
 class Borrower(object):
     def __unicode__(self):
         return self.__repr__()
@@ -29,3 +20,21 @@ class Borrower(object):
         return "<Borrower(%s, '%s %s')>" % (self.id,
                                             self.first_name,
                                             self.last_name)
+
+borrow_acts_table = Table('borrow_acts', meta.metadata,
+    Column('id', Integer, primary_key=True),
+    Column('media_id', Integer, ForeignKey('media.id')),
+    Column('borrower_id', Integer, ForeignKey('borrowers.id')),
+    Column('borrowed_ts', DateTime),
+    Column('returned_ts', DateTime),
+)
+
+class BorrowAct(object):
+    def __unicode__(self):
+        return self.__repr__()
+
+    __str__ = __unicode__
+
+    def __repr__(self):
+        return "<BorrowAct(%s)>" % self.id
+

@@ -1,40 +1,33 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">Borrow - "${c.item.title}"</%def>
+<%def name="title()">
+    % if c.action == 'Add':
+    Add new Borrower
+    % else:
+    Edit Borrower
+    % endif
+</%def>
 
 <%def name="content()">
-% if c.item.image_data:
-<div style="float:right">
-<p><img src="${h.url_for(controller='medium', action='image', width=400, height=300, id=c.item.id)}" /><p>
-<p>${c.item.title}</p>
-</div>
-% endif
-
-<form id="signin-form" method="post" action="${h.url_for(action='checkout_post', id=None)}">
+<form id="signin-form" method="post" action="${h.url_for(action='edit_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
-        <td class='simple'>${_('Medium')}</td>
-        <td class='simple' width="100%">
-            ${medium_block.medium_block(c.item)}
-        </td>
+        <td class='simple'><nobr>${_('First Name')}</nobr></td>
+        <td class='simple'><input type="text" name="first_name" value="${c.item.first_name}" size=50 /></td>
     </tr>
     <tr>
-        <td class='simple'>${_('Borrower')}</td>
-        <td class='simple'>
-            <select name="borrower">
-                <option value="-1">Add New</option>
-                % for item in c.borrowers:
-                <option value="${item.id}">${item.first_name} ${item.last_name}</option>
-                % endfor
-            </select>
-        </td>
+        <td class='simple'><nobr>${_('Last Name')}</nobr></td>
+        <td class='simple'><input type="text" name="last_name" value="${c.item.last_name}" size=50 /></td>
+    </tr>
+    <tr>
+        <td class='simple'><nobr>${_('eMail')}</nobr></td>
+        <td class='simple'><input type="text" name="email" value="${c.item.email}" size=50 /></td>
     </tr>
 </table>
-<input type="hidden" name="media_id" value="${c.item.id}" />
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="Borrow"/>
+<input type="submit" value="${c.action}"/>
 </p>
 </form>
 </%def>

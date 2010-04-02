@@ -85,7 +85,7 @@
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
         % endif
-        <li><a href="${h.url_for(controller='borrow', action='borrow', id=c.item.id)}">Borrow</a></li>
+        <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">Borrow</a></li>
         </ul>
 	</div>
 </%def>

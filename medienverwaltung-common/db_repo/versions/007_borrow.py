@@ -19,7 +19,7 @@ borrowers_table = Table('borrowers', meta.metadata,
     Column('updated_ts', DateTime),
 )
 
-borrow_history_table = Table('borrow_history', meta.metadata,
+borrow_acts_table = Table('borrow_acts', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('media_id', Integer, ForeignKey('media.id')),
     Column('borrower_id', Integer, ForeignKey('borrowers.id')),
@@ -29,8 +29,8 @@ borrow_history_table = Table('borrow_history', meta.metadata,
 
 def upgrade():
     borrowers_table.create()
-    borrow_history_table.create()
+    borrow_acts_table.create()
 
 def downgrade():
-    borrow_history_table.drop()
+    borrow_acts_table.drop()
     borrowers_table.drop()
