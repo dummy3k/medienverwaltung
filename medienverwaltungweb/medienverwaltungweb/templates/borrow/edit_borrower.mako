@@ -1,13 +1,7 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">
-    % if c.action == 'Add':
-    Add new Borrower
-    % else:
-    Edit Borrower
-    % endif
-</%def>
+<%def name="title()">Edit Borrower - '${c.item.first_name} ${c.item.last_name}'</%def>
 
 <%def name="content()">
 <h2>Borrower Details</h2>

@@ -211,6 +211,10 @@ class MediumController(BaseController):
             else:
                 c.persons[item.relation.name] = [item.person]
 
+        c.borrowed_by = meta.Session.query(model.Borrower)\
+                                    .join(model.BorrowAct)\
+                                    .filter(model.BorrowAct.media_id == id)\
+                                    .first()
         return render('medium/edit.mako')
 
     def edit_post(self):

@@ -1,12 +1,21 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Edit Item - "${c.item.title}"</%def>
+<%def name="title()">Edit Medium - "${c.item.title}"</%def>
 
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
 <p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
 </div>
+% endif
+
+% if c.borrowed_by:
+<p>
+This medium ist currently borrowed to
+<a href="${h.url_for(controller='borrow', action='edit_borrower', id=c.borrowed_by.id)}">
+    ${c.borrowed_by.first_name} ${c.borrowed_by.last_name}
+</a>
+</p>
 % endif
 
 <form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
