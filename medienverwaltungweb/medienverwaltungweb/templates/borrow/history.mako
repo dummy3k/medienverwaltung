@@ -26,7 +26,7 @@ ${js_pager.js_pager(e)}
             </a>
         </td>
         <td class='simple'>
-            <a href="${h.url_for(action='edit', id=item.medium.id, page=None)}">
+            <a href="${h.url_for(controller='medium', action='edit', id=item.medium.id, page=None)}">
                 ${item.medium.title}
             </a>
         </td>

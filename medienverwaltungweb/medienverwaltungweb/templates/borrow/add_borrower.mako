@@ -21,6 +21,7 @@
 </table>
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
+<input type="hidden" name="media_id" value="${c.media_id}"/>
 <input type="submit" value="Add"/>
 </p>
 </form>

@@ -9,8 +9,8 @@
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/minimalistic/style.css" rel="stylesheet" type="text/css" media="screen" />
 ##    <link href="/css/minimalistic/bigright.css" rel="stylesheet" type="text/css" media="screen" />
-    <script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript"></script>
-##    <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+##    <script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
 ##    % for x in c.rss_feeds:
 ##    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
 ##    % endfor

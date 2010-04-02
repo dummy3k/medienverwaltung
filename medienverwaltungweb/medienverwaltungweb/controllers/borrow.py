@@ -28,24 +28,33 @@ class BorrowController(BaseController):
         return render('borrow/borrow.mako')
 
     def checkout_post(self):
-        #~ id = request.params.get('id')
+        media_id = request.params.get('media_id')
         borrower_id = request.params.get('borrower')
+        self.__checkout_post__(media_id, borrower_id)
+        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
+        
+    def __checkout_post__(self, media_id, borrower_id):
+        log.debug("__checkout_post__")
+        log.debug("media_id: %s" % media_id)
+        log.debug("borrower_id: %s" % borrower_id)
         if not borrower_id or int(borrower_id) < 0:
-            return redirect_to(controller='borrow', action='add_borrower')
+            log.debug("redirect because no borrower_id")
+            return redirect_to(controller='borrow', action='add_borrower', media_id=media_id)
             
+        log.debug("FOLLOW ME, too, too")
         record = model.BorrowAct()
-        record.media_id = request.params.get('media_id')
+        record.media_id = media_id
         record.borrower_id = borrower_id
         record.borrowed_ts = datetime.now()
         meta.Session.save(record)
         meta.Session.commit()
 
         h.flash("added: %s" % record)
-        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
         
     def add_borrower(self):
         c.item = model.Borrower()
         c.post_action = "add_borrower_post"
+        c.media_id = request.params.get('media_id')
         return render('borrow/add_borrower.mako')
         
     def add_borrower_post(self):
@@ -55,11 +64,25 @@ class BorrowController(BaseController):
         record.email = request.params.get('email')
         record.created_ts = datetime.now()
         record.updated_ts = datetime.now()
-        meta.Session.save(record)
+        meta.Session.add(record)
         meta.Session.commit()
+        log.debug("record.id: %s" % record.id)
 
         h.flash("added: %s" % record)
-        return redirect_to(controller='borrow', action='list_borrowers')
+        media_id = request.params.get('media_id')
+        log.debug("media_id %s "% media_id)
+        if not media_id:
+            return redirect_to(controller='borrow', action='list_borrowers')
+        else:
+            log.debug("FOLLOW ME, media_id: %s" % media_id)
+            log.debug("url: %s" % h.url_for(controller='borrow', action='edit_borrower', id=record.id))
+            self.__checkout_post__(media_id, record.id)
+            return redirect_to(controller='borrow', action='edit_borrower', id=record.id)
+            #~ return redirect_to(controller='borrow',
+                               #~ action='checkout_post',
+                               #~ borrower_id=record.id,
+                               #~ media_id=media_id)
+            #~ return self.checkout_post()
 
     def list_borrowers(self, page=1):
         query = meta.Session\
