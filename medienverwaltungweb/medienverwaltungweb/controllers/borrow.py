@@ -78,6 +78,7 @@ class BorrowController(BaseController):
                           .query(model.Medium)\
                           .join(model.BorrowAct)\
                           .filter(model.BorrowAct.borrower_id == id)\
+                          .filter(model.BorrowAct.returned_ts == None)\
                           .order_by(model.BorrowAct.id.desc())\
                           .all()
         
@@ -113,3 +114,20 @@ class BorrowController(BaseController):
         c.page = paginate.Page(query, page)
         c.title = "Borrow History"
         return render('borrow/history.mako')
+
+    def checkin_post(self, id):
+        for item in h.checkboxes(request, 'item_id_'):
+            record = meta.Session\
+                         .query(model.BorrowAct)\
+                         .filter(model.BorrowAct.borrower_id == id)\
+                         .filter(model.BorrowAct.media_id == item)\
+                         .first()
+                         
+            record.returned_ts = datetime.now()
+            meta.Session.update(record)
+            h.flash("returned: %s" % record.medium)
+
+        #~ meta.Session.commit()
+
+        return redirect_to(action='show_history')
+        

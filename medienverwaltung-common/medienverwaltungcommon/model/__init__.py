@@ -20,7 +20,6 @@ orm.mapper(MediaToAsin, media_to_asin_table)
 orm.mapper(MediaType, media_types_table)
 orm.mapper(Tag, tags_table)
 orm.mapper(Borrower, borrowers_table)
-orm.mapper(BorrowAct, borrow_acts_table)
 
 orm.mapper(Medium, media_table, properties = {
     'asins' : orm.relation(MediaToAsin),
@@ -33,3 +32,7 @@ orm.mapper(PersonToMedia, person_to_media_table, properties = {
     'relation' : orm.relation(RelationType),
     })
 
+orm.mapper(BorrowAct, borrow_acts_table, properties = {
+    'borrower' : orm.relation(Borrower),
+    'medium' : orm.relation(Medium),
+    })

@@ -168,7 +168,6 @@ class MediumController(BaseController):
         return render('medium/list.mako')
 
     def delete(self):
-        msg = ""
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
@@ -214,6 +213,7 @@ class MediumController(BaseController):
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\
                                     .filter(model.BorrowAct.media_id == id)\
+                                    .filter(model.BorrowAct.returned_ts == None)\
                                     .first()
         return render('medium/edit.mako')
 
