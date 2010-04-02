@@ -90,3 +90,10 @@ class BorrowController(BaseController):
         h.flash("updated: %s" % record)
         return redirect_to(controller='borrow', action='edit_borrower', id=id)
 
+    def delete_borrower_post(self, id):
+        record = meta.find(model.Borrower, id)
+        meta.Session.delete(record)
+        meta.Session.commit()
+
+        h.flash("deleted: %s" % record)
+        return redirect_to(controller='borrow', action='list_borrowers')
