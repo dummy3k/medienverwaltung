@@ -3,6 +3,7 @@ import amazonproduct
 import urllib
 from StringIO import StringIO
 import pickle
+from datetime import datetime
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -157,6 +158,7 @@ class AmazonController(BaseController):
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
+        item.updated_ts = datetime.now()
         #~ pickle.dump(buffer, item.image_data)
         meta.Session.update(item)
         meta.Session.commit()

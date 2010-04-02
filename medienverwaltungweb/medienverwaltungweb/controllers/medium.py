@@ -16,11 +16,11 @@ from medienverwaltungweb.model import meta
 log = logging.getLogger(__name__)
 
 class MediumController(BaseController):
-    def index(self, id=None):
+    def index(self, id=None, type=None, page=1, tag=None):
         if id:
             return self.edit(id)
         else:
-            return self.list()
+            return self.list(type, page, tag)
 
     def mass_add(self):
         c.types = meta.Session.query(model.MediaType).all()

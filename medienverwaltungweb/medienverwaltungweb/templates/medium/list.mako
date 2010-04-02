@@ -12,16 +12,19 @@ ${self.bare_content(c.page, c.pager_action)}
 
 <%def name="bare_content(pager, pager_action)">
 
+Sort by:
+<a href="${h.url_for(order=h.iif(c.order=='created_ts', 'created_ts_desc', 'created_ts'))}">${_('created_ts')}</a>
+<a href="${h.url_for(order=h.iif(c.order=='updated_ts', 'updated_ts_desc', 'updated_ts'))}">${_('updated_ts')}</a>
+
 <p>${pager.pager(controller='medium', action=pager_action)}</p>
 
-<form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
+<form id="signin-form" method="post" action="${h.url_for(controller='medium', action='delete', page=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
-        <td class='simple'>&nbsp;</td>
         <td class='simple'><a href="${h.url_for(order=h.iif(c.order=='id', 'id_desc', 'id'))}">${_('Id')}</a></td>
         <td class='simple'><a href="${h.url_for(order=h.iif(c.order=='title', 'title_desc', 'title'))}">${_('Title')}</a></td>
-        <td class='simple'>${_('Tags')}</td>
+##        <td class='simple'>${_('Tags')}</td>
     </tr>
 
     % for item in pager.items:
@@ -30,21 +33,25 @@ ${self.bare_content(c.page, c.pager_action)}
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
             <a href="${h.url_for(controller='medium', action='edit', id=item.id, page=None, type=None, tag=None)}">Edit</a>
         </td>
+        <td class='simple'>${item.id}</td>
         <td class='simple'>
             % if item.image_data:
             <img src="${h.url_for(controller='medium', action='image', id=item.id, page=None, type=None, tag=None, return_to=None, width=20, height=20)}">
             % endif
-        </td>
-        <td class='simple'>${item.id}</td>
-        <td class='simple'>${item.title}</td>
-        <td class='simple'>
+            ${item.title}<br>
             % for subitem in item.tags:
             <a href="${h.url_for(controller='medium', action='list', tag=subitem.name, page=None)}">
                 ${subitem.name}
             </a>
             % endfor
         </td>
-##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
+##        <td class='simple'>
+##            % for subitem in item.tags:
+##            <a href="${h.url_for(controller='medium', action='list', tag=subitem.name, page=None)}">
+##                ${subitem.name}
+##            </a>
+##            % endfor
+##        </td>
     </tr>
     %endfor
 </table>

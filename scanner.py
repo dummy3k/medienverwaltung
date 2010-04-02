@@ -90,7 +90,7 @@ def one(isbn):
     session.commit()
     #~ print unicode(msg.value, errors='replace')
     print msg.value
-    os.system('mpg321 tack.mp3 -q')
+    
 
 def for_ever():
     while True:
@@ -107,7 +107,11 @@ def for_ever():
         if not user_input:
             continue
 
-        one(user_input)
+        try:
+            one(user_input)
+            os.system('play -q audio/success.wav')
+        except:
+            os.system('play -q audio/failure.wav')
 
 if __name__ == '__main__':
     #~ optfunc.run(find)

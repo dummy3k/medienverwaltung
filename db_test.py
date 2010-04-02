@@ -93,14 +93,12 @@ def variant003():
     result = map(lambda x: x[0], tag_query.execute())
     for item in result:
         print item
-    #~ print result
 
 def variant004():
     t = model.media_table
     foo = model.media_table.c.created_ts
     t.update(values={'created_ts':datetime.now()})
     h.ipython()()
-    pass
 
 def variant005():
     query = u"%term%"
@@ -108,6 +106,10 @@ def variant005():
                       .query(model.Medium)\
                       .filter(model.Medium.title.like(query))
     h.ipython()()
-    pass
+
+def variant006():
+    tag_query = select([model.tags_table.c.name])
+    tag_query.bind = engine
+    h.ipython()()
 
 variant005()
