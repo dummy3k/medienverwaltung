@@ -11,12 +11,14 @@ from persons import MediaToAsin, media_to_asin_table
 from persons import PersonToMedia, person_to_media_table
 from media_type import MediaType, media_types_table
 from tag import Tag, tags_table
+from borrower import Borrower, borrowers_table
 
 orm.mapper(RelationType, relation_types_table)
 orm.mapper(Person, persons_table)
 orm.mapper(MediaToAsin, media_to_asin_table)
 orm.mapper(MediaType, media_types_table)
 orm.mapper(Tag, tags_table)
+orm.mapper(Borrower, borrowers_table)
 
 orm.mapper(Medium, media_table, properties = {
     'asins' : orm.relation(MediaToAsin),

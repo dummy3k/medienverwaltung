@@ -3,7 +3,7 @@
 <%def name="title()">Edit Item - "${c.item.title}"</%def>
 
 <%def name="content()">
-% if len(c.item.asins) > 0:
+% if c.item.image_data:
 <div style="float:right">
 <p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
 </div>
@@ -85,6 +85,7 @@
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
         % endif
+        <li><a href="${h.url_for(controller='borrow', action='borrow', id=c.item.id)}">Borrow</a></li>
         </ul>
 	</div>
 </%def>

@@ -4,6 +4,7 @@
 <%def name="title()">${c.title}</%def>
 
 <%def name="content()">
+<%namespace name='medium_block' file='medium_block.mako' />
 <%namespace name='js_pager' file='../js_pager.mako' />
 ${js_pager.js_pager(e)}
 ${self.bare_content(c.page, c.pager_action)}
@@ -34,16 +35,8 @@ Sort by:
             <a href="${h.url_for(controller='medium', action='edit', id=item.id, page=None, type=None, tag=None)}">Edit</a>
         </td>
         <td class='simple'>${item.id}</td>
-        <td class='simple'>
-            % if item.image_data:
-            <img src="${h.url_for(controller='medium', action='image', id=item.id, page=None, type=None, tag=None, return_to=None, width=20, height=20)}">
-            % endif
-            ${item.title}<br>
-            % for subitem in item.tags:
-            <a href="${h.url_for(controller='medium', action='list', tag=subitem.name, page=None)}">
-                ${subitem.name}
-            </a>
-            % endfor
+        <td class='simple' width="100%">
+            ${medium_block.medium_block(item)}
         </td>
 ##        <td class='simple'>
 ##            % for subitem in item.tags:
