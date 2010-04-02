@@ -41,11 +41,10 @@ class BorrowController(BaseController):
         meta.Session.commit()
 
         h.flash("added: %s" % record)
-        return redirect_to(controller='borrow', action='index')
+        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
         
     def add_borrower(self):
         c.item = model.Borrower()
-        c.action = "Add"
         c.post_action = "add_borrower_post"
         return render('borrow/add_borrower.mako')
         
@@ -75,7 +74,13 @@ class BorrowController(BaseController):
     
     def edit_borrower(self, id):
         c.item = meta.find(model.Borrower, id)
-        c.action = "Edit"
+        c.borrowed_meda = meta.Session\
+                          .query(model.Medium)\
+                          .join(model.BorrowAct)\
+                          .filter(model.BorrowAct.borrower_id == id)\
+                          .order_by(model.BorrowAct.id.desc())\
+                          .all()
+        
         return render('borrow/edit_borrower.mako')
         
     def edit_borrower_post(self, id):

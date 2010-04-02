@@ -10,6 +10,7 @@
 </%def>
 
 <%def name="content()">
+<h2>Borrower Details</h2>
 <form id="signin-form" method="post" action="${h.url_for(action='edit_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
@@ -27,17 +28,38 @@
 </table>
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="${c.action}"/>
+<input type="submit" value="Update"/>
 </p>
 </form>
 
+<h2>Borrowed Items</h2>
+<form id="signin-form" method="post" action="${h.url_for(action='checkin_post')}">
+<table>
+% for item in c.borrowed_meda:
+    <tr>
+        <td>
+            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
+        <td>
+        <td>
+            ${medium_block.medium_block(item)}
+        <td>
+    </tr>
+% endfor
+</table>
 
-<p>
-<form id="signin-form" method="post" action="${h.url_for(action='delete_borrower_post')}">
-    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
-##    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-    <input type="submit" value="Delete"/>
+<input type="submit" value="Checkin"/>
 </form>
-</p>
+
 </%def>
 
+
+<%def name="side()">
+	<div class="box">
+        <h2>Actions:</h2>
+        <ul>
+            <li><a href="${h.url_for(controller='borrow', action='show_history', id=None)}">Borrow History</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='delete_borrower_post')}">Delete '${c.item.first_name} ${c.item.last_name}'</a></li>
+        </ul>
+	</div>
+</%def>
