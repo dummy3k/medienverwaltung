@@ -15,7 +15,6 @@ ${js_pager.js_pager(e)}
         <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Id')}</td>
         <td class='simple'>${_('Name')}</td>
-##        <td class='simple'>${_('Actions')}</td>
     </tr>
 
     ##% for item in c.page.items:
@@ -23,11 +22,10 @@ ${js_pager.js_pager(e)}
     <tr>
         <td class='simple'>
 ##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit', id=item.id, page=None)}">Edit</a>
+            <a href="${h.url_for(action='edit', id=item.id, page=None)}">${_("Edit")}</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.name}</td>
-##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
     </tr>
     %endfor
 </table>
@@ -37,7 +35,6 @@ ${js_pager.js_pager(e)}
 <input type="submit" value="Delete marked Media"/>
 </p>
 </form>
-
 </%def>
 
 

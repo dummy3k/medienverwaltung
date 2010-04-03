@@ -30,6 +30,7 @@ orm.mapper(Medium, media_table, properties = {
 orm.mapper(PersonToMedia, person_to_media_table, properties = {
     'person' : orm.relation(Person),
     'relation' : orm.relation(RelationType),
+    'medium' : orm.relation(Medium),
     })
 
 orm.mapper(BorrowAct, borrow_acts_table, properties = {

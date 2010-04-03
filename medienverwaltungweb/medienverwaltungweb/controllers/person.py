@@ -23,11 +23,9 @@ class PersonController(BaseController):
         c.item = meta.find(model.Person, id)
 
         query = meta.Session\
-            .query(model.Medium)\
-            .join(model.PersonToMedia)\
+            .query(model.PersonToMedia)\
             .filter(model.PersonToMedia.person_id == id)
         c.page = paginate.Page(query, page)
-
         return render('person/display.mako')
 
     def list(self, page=1):

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 20:11+0100\n"
+"PO-Revision-Date: 2010-04-03 20:41+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -95,7 +95,7 @@ msgstr ", getagged %s"
 
 #: medienverwaltungweb/controllers/medium.py:75
 #: medienverwaltungweb/controllers/medium.py:96
-#: medienverwaltungweb/controllers/person.py:53
+#: medienverwaltungweb/controllers/person.py:51
 #, python-format
 msgid ", page %s"
 msgstr ", Seite %s"
@@ -122,7 +122,7 @@ msgid "Media without images"
 msgstr "Medien ohne Bild"
 
 #: medienverwaltungweb/controllers/medium.py:228
-#: medienverwaltungweb/controllers/person.py:44
+#: medienverwaltungweb/controllers/person.py:42
 msgid "Actor"
 msgstr "Schauspieler"
 
@@ -142,17 +142,17 @@ msgstr "Erzeuger"
 msgid "all media after this have an image"
 msgstr "Alle folgenden Medien haben ein Bild"
 
-#: medienverwaltungweb/controllers/person.py:46
-#: medienverwaltungweb/templates/person/list.mako:49
+#: medienverwaltungweb/controllers/person.py:44
+#: medienverwaltungweb/templates/person/list.mako:46
 msgid "Directors"
 msgstr "Regisseure"
 
-#: medienverwaltungweb/controllers/person.py:48
+#: medienverwaltungweb/controllers/person.py:46
 #, python-format
 msgid "Persons of type '%s'"
 msgstr "Personen des Types '%s'"
 
-#: medienverwaltungweb/controllers/person.py:50
+#: medienverwaltungweb/controllers/person.py:48
 msgid "Every Person"
 msgstr "Alle Personen"
 
@@ -208,7 +208,7 @@ msgid "Title"
 msgstr "Titel"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
-#: medienverwaltungweb/templates/person/list.mako:48
+#: medienverwaltungweb/templates/person/list.mako:45
 msgid "Actors"
 msgstr "Schauspieler"
 
@@ -247,6 +247,7 @@ msgstr "eMail"
 
 #: medienverwaltungweb/templates/borrow/borrow.mako:17
 #: medienverwaltungweb/templates/borrow/history.mako:16
+#: medienverwaltungweb/templates/person/display.mako:38
 msgid "Medium"
 msgstr "Medium"
 
@@ -265,6 +266,7 @@ msgid "Borrower Details"
 msgstr "Ausleiher Details"
 
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:25
+#: medienverwaltungweb/templates/person/display.mako:26
 msgid "Save"
 msgstr "Speichern"
 
@@ -306,13 +308,14 @@ msgstr "Ausleiher bearbeiten"
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
 #: medienverwaltungweb/templates/medium/edit.mako:22
 #: medienverwaltungweb/templates/medium/list.mako:26
-#: medienverwaltungweb/templates/person/display.mako:16
+#: medienverwaltungweb/templates/person/display.mako:17
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
 msgstr "Id"
 
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:25
 #: medienverwaltungweb/templates/medium/list.mako:35
+#: medienverwaltungweb/templates/person/list.mako:25
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -386,12 +389,26 @@ msgstr "Gallerie"
 msgid "As List"
 msgstr "Als Liste"
 
-#: medienverwaltungweb/templates/person/display.mako:20
+#: medienverwaltungweb/templates/person/display.mako:8
+#, python-format
+#| msgid "Edit Borrower - '%s %s'"
+msgid "Edit Person - '%s'"
+msgstr "Person '%s' bearbeiten"
+
+#: medienverwaltungweb/templates/person/display.mako:21
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
 msgstr "Name"
 
-#: medienverwaltungweb/templates/person/list.mako:46
+#: medienverwaltungweb/templates/person/display.mako:32
+msgid "Appeared in this media"
+msgstr "Taucht in folgenden Medien auf"
+
+#: medienverwaltungweb/templates/person/display.mako:37
+msgid "Role"
+msgstr "Rolle"
+
+#: medienverwaltungweb/templates/person/list.mako:43
 msgid "Filter"
 msgstr "Filter"
 
