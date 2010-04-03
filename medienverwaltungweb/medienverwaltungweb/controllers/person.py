@@ -8,6 +8,7 @@ from pylons.controllers.util import abort, redirect_to
 from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.model as model
 from medienverwaltungweb.model import meta
+from pylons.i18n import _, ungettext
 
 log = logging.getLogger(__name__)
 
@@ -39,11 +40,18 @@ class PersonController(BaseController):
                          
         c.page = paginate.Page(query, page)
 
-        if relation_type:
-            c.title = "All %ss" % relation_type
+        if relation_type == 'Actor':
+            c.title = _("Actor")
+        elif relation_type == 'Director':
+            c.title = _("Directors")
+        elif relation_type:
+            c.title = _("Persons of type '%s'") % relation_type
         else:
-            c.title = "Every Person"
+            c.title = _("Every Person")
             
+        if page > 1:
+            c.title += _(", page %s") % c.page.page
+
         c.pager_action = "list"
         return render('person/list.mako')
 

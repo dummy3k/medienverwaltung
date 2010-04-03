@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 19:33+0100\n"
+"PO-Revision-Date: 2010-04-03 20:11+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -51,7 +51,7 @@ msgstr "'%s' wurde gelöscht"
 msgid "Borrow History"
 msgstr "Verleih Historie"
 
-#: medienverwaltungweb/controllers/borrow.py:158
+#: medienverwaltungweb/controllers/borrow.py:162
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr "%s hat das Medium '%s' zurück gegeben"
@@ -95,6 +95,7 @@ msgstr ", getagged %s"
 
 #: medienverwaltungweb/controllers/medium.py:75
 #: medienverwaltungweb/controllers/medium.py:96
+#: medienverwaltungweb/controllers/person.py:53
 #, python-format
 msgid ", page %s"
 msgstr ", Seite %s"
@@ -121,6 +122,7 @@ msgid "Media without images"
 msgstr "Medien ohne Bild"
 
 #: medienverwaltungweb/controllers/medium.py:228
+#: medienverwaltungweb/controllers/person.py:44
 msgid "Actor"
 msgstr "Schauspieler"
 
@@ -139,6 +141,20 @@ msgstr "Erzeuger"
 #: medienverwaltungweb/controllers/medium.py:306
 msgid "all media after this have an image"
 msgstr "Alle folgenden Medien haben ein Bild"
+
+#: medienverwaltungweb/controllers/person.py:46
+#: medienverwaltungweb/templates/person/list.mako:49
+msgid "Directors"
+msgstr "Regisseure"
+
+#: medienverwaltungweb/controllers/person.py:48
+#, python-format
+msgid "Persons of type '%s'"
+msgstr "Personen des Types '%s'"
+
+#: medienverwaltungweb/controllers/person.py:50
+msgid "Every Person"
+msgstr "Alle Personen"
 
 #: medienverwaltungweb/templates/layout-default.mako:30
 msgid "Books"
@@ -192,6 +208,7 @@ msgid "Title"
 msgstr "Titel"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
+#: medienverwaltungweb/templates/person/list.mako:48
 msgid "Actors"
 msgstr "Schauspieler"
 
@@ -205,6 +222,7 @@ msgstr "Bild"
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:20
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:54
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:46
 #: medienverwaltungweb/templates/medium/edit.mako:89
 msgid "Actions"
 msgstr "Aktionen"
@@ -259,6 +277,8 @@ msgid "Checkin"
 msgstr "Zurückgeben"
 
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:57
+#: medienverwaltungweb/templates/borrow/history.mako:48
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:48
 msgid "Add Borrower"
 msgstr "Ausleiher hinzufügen"
 
@@ -268,7 +288,6 @@ msgstr "Diesen Ausleiher wirklich löschen?"
 
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:58
 #, python-format
-#| msgid "Delete '%s'"
 msgid "Delete '%s %s'"
 msgstr "Lösche '%s %s'"
 
@@ -280,6 +299,10 @@ msgstr "Ausleihdatum"
 msgid "Checkin Date"
 msgstr "Rückgabedatum"
 
+#: medienverwaltungweb/templates/borrow/history.mako:49
+msgid "Edit Borrower"
+msgstr "Ausleiher bearbeiten"
+
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
 #: medienverwaltungweb/templates/medium/edit.mako:22
 #: medienverwaltungweb/templates/medium/list.mako:26
@@ -287,6 +310,11 @@ msgstr "Rückgabedatum"
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
 msgstr "Id"
+
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:25
+#: medienverwaltungweb/templates/medium/list.mako:35
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: medienverwaltungweb/templates/medium/edit.mako:3
 msgid "Edit Medium"
@@ -334,6 +362,10 @@ msgstr "Bild beschneiden"
 msgid "Delete '%s'"
 msgstr "Lösche '%s'"
 
+#: medienverwaltungweb/templates/medium/list.mako:16
+msgid "Sort by"
+msgstr "Sortieren"
+
 #: medienverwaltungweb/templates/medium/list.mako:17
 msgid "created_ts"
 msgstr "Erzeugt am"
@@ -341,6 +373,10 @@ msgstr "Erzeugt am"
 #: medienverwaltungweb/templates/medium/list.mako:18
 msgid "updated_ts"
 msgstr "Aktualisert am"
+
+#: medienverwaltungweb/templates/medium/list.mako:55
+msgid "Delete marked Media"
+msgstr "Martkierte Medien löschen"
 
 #: medienverwaltungweb/templates/medium/list_gallery.mako:23
 msgid "Gallery"
@@ -354,4 +390,8 @@ msgstr "Als Liste"
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
 msgstr "Name"
+
+#: medienverwaltungweb/templates/person/list.mako:46
+msgid "Filter"
+msgstr "Filter"
 

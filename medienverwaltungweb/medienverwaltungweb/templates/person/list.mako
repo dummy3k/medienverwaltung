@@ -7,7 +7,7 @@
 <%namespace name='js_pager' file='../js_pager.mako' />
 ${js_pager.js_pager(e)}
 
-<p>${c.page.pager()}</p>
+<p>${c.page.pager(role=request.params.get('role'))}</p>
 
 <form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
 <table border=1 class='simple'>
@@ -33,7 +33,7 @@ ${js_pager.js_pager(e)}
 </table>
 
 <p>
-<p>${c.page.pager()}</p>
+<p>${c.page.pager(role=request.params.get('role'))}</p>
 <input type="submit" value="Delete marked Media"/>
 </p>
 </form>
@@ -43,10 +43,10 @@ ${js_pager.js_pager(e)}
 
 <%def name="side()">
 	<div class="box">
-        <h2>Filter:</h2>
+        <h2>${_("Filter")}:</h2>
         <ul>
-        <li><a href="${h.url_for(role='Actor', page=None)}">Actor</a></li>
-        <li><a href="${h.url_for(role='Director', page=None)}">Director</a></li>
+        <li><a href="${h.url_for(role='Actor', page=None)}">${_("Actors")}</a></li>
+        <li><a href="${h.url_for(role='Director', page=None)}">${_("Directors")}</a></li>
         </ul>
 	</div>
 </%def>

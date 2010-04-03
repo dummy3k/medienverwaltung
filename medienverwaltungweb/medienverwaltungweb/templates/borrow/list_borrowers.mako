@@ -17,15 +17,12 @@ ${js_pager.js_pager(e)}
         <td class='simple'>${_('First Name')}</td>
         <td class='simple'>${_('Last Name')}</td>
         <td class='simple'>${_('eMail')}</td>
-##        <td class='simple'>${_('Actions')}</td>
     </tr>
-
-    ##% for item in c.page.items:
     % for item in c.page.items:
     <tr>
         <td class='simple'>
 ##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit_borrower', id=item.id, page=None)}">Edit</a>
+            <a href="${h.url_for(action='edit_borrower', id=item.id, page=None)}">${_("Edit")}</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.first_name}</td>
@@ -46,9 +43,9 @@ ${js_pager.js_pager(e)}
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_("Actions")}:</h2>
         <ul>
-            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">${_("Add Borrower")}</a></li>
         </ul>
 	</div>
 </%def>

@@ -155,7 +155,11 @@ class BorrowController(BaseController):
                          
             record.returned_ts = datetime.now()
             meta.Session.update(record)
-            h.flash(_("%s has returned medium '%s'") % (record.borrower, record.medium))
+            borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
+                             .render(item=record.borrower, h=h)
+            medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
+                           .render(item=record.medium, h=h)
+            h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link))
 
         #~ meta.Session.commit()
 

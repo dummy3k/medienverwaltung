@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 19:33+0200\n"
+"POT-Creation-Date: 2010-04-03 20:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Borrow History"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:158
+#: medienverwaltungweb/controllers/borrow.py:162
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr ""
@@ -95,6 +95,7 @@ msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:75
 #: medienverwaltungweb/controllers/medium.py:96
+#: medienverwaltungweb/controllers/person.py:53
 #, python-format
 msgid ", page %s"
 msgstr ""
@@ -121,6 +122,7 @@ msgid "Media without images"
 msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:228
+#: medienverwaltungweb/controllers/person.py:44
 msgid "Actor"
 msgstr ""
 
@@ -138,6 +140,20 @@ msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:306
 msgid "all media after this have an image"
+msgstr ""
+
+#: medienverwaltungweb/controllers/person.py:46
+#: medienverwaltungweb/templates/person/list.mako:49
+msgid "Directors"
+msgstr ""
+
+#: medienverwaltungweb/controllers/person.py:48
+#, python-format
+msgid "Persons of type '%s'"
+msgstr ""
+
+#: medienverwaltungweb/controllers/person.py:50
+msgid "Every Person"
 msgstr ""
 
 #: medienverwaltungweb/templates/layout-default.mako:30
@@ -192,6 +208,7 @@ msgid "Title"
 msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
+#: medienverwaltungweb/templates/person/list.mako:48
 msgid "Actors"
 msgstr ""
 
@@ -205,6 +222,7 @@ msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:20
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:54
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:46
 #: medienverwaltungweb/templates/medium/edit.mako:89
 msgid "Actions"
 msgstr ""
@@ -259,6 +277,8 @@ msgid "Checkin"
 msgstr ""
 
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:57
+#: medienverwaltungweb/templates/borrow/history.mako:48
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:48
 msgid "Add Borrower"
 msgstr ""
 
@@ -279,12 +299,21 @@ msgstr ""
 msgid "Checkin Date"
 msgstr ""
 
+#: medienverwaltungweb/templates/borrow/history.mako:49
+msgid "Edit Borrower"
+msgstr ""
+
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
 #: medienverwaltungweb/templates/medium/edit.mako:22
 #: medienverwaltungweb/templates/medium/list.mako:26
 #: medienverwaltungweb/templates/person/display.mako:16
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:25
+#: medienverwaltungweb/templates/medium/list.mako:35
+msgid "Edit"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/edit.mako:3
@@ -333,12 +362,20 @@ msgstr ""
 msgid "Delete '%s'"
 msgstr ""
 
+#: medienverwaltungweb/templates/medium/list.mako:16
+msgid "Sort by"
+msgstr ""
+
 #: medienverwaltungweb/templates/medium/list.mako:17
 msgid "created_ts"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/list.mako:18
 msgid "updated_ts"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/list.mako:55
+msgid "Delete marked Media"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/list_gallery.mako:23
@@ -352,5 +389,9 @@ msgstr ""
 #: medienverwaltungweb/templates/person/display.mako:20
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
+msgstr ""
+
+#: medienverwaltungweb/templates/person/list.mako:46
+msgid "Filter"
 msgstr ""
 

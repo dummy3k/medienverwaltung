@@ -5,9 +5,9 @@ $(document).ready(function() {
 ##        //alert(event.keyCode);
         var current_page = ${c.page.page}
         if (current_page > 1 && event.keyCode == 37) {
-            location.href = "${h.url_for(action=c.pager_action, page=int(c.page.page)-1)}"
+            location.href = "${h.url_for(action=c.pager_action, page=int(c.page.page)-1, role=request.params.get('role'))}"
         } else if (event.keyCode == 39) {
-            location.href = "${h.url_for(action=c.pager_action, page=int(c.page.page)+1)}"
+            location.href = "${h.url_for(action=c.pager_action, page=int(c.page.page)+1, role=request.params.get('role'))}"
         }
     });
 });
