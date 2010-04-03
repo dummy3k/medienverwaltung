@@ -1,1 +1,0 @@
-22:01:33,924 INFO  [paste.httpserver.ThreadPool] kill_hung_threads status: 10 threads (0 working, 10 idle, 0 starting) ave time N/A, max time 0.00sec, killed 0 workers
