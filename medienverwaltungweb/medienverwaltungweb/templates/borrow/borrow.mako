@@ -23,7 +23,7 @@
         <td class='simple'>${_('Borrower')}</td>
         <td class='simple'>
             <select name="borrower">
-                <option value="-1">Add New</option>
+                <option value="-1">${_('Add New')}</option>
                 % for item in c.borrowers:
                 <option value="${item.id}">${item.first_name} ${item.last_name}</option>
                 % endfor

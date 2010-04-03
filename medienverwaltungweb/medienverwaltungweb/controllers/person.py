@@ -44,6 +44,8 @@ class PersonController(BaseController):
             c.title = _("Actor")
         elif relation_type == 'Director':
             c.title = _("Directors")
+        elif relation_type == 'Author':
+            c.title = _("Authors")
         elif relation_type:
             c.title = _("Persons of type '%s'") % relation_type
         else:
@@ -80,5 +82,15 @@ class PersonController(BaseController):
 
         query.bind = meta.engine
         c.directors = map(lambda x: (meta.find(model.Person, x[0]), x[1]), query.execute())
+
+        query = select([id_col, cnt_col], from_obj=[model.relation_types_table])\
+                .where(model.relation_types_table.c.name == 'Author')\
+                .where(model.person_to_media_table.c.type_id == model.relation_types_table.c.id)\
+                .group_by(id_col)\
+                .order_by(cnt_col.desc())\
+                .limit(10)
+
+        query.bind = meta.engine
+        c.authors = map(lambda x: (meta.find(model.Person, x[0]), x[1]), query.execute())
 
         return render('person/top_ten.mako')

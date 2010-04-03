@@ -43,19 +43,31 @@ sqlalchemy.url = sqlite:///%(here)s/development.db
 Amazon.AccessKeyID=ABCDEFGHIJKLMNOP1234
 Amazon.SecretAccessKey=diofpidsofpaiofpdifaopsidpoifpaosdifpoii
 
+filter-with = translogger
+
+[filter:translogger]
+use = egg:Paste#translogger
+setup_console_handler = False
+
 # Logging configuration
 [loggers]
-keys = root, routes, medienverwaltungweb, sqlalchemy
+keys = root, routes, medienverwaltungweb, sqlalchemy, wsgi
 
 [handlers]
-keys = console
+keys = console, accesslog
 
 [formatters]
 keys = generic
 
 [logger_root]
 level = INFO
-handlers = console
+handlers = console, accesslog
+
+[logger_wsgi]
+level = INFO
+handlers = accesslog
+qualname = wsgi
+propagate = 0
 
 [logger_routes]
 level = INFO
@@ -64,12 +76,14 @@ qualname = routes.middleware
 # "level = DEBUG" logs the route matched and routing variables.
 
 [logger_medienverwaltungweb]
+#~ level = WARN
 level = DEBUG
 handlers =
 qualname = medienverwaltungweb
 
 [logger_sqlalchemy]
-level = INFO
+level = WARN
+#~ level = INFO
 handlers =
 qualname = sqlalchemy.engine
 # "level = INFO" logs SQL queries.
@@ -85,3 +99,9 @@ formatter = generic
 [formatter_generic]
 format = %(asctime)s,%(msecs)03d %(levelname)-5.5s [%(name)s] %(message)s
 datefmt = %H:%M:%S
+
+[handler_accesslog]
+class = FileHandler
+args = ('access.log','a')
+level = INFO
+formatter = generic

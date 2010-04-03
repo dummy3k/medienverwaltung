@@ -93,7 +93,9 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>
         % endif
+        % if c.item.image_data:
         <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">${_("Crop Image")}</a></li>
+        % endif
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">${_("Borrow")}</a></li>
         <li><a style="cursor:pointer" onclick="if (confirm('Really delete this medium?')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">${_("Delete '%s'") % c.item.title}</a></li>
         </ul>

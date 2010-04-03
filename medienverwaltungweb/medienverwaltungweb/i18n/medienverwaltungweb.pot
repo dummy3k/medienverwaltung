@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 22:06+0200\n"
+"POT-Creation-Date: 2010-04-03 22:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,6 +113,9 @@ msgstr ""
 msgid "Directors"
 msgstr ""
 
+msgid "Authors"
+msgstr ""
+
 #, python-format
 msgid "Persons of type '%s'"
 msgstr ""
@@ -178,6 +181,9 @@ msgid "Medium"
 msgstr ""
 
 msgid "Borrower"
+msgstr ""
+
+msgid "Add New"
 msgstr ""
 
 #, python-format
@@ -297,5 +303,8 @@ msgid "All Actors..."
 msgstr ""
 
 msgid "All Directors..."
+msgstr ""
+
+msgid "All Authors..."
 msgstr ""
 

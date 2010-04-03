@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 22:06+0200\n"
+"PO-Revision-Date: 2010-04-03 22:33+0200\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -113,6 +113,9 @@ msgstr "Alle folgenden Medien haben ein Bild"
 msgid "Directors"
 msgstr "Regisseure"
 
+msgid "Authors"
+msgstr "Autoren"
+
 #, python-format
 msgid "Persons of type '%s'"
 msgstr "Personen des Types '%s'"
@@ -179,6 +182,9 @@ msgstr "Medium"
 
 msgid "Borrower"
 msgstr "Ausleiher"
+
+msgid "Add New"
+msgstr "Neu Anlegen"
 
 #, python-format
 msgid "Edit Borrower - '%s %s'"
@@ -298,4 +304,7 @@ msgstr "Alle Schauspieler..."
 
 msgid "All Directors..."
 msgstr "Alle Regisseure..."
+
+msgid "All Authors..."
+msgstr "Alle Autoren..."
 
