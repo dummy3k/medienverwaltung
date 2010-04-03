@@ -1,7 +1,5 @@
 python setup.py extract_messages
-python setup.py init_catalog -l de
 python setup.py update_catalog -l de
+poedit medienverwaltungweb/i18n/de/LC_MESSAGES/medienverwaltungweb.po
 python setup.py compile_catalog
-
-Search:     ("[^"]*")
-Replace:    _(\1)
+touch development.ini

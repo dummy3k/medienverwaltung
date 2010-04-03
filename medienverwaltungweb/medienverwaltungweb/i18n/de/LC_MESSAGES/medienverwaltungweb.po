@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 16:43+0100\n"
+"PO-Revision-Date: 2010-04-03 17:06+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -17,6 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+#: medienverwaltungweb/controllers/medium.py:33
+msgid "please specify name"
+msgstr "Bitte geben Sie einen Namen an"
+
+#: medienverwaltungweb/controllers/medium.py:45
+#, python-format
+msgid "medium elready exists: %s"
+msgstr "Das Medium '%s' existiert bereits"
+
+#: medienverwaltungweb/controllers/medium.py:57
+#, python-format
+msgid "added: %s media"
+msgstr "Medium '%s' hinzugefügt"
+
+#: medienverwaltungweb/controllers/medium.py:63
+#, python-format
+msgid "All %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:65
+msgid "All Media"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:68
+#: medienverwaltungweb/controllers/medium.py:81
+#, python-format
+msgid " tagged %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:76
+#, python-format
+msgid "%s Gallery"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:78
+msgid "All Media Gallery"
+msgstr "Alle Medien Gallerie"
+
+#: medienverwaltungweb/controllers/medium.py:167
+msgid "Media without images"
+msgstr "Medien ohne Bild"
+
+#: medienverwaltungweb/controllers/medium.py:175
+#: medienverwaltungweb/controllers/medium.py:186
+#, python-format
+msgid "deleted: %s"
+msgstr "'%s' wurde gelöscht"
+
+#: medienverwaltungweb/controllers/medium.py:228
+#: medienverwaltungweb/controllers/medium.py:304
+#, python-format
+msgid "updated: %s"
+msgstr "%s wurde aktualisert"
+
+#: medienverwaltungweb/controllers/medium.py:285
+msgid "all media after this have an image"
+msgstr ""
 
 #: medienverwaltungweb/templates/layout-default.mako:30
 msgid "Books"
@@ -131,11 +189,16 @@ msgstr "Erzeugt am"
 msgid "updated_ts"
 msgstr "Aktualisert am"
 
+#: medienverwaltungweb/templates/medium/list_gallery.mako:23
+msgid "Gallery"
+msgstr "Gallerie"
+
+#: medienverwaltungweb/templates/medium/list_gallery.mako:25
+msgid "As List"
+msgstr "Als Liste"
+
 #: medienverwaltungweb/templates/person/display.mako:20
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
 msgstr "Name"
-
-#~ msgid "eMail Name"
-#~ msgstr ""
 

@@ -20,9 +20,9 @@ ${js_pager.js_pager(e)}
 
 <%def name="side()">
 	<div class="box">
-        <h2>Gallery:</h2>
+        <h2>${_("Gallery")}:</h2>
         <ul>
-        <li><a href="${h.url_for(action='list', id=None, page=None)}">As List</a></li>
+        <li><a href="${h.url_for(action='list', id=None, page=None)}">${_("As List")}</a></li>
         </ul>
 	</div>
 </%def>
