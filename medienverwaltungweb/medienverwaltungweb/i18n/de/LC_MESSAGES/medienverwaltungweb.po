@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 17:50+0100\n"
+"PO-Revision-Date: 2010-04-03 17:55+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -17,6 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+#: medienverwaltungweb/controllers/borrow.py:52
+#: medienverwaltungweb/controllers/borrow.py:71
+#, python-format
+msgid "added: %s"
+msgstr "'%s' hinzugefügt"
+
+#: medienverwaltungweb/controllers/borrow.py:94
+msgid "All borrowers"
+msgstr "Alle Ausleiher"
+
+#: medienverwaltungweb/controllers/borrow.py:119
+#: medienverwaltungweb/controllers/medium.py:249
+#: medienverwaltungweb/controllers/medium.py:325
+#, python-format
+msgid "updated: %s"
+msgstr "%s wurde aktualisert"
+
+#: medienverwaltungweb/controllers/borrow.py:127
+#: medienverwaltungweb/controllers/medium.py:190
+#: medienverwaltungweb/controllers/medium.py:201
+#, python-format
+msgid "deleted: %s"
+msgstr "'%s' wurde gelöscht"
+
+#: medienverwaltungweb/controllers/borrow.py:138
+msgid "Borrow History"
+msgstr "Verleih Historie"
+
+#: medienverwaltungweb/controllers/borrow.py:151
+#, python-format
+msgid "%s has returned medium '%s'"
+msgstr "%s hat das Medium '%s' zurück gegeben"
 
 #: medienverwaltungweb/controllers/medium.py:33
 msgid "please specify name"
@@ -37,18 +70,15 @@ msgid "Books List"
 msgstr "Bücher Liste"
 
 #: medienverwaltungweb/controllers/medium.py:65
-#| msgid "As List"
 msgid "DVDs List"
 msgstr "DVD Liste"
 
 #: medienverwaltungweb/controllers/medium.py:67
 #, python-format
-#| msgid "Gallery of unknown type '%s'"
 msgid "List of unknown type '%s'"
 msgstr "Liste unbekannten Types '%s'"
 
 #: medienverwaltungweb/controllers/medium.py:69
-#| msgid "All Media"
 msgid "All Media List"
 msgstr "Alle Medien Liste"
 
@@ -61,7 +91,6 @@ msgstr ", getagged %s"
 #: medienverwaltungweb/controllers/medium.py:75
 #: medienverwaltungweb/controllers/medium.py:96
 #, python-format
-#| msgid ", tagged %s"
 msgid ", page %s"
 msgstr ", Seite %s"
 
@@ -86,12 +115,6 @@ msgstr "Alle Medien Gallerie"
 msgid "Media without images"
 msgstr "Medien ohne Bild"
 
-#: medienverwaltungweb/controllers/medium.py:190
-#: medienverwaltungweb/controllers/medium.py:201
-#, python-format
-msgid "deleted: %s"
-msgstr "'%s' wurde gelöscht"
-
 #: medienverwaltungweb/controllers/medium.py:228
 msgid "Actor"
 msgstr "Schauspieler"
@@ -107,12 +130,6 @@ msgstr "Hersteller"
 #: medienverwaltungweb/controllers/medium.py:231
 msgid "Creator"
 msgstr "Erzeuger"
-
-#: medienverwaltungweb/controllers/medium.py:249
-#: medienverwaltungweb/controllers/medium.py:325
-#, python-format
-msgid "updated: %s"
-msgstr "%s wurde aktualisert"
 
 #: medienverwaltungweb/controllers/medium.py:306
 msgid "all media after this have an image"
@@ -291,9 +308,4 @@ msgstr "Als Liste"
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
 msgstr "Name"
-
-#~ msgid "All %s"
-#~ msgstr ""
-#~ msgid " tagged %s"
-#~ msgstr "getagged %s"
 

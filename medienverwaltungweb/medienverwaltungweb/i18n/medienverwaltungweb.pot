@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 17:49+0200\n"
+"POT-Creation-Date: 2010-04-03 17:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+#: medienverwaltungweb/controllers/borrow.py:52
+#: medienverwaltungweb/controllers/borrow.py:71
+#, python-format
+msgid "added: %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:94
+msgid "All borrowers"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:119
+#: medienverwaltungweb/controllers/medium.py:249
+#: medienverwaltungweb/controllers/medium.py:325
+#, python-format
+msgid "updated: %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:127
+#: medienverwaltungweb/controllers/medium.py:190
+#: medienverwaltungweb/controllers/medium.py:201
+#, python-format
+msgid "deleted: %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:138
+msgid "Borrow History"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:151
+#, python-format
+msgid "%s has returned medium '%s'"
+msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:33
 msgid "please specify name"
@@ -82,12 +115,6 @@ msgstr ""
 msgid "Media without images"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:190
-#: medienverwaltungweb/controllers/medium.py:201
-#, python-format
-msgid "deleted: %s"
-msgstr ""
-
 #: medienverwaltungweb/controllers/medium.py:228
 msgid "Actor"
 msgstr ""
@@ -102,12 +129,6 @@ msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:231
 msgid "Creator"
-msgstr ""
-
-#: medienverwaltungweb/controllers/medium.py:249
-#: medienverwaltungweb/controllers/medium.py:325
-#, python-format
-msgid "updated: %s"
 msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:306

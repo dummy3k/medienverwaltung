@@ -5,6 +5,7 @@ available to Controllers. This module is available to templates as 'h'.
 """
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
+from pylons import config
 from webhelpers.pylonslib import Flash as _Flash
 from routes import url_for
 
@@ -43,3 +44,6 @@ def iif(expr, a, b):
         return a
     else:
         return b
+
+def tmpl(template_name, def_name):
+    return config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)

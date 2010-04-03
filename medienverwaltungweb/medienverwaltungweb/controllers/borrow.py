@@ -3,6 +3,7 @@ from datetime import datetime
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
+from pylons.i18n import _
 from webhelpers import paginate
 
 from medienverwaltungweb.lib.base import BaseController, render
@@ -49,7 +50,12 @@ class BorrowController(BaseController):
         meta.Session.save(record)
         meta.Session.commit()
 
-        h.flash("added: %s" % record)
+        borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
+                         .render(item=record.borrower, h=h)
+        medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
+                       .render(item=record.medium, h=h)
+        h.flash(_("%s borrowed to %s") % (medium_link,
+                                            borrower_link))
         
     def add_borrower(self):
         c.item = model.Borrower()
@@ -68,7 +74,7 @@ class BorrowController(BaseController):
         meta.Session.commit()
         log.debug("record.id: %s" % record.id)
 
-        h.flash("added: %s" % record)
+        h.flash(_("added: %s") % record)
         media_id = request.params.get('media_id')
         log.debug("media_id %s "% media_id)
         if not media_id:
@@ -91,7 +97,7 @@ class BorrowController(BaseController):
 
         #~ c.items = query.all()
         c.page = paginate.Page(query, page)
-        c.title = "All borrowers"
+        c.title = _("All borrowers")
         #~ c.pager_action = "list_no_image"
         return render('borrow/list_borrowers.mako')
     
@@ -116,7 +122,7 @@ class BorrowController(BaseController):
         meta.Session.update(record)
         meta.Session.commit()
 
-        h.flash("updated: %s" % record)
+        h.flash(_("updated: %s") % record)
         return redirect_to(controller='borrow', action='edit_borrower', id=id)
 
     def delete_borrower_post(self, id):
@@ -124,7 +130,7 @@ class BorrowController(BaseController):
         meta.Session.delete(record)
         meta.Session.commit()
 
-        h.flash("deleted: %s" % record)
+        h.flash(_("deleted: %s") % record)
         return redirect_to(controller='borrow', action='list_borrowers')
 
     def show_history(self, id, page=1):
@@ -135,10 +141,11 @@ class BorrowController(BaseController):
                           .order_by(model.BorrowAct.id.desc())
         
         c.page = paginate.Page(query, page)
-        c.title = "Borrow History"
+        c.title = _("Borrow History")
         return render('borrow/history.mako')
 
     def checkin_post(self, id):
+        #~ borrower = meta.find(model.Borrower, id)
         for item in h.checkboxes(request, 'item_id_'):
             record = meta.Session\
                          .query(model.BorrowAct)\
@@ -148,7 +155,7 @@ class BorrowController(BaseController):
                          
             record.returned_ts = datetime.now()
             meta.Session.update(record)
-            h.flash("returned: %s" % record.medium)
+            h.flash(_("%s has returned medium '%s'") % (record.borrower, record.medium))
 
         #~ meta.Session.commit()
 

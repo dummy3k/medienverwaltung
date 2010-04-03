@@ -40,15 +40,10 @@
     % for flash in flashes:
         <div class="ui-state-highlight ui-corner-all">
             <span class="ui-icon ui-icon-info">&nbsp;</span>
-            <span class="flash-text">${flash}</span>
+            <span class="flash-text">${flash|n}</span>
         </div>
     % endfor
 % endif
-        
-
-
-##<div class="main">
-##</div>
 
 <div id="content">
 

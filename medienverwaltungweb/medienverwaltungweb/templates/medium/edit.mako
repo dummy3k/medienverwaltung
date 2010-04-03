@@ -2,19 +2,17 @@
 
 <%def name="title()">${_("Edit Medium")} - "${c.item.title}"</%def>
 
-<%def name="content()">
-% if c.item.image_data:
-<div style="float:right">
-<p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
-</div>
-% endif
-
-% if c.borrowed_by:
-<p>
-This medium ist currently borrowed to
+<%def name="person_name()">
 <a href="${h.url_for(controller='borrow', action='edit_borrower', id=c.borrowed_by.id)}">
     ${c.borrowed_by.first_name} ${c.borrowed_by.last_name}
 </a>
+</%def>
+
+<%def name="content()">
+
+% if c.borrowed_by:
+<p>
+${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
 
