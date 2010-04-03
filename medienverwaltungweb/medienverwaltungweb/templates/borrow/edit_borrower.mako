@@ -55,7 +55,7 @@
         <ul>
             <li><a href="${h.url_for(controller='borrow', action='show_history')}">Borrow History</a></li>
             <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
-            <li><a href="${h.url_for(controller='borrow', action='delete_borrower_post')}">Delete '${c.item.first_name} ${c.item.last_name}'</a></li>
+            <li><a style="cursor:pointer" onclick="if (confirm('Really delete this borrower?')) {location.href = '${h.url_for(controller='borrow', action='delete_borrower_post')}';}">Delete '${c.item.first_name} ${c.item.last_name}'</a></li>
         </ul>
 	</div>
 </%def>

@@ -52,6 +52,7 @@ This medium ist currently borrowed to
         </ul></td>
     </tr>
     %endfor
+    %if c.asins:
     <tr>
     <td class='simple'>${_('Asins')}</td>
         <td class='simple'><ul>
@@ -66,6 +67,7 @@ This medium ist currently borrowed to
         </li>
         %endfor
     </tr>
+    % endif
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
 <p>
@@ -74,13 +76,13 @@ This medium ist currently borrowed to
 </p>
 </form>
 
-<p>
-<form id="signin-form" method="post" action="${h.url_for(action='delete', id=None)}">
-    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
-    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-    <input type="submit" value="Delete"/>
-</form>
-</p>
+##<p>
+##<form id="signin-form" method="post" action="${h.url_for(action='delete', id=None)}">
+##    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
+##    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
+##    <input type="submit" value="Delete"/>
+##</form>
+##</p>
 </%def>
 
 
@@ -95,6 +97,7 @@ This medium ist currently borrowed to
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
         % endif
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">Borrow</a></li>
+        <li><a style="cursor:pointer" onclick="if (confirm('Really delete this medium?')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">Delete '${c.item.title}'</a></li>
         </ul>
 	</div>
 </%def>

@@ -178,14 +178,12 @@ class MediumController(BaseController):
         return redirect_to(action='index')
 
     def delete_one(self, id):
-        msg = ""
+        log.debug("delete_one(%s)" % id)
         db_item = meta.find(model.Medium, id)
         meta.Session.delete(db_item)
-        h.flash("deleted: %s" % db_item)
-
         meta.Session.commit()
-
-        return redirect_to(action='index')
+        h.flash("deleted: %s" % db_item)
+        return redirect_to(action='index', id=None)
 
     def edit(self, id):
         log.debug("id: %s" % id)
