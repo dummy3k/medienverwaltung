@@ -8,7 +8,8 @@ from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to, etag_cache
-#~ from pylons.i18n import get_lang, set_lang
+from pylons.i18n import get_lang, set_lang
+#~ from medienverwaltungweb.lib.base import *
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -187,6 +188,8 @@ class MediumController(BaseController):
         return redirect_to(action='index', id=None)
 
     def edit(self, id):
+        set_lang("de")
+
         log.debug("id: %s" % id)
         c.item = meta.find(model.Medium, id)
         c.persons = {}

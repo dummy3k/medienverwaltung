@@ -1,0 +1,124 @@
+# German translations for medienverwaltungweb.
+# Copyright (C) 2010 ORGANIZATION
+# This file is distributed under the same license as the medienverwaltungweb
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: medienverwaltungweb 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2010-04-03 15:52+0200\n"
+"PO-Revision-Date: 2010-04-03 15:55+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.4\n"
+
+#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
+#: medienverwaltungweb/templates/amazon/item_search_result.mako:18
+msgid "ASIN"
+msgstr ""
+
+#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:13
+#: medienverwaltungweb/templates/amazon/item_search_result.mako:19
+#: medienverwaltungweb/templates/medium/edit.mako:28
+#: medienverwaltungweb/templates/medium/list.mako:27
+msgid "Title"
+msgstr ""
+
+#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
+msgid "Actors"
+msgstr ""
+
+#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:27
+msgid "Images"
+msgstr ""
+
+#: medienverwaltungweb/templates/amazon/item_search_result.mako:17
+msgid "Image"
+msgstr ""
+
+#: medienverwaltungweb/templates/amazon/item_search_result.mako:20
+msgid "Actions"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/add_borrower.mako:10
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:11
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:17
+msgid "First Name"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/add_borrower.mako:14
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:15
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:18
+msgid "Last Name"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/add_borrower.mako:18
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:19
+msgid "eMail"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/borrow.mako:17
+#: medienverwaltungweb/templates/borrow/history.mako:16
+msgid "Medium"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/borrow.mako:23
+#: medienverwaltungweb/templates/borrow/history.mako:15
+msgid "Borrower"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/history.mako:17
+msgid "Checkout Date"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/history.mako:18
+msgid "Checkin Date"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
+#: medienverwaltungweb/templates/medium/edit.mako:24
+#: medienverwaltungweb/templates/medium/list.mako:26
+#: medienverwaltungweb/templates/person/display.mako:16
+#: medienverwaltungweb/templates/person/list.mako:16
+msgid "Id"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
+msgid "eMail Name"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:32
+msgid "Tags"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:36
+msgid "Created"
+msgstr "Erzeugt"
+
+#: medienverwaltungweb/templates/medium/edit.mako:40
+msgid "Updated"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:57
+msgid "Asins"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/list.mako:17
+msgid "created_ts"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/list.mako:18
+msgid "updated_ts"
+msgstr ""
+
+#: medienverwaltungweb/templates/person/display.mako:20
+#: medienverwaltungweb/templates/person/list.mako:17
+msgid "Name"
+msgstr ""
+
