@@ -246,11 +246,24 @@ class MediumController(BaseController):
         if item.image_crop:
             img = img.crop(item.image_crop)
             
-        if width != 'max' and height != 'max':
-            #~ log.debug("size: %s, %s" % (width, height))
-            size = int(width), int(height)
-            img.thumbnail(size)
-            #~ log.debug("imgsize: %s, %s" % img.size)
+        #~ log.debug("size: %s, %s" % (width, height))
+        size = int(width), int(height)
+        img.thumbnail(size)
+        #~ log.debug("imgsize: %s, %s" % img.size)
+
+        buffer = StringIO()
+        img.save(buffer, format='png')
+        response.content_type = 'image/png'
+
+        etag_cache(str(item.updated_ts))
+        return buffer.getvalue()
+
+    def raw_image(self, id):
+        item = meta.find(model.Medium, id)
+
+        p = ImageFile.Parser()
+        p.feed(item.image_data.getvalue())
+        img = p.close()
 
         buffer = StringIO()
         img.save(buffer, format='png')
