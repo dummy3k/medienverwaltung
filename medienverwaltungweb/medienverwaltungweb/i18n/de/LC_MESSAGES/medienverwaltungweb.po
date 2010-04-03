@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 17:17+0100\n"
+"PO-Revision-Date: 2010-04-03 17:34+0200\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -66,13 +66,29 @@ msgstr "Medien ohne Bild"
 msgid "deleted: %s"
 msgstr "'%s' wurde gelöscht"
 
-#: medienverwaltungweb/controllers/medium.py:228
-#: medienverwaltungweb/controllers/medium.py:304
+#: medienverwaltungweb/controllers/medium.py:213
+msgid "Actor"
+msgstr "Schauspieler"
+
+#: medienverwaltungweb/controllers/medium.py:214
+msgid "Director"
+msgstr "Regisseur"
+
+#: medienverwaltungweb/controllers/medium.py:215
+msgid "Manufacturer"
+msgstr "Hersteller"
+
+#: medienverwaltungweb/controllers/medium.py:216
+msgid "Creator"
+msgstr "Erzeuger"
+
+#: medienverwaltungweb/controllers/medium.py:234
+#: medienverwaltungweb/controllers/medium.py:310
 #, python-format
 msgid "updated: %s"
 msgstr "%s wurde aktualisert"
 
-#: medienverwaltungweb/controllers/medium.py:285
+#: medienverwaltungweb/controllers/medium.py:291
 msgid "all media after this have an image"
 msgstr "Alle folgenden Medien haben ein Bild"
 
@@ -89,6 +105,7 @@ msgid "Persons"
 msgstr "Personen"
 
 #: medienverwaltungweb/templates/layout-default.mako:33
+#: medienverwaltungweb/templates/medium/edit.mako:100
 msgid "Borrow"
 msgstr "Ausleihen"
 
@@ -102,13 +119,10 @@ msgid "Todo"
 msgstr "Todo"
 
 #: medienverwaltungweb/templates/layout-default.mako:74
-#, python-format
-#| msgid "added: %s media"
 msgid "Add Medium"
 msgstr "Medium  hinzugefügen"
 
 #: medienverwaltungweb/templates/layout-default.mako:75
-#| msgid "Media without images"
 msgid "Media without Image"
 msgstr "Medien ohne Bild"
 
@@ -190,6 +204,10 @@ msgstr "Rückgabedatum"
 msgid "Id"
 msgstr "Id"
 
+#: medienverwaltungweb/templates/medium/edit.mako:3
+msgid "Edit Medium"
+msgstr "Medium  ändern"
+
 #: medienverwaltungweb/templates/medium/edit.mako:36
 msgid "Created"
 msgstr "Erzeugt"
@@ -201,6 +219,31 @@ msgstr "Aktualisiert"
 #: medienverwaltungweb/templates/medium/edit.mako:57
 msgid "Asins"
 msgstr "Asins"
+
+#: medienverwaltungweb/templates/medium/edit.mako:93
+msgid "Attach to Amazon"
+msgstr "Mit Amazon verbinden"
+
+#: medienverwaltungweb/templates/medium/edit.mako:94
+msgid "Next w/o Image"
+msgstr "Nächstes ohne Bild"
+
+#: medienverwaltungweb/templates/medium/edit.mako:96
+msgid "Query Amazon"
+msgstr "Amazon abfragen"
+
+#: medienverwaltungweb/templates/medium/edit.mako:97
+msgid "Select image from Amazon"
+msgstr "Bild von Amazon auswählen"
+
+#: medienverwaltungweb/templates/medium/edit.mako:99
+msgid "Crop Image"
+msgstr "Bild beschneiden"
+
+#: medienverwaltungweb/templates/medium/edit.mako:101
+#, python-format
+msgid "Delete '%s'"
+msgstr "Lösche '%s'"
 
 #: medienverwaltungweb/templates/medium/list.mako:17
 msgid "created_ts"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 17:16+0200\n"
+"POT-Creation-Date: 2010-04-03 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,13 +66,29 @@ msgstr ""
 msgid "deleted: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:228
-#: medienverwaltungweb/controllers/medium.py:304
+#: medienverwaltungweb/controllers/medium.py:213
+msgid "Actor"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:214
+msgid "Director"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:215
+msgid "Manufacturer"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:216
+msgid "Creator"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:234
+#: medienverwaltungweb/controllers/medium.py:310
 #, python-format
 msgid "updated: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:285
+#: medienverwaltungweb/controllers/medium.py:291
 msgid "all media after this have an image"
 msgstr ""
 
@@ -89,6 +105,7 @@ msgid "Persons"
 msgstr ""
 
 #: medienverwaltungweb/templates/layout-default.mako:33
+#: medienverwaltungweb/templates/medium/edit.mako:100
 msgid "Borrow"
 msgstr ""
 
@@ -187,6 +204,10 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
+#: medienverwaltungweb/templates/medium/edit.mako:3
+msgid "Edit Medium"
+msgstr ""
+
 #: medienverwaltungweb/templates/medium/edit.mako:36
 msgid "Created"
 msgstr ""
@@ -197,6 +218,31 @@ msgstr ""
 
 #: medienverwaltungweb/templates/medium/edit.mako:57
 msgid "Asins"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:93
+msgid "Attach to Amazon"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:94
+msgid "Next w/o Image"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:96
+msgid "Query Amazon"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:97
+msgid "Select image from Amazon"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:99
+msgid "Crop Image"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:101
+#, python-format
+msgid "Delete '%s'"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/list.mako:17

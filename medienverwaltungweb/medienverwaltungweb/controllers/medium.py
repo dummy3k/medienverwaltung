@@ -209,6 +209,12 @@ class MediumController(BaseController):
             else:
                 c.persons[item.relation.name] = [item.person]
 
+        # names for babel to pick up:
+        _('Actor')
+        _('Director')
+        _('Manufacturer')
+        _('Creator')
+        
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\
                                     .filter(model.BorrowAct.media_id == id)\
