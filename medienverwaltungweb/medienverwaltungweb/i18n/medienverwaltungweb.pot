@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 17:55+0200\n"
+"POT-Creation-Date: 2010-04-03 19:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
 
-#: medienverwaltungweb/controllers/borrow.py:52
-#: medienverwaltungweb/controllers/borrow.py:71
+#: medienverwaltungweb/controllers/borrow.py:57
+#, python-format
+msgid "%s borrowed to %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/borrow.py:77
 #, python-format
 msgid "added: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:94
+#: medienverwaltungweb/controllers/borrow.py:100
 msgid "All borrowers"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:119
+#: medienverwaltungweb/controllers/borrow.py:125
 #: medienverwaltungweb/controllers/medium.py:249
 #: medienverwaltungweb/controllers/medium.py:325
 #, python-format
 msgid "updated: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:127
+#: medienverwaltungweb/controllers/borrow.py:133
 #: medienverwaltungweb/controllers/medium.py:190
 #: medienverwaltungweb/controllers/medium.py:201
 #, python-format
 msgid "deleted: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:138
+#: medienverwaltungweb/controllers/borrow.py:144
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:56
 msgid "Borrow History"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:151
+#: medienverwaltungweb/controllers/borrow.py:158
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr ""
@@ -148,29 +153,29 @@ msgid "Persons"
 msgstr ""
 
 #: medienverwaltungweb/templates/layout-default.mako:33
-#: medienverwaltungweb/templates/medium/edit.mako:100
+#: medienverwaltungweb/templates/medium/edit.mako:98
 msgid "Borrow"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:63
-#: medienverwaltungweb/templates/medium/edit.mako:32
+#: medienverwaltungweb/templates/layout-default.mako:58
+#: medienverwaltungweb/templates/medium/edit.mako:30
 msgid "Tags"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:72
+#: medienverwaltungweb/templates/layout-default.mako:67
 msgid "Todo"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:74
+#: medienverwaltungweb/templates/layout-default.mako:69
 msgid "Add Medium"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:75
+#: medienverwaltungweb/templates/layout-default.mako:70
 msgid "Media without Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:79
-#: medienverwaltungweb/templates/layout-default.mako:82
+#: medienverwaltungweb/templates/layout-default.mako:74
+#: medienverwaltungweb/templates/layout-default.mako:77
 msgid "Search"
 msgstr ""
 
@@ -181,7 +186,7 @@ msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:13
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:19
-#: medienverwaltungweb/templates/medium/edit.mako:28
+#: medienverwaltungweb/templates/medium/edit.mako:26
 #: medienverwaltungweb/templates/medium/list.mako:27
 msgid "Title"
 msgstr ""
@@ -199,7 +204,8 @@ msgid "Image"
 msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:20
-#: medienverwaltungweb/templates/medium/edit.mako:91
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:54
+#: medienverwaltungweb/templates/medium/edit.mako:89
 msgid "Actions"
 msgstr ""
 
@@ -231,6 +237,40 @@ msgstr ""
 msgid "Borrower"
 msgstr ""
 
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:4
+#, python-format
+msgid "Edit Borrower - '%s %s'"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:7
+msgid "Borrower Details"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:25
+msgid "Save"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:30
+msgid "Borrowed Items"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:45
+msgid "Checkin"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:57
+msgid "Add Borrower"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:58
+msgid "Really delete this borrower?"
+msgstr ""
+
+#: medienverwaltungweb/templates/borrow/edit_borrower.mako:58
+#, python-format
+msgid "Delete '%s %s'"
+msgstr ""
+
 #: medienverwaltungweb/templates/borrow/history.mako:17
 msgid "Checkout Date"
 msgstr ""
@@ -240,7 +280,7 @@ msgid "Checkin Date"
 msgstr ""
 
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
-#: medienverwaltungweb/templates/medium/edit.mako:24
+#: medienverwaltungweb/templates/medium/edit.mako:22
 #: medienverwaltungweb/templates/medium/list.mako:26
 #: medienverwaltungweb/templates/person/display.mako:16
 #: medienverwaltungweb/templates/person/list.mako:16
@@ -251,39 +291,44 @@ msgstr ""
 msgid "Edit Medium"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:36
+#: medienverwaltungweb/templates/medium/edit.mako:15
+#, python-format
+msgid "This medium ist currently borrowed to %s"
+msgstr ""
+
+#: medienverwaltungweb/templates/medium/edit.mako:34
 msgid "Created"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:40
+#: medienverwaltungweb/templates/medium/edit.mako:38
 msgid "Updated"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:57
+#: medienverwaltungweb/templates/medium/edit.mako:55
 msgid "Asins"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:93
+#: medienverwaltungweb/templates/medium/edit.mako:91
 msgid "Attach to Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:94
+#: medienverwaltungweb/templates/medium/edit.mako:92
 msgid "Next w/o Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:96
+#: medienverwaltungweb/templates/medium/edit.mako:94
 msgid "Query Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:97
+#: medienverwaltungweb/templates/medium/edit.mako:95
 msgid "Select image from Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:99
+#: medienverwaltungweb/templates/medium/edit.mako:97
 msgid "Crop Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:101
+#: medienverwaltungweb/templates/medium/edit.mako:99
 #, python-format
 msgid "Delete '%s'"
 msgstr ""
