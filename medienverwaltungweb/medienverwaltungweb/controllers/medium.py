@@ -23,6 +23,8 @@ _('Actor')
 _('Director')
 _('Manufacturer')
 _('Creator')
+_('Book')
+_('Dvd')
 
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):

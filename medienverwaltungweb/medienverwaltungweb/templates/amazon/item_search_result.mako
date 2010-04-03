@@ -1,12 +1,12 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Item Search Results</%def>
+<%def name="title()">${_("Amazon Search Results")}</%def>
 
 <%def name="content()">
 <form id="signin-form" method="post" action="${h.url_for(query=None)}">
 <p>
-    Query: <input type="text" name="query" value="${c.query}" />
-    <input type="submit" value="Search"/>
+    <input type="text" name="query" value="${c.query}" />
+    <input type="submit" value="${_('Search')}"/>
 </p>
 </form>
 
@@ -15,9 +15,8 @@
     <tr>
         <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Image')}</td>
-        <td class='simple'>${_('ASIN')}</td>
         <td class='simple'>${_('Title')}</td>
-        <td class='simple'>${_('Actions')}</td>
+        <td class='simple'>${_('ASIN')}</td>
     </tr>
 
     % for item in c.items:
@@ -34,23 +33,26 @@
         %else:
         <td class='simple'>No image available</td>
         %endif
-        <td class='simple'>${item.ASIN}</td>
         <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
-        <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">Details...</a></td>
+        <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
     </tr>
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
-<input type="submit" value="Attach to '${c.item}'"/>
+<p><input type="submit" value="${_("Attach to '%s'" % c.item.title)}"/></p>
 </form>
 </%def>
 
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_("Actions")}:</h2>
         <ul>
-        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">Next w/o Image</a></li>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">${_("Next w/o Image")}</a></li>
         </ul>
+	</div>
+	<div class="box">
+        <h2>${_("Hint")}:</h2>
+        ${_("If you click on the small image the checkbox toggles.")}
 	</div>
 </%def>

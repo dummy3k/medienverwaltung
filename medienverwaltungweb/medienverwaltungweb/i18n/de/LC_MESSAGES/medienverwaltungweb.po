@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 22:33+0200\n"
+"PO-Revision-Date: 2010-04-04 00:25+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -58,6 +58,12 @@ msgstr "Hersteller"
 
 msgid "Creator"
 msgstr "Erzeuger"
+
+msgid "Book"
+msgstr "Buch"
+
+msgid "Dvd"
+msgstr "Dvd"
 
 msgid "please specify name"
 msgstr "Bitte geben Sie einen Namen an"
@@ -150,6 +156,9 @@ msgstr "Medien ohne Bild"
 msgid "Search"
 msgstr "Suchen"
 
+msgid "Amazon Item Lookup Results"
+msgstr "Amazon Detail Ansicht"
+
 msgid "ASIN"
 msgstr "ASIN"
 
@@ -162,11 +171,27 @@ msgstr "Schauspieler"
 msgid "Images"
 msgstr "Bilder"
 
+msgid "Amazon Search Results"
+msgstr "Amazon Suchergebnisse"
+
 msgid "Image"
 msgstr "Bild"
 
+#, python-format
+msgid "Attach to '%s'"
+msgstr "Verbinde mit '%s'"
+
 msgid "Actions"
 msgstr "Aktionen"
+
+msgid "Next w/o Image"
+msgstr "Nächstes ohne Bild"
+
+msgid "Hint"
+msgstr "Tipp"
+
+msgid "If you click on the small image the checkbox toggles."
+msgstr "Ein Klick auf das kleine Bild schaltet die Checkbox an und aus."
 
 msgid "First Name"
 msgstr "Vorname"
@@ -246,9 +271,6 @@ msgstr "Asins"
 msgid "Attach to Amazon"
 msgstr "Mit Amazon verbinden"
 
-msgid "Next w/o Image"
-msgstr "Nächstes ohne Bild"
-
 msgid "Query Amazon"
 msgstr "Amazon abfragen"
 
@@ -257,6 +279,10 @@ msgstr "Bild von Amazon auswählen"
 
 msgid "Crop Image"
 msgstr "Bild beschneiden"
+
+#| msgid "Really delete this borrower?"
+msgid "Really delete this medium?"
+msgstr "Dieses Medium wirklich löschen?"
 
 #, python-format
 msgid "Delete '%s'"
@@ -279,6 +305,19 @@ msgstr "Gallerie"
 
 msgid "As List"
 msgstr "Als Liste"
+
+msgid "Add one single medium"
+msgstr "Ein einzelnes Medium hinzugefügen"
+
+msgid "Type"
+msgstr "Art"
+
+#| msgid "please specify name"
+msgid "Please select one"
+msgstr "Bitte wählen etwas aus"
+
+msgid "Add many media"
+msgstr "Viele Media hinzugefügen"
 
 #, python-format
 msgid "Edit Person - '%s'"

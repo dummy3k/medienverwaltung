@@ -82,7 +82,15 @@ font: 100%/1.3 TrebuchetMS,Arial,sans-serif;
 	clear:left;
 }
 
-ul,.tags{ margin: 0; font-size:1.2em;}
+ul,.tags{
+    margin: 0;
+    font-size:1.2em;
+}
+
+ul {
+    padding-left: 1em;
+}
+
 li { }
 
 .pager_curpage,.pager_link {

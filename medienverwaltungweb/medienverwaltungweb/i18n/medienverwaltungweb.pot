@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 22:33+0200\n"
+"POT-Creation-Date: 2010-04-04 00:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,12 @@ msgid "Manufacturer"
 msgstr ""
 
 msgid "Creator"
+msgstr ""
+
+msgid "Book"
+msgstr ""
+
+msgid "Dvd"
 msgstr ""
 
 msgid "please specify name"
@@ -150,6 +156,9 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Amazon Item Lookup Results"
+msgstr ""
+
 msgid "ASIN"
 msgstr ""
 
@@ -162,10 +171,26 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
+msgid "Amazon Search Results"
+msgstr ""
+
 msgid "Image"
 msgstr ""
 
+#, python-format
+msgid "Attach to '%s'"
+msgstr ""
+
 msgid "Actions"
+msgstr ""
+
+msgid "Next w/o Image"
+msgstr ""
+
+msgid "Hint"
+msgstr ""
+
+msgid "If you click on the small image the checkbox toggles."
 msgstr ""
 
 msgid "First Name"
@@ -246,9 +271,6 @@ msgstr ""
 msgid "Attach to Amazon"
 msgstr ""
 
-msgid "Next w/o Image"
-msgstr ""
-
 msgid "Query Amazon"
 msgstr ""
 
@@ -256,6 +278,9 @@ msgid "Select image from Amazon"
 msgstr ""
 
 msgid "Crop Image"
+msgstr ""
+
+msgid "Really delete this medium?"
 msgstr ""
 
 #, python-format
@@ -278,6 +303,18 @@ msgid "Gallery"
 msgstr ""
 
 msgid "As List"
+msgstr ""
+
+msgid "Add one single medium"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Please select one"
+msgstr ""
+
+msgid "Add many media"
 msgstr ""
 
 #, python-format

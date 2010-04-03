@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Item Lookup Results</%def>
+<%def name="title()">${_("Amazon Item Lookup Results")}</%def>
 
 <%def name="content()">
 
