@@ -17,6 +17,13 @@ import medienverwaltungweb.model as model
 
 log = logging.getLogger(__name__)
 
+# names for babel to pick up:
+_('Author')
+_('Actor')
+_('Director')
+_('Manufacturer')
+_('Creator')
+
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
         if id:
@@ -224,12 +231,6 @@ class MediumController(BaseController):
             else:
                 c.persons[item.relation.name] = [item.person]
 
-        # names for babel to pick up:
-        _('Actor')
-        _('Director')
-        _('Manufacturer')
-        _('Creator')
-        
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\
                                     .filter(model.BorrowAct.media_id == id)\
