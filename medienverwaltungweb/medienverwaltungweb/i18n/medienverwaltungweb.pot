@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 17:34+0200\n"
+"POT-Creation-Date: 2010-04-03 17:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,62 +33,84 @@ msgid "added: %s media"
 msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:63
-#, python-format
-msgid "All %s"
+msgid "Books List"
 msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:65
-msgid "All Media"
+msgid "DVDs List"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:68
-#: medienverwaltungweb/controllers/medium.py:81
+#: medienverwaltungweb/controllers/medium.py:67
 #, python-format
-msgid " tagged %s"
+msgid "List of unknown type '%s'"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:76
+#: medienverwaltungweb/controllers/medium.py:69
+msgid "All Media List"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:72
+#: medienverwaltungweb/controllers/medium.py:93
 #, python-format
-msgid "%s Gallery"
+msgid ", tagged %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:78
+#: medienverwaltungweb/controllers/medium.py:75
+#: medienverwaltungweb/controllers/medium.py:96
+#, python-format
+msgid ", page %s"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:84
+msgid "Books Gallery"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:86
+msgid "DVDs Gallery"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:88
+#, python-format
+msgid "Gallery of unknown type '%s'"
+msgstr ""
+
+#: medienverwaltungweb/controllers/medium.py:90
 msgid "All Media Gallery"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:167
+#: medienverwaltungweb/controllers/medium.py:182
 msgid "Media without images"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:175
-#: medienverwaltungweb/controllers/medium.py:186
+#: medienverwaltungweb/controllers/medium.py:190
+#: medienverwaltungweb/controllers/medium.py:201
 #, python-format
 msgid "deleted: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:213
+#: medienverwaltungweb/controllers/medium.py:228
 msgid "Actor"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:214
+#: medienverwaltungweb/controllers/medium.py:229
 msgid "Director"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:215
+#: medienverwaltungweb/controllers/medium.py:230
 msgid "Manufacturer"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:216
+#: medienverwaltungweb/controllers/medium.py:231
 msgid "Creator"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:234
-#: medienverwaltungweb/controllers/medium.py:310
+#: medienverwaltungweb/controllers/medium.py:249
+#: medienverwaltungweb/controllers/medium.py:325
 #, python-format
 msgid "updated: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:291
+#: medienverwaltungweb/controllers/medium.py:306
 msgid "all media after this have an image"
 msgstr ""
 

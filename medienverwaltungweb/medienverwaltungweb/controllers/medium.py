@@ -59,26 +59,41 @@ class MediumController(BaseController):
 
     def list(self, type=None, page=1, tag=None):
         self.__prepare_list__(False, type, page, tag)
-        if type:
-            c.title = _("All %s") % type.capitalize()
+        if type == 'books':
+            c.title = _("Books List")
+        elif type == 'dvds':
+            c.title = _("DVDs List")
+        elif type:
+            c.title = _("List of unknown type '%s'") % type
         else:
-            c.title = _("All Media")
+            c.title = _("All Media List")
 
         if tag:
-            c.title += _(" tagged %s") % tag.capitalize()
+            c.title += _(", tagged %s") % tag.capitalize()
+            
+        if page > 1:
+            c.title += _(", page %s") % c.page.page
+            
             
         c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
         self.__prepare_list__(True, type, page, tag)
-        if type:
-            c.title = _("%s Gallery") % type.capitalize()
+        if type == 'books':
+            c.title = _("Books Gallery")
+        elif type == 'dvds':
+            c.title = _("DVDs Gallery")
+        elif type:
+            c.title = _("Gallery of unknown type '%s'") % type
         else:
             c.title = _("All Media Gallery")
 
         if tag:
-            c.title += _(" tagged %s") % tag.capitalize()
+            c.title += _(", tagged %s") % tag.capitalize()
+            
+        if page > 1:
+            c.title += _(", page %s") % c.page.page
             
         c.pager_action = "list_gallery"
         return render('medium/list_gallery.mako')
