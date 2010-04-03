@@ -4,6 +4,8 @@ from webhelpers import paginate
 import urllib
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
+from sqlalchemy import func
+from sqlalchemy.sql import select, join, and_, or_, not_
 
 from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.model as model
@@ -54,4 +56,29 @@ class PersonController(BaseController):
         return render('person/list.mako')
 
     def top_ten(self):
-        return "Hi"
+        #
+        id_col = model.person_to_media_table.c.person_id
+        cnt_col = func.count()
+
+        query = select([id_col, cnt_col], from_obj=[model.relation_types_table])\
+                .where(model.relation_types_table.c.name == 'Actor')\
+                .where(model.person_to_media_table.c.type_id == model.relation_types_table.c.id)\
+                .group_by(id_col)\
+                .order_by(cnt_col.desc())\
+                .limit(10)
+
+        query.bind = meta.engine
+        c.actors = map(lambda x: (meta.find(model.Person, x[0]), x[1]), query.execute())
+
+
+        query = select([id_col, cnt_col], from_obj=[model.relation_types_table])\
+                .where(model.relation_types_table.c.name == 'Director')\
+                .where(model.person_to_media_table.c.type_id == model.relation_types_table.c.id)\
+                .group_by(id_col)\
+                .order_by(cnt_col.desc())\
+                .limit(10)
+
+        query.bind = meta.engine
+        c.directors = map(lambda x: (meta.find(model.Person, x[0]), x[1]), query.execute())
+
+        return render('person/top_ten.mako')

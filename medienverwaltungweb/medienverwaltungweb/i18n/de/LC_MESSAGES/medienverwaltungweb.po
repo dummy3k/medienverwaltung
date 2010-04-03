@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 20:57+0200\n"
+"PO-Revision-Date: 2010-04-03 22:06+0200\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -43,6 +43,21 @@ msgstr "Verleih Historie"
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr "%s hat das Medium '%s' zurück gegeben"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Actor"
+msgstr "Schauspieler"
+
+msgid "Director"
+msgstr "Regisseur"
+
+msgid "Manufacturer"
+msgstr "Hersteller"
+
+msgid "Creator"
+msgstr "Erzeuger"
 
 msgid "please specify name"
 msgstr "Bitte geben Sie einen Namen an"
@@ -91,18 +106,6 @@ msgstr "Alle Medien Gallerie"
 
 msgid "Media without images"
 msgstr "Medien ohne Bild"
-
-msgid "Actor"
-msgstr "Schauspieler"
-
-msgid "Director"
-msgstr "Regisseur"
-
-msgid "Manufacturer"
-msgstr "Hersteller"
-
-msgid "Creator"
-msgstr "Erzeuger"
 
 msgid "all media after this have an image"
 msgstr "Alle folgenden Medien haben ein Bild"
@@ -288,5 +291,11 @@ msgid "Filter"
 msgstr "Filter"
 
 msgid "Top Ten Persons"
-msgstr ""
+msgstr "Top Ten Personen"
+
+msgid "All Actors..."
+msgstr "Alle Schauspieler..."
+
+msgid "All Directors..."
+msgstr "Alle Regisseure..."
 
