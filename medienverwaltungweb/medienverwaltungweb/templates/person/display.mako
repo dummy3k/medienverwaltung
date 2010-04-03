@@ -3,8 +3,9 @@
 <%!
     import urllib
 %>
+<%namespace name='medium_block' file='/medium/medium_block.mako' />
 
-<%def name="title()">Edit Iser '${c.item.name}' (${c.item.id})</%def>
+<%def name="title()">${_("Edit Person - '%s'") % c.item.name}</%def>
 
 <%def name="content()">
 ##<div style="float:right">
@@ -22,19 +23,31 @@
     </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
-<input type="submit" value="Save"/>
+<p><input type="submit" value="${_("Save")}"/></p>
 </form>
 
 ##<a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a>
 ##<a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a>
 
-<h2>Actor in...</h2>
+<h2>${_("Appeared in this media")}</h2>
 <p>${c.page.pager()}</p>
-<ul>
-%for item in c.page.items:
-    <li><a href="${h.url_for(controller='medium', action='edit', id=item.id)}">${item.title}</a></li>
-%endfor
-</ul>
+
+<table border=1 class='simple'>
+    <tr>
+        <td class='simple'>${_('Role')}</td>
+        <td class='simple'>${_('Medium')}</td>
+    </tr>
+    % for item in c.page.items:
+    % if item.medium:
+    <tr>
+        <td class='simple'>${_(item.relation.name)}</td>
+        <td class='simple' width="100%">
+            ${medium_block.medium_block(item.medium)}
+        </td>
+    </tr>
+    % endif
+    % endfor
+</table>
 <p>${c.page.pager()}</p>
 
 <iframe src="http://de.wikipedia.org/wiki/${urllib.quote(c.item.name)}" width="600" height="600" name="SELFHTML_in_a_box">

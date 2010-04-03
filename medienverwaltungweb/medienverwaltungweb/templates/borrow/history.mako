@@ -45,7 +45,8 @@ ${js_pager.js_pager(e)}
 	<div class="box">
         <h2>Actions:</h2>
         <ul>
-            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">${_("Add Borrower")}</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='edit_borrower')}">${_("Edit Borrower")}</a></li>
         </ul>
 	</div>
 </%def>

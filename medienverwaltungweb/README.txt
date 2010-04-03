@@ -17,3 +17,9 @@ Tweak the config file as appropriate and then setup the application::
     paster setup-app config.ini
 
 Then you are ready to go.
+
+Todo for devlopment:
+    sudo easy_install babel
+
+Thanks goto:
+- http://deepliquid.com/content/Jcrop.html

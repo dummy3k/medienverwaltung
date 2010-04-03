@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Edit Medium - "${c.item.title}"</%def>
+<%def name="title()">${_("Edit Medium")} - "${c.item.title}"</%def>
 
 <%def name="content()">
 % if c.item.image_data:
@@ -11,10 +11,7 @@
 
 % if c.borrowed_by:
 <p>
-This medium ist currently borrowed to
-<a href="${h.url_for(controller='borrow', action='edit_borrower', id=c.borrowed_by.id)}">
-    ${c.borrowed_by.first_name} ${c.borrowed_by.last_name}
-</a>
+${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
 
@@ -88,17 +85,17 @@ This medium ist currently borrowed to
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_('Actions')}:</h2>
         <ul>
-        <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a></li>
-        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">Next w/o Image</a></li>
+        <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">${_("Attach to Amazon")}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">${_("Next w/o Image")}</a></li>
         % if len(c.item.asins) > 0:
-        <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
-        <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
+        <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
+        <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>
         % endif
-        <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">Crop Image</a></li>
-        <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">Borrow</a></li>
-        <li><a style="cursor:pointer" onclick="if (confirm('Really delete this medium?')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">Delete '${c.item.title}'</a></li>
+        <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">${_("Crop Image")}</a></li>
+        <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">${_("Borrow")}</a></li>
+        <li><a style="cursor:pointer" onclick="if (confirm('Really delete this medium?')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">${_("Delete '%s'") % c.item.title}</a></li>
         </ul>
 	</div>
 </%def>

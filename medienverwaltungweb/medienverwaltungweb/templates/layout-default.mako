@@ -27,10 +27,10 @@
 </div>
  <div id="menu">
   <ul id="nav">
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">Books</a></li>
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">DVDs</a></li>
-    <li><a href="${h.url_for(controller='person', action='list', id=None, page=None, type=None, tag=None)}">Persons</a></li>
-    <li><a href="${h.url_for(controller='borrow', action='list_borrowers', id=None, page=None, type=None, tag=None)}">Borrow</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">${_('Books')}</a></li>
+    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">${_('DVDs')}</a></li>
+    <li><a href="${h.url_for(controller='person', action='top_ten', id=None, page=None, type=None, tag=None)}">${_('Persons')}</a></li>
+    <li><a href="${h.url_for(controller='borrow', action='list_borrowers', id=None, page=None, type=None, tag=None)}">${_('Borrow')}</a></li>
   </ul>
  </div>
 </div>
@@ -40,15 +40,10 @@
     % for flash in flashes:
         <div class="ui-state-highlight ui-corner-all">
             <span class="ui-icon ui-icon-info">&nbsp;</span>
-            <span class="flash-text">${flash}</span>
+            <span class="flash-text">${flash|n}</span>
         </div>
     % endfor
 % endif
-        
-
-
-##<div class="main">
-##</div>
 
 <div id="content">
 
@@ -60,7 +55,7 @@
     ${self.side()}
     % if c.tags:
 	<div class="box">
-        <h2>Tags:</h2>
+        <h2>${_("Tags")}:</h2>
         <span class="tags">
         % for item in c.tags[:10]:
         <a href="${h.url_for(tag=item[0], page=None)}">${item[0]}&nbsp;(${item[1]})</a>
@@ -69,17 +64,17 @@
 	</div>
     % endif
 	<div class="box">
-        <h2>Todo:</h2>
+        <h2>${_("Todo")}:</h2>
         <ul>
-        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None, tag=None)}">Add Medium</a></li>
-        <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, tag=None)}">Without Image</a></li>
+        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None, tag=None)}">${_("Add Medium")}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, tag=None)}">${_("Media without Image")}</a></li>
         </ul>
 	</div>
 	<div class="box">
-        <h2>Search:</h2>
+        <h2>${_("Search")}:</h2>
         <form id="signin-form" method="post" action="${h.url_for(controller='search', action='search_post', id=None, page=None, tag=None, type=None)}">
             <input type="text" name="query"/>
-            <input type="submit" value="Find"/>
+            <input type="submit" value="${_("Search")}"/>
         </form>
 	</div>
 </div>

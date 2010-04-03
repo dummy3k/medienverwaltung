@@ -1,10 +1,10 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">Edit Borrower - '${c.item.first_name} ${c.item.last_name}'</%def>
+<%def name="title()">${_("Edit Borrower - '%s %s'") % (c.item.first_name, c.item.last_name)}</%def>
 
 <%def name="content()">
-<h2>Borrower Details</h2>
+<h2>${_("Borrower Details")}</h2>
 <form id="signin-form" method="post" action="${h.url_for(action='edit_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
@@ -22,12 +22,12 @@
 </table>
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="Update"/>
+<input type="submit" value="${_("Save")}"/>
 </p>
 </form>
 
 % if c.borrowed_media:
-<h2>Borrowed Items</h2>
+<h2>${_("Borrowed Items")}</h2>
 <form id="signin-form" method="post" action="${h.url_for(action='checkin_post')}">
 <table>
 % for item in c.borrowed_media:
@@ -42,7 +42,7 @@
 % endfor
 </table>
 
-<input type="submit" value="Checkin"/>
+<input type="submit" value="${_("Checkin")}"/>
 </form>
 % endif
 
@@ -51,11 +51,11 @@
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_("Actions")}:</h2>
         <ul>
-            <li><a href="${h.url_for(controller='borrow', action='show_history')}">Borrow History</a></li>
-            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">Add Borrower</a></li>
-            <li><a style="cursor:pointer" onclick="if (confirm('Really delete this borrower?')) {location.href = '${h.url_for(controller='borrow', action='delete_borrower_post')}';}">Delete '${c.item.first_name} ${c.item.last_name}'</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='show_history')}">${_("Borrow History")}</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">${_("Add Borrower")}</a></li>
+            <li><a style="cursor:pointer" onclick="if (confirm('${_("Really delete this borrower?")}')) {location.href = '${h.url_for(controller='borrow', action='delete_borrower_post')}';}">${_("Delete '%s %s'") % (c.item.first_name, c.item.last_name)}</a></li>
         </ul>
 	</div>
 </%def>

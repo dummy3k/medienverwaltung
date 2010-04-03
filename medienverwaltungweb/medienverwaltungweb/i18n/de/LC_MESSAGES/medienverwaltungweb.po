@@ -1,0 +1,301 @@
+# German translations for medienverwaltungweb.
+# Copyright (C) 2010 ORGANIZATION
+# This file is distributed under the same license as the medienverwaltungweb
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: medienverwaltungweb 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2010-04-03 16:35+0200\n"
+"PO-Revision-Date: 2010-04-03 22:06+0200\n"
+"Last-Translator: dummy3k <l4711@gmx.net>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.4\n"
+
+#, python-format
+msgid "%s borrowed to %s"
+msgstr "%s hat sich %s ausgeliehen"
+
+#, python-format
+msgid "added: %s"
+msgstr "'%s' hinzugefügt"
+
+msgid "All borrowers"
+msgstr "Alle Ausleiher"
+
+#, python-format
+msgid "updated: %s"
+msgstr "%s wurde aktualisert"
+
+#, python-format
+msgid "deleted: %s"
+msgstr "'%s' wurde gelöscht"
+
+msgid "Borrow History"
+msgstr "Verleih Historie"
+
+#, python-format
+msgid "%s has returned medium '%s'"
+msgstr "%s hat das Medium '%s' zurück gegeben"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Actor"
+msgstr "Schauspieler"
+
+msgid "Director"
+msgstr "Regisseur"
+
+msgid "Manufacturer"
+msgstr "Hersteller"
+
+msgid "Creator"
+msgstr "Erzeuger"
+
+msgid "please specify name"
+msgstr "Bitte geben Sie einen Namen an"
+
+#, python-format
+msgid "medium elready exists: %s"
+msgstr "Das Medium '%s' existiert bereits"
+
+#, python-format
+msgid "added: %s media"
+msgstr "Medium '%s' hinzugefügt"
+
+msgid "Books List"
+msgstr "Bücher Liste"
+
+msgid "DVDs List"
+msgstr "DVD Liste"
+
+#, python-format
+msgid "List of unknown type '%s'"
+msgstr "Liste unbekannten Types '%s'"
+
+msgid "All Media List"
+msgstr "Alle Medien Liste"
+
+#, python-format
+msgid ", tagged %s"
+msgstr ", getagged %s"
+
+#, python-format
+msgid ", page %s"
+msgstr ", Seite %s"
+
+msgid "Books Gallery"
+msgstr "Bücher Gallerie"
+
+msgid "DVDs Gallery"
+msgstr "DVD Gallerie"
+
+#, python-format
+msgid "Gallery of unknown type '%s'"
+msgstr "Gallerie unbekannten Types '%s'"
+
+msgid "All Media Gallery"
+msgstr "Alle Medien Gallerie"
+
+msgid "Media without images"
+msgstr "Medien ohne Bild"
+
+msgid "all media after this have an image"
+msgstr "Alle folgenden Medien haben ein Bild"
+
+msgid "Directors"
+msgstr "Regisseure"
+
+#, python-format
+msgid "Persons of type '%s'"
+msgstr "Personen des Types '%s'"
+
+msgid "Every Person"
+msgstr "Alle Personen"
+
+msgid "Books"
+msgstr "Bücher"
+
+msgid "DVDs"
+msgstr "DVDs"
+
+msgid "Persons"
+msgstr "Personen"
+
+msgid "Borrow"
+msgstr "Ausleihen"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Todo"
+msgstr "Todo"
+
+msgid "Add Medium"
+msgstr "Medium  hinzugefügen"
+
+msgid "Media without Image"
+msgstr "Medien ohne Bild"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "ASIN"
+msgstr "ASIN"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Actors"
+msgstr "Schauspieler"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Image"
+msgstr "Bild"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "First Name"
+msgstr "Vorname"
+
+msgid "Last Name"
+msgstr "Nachname"
+
+msgid "eMail"
+msgstr "eMail"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Borrower"
+msgstr "Ausleiher"
+
+#, python-format
+msgid "Edit Borrower - '%s %s'"
+msgstr "Ausleiher '%s %s' bearbeiten"
+
+msgid "Borrower Details"
+msgstr "Ausleiher Details"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Borrowed Items"
+msgstr "Geliehene Medien"
+
+msgid "Checkin"
+msgstr "Zurückgeben"
+
+msgid "Add Borrower"
+msgstr "Ausleiher hinzufügen"
+
+msgid "Really delete this borrower?"
+msgstr "Diesen Ausleiher wirklich löschen?"
+
+#, python-format
+msgid "Delete '%s %s'"
+msgstr "Lösche '%s %s'"
+
+msgid "Checkout Date"
+msgstr "Ausleihdatum"
+
+msgid "Checkin Date"
+msgstr "Rückgabedatum"
+
+msgid "Edit Borrower"
+msgstr "Ausleiher bearbeiten"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Edit Medium"
+msgstr "Medium  ändern"
+
+#, python-format
+msgid "This medium ist currently borrowed to %s"
+msgstr "Dieses Medium hat sich %s zur Zeit ausgeliehen"
+
+msgid "Created"
+msgstr "Erzeugt"
+
+msgid "Updated"
+msgstr "Aktualisiert"
+
+msgid "Asins"
+msgstr "Asins"
+
+msgid "Attach to Amazon"
+msgstr "Mit Amazon verbinden"
+
+msgid "Next w/o Image"
+msgstr "Nächstes ohne Bild"
+
+msgid "Query Amazon"
+msgstr "Amazon abfragen"
+
+msgid "Select image from Amazon"
+msgstr "Bild von Amazon auswählen"
+
+msgid "Crop Image"
+msgstr "Bild beschneiden"
+
+#, python-format
+msgid "Delete '%s'"
+msgstr "Lösche '%s'"
+
+msgid "Sort by"
+msgstr "Sortieren"
+
+msgid "created_ts"
+msgstr "Erzeugt am"
+
+msgid "updated_ts"
+msgstr "Aktualisert am"
+
+msgid "Delete marked Media"
+msgstr "Martkierte Medien löschen"
+
+msgid "Gallery"
+msgstr "Gallerie"
+
+msgid "As List"
+msgstr "Als Liste"
+
+#, python-format
+msgid "Edit Person - '%s'"
+msgstr "Person '%s' bearbeiten"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Appeared in this media"
+msgstr "Taucht in folgenden Medien auf"
+
+msgid "Role"
+msgstr "Rolle"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Top Ten Persons"
+msgstr "Top Ten Personen"
+
+msgid "All Actors..."
+msgstr "Alle Schauspieler..."
+
+msgid "All Directors..."
+msgstr "Alle Regisseure..."
+

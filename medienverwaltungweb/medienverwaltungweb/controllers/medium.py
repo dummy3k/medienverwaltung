@@ -8,6 +8,7 @@ from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to, etag_cache
+from pylons.i18n import _
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -15,6 +16,13 @@ from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
 
 log = logging.getLogger(__name__)
+
+# names for babel to pick up:
+_('Author')
+_('Actor')
+_('Director')
+_('Manufacturer')
+_('Creator')
 
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
@@ -29,7 +37,7 @@ class MediumController(BaseController):
 
     def mass_add_post(self):
         if not request.params.get('title'):
-            h.flash("please specify name")
+            h.flash(_("please specify name"))
             return redirect_to(action='mass_add')
 
         count = 0
@@ -41,7 +49,7 @@ class MediumController(BaseController):
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
             if query.first() != None:
-                h.flash("medium elready exists: %s" % query.first())
+                h.flash(_("medium elready exists: %s") % query.first())
                 continue
                 
             record = model.Medium()
@@ -53,31 +61,46 @@ class MediumController(BaseController):
             count += 1
         meta.Session.commit()
 
-        h.flash("added: %s media" % count)
+        h.flash(_("added: %s media") % count)
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
         self.__prepare_list__(False, type, page, tag)
-        if type:
-            c.title = "All %s" % type.capitalize()
+        if type == 'books':
+            c.title = _("Books List")
+        elif type == 'dvds':
+            c.title = _("DVDs List")
+        elif type:
+            c.title = _("List of unknown type '%s'") % type
         else:
-            c.title = "All Media"
+            c.title = _("All Media List")
 
         if tag:
-            c.title += " tagged %s" % tag.capitalize()
+            c.title += _(", tagged %s") % tag.capitalize()
+            
+        if page > 1:
+            c.title += _(", page %s") % c.page.page
+            
             
         c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
         self.__prepare_list__(True, type, page, tag)
-        if type:
-            c.title = "%s Gallery" % type.capitalize()
+        if type == 'books':
+            c.title = _("Books Gallery")
+        elif type == 'dvds':
+            c.title = _("DVDs Gallery")
+        elif type:
+            c.title = _("Gallery of unknown type '%s'") % type
         else:
-            c.title = "All Media Gallery"
+            c.title = _("All Media Gallery")
 
         if tag:
-            c.title += " tagged %s" % tag.capitalize()
+            c.title += _(", tagged %s") % tag.capitalize()
+            
+        if page > 1:
+            c.title += _(", page %s") % c.page.page
             
         c.pager_action = "list_gallery"
         return render('medium/list_gallery.mako')
@@ -163,7 +186,7 @@ class MediumController(BaseController):
         query = query.order_by(model.Medium.id.desc())
         c.items = query.all()
         c.page = paginate.Page(query, page)
-        c.title = "Media without images"
+        c.title = _("Media without images")
         c.pager_action = "list_no_image"
         return render('medium/list.mako')
 
@@ -171,7 +194,7 @@ class MediumController(BaseController):
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
-            h.flash("deleted: %s" % db_item)
+            h.flash(_("deleted: %s") % db_item)
 
         meta.Session.commit()
 
@@ -182,7 +205,7 @@ class MediumController(BaseController):
         db_item = meta.find(model.Medium, id)
         meta.Session.delete(db_item)
         meta.Session.commit()
-        h.flash("deleted: %s" % db_item)
+        h.flash(_("deleted: %s") % db_item)
         return redirect_to(action='index', id=None)
 
     def edit(self, id):
@@ -224,7 +247,7 @@ class MediumController(BaseController):
         item.set_tagstring(request.params.get('tags'))
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash("updated: %s" % item)
+        h.flash(_("updated: %s") % item)
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
@@ -281,7 +304,7 @@ class MediumController(BaseController):
 
         medium = query.first()
         if not medium:
-            h.flash("all media after this have a image")
+            h.flash(_("all media after this have an image"))
             return redirect_to(action='edit', id=id)
             
         return redirect_to(action='edit', id=medium.id)
@@ -300,7 +323,7 @@ class MediumController(BaseController):
         item.updated_ts = datetime.now()
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash("updated: %s" % item)
+        h.flash(_("updated: %s") % item)
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
