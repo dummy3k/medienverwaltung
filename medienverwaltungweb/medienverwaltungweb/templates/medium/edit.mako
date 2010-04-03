@@ -96,6 +96,7 @@ This medium ist currently borrowed to
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">Query Amazon</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">Select image from Amazon</a></li>
         % endif
+        <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">Crop Image</a></li>
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">Borrow</a></li>
         <li><a style="cursor:pointer" onclick="if (confirm('Really delete this medium?')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">Delete '${c.item.title}'</a></li>
         </ul>

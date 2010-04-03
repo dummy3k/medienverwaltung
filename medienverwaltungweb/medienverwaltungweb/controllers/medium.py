@@ -241,13 +241,13 @@ class MediumController(BaseController):
 
         p = ImageFile.Parser()
         p.feed(item.image_data.getvalue())
-        #~ p.feed(StringIO(item.image_data.getvalue()))
         img = p.close()
 
-        #~ log.debug("size: %s, %s" % (width, height))
-        size = int(width), int(height)
-        img.thumbnail(size)
-        #~ log.debug("imgsize: %s, %s" % img.size)
+        if width != 'max' and height != 'max':
+            #~ log.debug("size: %s, %s" % (width, height))
+            size = int(width), int(height)
+            img.thumbnail(size)
+            #~ log.debug("imgsize: %s, %s" % img.size)
 
         buffer = StringIO()
         img.save(buffer, format='png')
@@ -255,10 +255,6 @@ class MediumController(BaseController):
 
         etag_cache(str(item.updated_ts))
         return buffer.getvalue()
-
-        # set the response type to PNG, since we at least hope to return a PNG image here
-        #~ return item.image_data.getvalue()
-        #~ return img.tostring()
 
     def next_without_image(self, id):
         query = meta.Session\
@@ -273,4 +269,7 @@ class MediumController(BaseController):
             return redirect_to(action='edit', id=id)
             
         return redirect_to(action='edit', id=medium.id)
+    def crop_image(self, id):
+        c.item = meta.find(model.Medium, id)
+        return render('medium/crop_image.mako')
         
