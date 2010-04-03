@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 17:05+0200\n"
+"POT-Creation-Date: 2010-04-03 17:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,6 +92,28 @@ msgstr ""
 msgid "Borrow"
 msgstr ""
 
+#: medienverwaltungweb/templates/layout-default.mako:63
+#: medienverwaltungweb/templates/medium/edit.mako:32
+msgid "Tags"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:72
+msgid "Todo"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:74
+msgid "Add Medium"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:75
+msgid "Media without Image"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:79
+#: medienverwaltungweb/templates/layout-default.mako:82
+msgid "Search"
+msgstr ""
+
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:18
 msgid "ASIN"
@@ -163,10 +185,6 @@ msgstr ""
 #: medienverwaltungweb/templates/person/display.mako:16
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
-msgstr ""
-
-#: medienverwaltungweb/templates/medium/edit.mako:32
-msgid "Tags"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/edit.mako:36

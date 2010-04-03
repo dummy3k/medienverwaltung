@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-03 17:06+0100\n"
+"PO-Revision-Date: 2010-04-03 17:17+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: medienverwaltungweb/controllers/medium.py:65
 msgid "All Media"
-msgstr ""
+msgstr "Alle Medien"
 
 #: medienverwaltungweb/controllers/medium.py:68
 #: medienverwaltungweb/controllers/medium.py:81
@@ -74,7 +74,7 @@ msgstr "%s wurde aktualisert"
 
 #: medienverwaltungweb/controllers/medium.py:285
 msgid "all media after this have an image"
-msgstr ""
+msgstr "Alle folgenden Medien haben ein Bild"
 
 #: medienverwaltungweb/templates/layout-default.mako:30
 msgid "Books"
@@ -91,6 +91,31 @@ msgstr "Personen"
 #: medienverwaltungweb/templates/layout-default.mako:33
 msgid "Borrow"
 msgstr "Ausleihen"
+
+#: medienverwaltungweb/templates/layout-default.mako:63
+#: medienverwaltungweb/templates/medium/edit.mako:32
+msgid "Tags"
+msgstr "Tags"
+
+#: medienverwaltungweb/templates/layout-default.mako:72
+msgid "Todo"
+msgstr "Todo"
+
+#: medienverwaltungweb/templates/layout-default.mako:74
+#, python-format
+#| msgid "added: %s media"
+msgid "Add Medium"
+msgstr "Medium  hinzugefügen"
+
+#: medienverwaltungweb/templates/layout-default.mako:75
+#| msgid "Media without images"
+msgid "Media without Image"
+msgstr "Medien ohne Bild"
+
+#: medienverwaltungweb/templates/layout-default.mako:79
+#: medienverwaltungweb/templates/layout-default.mako:82
+msgid "Search"
+msgstr "Suchen"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:18
@@ -164,10 +189,6 @@ msgstr "Rückgabedatum"
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
 msgstr "Id"
-
-#: medienverwaltungweb/templates/medium/edit.mako:32
-msgid "Tags"
-msgstr "Tags"
 
 #: medienverwaltungweb/templates/medium/edit.mako:36
 msgid "Created"
