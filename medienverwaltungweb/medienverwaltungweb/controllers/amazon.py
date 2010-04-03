@@ -151,7 +151,10 @@ class AmazonController(BaseController):
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
             h.flash('image is to big.')
-            return redirect_to(controller='amazon', action='query_images')
+
+            # dont do this, might be an infinite loop
+            #~ return redirect_to(controller='amazon', action='query_images')
+            return redirect_to(controller='medium', action='edit')
 
         #~ return str(buffer.len)
 
