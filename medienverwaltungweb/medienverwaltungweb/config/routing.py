@@ -26,6 +26,7 @@ def make_map():
     map.connect('/{controller}/{action}/page/{page}')
     map.connect('/{controller}/{action}/type/{type}')
     map.connect('/{controller}/{action}/tagged/{tag}')
+    map.connect('/{controller}/{action}/tagged/{tag}/page/{page}')
     map.connect('/{controller}/{action}/type/{type}/page/{page}')
     map.connect('/{controller}/{action}/type/{type}/tagged/{tag}')
     map.connect('/{controller}/{action}/type/{type}/tagged/{tag}/page/{page}')

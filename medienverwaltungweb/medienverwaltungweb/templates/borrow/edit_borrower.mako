@@ -26,6 +26,7 @@
 </p>
 </form>
 
+% if c.borrowed_media:
 <h2>Borrowed Items</h2>
 <form id="signin-form" method="post" action="${h.url_for(action='checkin_post')}">
 <table>
@@ -43,6 +44,7 @@
 
 <input type="submit" value="Checkin"/>
 </form>
+% endif
 
 </%def>
 
