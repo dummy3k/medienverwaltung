@@ -53,3 +53,5 @@ class PersonController(BaseController):
         c.pager_action = "list"
         return render('person/list.mako')
 
+    def top_ten(self):
+        return "Hi"

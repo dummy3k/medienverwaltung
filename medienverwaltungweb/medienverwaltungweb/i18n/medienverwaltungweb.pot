@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 20:41+0200\n"
+"POT-Creation-Date: 2010-04-03 20:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,396 +18,275 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
 
-#: medienverwaltungweb/controllers/borrow.py:57
 #, python-format
 msgid "%s borrowed to %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:77
 #, python-format
 msgid "added: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:100
 msgid "All borrowers"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:125
-#: medienverwaltungweb/controllers/medium.py:249
-#: medienverwaltungweb/controllers/medium.py:325
 #, python-format
 msgid "updated: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:133
-#: medienverwaltungweb/controllers/medium.py:190
-#: medienverwaltungweb/controllers/medium.py:201
 #, python-format
 msgid "deleted: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:144
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:56
 msgid "Borrow History"
 msgstr ""
 
-#: medienverwaltungweb/controllers/borrow.py:162
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:33
 msgid "please specify name"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:45
 #, python-format
 msgid "medium elready exists: %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:57
 #, python-format
 msgid "added: %s media"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:63
 msgid "Books List"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:65
 msgid "DVDs List"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:67
 #, python-format
 msgid "List of unknown type '%s'"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:69
 msgid "All Media List"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:72
-#: medienverwaltungweb/controllers/medium.py:93
 #, python-format
 msgid ", tagged %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:75
-#: medienverwaltungweb/controllers/medium.py:96
-#: medienverwaltungweb/controllers/person.py:51
 #, python-format
 msgid ", page %s"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:84
 msgid "Books Gallery"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:86
 msgid "DVDs Gallery"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:88
 #, python-format
 msgid "Gallery of unknown type '%s'"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:90
 msgid "All Media Gallery"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:182
 msgid "Media without images"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:228
-#: medienverwaltungweb/controllers/person.py:42
 msgid "Actor"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:229
 msgid "Director"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:230
 msgid "Manufacturer"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:231
 msgid "Creator"
 msgstr ""
 
-#: medienverwaltungweb/controllers/medium.py:306
 msgid "all media after this have an image"
 msgstr ""
 
-#: medienverwaltungweb/controllers/person.py:44
-#: medienverwaltungweb/templates/person/list.mako:46
 msgid "Directors"
 msgstr ""
 
-#: medienverwaltungweb/controllers/person.py:46
 #, python-format
 msgid "Persons of type '%s'"
 msgstr ""
 
-#: medienverwaltungweb/controllers/person.py:48
 msgid "Every Person"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:30
 msgid "Books"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:31
 msgid "DVDs"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:32
 msgid "Persons"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:33
-#: medienverwaltungweb/templates/medium/edit.mako:98
 msgid "Borrow"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:58
-#: medienverwaltungweb/templates/medium/edit.mako:30
 msgid "Tags"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:67
 msgid "Todo"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:69
 msgid "Add Medium"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:70
 msgid "Media without Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/layout-default.mako:74
-#: medienverwaltungweb/templates/layout-default.mako:77
 msgid "Search"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
-#: medienverwaltungweb/templates/amazon/item_search_result.mako:18
 msgid "ASIN"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:13
-#: medienverwaltungweb/templates/amazon/item_search_result.mako:19
-#: medienverwaltungweb/templates/medium/edit.mako:26
-#: medienverwaltungweb/templates/medium/list.mako:27
 msgid "Title"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
-#: medienverwaltungweb/templates/person/list.mako:45
 msgid "Actors"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_lookup_result.mako:27
 msgid "Images"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_search_result.mako:17
 msgid "Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/amazon/item_search_result.mako:20
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:54
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:46
-#: medienverwaltungweb/templates/medium/edit.mako:89
 msgid "Actions"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/add_borrower.mako:10
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:11
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:17
 msgid "First Name"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/add_borrower.mako:14
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:15
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:18
 msgid "Last Name"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/add_borrower.mako:18
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:19
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
 msgid "eMail"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/borrow.mako:17
-#: medienverwaltungweb/templates/borrow/history.mako:16
-#: medienverwaltungweb/templates/person/display.mako:38
 msgid "Medium"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/borrow.mako:23
-#: medienverwaltungweb/templates/borrow/history.mako:15
 msgid "Borrower"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:4
 #, python-format
 msgid "Edit Borrower - '%s %s'"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:7
 msgid "Borrower Details"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:25
-#: medienverwaltungweb/templates/person/display.mako:26
 msgid "Save"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:30
 msgid "Borrowed Items"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:45
 msgid "Checkin"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:57
-#: medienverwaltungweb/templates/borrow/history.mako:48
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:48
 msgid "Add Borrower"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:58
 msgid "Really delete this borrower?"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/edit_borrower.mako:58
 #, python-format
 msgid "Delete '%s %s'"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/history.mako:17
 msgid "Checkout Date"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/history.mako:18
 msgid "Checkin Date"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/history.mako:49
 msgid "Edit Borrower"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
-#: medienverwaltungweb/templates/medium/edit.mako:22
-#: medienverwaltungweb/templates/medium/list.mako:26
-#: medienverwaltungweb/templates/person/display.mako:17
-#: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
 msgstr ""
 
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:25
-#: medienverwaltungweb/templates/medium/list.mako:35
-#: medienverwaltungweb/templates/person/list.mako:25
 msgid "Edit"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:3
 msgid "Edit Medium"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:15
 #, python-format
 msgid "This medium ist currently borrowed to %s"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:34
 msgid "Created"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:38
 msgid "Updated"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:55
 msgid "Asins"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:91
 msgid "Attach to Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:92
 msgid "Next w/o Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:94
 msgid "Query Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:95
 msgid "Select image from Amazon"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:97
 msgid "Crop Image"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/edit.mako:99
 #, python-format
 msgid "Delete '%s'"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list.mako:16
 msgid "Sort by"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list.mako:17
 msgid "created_ts"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list.mako:18
 msgid "updated_ts"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list.mako:55
 msgid "Delete marked Media"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list_gallery.mako:23
 msgid "Gallery"
 msgstr ""
 
-#: medienverwaltungweb/templates/medium/list_gallery.mako:25
 msgid "As List"
 msgstr ""
 
-#: medienverwaltungweb/templates/person/display.mako:8
 #, python-format
 msgid "Edit Person - '%s'"
 msgstr ""
 
-#: medienverwaltungweb/templates/person/display.mako:21
-#: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
 msgstr ""
 
-#: medienverwaltungweb/templates/person/display.mako:32
 msgid "Appeared in this media"
 msgstr ""
 
-#: medienverwaltungweb/templates/person/display.mako:37
 msgid "Role"
 msgstr ""
 
-#: medienverwaltungweb/templates/person/list.mako:43
 msgid "Filter"
+msgstr ""
+
+msgid "Top Ten Persons"
 msgstr ""
 
