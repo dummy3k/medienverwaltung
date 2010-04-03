@@ -11,6 +11,7 @@ media_table = Table('media', meta.metadata,
     Column('isbn', String(15)),
     Column('created_ts', DateTime),
     Column('updated_ts', DateTime),
+    Column('image_crop', PickleType),
 )
 
 class Medium(object):

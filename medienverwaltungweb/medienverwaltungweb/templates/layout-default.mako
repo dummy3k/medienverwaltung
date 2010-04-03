@@ -14,6 +14,7 @@
 ##    % for x in c.rss_feeds:
 ##    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
 ##    % endfor
+    ${self.html_head()}
 </head>
 <body>
 <div id="header">
@@ -88,4 +89,7 @@
 </html>
 
 <%def name="side()">
+</%def>
+
+<%def name="html_head()">
 </%def>

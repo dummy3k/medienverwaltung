@@ -243,6 +243,9 @@ class MediumController(BaseController):
         p.feed(item.image_data.getvalue())
         img = p.close()
 
+        if item.image_crop:
+            img = img.crop(item.image_crop)
+            
         if width != 'max' and height != 'max':
             #~ log.debug("size: %s, %s" % (width, height))
             size = int(width), int(height)
@@ -273,3 +276,23 @@ class MediumController(BaseController):
         c.item = meta.find(model.Medium, id)
         return render('medium/crop_image.mako')
         
+    def crop_image_post(self, id):
+        crop = (int(request.params.get('x')),
+                int(request.params.get('y')),
+                int(request.params.get('x2')),
+                int(request.params.get('y2')))
+
+        item = meta.find(model.Medium, id)
+        item.image_crop = crop
+        item.updated_ts = datetime.now()
+        meta.Session.update(item)
+        meta.Session.commit()
+        h.flash("updated: %s" % item)
+
+        return_to = request.params.get('return_to')
+        log.debug("return_to: %s" % return_to)
+        if return_to:
+            return redirect_to(str(return_to))
+        else:
+            return redirect_to(action='edit', id=id)
+
