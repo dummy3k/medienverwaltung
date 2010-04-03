@@ -16,7 +16,7 @@ ${js_pager.js_pager(e)}
         <td class='simple'>${_('Id')}</td>
         <td class='simple'>${_('First Name')}</td>
         <td class='simple'>${_('Last Name')}</td>
-        <td class='simple'>${_('eMail Name')}</td>
+        <td class='simple'>${_('eMail')}</td>
 ##        <td class='simple'>${_('Actions')}</td>
     </tr>
 

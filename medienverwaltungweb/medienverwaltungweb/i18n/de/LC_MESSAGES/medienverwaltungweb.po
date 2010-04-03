@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 15:52+0200\n"
-"PO-Revision-Date: 2010-04-03 15:55+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-04-03 16:35+0200\n"
+"PO-Revision-Date: 2010-04-03 16:43+0100\n"
+"Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
@@ -18,68 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
 
+#: medienverwaltungweb/templates/layout-default.mako:30
+msgid "Books"
+msgstr "Bücher"
+
+#: medienverwaltungweb/templates/layout-default.mako:31
+msgid "DVDs"
+msgstr "DVDs"
+
+#: medienverwaltungweb/templates/layout-default.mako:32
+msgid "Persons"
+msgstr "Personen"
+
+#: medienverwaltungweb/templates/layout-default.mako:33
+msgid "Borrow"
+msgstr "Ausleihen"
+
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:18
 msgid "ASIN"
-msgstr ""
+msgstr "ASIN"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:13
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:19
 #: medienverwaltungweb/templates/medium/edit.mako:28
 #: medienverwaltungweb/templates/medium/list.mako:27
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:18
 msgid "Actors"
-msgstr ""
+msgstr "Schauspieler"
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:27
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:17
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:20
+#: medienverwaltungweb/templates/medium/edit.mako:91
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 #: medienverwaltungweb/templates/borrow/add_borrower.mako:10
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:11
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:17
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: medienverwaltungweb/templates/borrow/add_borrower.mako:14
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:15
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:18
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 #: medienverwaltungweb/templates/borrow/add_borrower.mako:18
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:19
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
 msgid "eMail"
-msgstr ""
+msgstr "eMail"
 
 #: medienverwaltungweb/templates/borrow/borrow.mako:17
 #: medienverwaltungweb/templates/borrow/history.mako:16
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: medienverwaltungweb/templates/borrow/borrow.mako:23
 #: medienverwaltungweb/templates/borrow/history.mako:15
 msgid "Borrower"
-msgstr ""
+msgstr "Ausleiher"
 
 #: medienverwaltungweb/templates/borrow/history.mako:17
 msgid "Checkout Date"
-msgstr ""
+msgstr "Ausleihdatum"
 
 #: medienverwaltungweb/templates/borrow/history.mako:18
 msgid "Checkin Date"
-msgstr ""
+msgstr "Rückgabedatum"
 
 #: medienverwaltungweb/templates/borrow/list_borrowers.mako:16
 #: medienverwaltungweb/templates/medium/edit.mako:24
@@ -87,15 +105,11 @@ msgstr ""
 #: medienverwaltungweb/templates/person/display.mako:16
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
-msgstr ""
-
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
-msgid "eMail Name"
-msgstr ""
+msgstr "Id"
 
 #: medienverwaltungweb/templates/medium/edit.mako:32
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: medienverwaltungweb/templates/medium/edit.mako:36
 msgid "Created"
@@ -103,22 +117,25 @@ msgstr "Erzeugt"
 
 #: medienverwaltungweb/templates/medium/edit.mako:40
 msgid "Updated"
-msgstr ""
+msgstr "Aktualisiert"
 
 #: medienverwaltungweb/templates/medium/edit.mako:57
 msgid "Asins"
-msgstr ""
+msgstr "Asins"
 
 #: medienverwaltungweb/templates/medium/list.mako:17
 msgid "created_ts"
-msgstr ""
+msgstr "Erzeugt am"
 
 #: medienverwaltungweb/templates/medium/list.mako:18
 msgid "updated_ts"
-msgstr ""
+msgstr "Aktualisert am"
 
 #: medienverwaltungweb/templates/person/display.mako:20
 #: medienverwaltungweb/templates/person/list.mako:17
 msgid "Name"
-msgstr ""
+msgstr "Name"
+
+#~ msgid "eMail Name"
+#~ msgstr ""
 

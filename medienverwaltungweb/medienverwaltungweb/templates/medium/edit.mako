@@ -88,7 +88,7 @@ This medium ist currently borrowed to
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_('Actions')}:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">Attach to Amazon</a></li>
         <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">Next w/o Image</a></li>

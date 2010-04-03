@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 15:52+0200\n"
+"POT-Creation-Date: 2010-04-03 16:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
+
+#: medienverwaltungweb/templates/layout-default.mako:30
+msgid "Books"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:31
+msgid "DVDs"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:32
+msgid "Persons"
+msgstr ""
+
+#: medienverwaltungweb/templates/layout-default.mako:33
+msgid "Borrow"
+msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_lookup_result.mako:9
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:18
@@ -43,6 +59,7 @@ msgid "Image"
 msgstr ""
 
 #: medienverwaltungweb/templates/amazon/item_search_result.mako:20
+#: medienverwaltungweb/templates/medium/edit.mako:91
 msgid "Actions"
 msgstr ""
 
@@ -60,6 +77,7 @@ msgstr ""
 
 #: medienverwaltungweb/templates/borrow/add_borrower.mako:18
 #: medienverwaltungweb/templates/borrow/edit_borrower.mako:19
+#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
 msgid "eMail"
 msgstr ""
 
@@ -87,10 +105,6 @@ msgstr ""
 #: medienverwaltungweb/templates/person/display.mako:16
 #: medienverwaltungweb/templates/person/list.mako:16
 msgid "Id"
-msgstr ""
-
-#: medienverwaltungweb/templates/borrow/list_borrowers.mako:19
-msgid "eMail Name"
 msgstr ""
 
 #: medienverwaltungweb/templates/medium/edit.mako:32

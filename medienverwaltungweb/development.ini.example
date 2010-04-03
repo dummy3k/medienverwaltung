@@ -9,6 +9,7 @@ debug = true
 #email_to = you@yourdomain.com
 smtp_server = localhost
 error_email_from = paste@localhost
+language = en
 
 [server:main]
 use = egg:Paste#http
