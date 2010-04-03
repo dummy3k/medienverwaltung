@@ -1,5 +1,6 @@
 import logging
 
+from sqlalchemy.sql import select, join, and_, or_, not_
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
@@ -27,7 +28,8 @@ class SearchController(BaseController):
         
         media_query = meta.Session\
                           .query(model.Medium)\
-                          .filter(model.Medium.title.like(like_query))
+                          .filter(or_(model.Medium.title.like(like_query),
+                                      model.Medium.isbn.like(like_query)))
         c.media_page = paginate.Page(media_query)
 
 

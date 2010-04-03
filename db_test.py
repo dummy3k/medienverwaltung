@@ -108,10 +108,15 @@ def variant004():
 
 def variant005():
     query = u"%term%"
+    query2 = u"%matrix%"
     media_query = session\
                       .query(model.Medium)\
-                      .filter(model.Medium.title.like(query))
-    h.ipython()()
+                      .filter(or_(model.Medium.title.like(query),
+                                  model.Medium.title.like(query2)))
+                      
+    print media_query
+    #~ h.ipython()()
+    dump_results(media_query.all())
 
 def dump_results(r):
     for item in r:
@@ -124,4 +129,4 @@ def variant006():
     dump_results(tag_query.execute())
     #~ h.ipython()()
 
-variant003()
+variant005()
