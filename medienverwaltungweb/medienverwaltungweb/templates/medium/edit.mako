@@ -1,4 +1,5 @@
 <%inherit file="/layout-default.mako"/>\
+<%namespace name='person_snippets' file='/person/snippets.mako' />
 
 <%def name="title()">${_("Edit Medium")} - "${c.item.title}"</%def>
 
@@ -42,9 +43,10 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'><ul>
         %for subsubitem in c.persons[subitem]:
         <li>
-            <a href="${h.url_for(controller='person', action='index', id=subsubitem.person.id)}">
-                ${subsubitem.person.name}
-            </a>
+            ${person_snippets.link_to_person(subsubitem.person, h)}
+##            <a href="${h.url_for(controller='person', action='index', id=subsubitem.person.id)}">
+##                ${subsubitem.person.name}
+##            </a>
 
             ${self.confirm("[X]",
                            h.url_for(controller='person', action='remove_from_media', id=subsubitem.id),

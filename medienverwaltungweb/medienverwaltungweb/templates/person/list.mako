@@ -1,10 +1,10 @@
 ## -*- coding: utf-8 -*-
 <%inherit file="/layout-default.mako"/>\
+<%namespace name='js_pager' file='../js_pager.mako' />
 
 <%def name="title()">${c.title}</%def>
 
 <%def name="content()">
-<%namespace name='js_pager' file='../js_pager.mako' />
 ${js_pager.js_pager(e)}
 
 <p>${c.page.pager(role=request.params.get('role'))}</p>
