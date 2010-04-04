@@ -141,21 +141,9 @@ def variant007():
 
 def variant008():
     medium_id = 306
-    #~ query = select([model.tags_table.c.name, cnt_col], from_obj=[model.media_table])
-    #~ query = select([model.tags_table.c.name, cnt_col], from_obj=[model.media_table])
-    #~ query = query.where(model.tags_table.c.media_id == medium_id)
-
-    #~ join_clause = model.tags_table.join(model.media_table)
-    #~ query = select([model.tags_table.c.name], from_obj=[join_clause])
-    #~ query = query.where(model.media_table.c.id == medium_id)
-    #~ print "%s\n" % query
-
-    #~ join_clause = model.tags_table.join(model.media_table)
     query1 = select([model.tags_table.c.name])
     query1 = query1.where(model.tags_table.c.media_id == medium_id)
     print "%s\n" % query1
-    #~ query1.bind = engine
-    #~ dump_results(query1.execute())
 
     cnt_col = func.count()
     query = select([model.tags_table.c.name, cnt_col], from_obj=[model.tags_table])
@@ -168,4 +156,21 @@ def variant008():
     dump_results(query.execute())
     #~ h.ipython()()
 
-variant008()
+def variant009():
+    tag_name = u'test'
+    #~ tag_name = None
+    #~ media_type_name = 'book'
+    media_type_name = None
+
+
+    join_clause = model.tags_table.join(model.media_table)
+    if tag_name:
+        sub_tags_table = model.tags_table.alias('sub_tags')
+        join_clause = join_clause.join(sub_tags_table)
+
+    query1 = select([model.tags_table.c.name],
+                       from_obj=[join_clause])
+
+    print query1
+    
+variant009()

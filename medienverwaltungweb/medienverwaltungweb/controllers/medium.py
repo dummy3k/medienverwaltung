@@ -139,8 +139,7 @@ class MediumController(BaseController):
             sub_media_types_table = model.media_types_table.alias('sub_media_types_table')
             join_clause = join_clause.join(sub_media_types_table)
 
-        cnt_col = func.count()
-        tag_query = select([model.tags_table.c.name, cnt_col],
+        tag_query = select([model.tags_table.c.name],
                            from_obj=[join_clause])
 
         if tag_name:
@@ -150,10 +149,18 @@ class MediumController(BaseController):
         if media_type_name:
             tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
             
-        tag_query = tag_query.group_by(model.tags_table.c.name)\
-                             .order_by(cnt_col.desc())
-        tag_query.bind = meta.engine
-        retval = map(lambda x: (x[0], x[1]), tag_query.execute())
+        #~ tag_query = tag_query.group_by(model.tags_table.c.name)\
+                             #~ .order_by(cnt_col.desc())
+
+        cnt_col = func.count()
+        query = select([model.tags_table.c.name, cnt_col],
+                       from_obj=[model.tags_table])
+        query = query.where(model.tags_table.c.name.in_(tag_query))
+        query = query.group_by(model.tags_table.c.name)
+        query = query.order_by(cnt_col.desc())
+        query.bind = meta.engine
+
+        retval = map(lambda x: (x[0], x[1]), query.execute())
         return retval
         
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):
