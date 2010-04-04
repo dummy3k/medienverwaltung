@@ -33,3 +33,14 @@
     </tr>
 </table>
 </%def>
+
+
+<%def name="side()">
+	<div class="box">
+    <h2>${_("Actions")}:</h2>
+    <ul>
+        <li><a href="${c.item.DetailPageURL}">${_("Show Amazon Page")}</a></li>
+    </ul>
+    </span>
+	</div>
+</%def>

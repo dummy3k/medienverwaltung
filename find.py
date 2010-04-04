@@ -32,7 +32,7 @@ def find(keywords, SearchIndex='DVD'):
         except AttributeError:
             print "Could not list actors"
 
-        #~ h.ipython()()
+        h.ipython()()
         #~ break
 
         print actors
