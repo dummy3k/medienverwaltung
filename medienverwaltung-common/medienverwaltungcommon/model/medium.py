@@ -36,8 +36,17 @@ class Medium(object):
     def set_tagstring(self, s):
         tag_names = map(lambda x: x.name, self.tags)
         for item in s.split(' '):
-            if item and not item in tag_names:
-                mytag = tag.Tag()
-                mytag.name = item
-                self.tags.append(mytag)
+            if item:
+                if not item in tag_names:
+                    mytag = tag.Tag()
+                    mytag.name = item
+                    self.tags.append(mytag)
+                else:
+                    tag_names.remove(item)
 
+        for item in tag_names:
+            for tagobj in self.tags:
+                if tagobj.name == item:
+                    self.tags.remove(tagobj)
+                    break
+                    

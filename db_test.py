@@ -178,7 +178,7 @@ def variant009():
 #~ foo(*args, c=56)
 
 def variant010():
-    medium = session.query(model.Medium).get(343)
+    medium = session.query(model.Medium).get(250)
     record = model.MediaToAsin()
     h.ipython()()
 

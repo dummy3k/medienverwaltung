@@ -30,7 +30,7 @@ class TestTracerouteParser(unittest.TestCase):
     def testSetSomeNewSomeNot(self):
         m = model.Medium()
         m.set_tagstring('foo bar')
-        m.set_tagstring('foo test')
+        m.set_tagstring('foo test bar')
         self.assertEqual(len(m.tags), 3)
         self.assertEqual(m.tags[0].name, 'foo')
         self.assertEqual(m.tags[1].name, 'bar')
@@ -43,6 +43,14 @@ class TestTracerouteParser(unittest.TestCase):
         self.assertEqual(len(m.tags), 1)
         self.assertEqual(m.tags[0].name, 'foo')
         self.assertEqual(m.get_tagstring(), 'foo')
+
+    def testRemove(self):
+        m = model.Medium()
+        m.set_tagstring('foo bar')
+        m.set_tagstring('foo')
+        self.assertEqual(len(m.tags), 1)
+        self.assertEqual(m.get_tagstring(), 'foo')
+        self.assertEqual(m.tags[0].name, 'foo')
 
 
 if __name__ == '__main__':
