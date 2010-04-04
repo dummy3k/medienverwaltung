@@ -78,3 +78,7 @@
 
 <%def name="html_head()">
 </%def>
+
+<%def name="confirm(text, url, question)">\
+<a style="cursor:pointer" onclick="if (confirm('${question}')) {location.href = '${url}';}">${text}</a>
+</%def>

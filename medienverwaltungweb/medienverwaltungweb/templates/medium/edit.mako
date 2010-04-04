@@ -2,10 +2,6 @@
 
 <%def name="title()">${_("Edit Medium")} - "${c.item.title}"</%def>
 
-<%def name="confirm(text, url, question)">
-<a style="cursor:pointer" onclick="if (confirm('${question}')) {location.href = '${url}';}">${text}</a>
-</%def>
-
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
@@ -67,9 +63,9 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
             <a href="${h.url_for(controller='amazon', action='show_asin', id=subitem)}">
                 ${subitem}
             </a>
-            <a href="${h.url_for(controller='amazon', action='remove_asin', asin=subitem)}">
-                [X]
-            </a>
+            ${self.confirm("[X]",
+                           h.url_for(controller='amazon', action='remove_asin', asin=subitem),
+                           _("Do you really want to remove this ASIN from the medium?"))}
         </li>
         %endfor
     </tr>
@@ -124,7 +120,12 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">${_("Crop Image")}</a></li>
         % endif
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">${_("Borrow")}</a></li>
-        <li><a style="cursor:pointer" onclick="if (confirm('${_("Really delete this medium?")}')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">${_("Delete '%s'") % c.item.title}</a></li>
+        ##<li><a style="cursor:pointer" onclick="if (confirm('${_("Really delete this medium?")}')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">${_("Delete '%s'") % c.item.title}</a></li>
+        <li>
+            ${self.confirm(_("Delete '%s'") % c.item.title,
+                           h.url_for(controller='medium', action='delete_one'),
+                           _("Really delete this medium?"))}
+        </li>
         <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Clear Persons")}</a></li>
         </ul>
 	</div>
