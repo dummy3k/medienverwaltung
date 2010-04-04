@@ -9,6 +9,7 @@ from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to, etag_cache
 from pylons.i18n import _, ungettext
+from mako.template import Template
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -25,6 +26,8 @@ _('Manufacturer')
 _('Creator')
 _('Book')
 _('Dvd')
+
+anchor_tmpl = Template("<a href='${url}'>${text}</a>")
 
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
@@ -52,7 +55,7 @@ class MediumController(BaseController):
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
             if query.first() != None:
-                h.flash(_("medium elready exists: %s") % h.html_escape(query.first()))
+                h.flash(_("medium elready exists: %s") % h.html_escape(str(query.first())))
                 continue
                 
             record = model.Medium()
@@ -66,9 +69,7 @@ class MediumController(BaseController):
         meta.Session.commit()
 
         if len(new_media) > 0:
-            from mako.template import Template
-            anchor = Template("<a href='${url}'>${text}</a>")
-            link_list = map(lambda x: anchor.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title)), new_media)
+            link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title)), new_media)
             #~ link_list = map(lambda x: x.title, new_media)
             link_list = ", ".join(link_list)
             msg = ungettext("added medium %(media)s",
@@ -262,7 +263,7 @@ class MediumController(BaseController):
         item.set_tagstring(request.params.get('tags'))
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash(_("updated: %s") % h.html_escape(item))
+        h.flash(_("updated: '%s'") % h.html_escape(item.title))
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
@@ -338,7 +339,7 @@ class MediumController(BaseController):
         item.updated_ts = datetime.now()
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash(_("updated: %s") % h.html_escape(item))
+        h.flash(_("updated: '%s'") % h.html_escape(item.title))
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)

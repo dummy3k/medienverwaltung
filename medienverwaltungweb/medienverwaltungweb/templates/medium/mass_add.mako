@@ -25,7 +25,7 @@
         <select name="media_type">
             <option value="-1">${_("Please select one")}</option>
             % for item in c.types:
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${_(item.name.capitalize())}</option>
             % endfor
         </select>
     </p>
