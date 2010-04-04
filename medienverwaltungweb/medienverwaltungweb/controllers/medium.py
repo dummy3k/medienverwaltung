@@ -81,7 +81,6 @@ class MediumController(BaseController):
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
-        self.__prepare_list__(False, type, page, tag)
         if type == 'books':
             c.title = _("Books List")
         elif type == 'dvds':
@@ -91,18 +90,12 @@ class MediumController(BaseController):
         else:
             c.title = _("All Media List")
 
-        if tag:
-            c.title += _(", tagged %s") % tag.capitalize()
-            
-        if int(page) > 1:
-            c.title += _(", page %s") % c.page.page
-            
-            
+        self.__prepare_list__(False, type, page, tag)
+
         c.pager_action = "list"
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
-        self.__prepare_list__(True, type, page, tag)
         if type == 'books':
             c.title = _("Books Gallery")
         elif type == 'dvds':
@@ -112,12 +105,8 @@ class MediumController(BaseController):
         else:
             c.title = _("All Media Gallery")
 
-        if tag:
-            c.title += _(", tagged %s") % tag.capitalize()
-            
-        if page > 1:
-            c.title += _(", page %s") % c.page.page
-            
+        self.__prepare_list__(True, type, page, tag)
+
         c.pager_action = "list_gallery"
         return render('medium/list_gallery.mako')
 
@@ -148,6 +137,7 @@ class MediumController(BaseController):
             
         if media_type_name:
             tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
+            log.debug("tag_query: %s" % tag_query)
             
         #~ tag_query = tag_query.group_by(model.tags_table.c.name)\
                              #~ .order_by(cnt_col.desc())
@@ -164,6 +154,9 @@ class MediumController(BaseController):
         return retval
         
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):
+        if tag:
+            c.title += _(", tagged %s") % tag.capitalize()
+
         if type and type[-1:] == 's':
             type = type[:-1]
 
@@ -191,13 +184,23 @@ class MediumController(BaseController):
         elif c.order.endswith('_desc'):
             #~ real_order = c.order[:-5]
             #~ log.debug("real_order: %s" % real_order)
-            query = query.order_by(model.Medium.__dict__[c.order[:-5]].desc())
+            sort_name = c.order[:-5]
+            query = query.order_by(model.Medium.__dict__[sort_name].desc())
+            c.title += _(", sorted by %s descending") % _(sort_name.capitalize())
         else:
             query = query.order_by(model.Medium.__dict__[c.order])
+            c.title += _(", sorted by %s") % _(c.order.capitalize())
             
         #~ c.items = query.all()
         log.debug("c.items: %s" % len(c.items))
         c.page = paginate.Page(query, page)
+        c.page_args = {'controller':'medium',
+                       'action':'list',
+                       'order':c.order}
+
+        if int(page) > 1:
+            c.title += _(", page %s") % c.page.page
+
 
     def list_no_image(self, page=1):
         query = meta.Session\

@@ -172,5 +172,11 @@ def variant009():
                        from_obj=[join_clause])
 
     print query1
-    
-variant009()
+
+def foo(a, b, c):
+    print "a: %s, b: %s, c: %s" % (a, b, c)
+        
+#~ variant009()
+
+args = (12, 34)
+foo(*args, c=56)
