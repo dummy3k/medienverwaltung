@@ -8,7 +8,7 @@ from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to, etag_cache
-from pylons.i18n import _
+from pylons.i18n import _, ungettext
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -43,6 +43,7 @@ class MediumController(BaseController):
             return redirect_to(action='mass_add')
 
         count = 0
+        new_media = []
         for item in request.params.get('title').split('\n'):
             if not item:
                 continue
@@ -51,7 +52,7 @@ class MediumController(BaseController):
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
             if query.first() != None:
-                h.flash(_("medium elready exists: %s") % query.first())
+                h.flash(_("medium elready exists: %s") % h.html_escape(query.first()))
                 continue
                 
             record = model.Medium()
@@ -61,9 +62,21 @@ class MediumController(BaseController):
             record.media_type_id = request.params.get('media_type')
             meta.Session.save(record)
             count += 1
+            new_media.append(record)
         meta.Session.commit()
 
-        h.flash(_("added: %s media") % count)
+        if len(new_media) > 0:
+            from mako.template import Template
+            anchor = Template("<a href='${url}'>${text}</a>")
+            link_list = map(lambda x: anchor.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title)), new_media)
+            #~ link_list = map(lambda x: x.title, new_media)
+            link_list = ", ".join(link_list)
+            msg = ungettext("added medium %(media)s",
+                            "added %(num)d media: %(media)s",
+                            len(new_media)) % {'num':len(new_media),
+                                               'media':link_list}
+            h.flash(msg)   
+        #~ h.flash(_("added: %s media") % count)
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
@@ -80,7 +93,7 @@ class MediumController(BaseController):
         if tag:
             c.title += _(", tagged %s") % tag.capitalize()
             
-        if page > 1:
+        if int(page) > 1:
             c.title += _(", page %s") % c.page.page
             
             
@@ -196,7 +209,7 @@ class MediumController(BaseController):
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
-            h.flash(_("deleted: %s") % db_item)
+            h.flash(_("deleted: %s") % h.html_escape(db_item.title))
 
         meta.Session.commit()
 
@@ -207,7 +220,7 @@ class MediumController(BaseController):
         db_item = meta.find(model.Medium, id)
         meta.Session.delete(db_item)
         meta.Session.commit()
-        h.flash(_("deleted: %s") % db_item)
+        h.flash(_("deleted: %s") % h.html_escape(db_item.title))
         return redirect_to(action='index', id=None)
 
     def edit(self, id):
@@ -249,7 +262,7 @@ class MediumController(BaseController):
         item.set_tagstring(request.params.get('tags'))
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash(_("updated: %s") % item)
+        h.flash(_("updated: %s") % h.html_escape(item))
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
@@ -325,7 +338,7 @@ class MediumController(BaseController):
         item.updated_ts = datetime.now()
         meta.Session.update(item)
         meta.Session.commit()
-        h.flash(_("updated: %s") % item)
+        h.flash(_("updated: %s") % h.html_escape(item))
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)

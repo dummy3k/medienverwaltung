@@ -8,6 +8,7 @@ available to Controllers. This module is available to templates as 'h'.
 from pylons import config
 from webhelpers.pylonslib import Flash as _Flash
 from routes import url_for
+from mako.filters import html_escape
 
 flash = _Flash()
 
