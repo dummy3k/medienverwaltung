@@ -25,6 +25,7 @@ def add_persons(item, relation_name, medium_id, msg, session):
         #~ abort(404)
         
     log.debug("actor_relation: %s" % actor_relation)
+    medium = session.query(model.Medium).get(medium_id)
 
     for subitem in item.ItemAttributes.__dict__[relation_name]:
         #~ subitem = str(subitem).encode('utf-8')
@@ -56,7 +57,8 @@ def add_persons(item, relation_name, medium_id, msg, session):
         else:
             record = model.PersonToMedia()
             record.person_id = actor.id
-            record.medium_id = medium_id
+            #~ record.medium_id = medium_id
             record.type_id = actor_relation.id
-            session.add(record)
+            medium.persons_to_media.append(record)
+            #~ session.add(record)
             #~ h.flash("added: %s" % record)

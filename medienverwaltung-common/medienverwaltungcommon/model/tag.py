@@ -10,9 +10,9 @@ tags_table = Table('tags', meta.metadata,
 
 class Tag(object):
     def __unicode__(self):
-        return self.__repr__()
+        return "<Tag(%s, '%s')>" % (self.id, self.name)
 
-    __str__ = __unicode__
+    #~ __str__ = __unicode__
 
     def __repr__(self):
-        return "<Tag(%s, '%s')>" % (self.id, self.name)
+        return self.__unicode__().encode('ascii', 'replace')

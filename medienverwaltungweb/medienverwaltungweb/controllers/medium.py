@@ -45,6 +45,10 @@ class MediumController(BaseController):
             h.flash(_("please specify name"))
             return redirect_to(action='mass_add')
 
+        if int(request.params.get('media_type', -1)) < 0:
+            h.flash(_("please specify media type"))
+            return redirect_to(action='mass_add')
+
         count = 0
         new_media = []
         for item in request.params.get('title').split('\n'):
@@ -55,7 +59,10 @@ class MediumController(BaseController):
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
             if query.first() != None:
-                h.flash(_("medium elready exists: %s") % h.html_escape(str(query.first())))
+                first_item = query.first()
+                h.flash(_("medium elready exists: %s") %\
+                    anchor_tmpl.render(url=h.url_for(action='edit', id=first_item.id),
+                                       text=h.html_escape(first_item.title)))
                 continue
                 
             record = model.Medium()

@@ -69,13 +69,15 @@ class AmazonController(BaseController):
 
     def map_to_medium_post(self):
         media_id = request.params.get('media_id', None)
+        medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
         for item in h.checkboxes(request, 'item_id_'):
             record = model.MediaToAsin()
-            record.media_id = media_id
+            #~ record.media_id = media_id
             record.asin = item
-            meta.Session.add(record)
+            #~ meta.Session.save(record)
             asins.append(item)
+            medium.asins.append(record)
 
         h.flash("attached %s amazon ids to media id %s: %s"\
                 % (len(asins), media_id, ", ".join(asins)))
@@ -133,7 +135,14 @@ class AmazonController(BaseController):
                                     ResponseGroup="Images")
         c.items = node.Items.Item
         if len(c.items) == 1:
-            self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
+            url = None
+            try:
+                url = c.items[0].LargeImage.URL
+            except:
+                h.flash(_("No image available"))
+
+            if url:
+                self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
             return redirect_to(controller='medium', action='edit')
 
         return render("amazon/image_list.mako")

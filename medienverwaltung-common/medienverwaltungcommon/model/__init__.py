@@ -22,10 +22,10 @@ orm.mapper(Tag, tags_table)
 orm.mapper(Borrower, borrowers_table)
 
 orm.mapper(Medium, media_table, properties = {
-    'asins' : orm.relation(MediaToAsin),
+    'asins' : orm.relation(MediaToAsin, cascade="all, delete, delete-orphan"),
     'type' : orm.relation(MediaType),
-    'tags' : orm.relation(Tag),
-    'persons_to_media' : orm.relation(PersonToMedia),
+    'tags' : orm.relation(Tag, cascade="all, delete, delete-orphan"),
+    'persons_to_media' : orm.relation(PersonToMedia, cascade="all, delete, delete-orphan"),
     })
 
 orm.mapper(PersonToMedia, person_to_media_table, properties = {

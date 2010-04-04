@@ -154,7 +154,6 @@ def variant008():
 
     query.bind = engine
     dump_results(query.execute())
-    #~ h.ipython()()
 
 def variant009():
     tag_name = u'test'
@@ -173,10 +172,14 @@ def variant009():
 
     print query1
 
-def foo(a, b, c):
-    print "a: %s, b: %s, c: %s" % (a, b, c)
-        
-#~ variant009()
+#~ def foo(a, b, c):
+    #~ print "a: %s, b: %s, c: %s" % (a, b, c)
+#~ args = (12, 34)
+#~ foo(*args, c=56)
 
-args = (12, 34)
-foo(*args, c=56)
+def variant010():
+    medium = session.query(model.Medium).get(343)
+    record = model.MediaToAsin()
+    h.ipython()()
+
+variant010()
