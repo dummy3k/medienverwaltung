@@ -26,18 +26,14 @@ class BorrowController(BaseController):
         return render('borrow/borrow.mako')
 
     def checkout_post(self):
-        media_id = request.params.get('media_id')
+        borrower_id = request.params.get('borrower')
         if not borrower_id or int(borrower_id) < 0:
             log.debug("redirect because no borrower_id")
-            return redirect_to(controller='borrow', action='add_borrower', media_id=media_id)
 
-        borrower_id = request.params.get('borrower')
-        self.__checkout_post__(media_id, borrower_id)
-        meta.Session.commit()
-        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
-        
-    def mass_checkout_post(self):
-        borrower_id = request.params.get('borrower')
+            ids = ','.join(h.checkboxes(request, 'item_id_'))
+            log.debug("ids: %s" % ids)
+            return redirect_to(controller='borrow', action='add_borrower', media_ids=ids)
+
         log.debug("borrower_id: %s" % borrower_id)
         for item in h.checkboxes(request, 'item_id_'):
             log.debug("checkout: %s" % item)
@@ -66,7 +62,7 @@ class BorrowController(BaseController):
         borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
                          .render(item=borrower, h=h)
         medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
-                       .render(item=medium, h=h)
+                       .render_unicode(item=medium, h=h)
         h.flash(_("%(medium)s borrowed to %(to)s") % {'medium':medium_link,
                                                       'to':borrower_link})
         
@@ -77,6 +73,8 @@ class BorrowController(BaseController):
         return render('borrow/add_borrower.mako')
         
     def add_borrower_post(self):
+        log.debug("add_borrower_post")
+            
         record = model.Borrower()
         record.first_name = request.params.get('first_name')
         record.last_name = request.params.get('last_name')
@@ -87,15 +85,17 @@ class BorrowController(BaseController):
         meta.Session.commit()
         log.debug("record.id: %s" % record.id)
 
-        h.flash(_("added: %s") % record)
-        media_id = request.params.get('media_id')
-        log.debug("media_id %s "% media_id)
-        if not media_id:
+        h.flash(_("added: '%s %s'") % (record.first_name, record.last_name))
+        media_ids = request.params.get('media_ids')
+        log.debug("media_ids %s "% media_ids)
+        if not media_ids:
             return redirect_to(controller='borrow', action='list_borrowers')
         else:
-            log.debug("FOLLOW ME, media_id: %s" % media_id)
+            log.debug("FOLLOW ME, media_id: %s" % media_ids)
             log.debug("url: %s" % h.url_for(controller='borrow', action='edit_borrower', id=record.id))
-            self.__checkout_post__(media_id, record.id)
+            for item in request.params.get('media_ids').split(','):
+                log.debug("checkout: %s" % item)
+                self.__checkout_post__(item, record.id)
             return redirect_to(controller='borrow', action='edit_borrower', id=record.id)
             #~ return redirect_to(controller='borrow',
                                #~ action='checkout_post',
@@ -150,7 +150,7 @@ class BorrowController(BaseController):
         meta.Session.delete(record)
         meta.Session.commit()
 
-        h.flash(_("deleted: %s") % record)
+        h.flash(_("deleted: '%s %s'") % (record.first_name, record.last_name))
         return redirect_to(controller='borrow', action='list_borrowers')
 
     def show_history(self, id, page=1):
@@ -174,7 +174,7 @@ class BorrowController(BaseController):
             borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
                              .render(item=record.borrower, h=h)
             medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
-                           .render(item=record.medium, h=h)
+                           .render_unicode(item=record.medium, h=h)
             h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link))
 
         #~ meta.Session.commit()

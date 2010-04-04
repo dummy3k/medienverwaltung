@@ -5,7 +5,7 @@
 <%def name="content()">
 % if c.available:
 <h2>${_("Available Media")}</h2>
-<form method="post" action="${h.url_for(controller='borrow', action='mass_checkout_post')}">
+<form method="post" action="${h.url_for(controller='borrow', action='checkout_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -27,9 +27,9 @@
 <p>
     ${_("Borrower")}:
     <select name="borrower">
-        ##<option value="-1">${_("Please select one")}</option>
+        <option value="-1">${_("Please select one")}</option>
         % for item in c.borrowers:
-        <option value="${item.id}">${_(item.first_name)} ${_(item.last_name)}</option>
+        <option value="${item.id}">${item.first_name} ${item.last_name}</option>
         % endfor
     </select>
     <input type="submit" value="${_("Checkout marked media")}"/>

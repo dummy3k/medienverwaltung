@@ -31,7 +31,7 @@
         </td>
     </tr>
 </table>
-<input type="hidden" name="media_id" value="${c.item.id}" />
+<input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 <input type="submit" value="Borrow"/>
