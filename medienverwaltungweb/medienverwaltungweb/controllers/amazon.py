@@ -9,6 +9,7 @@ from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons import config
 from pylons.controllers.util import abort
+from pylons.i18n import _, ungettext
 
 from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
@@ -150,19 +151,16 @@ class AmazonController(BaseController):
         if buffer.len >= 65536:
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
-            h.flash('image is to big.')
+            h.flash(_("image is to big."))
 
             # dont do this, might be an infinite loop
             #~ return redirect_to(controller='amazon', action='query_images')
             return redirect_to(controller='medium', action='edit')
 
-        #~ return str(buffer.len)
-
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
         item.updated_ts = datetime.now()
-        #~ pickle.dump(buffer, item.image_data)
         meta.Session.update(item)
         meta.Session.commit()
 
@@ -174,7 +172,17 @@ class AmazonController(BaseController):
 
         meta.Session.delete(asin)
         meta.Session.commit()
-        return redirect_to(controller='medium', action='index')
+        return redirect_to(controller='medium', action='edit')
         
+    def clear_persons(self, id):
+        item = meta.find(model.Medium, id)
+        cnt = 0
+        for person2media in item.persons_to_media:
+            meta.Session.delete(person2media)
+            cnt += 1
+            
+        meta.Session.commit()
+        h.flash(_("removed %d persons") % cnt)            
+        return redirect_to(controller='medium', action='edit')
         
         

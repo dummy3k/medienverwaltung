@@ -129,4 +129,14 @@ def variant006():
     dump_results(tag_query.execute())
     #~ h.ipython()()
 
-variant005()
+def variant007():
+    medium_id = 317
+    item = session.query(model.Medium)\
+                  .filter(model.Medium.id == medium_id)\
+                  .first()
+                      
+    #~ print query
+    h.ipython()()
+    #~ dump_results(media_query.all())
+
+variant007()
