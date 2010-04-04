@@ -20,7 +20,7 @@ def add_persons(item, relation_name, medium_id, msg, session):
     if not actor_relation:
         actor_relation = model.RelationType()
         actor_relation.name = relation_name
-        session.save(actor_relation)
+        session.add(actor_relation)
         log.info("created %s" % actor_relation)
         #~ abort(404)
         
@@ -38,7 +38,7 @@ def add_persons(item, relation_name, medium_id, msg, session):
             actor = model.Person()
             actor.name = subitem
             log.debug("Actor.name, bf commit: %s" % actor.name)
-            session.save(actor)
+            session.add(actor)
             session.commit()
             log.debug("Actor.name, after cm: %s" % actor.name)
             #~ h.flash("added: %s" % actor)
@@ -58,5 +58,5 @@ def add_persons(item, relation_name, medium_id, msg, session):
             record.person_id = actor.id
             record.medium_id = medium_id
             record.type_id = actor_relation.id
-            session.save(record)
+            session.add(record)
             #~ h.flash("added: %s" % record)

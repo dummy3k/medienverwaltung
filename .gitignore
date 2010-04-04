@@ -1,4 +1,5 @@
 *.pyc
 *.conf
 *.bak
+*.log
 */local/*

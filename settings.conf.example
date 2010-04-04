@@ -5,3 +5,53 @@ SecretAccessKey=CHANGE ME
 
 [sqlalchemy]
 url = mysql://medienverwaltung:pass@localhost/medienverwaltung
+
+# Logging configuration
+[loggers]
+keys = root, medienverwaltungweb, sqlalchemy, isbn
+
+[handlers]
+keys = console, isbnlog
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = DEBUG
+handlers = console
+
+[logger_isbn]
+level = INFO
+handlers = console, isbnlog
+qualname = isbn
+
+[logger_medienverwaltungweb]
+level = DEBUG
+handlers =
+qualname = medienverwaltungweb
+
+[logger_sqlalchemy]
+level = WARN
+#~ level = INFO
+handlers =
+qualname = sqlalchemy.engine
+# "level = INFO" logs SQL queries.
+# "level = DEBUG" logs SQL queries and results.
+# "level = WARN" logs neither.  (Recommended for production systems.)
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[formatter_generic]
+format = %(asctime)s,%(msecs)03d %(levelname)-5.5s [%(name)s] %(message)s
+datefmt = %H:%M:%S
+
+[handler_isbnlog]
+class = FileHandler
+args = ('isbn.log','a')
+level = INFO
+formatter = generic
+

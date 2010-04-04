@@ -18,6 +18,7 @@ import medienverwaltungweb.model as model
 from medienverwaltungcommon.amazon import add_persons, RefHelper
 
 log = logging.getLogger(__name__)
+isbn_log = logging.getLogger('isbn')
 
 config = ConfigParser.ConfigParser()
 config.read('settings.conf')
@@ -32,7 +33,7 @@ session.configure(bind=engine)
 
 def one(isbn):
     print "ISBN: %s" % isbn
-    log.debug("ISBN: %s" % isbn)
+    isbn_log.info("ISBN: %s" % isbn)
     node = api.item_lookup(isbn,
                            IdType='ISBN',
                            SearchIndex=SearchIndex,
