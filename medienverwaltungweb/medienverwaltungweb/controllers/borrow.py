@@ -14,12 +14,6 @@ import medienverwaltungweb.lib.helpers as h
 log = logging.getLogger(__name__)
 
 class BorrowController(BaseController):
-    def index(self):
-        # Return a rendered template
-        #return render('/borrow.mako')
-        # or, return a response
-        return 'Hello World'
-
     def checkout(self, id):
         c.item = meta.find(model.Medium, id)
         c.borrowers = meta.Session\
@@ -45,9 +39,13 @@ class BorrowController(BaseController):
         log.debug("FOLLOW ME, too, too")
         record = model.BorrowAct()
         record.media_id = media_id
-        record.borrower_id = borrower_id
+        #~ record.borrower_id = borrower_id
         record.borrowed_ts = datetime.now()
-        meta.Session.save(record)
+        #~ meta.Session.save(record)
+
+        borrower = meta.Session.query(model.Borrower).get(borrower_id)
+        borrower.acts.append(record)
+        
         meta.Session.commit()
 
         borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
@@ -165,4 +163,9 @@ class BorrowController(BaseController):
         #~ meta.Session.commit()
 
         return redirect_to(action='show_history')
-        
+
+    def dashboard(self):
+        c.borrow_acts = meta.Session.query(model.BorrowAct)\
+                                    .filter(model.BorrowAct.returned_ts == None)\
+                                    .all()
+        return render('borrow/dashboard.mako')
