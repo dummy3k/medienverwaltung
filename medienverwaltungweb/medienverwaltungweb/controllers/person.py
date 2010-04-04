@@ -27,7 +27,10 @@ class PersonController(BaseController):
 
         query = meta.Session\
             .query(model.PersonToMedia)\
-            .filter(model.PersonToMedia.person_id == id)
+            .join(model.Medium)\
+            .filter(model.PersonToMedia.person_id == id)\
+            .order_by(model.Medium.title)
+            
         c.page = paginate.Page(query, page)
         return render('person/display.mako')
 
