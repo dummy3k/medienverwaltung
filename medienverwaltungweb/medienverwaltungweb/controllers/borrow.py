@@ -14,6 +14,9 @@ import medienverwaltungweb.lib.helpers as h
 log = logging.getLogger(__name__)
 
 class BorrowController(BaseController):
+    def index(self):
+        return self.list_borrowed_media()
+        
     def checkout(self, id):
         c.item = meta.find(model.Medium, id)
         c.borrowers = meta.Session\
@@ -24,17 +27,29 @@ class BorrowController(BaseController):
 
     def checkout_post(self):
         media_id = request.params.get('media_id')
-        borrower_id = request.params.get('borrower')
-        self.__checkout_post__(media_id, borrower_id)
-        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
-        
-    def __checkout_post__(self, media_id, borrower_id):
-        log.debug("__checkout_post__")
-        log.debug("media_id: %s" % media_id)
-        log.debug("borrower_id: %s" % borrower_id)
         if not borrower_id or int(borrower_id) < 0:
             log.debug("redirect because no borrower_id")
             return redirect_to(controller='borrow', action='add_borrower', media_id=media_id)
+
+        borrower_id = request.params.get('borrower')
+        self.__checkout_post__(media_id, borrower_id)
+        meta.Session.commit()
+        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
+        
+    def mass_checkout_post(self):
+        borrower_id = request.params.get('borrower')
+        log.debug("borrower_id: %s" % borrower_id)
+        for item in h.checkboxes(request, 'item_id_'):
+            log.debug("checkout: %s" % item)
+            self.__checkout_post__(item, borrower_id)
+            
+        meta.Session.commit()
+        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
+        
+    def __checkout_post__(self, media_id, borrower_id):
+        log.debug("")
+        log.debug("media_id: %s" % media_id)
+        log.debug("borrower_id: %s" % borrower_id)
             
         log.debug("FOLLOW ME, too, too")
         record = model.BorrowAct()
@@ -45,13 +60,13 @@ class BorrowController(BaseController):
 
         borrower = meta.Session.query(model.Borrower).get(borrower_id)
         borrower.acts.append(record)
-        
-        meta.Session.commit()
+
+        medium = meta.Session.query(model.Medium).get(media_id)
 
         borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
-                         .render(item=record.borrower, h=h)
+                         .render(item=borrower, h=h)
         medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
-                       .render(item=record.medium, h=h)
+                       .render(item=medium, h=h)
         h.flash(_("%(medium)s borrowed to %(to)s") % {'medium':medium_link,
                                                       'to':borrower_link})
         
@@ -87,6 +102,7 @@ class BorrowController(BaseController):
                                #~ borrower_id=record.id,
                                #~ media_id=media_id)
             #~ return self.checkout_post()
+        meta.Session.commit()
 
     def list_borrowers(self, page=1):
         query = meta.Session\
@@ -162,8 +178,7 @@ class BorrowController(BaseController):
             h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link))
 
         #~ meta.Session.commit()
-
-        return redirect_to(action='dashboard')
+        return redirect_to(action='index')
 
     def list_borrowed_media(self):
         c.borrow_acts = meta.Session.query(model.BorrowAct)\
@@ -171,3 +186,33 @@ class BorrowController(BaseController):
                                     .all()
         return render('borrow/list_borrowed_media.mako')
 
+    def scanner(self):
+        return render('borrow/scanner.mako')
+        
+    def scanner_post(self):
+        c.available = []
+        c.borrowed = []
+        for line in request.params.get('isbns').split('\n'):
+            line = line.strip()
+            if line:
+                medium = meta.Session\
+                             .query(model.Medium)\
+                             .filter(model.Medium.isbn == line)\
+                             .first()
+
+                if not medium:
+                    h.flash(_("Isbn '%s' not found") % line)
+                else:
+                    borrow_act = meta.Session\
+                                     .query(model.BorrowAct)\
+                                     .filter(model.BorrowAct.media_id == medium.id)\
+                                     .filter(model.BorrowAct.returned_ts == None)\
+                                     .first()
+                    if borrow_act:
+                        c.borrowed.append(borrow_act)
+                    else:
+                        c.available.append(medium)
+
+        c.borrowers = meta.Session.query(model.Borrower).all()
+        return render('borrow/scanner_post.mako')
+        

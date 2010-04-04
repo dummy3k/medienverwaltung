@@ -15,7 +15,7 @@
         </select>
     </p>
     <input type="text" name="title"/>
-    <input type="submit" value="Process"/>
+    <p><input type="submit" value="${_("Process")}"/></p>
 </form>
 
 <h2>${_("Add many media")}</h2>

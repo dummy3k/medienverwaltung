@@ -44,6 +44,7 @@
         <ul>
             <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">${_("Add Borrower")}</a></li>
             <li><a href="${h.url_for(controller='borrow', action='list_borrowers')}">${_("List Borrowers")}</a></li>
+            <li><a href="${h.url_for(controller='borrow', action='scanner')}">${_("Barcode Scanner")}</a></li>
         </ul>
 	</div>
 </%def>
