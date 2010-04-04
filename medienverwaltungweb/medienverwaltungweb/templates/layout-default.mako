@@ -30,7 +30,7 @@
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">${_('Books')}</a></li>
     <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">${_('DVDs')}</a></li>
     <li><a href="${h.url_for(controller='person', action='top_ten', id=None, page=None, type=None, tag=None)}">${_('Persons')}</a></li>
-    <li><a href="${h.url_for(controller='borrow', action='list_borrowers', id=None, page=None, type=None, tag=None)}">${_('Borrow')}</a></li>
+    <li><a href="${h.url_for(controller='borrow', action='list_borrowed_media', id=None, page=None, type=None, tag=None)}">${_('Borrow')}</a></li>
   </ul>
  </div>
 </div>

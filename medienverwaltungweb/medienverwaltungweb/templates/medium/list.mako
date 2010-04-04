@@ -19,7 +19,7 @@ ${_("Sort by")}:
 
 <p>${pager.pager(controller='medium', action=pager_action, order=request.params.get('order'))}</p>
 
-<form id="signin-form" method="post" action="${h.url_for(controller='medium', action='delete', page=None)}">
+<form method="post" action="${h.url_for(controller='medium', action='delete', page=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -52,7 +52,7 @@ ${_("Sort by")}:
 <p>${pager.pager(controller='medium', action=pager_action)}</p>
 
 <p>
-<input type="submit" value="${_("Delete marked Media")}"/>
+<p><input type="submit" value="${_("Delete marked Media")}"/></p>
 ##<a href="${h.url_for(action='delete', id=None)}">${_("Delete marked Media")}</a>
 </p>
 </form>

@@ -101,9 +101,15 @@ class BorrowController(BaseController):
     
     def edit_borrower(self, id):
         c.item = meta.find(model.Borrower, id)
+        #~ c.borrowed_media = meta.Session\
+                          #~ .query(model.Medium)\
+                          #~ .join(model.BorrowAct)\
+                          #~ .filter(model.BorrowAct.borrower_id == id)\
+                          #~ .filter(model.BorrowAct.returned_ts == None)\
+                          #~ .order_by(model.BorrowAct.id.desc())\
+                          #~ .all()
         c.borrowed_media = meta.Session\
-                          .query(model.Medium)\
-                          .join(model.BorrowAct)\
+                          .query(model.BorrowAct)\
                           .filter(model.BorrowAct.borrower_id == id)\
                           .filter(model.BorrowAct.returned_ts == None)\
                           .order_by(model.BorrowAct.id.desc())\
@@ -142,16 +148,11 @@ class BorrowController(BaseController):
         c.title = _("Borrow History")
         return render('borrow/history.mako')
 
-    def checkin_post(self, id):
+    def checkin_post(self):
+        id = request.params.get('id')
         #~ borrower = meta.find(model.Borrower, id)
         for item in h.checkboxes(request, 'item_id_'):
-            record = meta.Session\
-                         .query(model.BorrowAct)\
-                         .filter(model.BorrowAct.borrower_id == id)\
-                         .filter(model.BorrowAct.media_id == item)\
-                         .filter(model.BorrowAct.returned_ts == None)\
-                         .first()
-                         
+            record = meta.Session.query(model.BorrowAct).get(item)
             record.returned_ts = datetime.now()
             meta.Session.update(record)
             borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
@@ -162,10 +163,11 @@ class BorrowController(BaseController):
 
         #~ meta.Session.commit()
 
-        return redirect_to(action='show_history')
+        return redirect_to(action='dashboard')
 
-    def dashboard(self):
+    def list_borrowed_media(self):
         c.borrow_acts = meta.Session.query(model.BorrowAct)\
                                     .filter(model.BorrowAct.returned_ts == None)\
                                     .all()
-        return render('borrow/dashboard.mako')
+        return render('borrow/list_borrowed_media.mako')
+

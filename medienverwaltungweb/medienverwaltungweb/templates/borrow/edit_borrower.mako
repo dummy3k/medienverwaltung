@@ -36,12 +36,11 @@
             <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
         <td>
         <td>
-            ${medium_block.medium_block(item)}
+            ${medium_block.medium_block(item.medium)}
         <td>
     </tr>
 % endfor
 </table>
-
 <input type="submit" value="${_("Checkin")}"/>
 </form>
 % endif
