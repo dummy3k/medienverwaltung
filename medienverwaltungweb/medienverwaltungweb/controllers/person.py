@@ -4,13 +4,14 @@ from webhelpers import paginate
 import urllib
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
+from pylons.i18n import _, ungettext
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 
 from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.model as model
 from medienverwaltungweb.model import meta
-from pylons.i18n import _, ungettext
+import medienverwaltungweb.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
@@ -94,3 +95,34 @@ class PersonController(BaseController):
         c.authors = map(lambda x: (meta.find(model.Person, x[0]), x[1]), query.execute())
 
         return render('person/top_ten.mako')
+
+    def add_to_medium_post(self, id):
+        medium = meta.Session.query(model.Medium).get(id)
+        name = request.params.get('name')
+
+        person = meta.Session.query(model.Person)\
+                             .filter(model.Person.name == name)\
+                             .first()
+
+        relation = meta.Session.query(model.RelationType)\
+                       .filter(model.RelationType.name == request.params.get('role'))\
+                       .first()
+        if not relation:
+            return "unknown relation: %s" % relation
+            
+        if not person:
+            person = model.Person()
+            person.name = name
+            meta.Session.add(person)
+
+        media2person = model.PersonToMedia()
+        medium.persons_to_media.append(media2person)
+        person.persons_to_media.append(media2person)
+        relation.persons_to_media.append(media2person)
+        meta.Session.add(relation)
+        meta.Session.commit()
+
+        h.flash("added: %(person)s to %(medium)s" % {'person':person.name,
+                                                     'medium':medium.title})
+        return redirect_to(controller='medium', action='edit', id=id)
+        

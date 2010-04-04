@@ -67,14 +67,32 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     % endif
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
-<p>
 <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="Save"/>
-</p>
+<p><input type="submit" value="${_('Save')}"/></p>
+</form>
+
+<h2>Add Person</h2>
+<form id="signin-form" method="post" action="${h.url_for(controller='person', action='add_to_medium_post')}">
+<table border=1 class='simple'>
+    <tr>
+        <td class='simple'>${_('Role')}</td>
+        <td class='simple'><select name="role">
+            <option value='actor'>${_('Actor')}</option>
+            <option value='actor'>${_('Author')}</option>
+            <option value='actor'>${_('Director')}</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td class='simple'>${_('Name')}</td>
+        <td class='simple'><input type="text" name="name" value="" size=50 /></td>
+    </tr>
+</table>
+<p><input type="submit" value="${_('Add')}"/></p>
+
 </form>
 
 ##<p>
-##<form id="signin-form" method="post" action="${h.url_for(action='delete', id=None)}">
+##
 ##    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
 ##    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 ##    <input type="submit" value="Delete"/>

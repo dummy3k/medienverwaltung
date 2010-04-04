@@ -14,8 +14,6 @@ from tag import Tag, tags_table
 from borrower import Borrower, borrowers_table
 from borrower import BorrowAct, borrow_acts_table
 
-orm.mapper(RelationType, relation_types_table)
-orm.mapper(Person, persons_table)
 orm.mapper(MediaToAsin, media_to_asin_table)
 orm.mapper(MediaType, media_types_table)
 orm.mapper(Tag, tags_table)
@@ -37,4 +35,12 @@ orm.mapper(PersonToMedia, person_to_media_table, properties = {
 orm.mapper(BorrowAct, borrow_acts_table, properties = {
     'borrower' : orm.relation(Borrower),
     'medium' : orm.relation(Medium),
+    })
+
+orm.mapper(Person, persons_table, properties = {
+    'persons_to_media' : orm.relation(PersonToMedia, cascade="all, delete, delete-orphan"),
+    })
+
+orm.mapper(RelationType, relation_types_table, properties = {
+    'persons_to_media' : orm.relation(PersonToMedia, cascade="all, delete, delete-orphan"),
     })
