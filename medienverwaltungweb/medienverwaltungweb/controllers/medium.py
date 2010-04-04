@@ -257,9 +257,9 @@ class MediumController(BaseController):
             log.debug("Person2: %s" % item.person)
 
             if item.relation.name in c.persons:
-                c.persons[item.relation.name].append(item.person)
+                c.persons[item.relation.name].append(item)
             else:
-                c.persons[item.relation.name] = [item.person]
+                c.persons[item.relation.name] = [item]
 
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\

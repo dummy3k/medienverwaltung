@@ -119,10 +119,19 @@ class PersonController(BaseController):
         medium.persons_to_media.append(media2person)
         person.persons_to_media.append(media2person)
         relation.persons_to_media.append(media2person)
-        meta.Session.add(relation)
+        meta.Session.add(media2person)
         meta.Session.commit()
 
-        h.flash("added: %(person)s to %(medium)s" % {'person':person.name,
-                                                     'medium':medium.title})
+        h.flash(_("added: %(person)s to %(medium)s") % {'person':person.name,
+                                                        'medium':medium.title})
         return redirect_to(controller='medium', action='edit', id=id)
+        
+    def remove_from_media(self, id):
+        item = meta.Session.query(model.PersonToMedia).get(id)
+        meta.Session.delete(item)
+
+        h.flash(_("removed: %(person)s from %(medium)s") % {'person':item.person.name,
+                                                            'medium':item.medium.title})
+        meta.Session.commit()
+        return redirect_to(controller='medium', action='edit', id=item.medium.id)
         

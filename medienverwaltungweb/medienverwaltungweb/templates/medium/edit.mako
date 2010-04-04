@@ -2,6 +2,10 @@
 
 <%def name="title()">${_("Edit Medium")} - "${c.item.title}"</%def>
 
+<%def name="confirm(text, url, question)">
+<a style="cursor:pointer" onclick="if (confirm('${question}')) {location.href = '${url}';}">${text}</a>
+</%def>
+
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
@@ -14,7 +18,6 @@
 ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
-
 <form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
 <table border=1 class='simple'>
     <tr>
@@ -42,9 +45,15 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'>${_(subitem)}</td>
         <td class='simple'><ul>
         %for subsubitem in c.persons[subitem]:
-        <li><a href="${h.url_for(controller='person', action='index', id=subsubitem.id)}">
-                ${subsubitem.name}
-        </a></li>
+        <li>
+            <a href="${h.url_for(controller='person', action='index', id=subsubitem.person.id)}">
+                ${subsubitem.person.name}
+            </a>
+
+            ${self.confirm("[X]",
+                           h.url_for(controller='person', action='remove_from_media', id=subsubitem.id),
+                           _("Do you really want to remove this person from the medium?"))}
+        </li>
         %endfor
         </ul></td>
     </tr>
