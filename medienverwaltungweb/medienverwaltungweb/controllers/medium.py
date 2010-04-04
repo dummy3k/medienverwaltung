@@ -150,13 +150,10 @@ class MediumController(BaseController):
         if media_type_name:
             tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
             
-        #~ tag_query = tag_query.distinct()
         tag_query = tag_query.group_by(model.tags_table.c.name)\
                              .order_by(cnt_col.desc())
         tag_query.bind = meta.engine
         retval = map(lambda x: (x[0], x[1]), tag_query.execute())
-        #~ if tag_name in retval:
-            #~ retval.remove(tag_name)
         return retval
         
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):
@@ -252,6 +249,20 @@ class MediumController(BaseController):
                                     .filter(model.BorrowAct.media_id == id)\
                                     .filter(model.BorrowAct.returned_ts == None)\
                                     .first()
+
+        # All Tag Names for this medium
+        query1 = select([model.tags_table.c.name])
+        query1 = query1.where(model.tags_table.c.media_id == id)
+
+        cnt_col = func.count()
+        query = select([model.tags_table.c.name, cnt_col],
+                       from_obj=[model.tags_table])
+        query = query.where(model.tags_table.c.name.in_(query1))
+        query = query.group_by(model.tags_table.c.name)
+        query = query.order_by(cnt_col.desc())
+        query.bind = meta.engine
+        c.tags = map(lambda x: (x[0], x[1]), query.execute())
+        
         return render('medium/edit.mako')
 
     def edit_post(self):

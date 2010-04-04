@@ -101,4 +101,14 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Clear Persons")}</a></li>
         </ul>
 	</div>
+    % if c.tags:
+	<div class="box">
+        <h2>${_("Tags")}:</h2>
+        <span class="tags">
+        % for item in c.tags[:10]:
+        <a href="${h.url_for(action='list', tag=item[0], page=None, id=None)}">${item[0]}&nbsp;(${item[1]})</a>
+        % endfor
+        </span>
+	</div>
+    % endif
 </%def>

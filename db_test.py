@@ -139,4 +139,33 @@ def variant007():
     h.ipython()()
     #~ dump_results(media_query.all())
 
-variant007()
+def variant008():
+    medium_id = 306
+    #~ query = select([model.tags_table.c.name, cnt_col], from_obj=[model.media_table])
+    #~ query = select([model.tags_table.c.name, cnt_col], from_obj=[model.media_table])
+    #~ query = query.where(model.tags_table.c.media_id == medium_id)
+
+    #~ join_clause = model.tags_table.join(model.media_table)
+    #~ query = select([model.tags_table.c.name], from_obj=[join_clause])
+    #~ query = query.where(model.media_table.c.id == medium_id)
+    #~ print "%s\n" % query
+
+    #~ join_clause = model.tags_table.join(model.media_table)
+    query1 = select([model.tags_table.c.name])
+    query1 = query1.where(model.tags_table.c.media_id == medium_id)
+    print "%s\n" % query1
+    #~ query1.bind = engine
+    #~ dump_results(query1.execute())
+
+    cnt_col = func.count()
+    query = select([model.tags_table.c.name, cnt_col], from_obj=[model.tags_table])
+    query = query.where(model.tags_table.c.name.in_(query1))
+    query = query.group_by(model.tags_table.c.name)
+    query = query.order_by(cnt_col.desc())
+    print "%s\n" % query
+
+    query.bind = engine
+    dump_results(query.execute())
+    #~ h.ipython()()
+
+variant008()
