@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-03 16:35+0200\n"
-"PO-Revision-Date: 2010-04-04 00:25+0100\n"
+"PO-Revision-Date: 2010-04-04 12:49+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -19,8 +19,9 @@ msgstr ""
 "Generated-By: Babel 0.9.4\n"
 
 #, python-format
-msgid "%s borrowed to %s"
-msgstr "%s hat sich %s ausgeliehen"
+#| msgid "%s borrowed to %s"
+msgid "%(medium)s borrowed to %(to)s"
+msgstr "%(to)s hat sich %(medium)s ausgeliehen"
 
 #, python-format
 msgid "added: %s"
@@ -73,8 +74,10 @@ msgid "medium elready exists: %s"
 msgstr "Das Medium '%s' existiert bereits"
 
 #, python-format
-msgid "added: %s media"
-msgstr "Medium '%s' hinzugefügt"
+msgid "added medium %(media)s"
+msgid_plural "added %(num)d media: %(media)s"
+msgstr[0] "Medium '%(media)s' added medium %(media)s"
+msgstr[1] "%(num)d Medien hinzugefügt: %(media)s"
 
 msgid "Books List"
 msgstr "Bücher Liste"
@@ -112,6 +115,11 @@ msgstr "Alle Medien Gallerie"
 
 msgid "Media without images"
 msgstr "Medien ohne Bild"
+
+#, python-format
+#| msgid "updated: %s"
+msgid "updated: '%s'"
+msgstr "'%s' wurde aktualisert"
 
 msgid "all media after this have an image"
 msgstr "Alle folgenden Medien haben ein Bild"
@@ -280,7 +288,6 @@ msgstr "Bild von Amazon auswählen"
 msgid "Crop Image"
 msgstr "Bild beschneiden"
 
-#| msgid "Really delete this borrower?"
 msgid "Really delete this medium?"
 msgstr "Dieses Medium wirklich löschen?"
 
@@ -312,7 +319,6 @@ msgstr "Ein einzelnes Medium hinzugefügen"
 msgid "Type"
 msgstr "Art"
 
-#| msgid "please specify name"
 msgid "Please select one"
 msgstr "Bitte wählen etwas aus"
 
@@ -346,4 +352,7 @@ msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
 msgstr "Alle Autoren..."
+
+#~ msgid "added: %s media"
+#~ msgstr "Medium '%s' hinzugefügt"
 

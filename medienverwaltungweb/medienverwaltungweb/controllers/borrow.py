@@ -54,8 +54,8 @@ class BorrowController(BaseController):
                          .render(item=record.borrower, h=h)
         medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
                        .render(item=record.medium, h=h)
-        h.flash(_("%s borrowed to %s") % (medium_link,
-                                            borrower_link))
+        h.flash(_("%(medium)s borrowed to %(to)s") % {'medium':medium_link,
+                                                      'to':borrower_link})
         
     def add_borrower(self):
         c.item = model.Borrower()
@@ -151,6 +151,7 @@ class BorrowController(BaseController):
                          .query(model.BorrowAct)\
                          .filter(model.BorrowAct.borrower_id == id)\
                          .filter(model.BorrowAct.media_id == item)\
+                         .filter(model.BorrowAct.returned_ts == None)\
                          .first()
                          
             record.returned_ts = datetime.now()

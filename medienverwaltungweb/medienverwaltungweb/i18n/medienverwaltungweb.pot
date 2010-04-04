@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-04 00:25+0200\n"
+"POT-Creation-Date: 2010-04-04 12:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Generated-By: Babel 0.9.4\n"
 
 #, python-format
-msgid "%s borrowed to %s"
+msgid "%(medium)s borrowed to %(to)s"
 msgstr ""
 
 #, python-format
@@ -73,8 +73,10 @@ msgid "medium elready exists: %s"
 msgstr ""
 
 #, python-format
-msgid "added: %s media"
-msgstr ""
+msgid "added medium %(media)s"
+msgid_plural "added %(num)d media: %(media)s"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Books List"
 msgstr ""
@@ -111,6 +113,10 @@ msgid "All Media Gallery"
 msgstr ""
 
 msgid "Media without images"
+msgstr ""
+
+#, python-format
+msgid "updated: '%s'"
 msgstr ""
 
 msgid "all media after this have an image"
