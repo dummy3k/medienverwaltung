@@ -5,7 +5,7 @@
 
 <%def name="content()">
 
-<div style="float:left; position:relative;">
+<div class="contentbox">
 <h2>${_("Actors")}</h2>
 <ol>
     % for item in c.actors:
@@ -16,7 +16,7 @@
 <a href="${h.url_for(action='list', role='Actor')}">${_("All Actors...")}</a>
 </div>
 
-<div style="float:left; position:relative; margin-left: 10px;">
+<div class="contentbox">
 <h2>${_("Directors")}</h2>
 <ol>
     % for item in c.directors:
@@ -26,7 +26,7 @@
 <a href="${h.url_for(action='list', role='Actor')}">${_("All Directors...")}</a>
 </div>
 
-<div style="float:left; position:relative; margin-left: 10px;">
+<div class="contentbox">
 <h2>${_("Authors")}</h2>
 <ol>
     % for item in c.authors:

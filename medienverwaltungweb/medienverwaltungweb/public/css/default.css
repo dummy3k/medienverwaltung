@@ -41,3 +41,9 @@ a.button
     padding: 5px;
     margin-right: 5px;
 }
+
+div.contentbox {
+    float:left;
+    position:relative;
+    margin-right: 1em;
+}
