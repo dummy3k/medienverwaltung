@@ -85,8 +85,8 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'>${_('Role')}</td>
         <td class='simple'><select name="role">
             <option value='actor'>${_('Actor')}</option>
-            <option value='actor'>${_('Author')}</option>
-            <option value='actor'>${_('Director')}</option>
+            <option value='author'>${_('Author')}</option>
+            <option value='director'>${_('Director')}</option>
         </select></td>
     </tr>
     <tr>
