@@ -189,8 +189,6 @@ class MediumController(BaseController):
         if not c.order:
             query = query.order_by(model.Medium.title)
         elif c.order.endswith('_desc'):
-            #~ real_order = c.order[:-5]
-            #~ log.debug("real_order: %s" % real_order)
             sort_name = c.order[:-5]
             query = query.order_by(model.Medium.__dict__[sort_name].desc())
             c.title += _(", sorted by %s descending") % _(sort_name.capitalize())
@@ -198,9 +196,8 @@ class MediumController(BaseController):
             query = query.order_by(model.Medium.__dict__[c.order])
             c.title += _(", sorted by %s") % _(c.order.capitalize())
             
-        #~ c.items = query.all()
         log.debug("c.items: %s" % len(c.items))
-        c.page = paginate.Page(query, page)
+        c.page = paginate.Page(query, page, items_per_page=14)
         c.page_args = {'controller':'medium',
                        'action':'list',
                        'order':c.order}

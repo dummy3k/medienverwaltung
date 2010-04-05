@@ -10,7 +10,7 @@ ${js_pager.js_pager(e)}
 
 % for item in c.page.items:
 <a href="${h.url_for(controller='medium', action='index', id=item.id, page=None, type=None, tag=None)}">
-<img class="plain" src="${h.url_for(action='image', id=item.id, width=100, height=175, type=None, tag=None, page=None)}" />
+<img class="plain" src="${h.url_for(action='image', id=item.id, width=100, height=140, type=None, tag=None, page=None)}" />
 </a>
 % endfor
 
