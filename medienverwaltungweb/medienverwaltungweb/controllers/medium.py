@@ -76,7 +76,11 @@ class MediumController(BaseController):
         meta.Session.commit()
 
         if len(new_media) > 0:
-            link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title)), new_media)
+            #~ log.debug("new_media: %s" % new_media)
+            #~ log.debug("new_media.title: %s" % new_media[0].title)
+            #~ log.debug("new_media.title: %s" % str(new_media[0].title))
+            #~ log.debug("new_media: %s" % unicode(new_media[0].title))
+            link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title.encode('ascii', 'replace'))), new_media)
             #~ link_list = map(lambda x: x.title, new_media)
             link_list = ", ".join(link_list)
             msg = ungettext("added medium %(media)s",
