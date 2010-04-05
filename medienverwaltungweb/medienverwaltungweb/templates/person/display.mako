@@ -50,7 +50,8 @@
 </table>
 <p>${c.page.pager()}</p>
 
-<iframe src="http://de.wikipedia.org/wiki/${urllib.quote(c.item.name)}" width="600" height="600" name="SELFHTML_in_a_box">
+##<iframe src="http://de.wikipedia.org/wiki/${urllib.quote(c.item.name)}" width="600" height="600" name="SELFHTML_in_a_box">
+<iframe src="http://de.wikipedia.org/wiki/${c.item.name}" width="600" height="600" name="SELFHTML_in_a_box">
   <p>no iframe</a></p>
 </iframe>
 
