@@ -1,0 +1,7 @@
+How to install
+==============
+
+sudo aptitude install mysql-server phpmyadmin
+easy_install -U medienverwaltung-common
+mv_manage_db.py version_control --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
+mv_manage_db.py upgrade --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
