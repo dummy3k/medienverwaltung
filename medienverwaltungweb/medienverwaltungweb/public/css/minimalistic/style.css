@@ -57,6 +57,11 @@ ul#nav li.activelink a,ul#nav li.activelink a:hover{background: #FFF;color: #003
 	z-index:4;
 }
 
+div#right h1 {
+    text-align: left;
+}
+
+
 #left {
 	float: right;
 	width: 20%;
