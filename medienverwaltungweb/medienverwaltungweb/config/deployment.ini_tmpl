@@ -18,6 +18,7 @@ port = 5000
 use = egg:medienverwaltungweb
 full_stack = true
 static_files = true
+language = en
 
 cache_dir = %(here)s/data
 beaker.session.key = medienverwaltungweb

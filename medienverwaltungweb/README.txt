@@ -13,7 +13,13 @@ Make a config file as follows::
 
     paster make-config medienverwaltungweb config.ini
 
-Tweak the config file as appropriate and then setup the application::
+Tweak the config file and especially edited these values:
+    - language
+    - sqlalchemy.url
+    - Amazon.AccessKeyID
+    - Amazon.SecretAccessKey
+    
+Then setup the application::
 
     paster setup-app config.ini
 
