@@ -4,7 +4,10 @@ you would include information such as the information below:
 Installation and Setup
 ======================
 
+
 Install ``medienverwaltungweb`` using easy_install::
+
+    sudo aptitude install python-imaging
 
     easy_install medienverwaltungweb
     (this won't work)

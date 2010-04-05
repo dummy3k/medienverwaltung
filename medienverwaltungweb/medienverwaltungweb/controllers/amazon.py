@@ -103,7 +103,7 @@ class AmazonController(BaseController):
         try:
             node = self.api.item_lookup(",".join(asins),
                                         ResponseGroup="Images,ItemAttributes")
-        except Exception as ex:
+        except Exception, ex:
             #~ h.flash(dir(ex))
             h.flash("%s: %s" % (type(ex), ex))
             return redirect_to(controller='medium', action='edit') 

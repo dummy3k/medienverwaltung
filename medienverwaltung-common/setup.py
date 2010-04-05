@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.0'
+version = '0.1'
 
-setup(name='medienverwaltung-common',
+setup(name='medienverwaltungcommon',
       version=version,
-      description="medienverwaltung-common",
+      description="medienverwaltungcommon",
       long_description="""\
 """,
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -21,7 +21,7 @@ setup(name='medienverwaltung-common',
       include_package_data=True,
       zip_safe=False,
         install_requires=[
-            "SQLAlchemy>=0.5",
+            "SQLAlchemy==0.5.7", #0.6beta wont work for me
             "sqlalchemy-migrate"
         ],
       entry_points="""

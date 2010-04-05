@@ -2,5 +2,7 @@
 *.conf
 *.bak
 *.log
+*.egg
+*.egg-info
 */local/*
 */build/*
