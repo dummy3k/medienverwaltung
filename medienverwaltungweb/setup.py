@@ -15,10 +15,10 @@ setup(
     install_requires=[
         "Pylons>=0.9.7",
         "SQLAlchemy>=0.5",
+        "python-amazon-product-api>=0.2.3",
+        "sqlalchemy-migrate"
     ],
-    setup_requires=["PasteScript>=1.6.3",
-                    "python-amazon-product-api>=0.2.3",
-                    "sqlalchemy-migrate"],
+    setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
     test_suite='nose.collector',

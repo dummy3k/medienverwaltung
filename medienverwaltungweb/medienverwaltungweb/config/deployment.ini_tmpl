@@ -38,6 +38,9 @@ sqlalchemy.url = sqlite:///production.db
 # execute malicious code after an exception is raised.
 set debug = false
 
+# Add your secrets here:
+Amazon.AccessKeyID=ABCDEFGHIJKLMNOP1234
+Amazon.SecretAccessKey=diofpidsofpaiofpdifaopsidpoifpaosdifpoii
 
 # Logging configuration
 [loggers]

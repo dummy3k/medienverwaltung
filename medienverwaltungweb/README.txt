@@ -7,6 +7,7 @@ Installation and Setup
 Install ``medienverwaltungweb`` using easy_install::
 
     easy_install medienverwaltungweb
+    (this won't work)
 
 Make a config file as follows::
 
