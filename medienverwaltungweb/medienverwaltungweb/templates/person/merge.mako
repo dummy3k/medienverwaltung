@@ -21,6 +21,7 @@ ${_("Please select the name you want to be displayed. All other Persons will be 
 </p>
 % endfor
 <input type="hidden" name="person_ids_str" value="${c.person_ids_str}" />
+<input type="hidden" name="return_to" value="${request.params.get('return_to')}" />
 <p><input type="submit" value="${_('Merge')}"/></p>
 </form>
 

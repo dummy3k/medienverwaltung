@@ -179,5 +179,11 @@ class PersonController(BaseController):
         meta.Session.commit()
         h.flash(_("Removed %(person_cnt)d, added %(media_cnt)d media") %\
                 {'person_cnt':len(person_ids), 'media_cnt':remap_cnt})
-        return redirect_to(controller='person', action='edit', id=primary.id)
+                
+        #~ return redirect_to(controller='person', action='edit', id=primary.id)
+        return_to = request.params.get('return_to',
+                                       h.url_for(controller='person',
+                                                 action='edit',
+                                                 id=primary.id))
+        return redirect_to(str(return_to))
         
