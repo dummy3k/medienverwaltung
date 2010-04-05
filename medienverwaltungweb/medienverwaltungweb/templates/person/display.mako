@@ -8,7 +8,7 @@
 <%def name="title()">${_("Edit Person - '%s'") % c.item.name}</%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(controller='person', action='edit_post', id=None)}">
+<form id="mainform" method="post" action="${h.url_for(controller='person', action='edit_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Id')}</td>
@@ -16,7 +16,10 @@
     </tr>
     <tr>
         <td class='simple'>${_('Name')}</td>
-        <td class='simple'><input type="text" name="title" value="${c.item.name}" /></td>
+        <td class='simple'>
+            <input type="text" name="name" value="${c.item.name}" /><br>
+            <input type="checkbox" name="create_alias" />&nbsp;${_("Create Alias")}
+        </td>
     </tr>
     <tr>
         <td class='simple'>${_('Aliases')}</td>

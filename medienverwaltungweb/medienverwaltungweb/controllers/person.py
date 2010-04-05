@@ -28,6 +28,19 @@ class PersonController(BaseController):
         c.page = paginate.Page(query, page)
         return render('person/display.mako')
 
+    def edit_post(self, id):
+        item = meta.Session.query(model.Person).get(id)
+        if request.params.get("create_alias"):
+            alias = model.PersonAlias()
+            alias.name = item.name
+            item.aliases.append(alias)
+            
+        item.name = request.params.get("name")
+        
+        meta.Session.commit()
+        h.flash(_("updated: '%s'") % item.name)
+        return redirect_to(controller='person', action='edit', id=id)
+        
     def list(self, page=1):
         relation_type = request.params.get('role')
         query = meta.Session.query(model.Person)
