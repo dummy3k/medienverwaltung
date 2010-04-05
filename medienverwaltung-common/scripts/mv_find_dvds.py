@@ -4,7 +4,7 @@ from optfunc import optfunc
 def try_get_files(directory):
     try:
         return os.listdir(directory)
-    except OSError as ex:
+    except OSError, ex:
         return []
 
 def find_dvds(directory):
