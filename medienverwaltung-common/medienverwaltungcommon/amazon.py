@@ -28,26 +28,26 @@ def add_persons(item, relation_name, medium_id, msg, session):
     medium = session.query(model.Medium).get(medium_id)
 
     for subitem in item.ItemAttributes.__dict__[relation_name]:
-        #~ subitem = str(subitem).encode('utf-8')
         subitem = unicode(subitem)
         log.debug("AUTHOR: %s" % subitem)
-        #~ subitem = ("%s" % subitem).encode('utf-8')
-        query = session.query(model.Person)
-        actor = query.filter(model.Person.name==subitem).first()
-        if not actor:
-            log.info("new actor: %s" % subitem)
-            actor = model.Person()
-            actor.name = subitem
-            log.debug("Actor.name, bf commit: %s" % actor.name)
-            session.add(actor)
-            session.commit()
-            log.debug("Actor.name, after cm: %s" % actor.name)
-            #~ h.flash("added: %s" % actor)
-            #~ msg.value += u"%s, " % unicode(actor.name, errors='replace')
-            msg.value += u"%s, " % actor.name
-            #~ msg.value += u"%s, " % subitem
-        log.debug("!!!!!! Actor: %s" % actor)
-
+        alias = session.query(model.PersonAlias)\
+                       .filter(model.PersonAlias.name==subitem)\
+                       .first()
+        if alias:
+            log.debug("found alias '%s' -> '%s'" % (alias.name, alias.person.name))
+            actor = alias.person
+        else:
+            query = session.query(model.Person)
+            actor = query.filter(model.Person.name==subitem).first()
+            if not actor:
+                log.info("new actor: %s" % subitem)
+                actor = model.Person()
+                actor.name = subitem
+                log.debug("Actor.name, bf commit: %s" % actor.name)
+                session.add(actor)
+                session.commit()
+                log.debug("Actor.name, after cm: %s" % actor.name)
+                msg.value += u"%s, " % actor.name
 
         query = session.query(model.PersonToMedia)
         record = query.filter(model.PersonToMedia.person_id==actor.id)\

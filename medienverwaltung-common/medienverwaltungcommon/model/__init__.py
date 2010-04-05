@@ -9,6 +9,7 @@ from persons import Person, persons_table
 from persons import RelationType, relation_types_table
 from persons import MediaToAsin, media_to_asin_table
 from persons import PersonToMedia, person_to_media_table
+from persons import PersonAlias, person_aliases_table
 from media_type import MediaType, media_types_table
 from tag import Tag, tags_table
 from borrower import Borrower, borrowers_table
@@ -38,6 +39,7 @@ orm.mapper(BorrowAct, borrow_acts_table, properties = {
 
 orm.mapper(Person, persons_table, properties = {
     'persons_to_media' : orm.relation(PersonToMedia, cascade="all, delete, delete-orphan"),
+    'aliases' : orm.relation(PersonAlias, cascade="all, delete, delete-orphan"),
     })
 
 orm.mapper(RelationType, relation_types_table, properties = {
@@ -46,4 +48,8 @@ orm.mapper(RelationType, relation_types_table, properties = {
 
 orm.mapper(Borrower, borrowers_table, properties = {
     'acts' : orm.relation(BorrowAct, cascade="all, delete, delete-orphan"),
+    })
+
+orm.mapper(PersonAlias, person_aliases_table, properties = {
+    'person' : orm.relation(Person),
     })

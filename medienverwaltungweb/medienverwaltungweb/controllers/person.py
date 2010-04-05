@@ -16,12 +16,6 @@ import medienverwaltungweb.lib.helpers as h
 log = logging.getLogger(__name__)
 
 class PersonController(BaseController):
-    def index(self, id=None):
-        if id:
-            return self.edit(id)
-        else:
-            return 'Hello World. Need id.'
-
     def edit(self, id, page=1):
         c.item = meta.find(model.Person, id)
 
@@ -170,17 +164,24 @@ class PersonController(BaseController):
                     log.debug("medium already exists: %s" % item.medium)
                 else:
                     log.debug("medium does not exists: %s" % item.medium)
-                    item.person_id = primary.id
-                    meta.Session.update(item)
+                    #~ item.person_id = primary.id
+                    #~ meta.Session.update(item)
+                    record = model.PersonToMedia()
+                    record.type_id = item.type_id
+                    item.medium.persons_to_media.append(record)
+                    primary.persons_to_media.append(record)
+                    
                     remap_cnt += 1
-                
+
+            alias = model.PersonAlias()
+            alias.name = secondary.name
+            primary.aliases.append(alias)
             meta.Session.delete(secondary)
 
         meta.Session.commit()
         h.flash(_("Removed %(person_cnt)d, added %(media_cnt)d media") %\
                 {'person_cnt':len(person_ids), 'media_cnt':remap_cnt})
-                
-        #~ return redirect_to(controller='person', action='edit', id=primary.id)
+
         return_to = request.params.get('return_to',
                                        h.url_for(controller='person',
                                                  action='edit',

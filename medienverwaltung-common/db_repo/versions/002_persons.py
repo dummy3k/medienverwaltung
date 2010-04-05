@@ -13,8 +13,6 @@ media_table = Table('media', meta.metadata,
 persons_table = Table('persons', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('name', Unicode(50)),
-    #~ Column('wikipedia_url', Unicode(255)),
-    #~ Column('image_url', Unicode(255)),
 )
 
 relation_types_table = Table('relation_types', meta.metadata,

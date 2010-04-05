@@ -30,10 +30,8 @@ def make_map():
     map.connect('/{controller}/{action}/type/{type}/page/{page}')
     map.connect('/{controller}/{action}/type/{type}/tagged/{tag}')
     map.connect('/{controller}/{action}/type/{type}/tagged/{tag}/page/{page}')
-    #~ map.connect('/{controller}/{action}/{type}')
-    #~ map.connect('/{controller}/{action}/books', type='books')
-    #~ map.connect('/{controller}/{action}/dvds', type='dvds')
     map.connect('/{controller}/{action}/{id}')
+    map.connect('/{controller}/{action}/{id}/page/{page}')
     map.connect('/{controller}/{action}/{id}/{width}/{height}')
 
     return map
