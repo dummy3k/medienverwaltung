@@ -15,7 +15,8 @@
 ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
-<form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
+##<form id="signin-form" method="post" action="${h.url_for(action='edit_post', id=None)}">
+<form id="mainform" method="post" action="${h.url_for(action='debug', id=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Id')}</td>
@@ -40,20 +41,20 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     %for subitem in c.persons:
     <tr>
         <td class='simple'>${_(subitem)}</td>
-        <td class='simple'><ul>
+        <td class='simple'>
+        ##<ul>
         %for subsubitem in c.persons[subitem]:
-        <li>
+        ##<p>
+            <input type="checkbox" name="person_id_${subsubitem.person.id}" value="${subsubitem.person.id}"/>
             ${person_snippets.link_to_person(subsubitem.person, h)}
-##            <a href="${h.url_for(controller='person', action='index', id=subsubitem.person.id)}">
-##                ${subsubitem.person.name}
-##            </a>
-
             ${self.confirm("[X]",
                            h.url_for(controller='person', action='remove_from_media', id=subsubitem.id),
                            _("Do you really want to remove this person from the medium?"))}
-        </li>
+        ##</p>
+        <br>
         %endfor
-        </ul></td>
+        ##</ul>
+        </td>
     </tr>
     %endfor
     %if c.asins:
@@ -95,27 +96,17 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     </tr>
 </table>
 <p><input type="submit" value="${_('Add')}"/></p>
-
 </form>
-
-##<p>
-##
-##    <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
-##    <input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-##    <input type="submit" value="Delete"/>
-##</form>
-##</p>
 </%def>
 
 
 <%def name="side()">
 	<div class="box">
-        <h2>${_('Actions')}:</h2>
+    <h2>${_('Actions')}:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">${_("Attach to Amazon")}</a></li>
         <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">${_("Next w/o Image")}</a></li>
         % if len(c.item.asins) > 0:
-        <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>
         % endif
         % if c.item.image_data:
@@ -128,17 +119,22 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
                            h.url_for(controller='medium', action='delete_one'),
                            _("Really delete this medium?"))}
         </li>
-        <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Clear Persons")}</a></li>
-        </ul>
+    </ul>
+	</div>
+	<div class="box">
+    <h2>${_('Persons')}:</h2>
+        <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
+        <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Remove all Persons")}</a></li>
+        <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for())}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
+    </ul>
 	</div>
     % if c.tags:
 	<div class="box">
-        <h2>${_("Tags")}:</h2>
-        <span class="tags">
+    <h2>${_("Tags")}:</h2>
         % for item in c.tags[:10]:
         <a href="${h.url_for(action='list', tag=item[0], page=None, id=None)}">${item[0]}&nbsp;(${item[1]})</a>
         % endfor
-        </span>
+    </span>
 	</div>
     % endif
 </%def>

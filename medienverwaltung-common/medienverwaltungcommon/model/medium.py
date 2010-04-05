@@ -16,12 +16,12 @@ media_table = Table('media', meta.metadata,
 
 class Medium(object):
     def __unicode__(self):
-        return self.__repr__()
+        return "<Medium(%s, '%s')>" % (self.id, self.title)
 
-    __str__ = __unicode__
+    #~ __str__ = __unicode__
 
     def __repr__(self):
-        return "<Medium(%s, '%s')>" % (self.id, self.title)
+        return self.__unicode__().encode('ascii', 'replace')
 
     def get_tagstring(self):
         retval = ""

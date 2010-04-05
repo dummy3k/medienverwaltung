@@ -26,10 +26,10 @@ class PersonController(BaseController):
         c.item = meta.find(model.Person, id)
 
         query = meta.Session\
-            .query(model.PersonToMedia)\
-            .join(model.Medium)\
-            .filter(model.PersonToMedia.person_id == id)\
-            .order_by(model.Medium.title)
+                    .query(model.PersonToMedia)\
+                    .join(model.Medium)\
+                    .filter(model.PersonToMedia.person_id == id)\
+                    .order_by(model.Medium.title)
             
         c.page = paginate.Page(query, page)
         return render('person/display.mako')
@@ -137,4 +137,47 @@ class PersonController(BaseController):
                                                             'medium':item.medium.title})
         meta.Session.commit()
         return redirect_to(controller='medium', action='edit', id=item.medium.id)
+    def merge(self):
+        person_ids = h.checkboxes(request, 'person_id_')
+
+        c.persons = meta.Session\
+                       .query(model.Person)\
+                       .filter(model.Person.id.in_(person_ids))\
+                       .all()
+        c.person_ids_str = ",".join(person_ids)
+        return render('person/merge.mako')
+        
+    def merge_post(self):
+        primary_id = int(request.params.get('primary_id'))
+        primary = meta.Session.query(model.Person).get(primary_id)
+        log.debug("primary: %s" % primary)
+
+        primary_media = map(lambda x: x.medium, primary.persons_to_media)
+        log.debug("primary_media: %s" % primary_media)
+
+        person_ids = request.params.get('person_ids_str')
+        person_ids = person_ids.split(',')
+        person_ids = map(lambda x: int(x), person_ids)
+        person_ids.remove(primary_id)
+        log.debug("person_ids: %s" % person_ids)
+
+        remap_cnt = 0
+        for secondary_id in person_ids:
+            secondary = meta.Session.query(model.Person).get(secondary_id)
+            log.debug("secondary: %s" % secondary)
+            for item in secondary.persons_to_media:
+                if item.medium in primary_media:
+                    log.debug("medium already exists: %s" % item.medium)
+                else:
+                    log.debug("medium does not exists: %s" % item.medium)
+                    item.person_id = primary.id
+                    meta.Session.update(item)
+                    remap_cnt += 1
+                
+            meta.Session.delete(secondary)
+
+        meta.Session.commit()
+        h.flash(_("Removed %(person_cnt)d, added %(media_cnt)d media") %\
+                {'person_cnt':len(person_ids), 'media_cnt':remap_cnt})
+        return redirect_to(controller='person', action='edit', id=primary.id)
         
