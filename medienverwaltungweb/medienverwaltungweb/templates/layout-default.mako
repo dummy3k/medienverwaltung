@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>${self.title()} - Medienverwaltung</title>
+    <title>${self.title()} - ${config['page_title']}</title>
 
 	<link href="/css/default.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />

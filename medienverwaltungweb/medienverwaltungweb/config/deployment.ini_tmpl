@@ -19,6 +19,7 @@ use = egg:medienverwaltungweb
 full_stack = true
 static_files = true
 language = en
+page_title = Medienverwaltung
 
 cache_dir = %(here)s/data
 beaker.session.key = medienverwaltungweb
