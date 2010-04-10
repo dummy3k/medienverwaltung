@@ -27,8 +27,11 @@ _('Creator')
 _('Book')
 _('Dvd')
 
-anchor_tmpl = Template("<a href='${url}'>${text}</a>")
+anchor_tmpl = Template("<a href='${url}'>${text|h}</a>")
 
+def make_link(url, text):
+    return "<a href='%s'>%s</a>" % (url, text)
+    
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
         if id:
@@ -73,14 +76,16 @@ class MediumController(BaseController):
             meta.Session.save(record)
             count += 1
             new_media.append(record)
-        meta.Session.commit()
 
         if len(new_media) > 0:
             #~ log.debug("new_media: %s" % new_media)
             #~ log.debug("new_media.title: %s" % new_media[0].title)
             #~ log.debug("new_media.title: %s" % str(new_media[0].title))
-            #~ log.debug("new_media: %s" % unicode(new_media[0].title))
-            link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title.encode('ascii', 'replace'))), new_media)
+            log.debug("new_media: %s" % unicode(new_media[0].title))
+            log.debug("type new_media: %s" % type(new_media[0].title))
+            #~ link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title.encode('ascii', 'replace'))), new_media)
+            link_list = map(lambda x: anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
+            #~ link_list = map(lambda x: make_link(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
             #~ link_list = map(lambda x: x.title, new_media)
             link_list = ", ".join(link_list)
             msg = ungettext("added medium %(media)s",
@@ -89,6 +94,7 @@ class MediumController(BaseController):
                                                'media':link_list}
             h.flash(msg)   
         #~ h.flash(_("added: %s media") % count)
+        meta.Session.commit()
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
@@ -377,3 +383,6 @@ class MediumController(BaseController):
         else:
             return redirect_to(action='edit', id=id)
 
+    def debug(self):
+        return anchor_tmpl.render_unicode(text=u'\xc3\xa4\xc3\xa4', url='')
+        #~ return render('testing.mako')

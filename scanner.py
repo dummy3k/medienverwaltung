@@ -80,7 +80,8 @@ def one(isbn):
     asin = model.MediaToAsin()
     asin.media_id = medium.id
     asin.asin = item.ASIN
-    session.add(asin)
+    #~ session.add(asin)
+    medium.asins.append(asin)
 
     # Languages
     msg = RefHelper(u"added: ")
