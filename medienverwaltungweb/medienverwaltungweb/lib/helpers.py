@@ -3,6 +3,8 @@
 Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
+import logging
+
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
 from pylons import config
@@ -10,7 +12,21 @@ from webhelpers.pylonslib import Flash as _Flash
 from routes import url_for
 from mako.filters import html_escape
 
-flash = _Flash()
+log = logging.getLogger(__name__)
+
+class MvFlash(_Flash):
+    """ Default is to escape the string, but it *might* be overridden
+        and wont be escaped
+    """
+    def __call__(self, msg, escape=True):
+        log.debug("mvflash: %s" % msg)
+        if escape:
+            msg = html_escape(msg)
+
+        _Flash.__call__(self, msg)
+
+flash = MvFlash()
+
 
 do_debug = True
 def ipython():

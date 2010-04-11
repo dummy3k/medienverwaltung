@@ -29,9 +29,13 @@ _('Dvd')
 
 anchor_tmpl = Template("<a href='${url}'>${text|h}</a>")
 
-def make_link(url, text):
-    return "<a href='%s'>%s</a>" % (url, text)
-    
+class UnsafeString():
+    def __init__(self, value):
+        self.value = value
+
+    def __unicode__(self):
+        return self.value
+
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
         if id:
@@ -78,22 +82,17 @@ class MediumController(BaseController):
             new_media.append(record)
 
         if len(new_media) > 0:
-            #~ log.debug("new_media: %s" % new_media)
-            #~ log.debug("new_media.title: %s" % new_media[0].title)
-            #~ log.debug("new_media.title: %s" % str(new_media[0].title))
             log.debug("new_media: %s" % unicode(new_media[0].title))
             log.debug("type new_media: %s" % type(new_media[0].title))
-            #~ link_list = map(lambda x: anchor_tmpl.render(url=h.url_for(action='edit', id=x.id), text=h.html_escape(x.title.encode('ascii', 'replace'))), new_media)
             link_list = map(lambda x: anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
-            #~ link_list = map(lambda x: make_link(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
-            #~ link_list = map(lambda x: x.title, new_media)
             link_list = ", ".join(link_list)
             msg = ungettext("added medium %(media)s",
                             "added %(num)d media: %(media)s",
                             len(new_media)) % {'num':len(new_media),
                                                'media':link_list}
-            h.flash(msg)   
-        #~ h.flash(_("added: %s media") % count)
+            h.flash(msg)
+            #~ h.flash(UnsafeString(msg))
+
         meta.Session.commit()
         return redirect_to(action='index')
 
@@ -384,5 +383,7 @@ class MediumController(BaseController):
             return redirect_to(action='edit', id=id)
 
     def debug(self):
-        return anchor_tmpl.render_unicode(text=u'\xc3\xa4\xc3\xa4', url='')
-        #~ return render('testing.mako')
+        log.debug("START DEBUG")
+        #~ h.flash(u"testing \xc3\xa4")
+        h.flash("<i>blah</i>", False)
+        return redirect_to(action='index')
