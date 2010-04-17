@@ -5,4 +5,5 @@
 *.egg
 *.egg-info
 */local/*
+medienverwaltung-common/medienverwaltungcommon/local/*
 */build/*

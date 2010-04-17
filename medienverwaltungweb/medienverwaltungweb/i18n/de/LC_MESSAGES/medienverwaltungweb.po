@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-03 16:35+0200\n"
+"POT-Creation-Date: 2010-04-17 12:05+0200\n"
 "PO-Revision-Date: 2010-04-04 15:46+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -16,7 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.4\n"
+"Generated-By: Babel 1.0dev-r0\n"
+
+msgid "No image available"
+msgstr ""
 
 msgid "image is to big."
 msgstr ""
@@ -29,8 +32,9 @@ msgstr ""
 msgid "%(medium)s borrowed to %(to)s"
 msgstr "%(to)s hat sich %(medium)s ausgeliehen"
 
-#, python-format
-msgid "added: %s"
+#, fuzzy, python-format
+#| msgid "added: %s"
+msgid "added: '%s %s'"
 msgstr "'%s' hinzugefügt"
 
 msgid "All borrowers"
@@ -40,9 +44,10 @@ msgstr "Alle Ausleiher"
 msgid "updated: %s"
 msgstr "%s wurde aktualisert"
 
-#, python-format
-msgid "deleted: %s"
-msgstr "'%s' wurde gelöscht"
+#, fuzzy, python-format
+#| msgid "Delete '%s %s'"
+msgid "deleted: '%s %s'"
+msgstr "Lösche '%s %s'"
 
 msgid "Borrow History"
 msgstr "Verleih Historie"
@@ -50,6 +55,10 @@ msgstr "Verleih Historie"
 #, python-format
 msgid "%s has returned medium '%s'"
 msgstr "%s hat das Medium '%s' zurück gegeben"
+
+#, python-format
+msgid "Isbn '%s' not found"
+msgstr ""
 
 msgid "Author"
 msgstr "Autor"
@@ -76,7 +85,6 @@ msgid "please specify name"
 msgstr "Bitte geben Sie einen Namen an"
 
 #, fuzzy
-#| msgid "please specify name"
 msgid "please specify media type"
 msgstr "Bitte geben Sie einen Namen an"
 
@@ -125,7 +133,6 @@ msgid ", sorted by %s descending"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid ", tagged %s"
 msgid ", sorted by %s"
 msgstr ", getagged %s"
 
@@ -135,6 +142,10 @@ msgstr ", Seite %s"
 
 msgid "Media without images"
 msgstr "Medien ohne Bild"
+
+#, python-format
+msgid "deleted: %s"
+msgstr "'%s' wurde gelöscht"
 
 #, python-format
 msgid "updated: '%s'"
@@ -155,6 +166,20 @@ msgstr "Personen des Types '%s'"
 
 msgid "Every Person"
 msgstr "Alle Personen"
+
+#, fuzzy, python-format
+#| msgid "added medium %(media)s"
+#| msgid_plural "added %(num)d media: %(media)s"
+msgid "added: %(person)s to %(medium)s"
+msgstr "Medium '%(media)s' hinzugefügt"
+
+#, python-format
+msgid "removed: %(person)s from %(medium)s"
+msgstr ""
+
+#, python-format
+msgid "Removed %(person_cnt)d, added %(media_cnt)d media"
+msgstr ""
 
 msgid "Books"
 msgstr "Bücher"
@@ -195,6 +220,12 @@ msgstr "Schauspieler"
 msgid "Images"
 msgstr "Bilder"
 
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Show Amazon Page"
+msgstr ""
+
 msgid "Amazon Search Results"
 msgstr "Amazon Suchergebnisse"
 
@@ -204,9 +235,6 @@ msgstr "Bild"
 #, python-format
 msgid "Attach to '%s'"
 msgstr "Verbinde mit '%s'"
-
-msgid "Actions"
-msgstr "Aktionen"
 
 msgid "Next w/o Image"
 msgstr "Nächstes ohne Bild"
@@ -270,11 +298,53 @@ msgstr "Rückgabedatum"
 msgid "Edit Borrower"
 msgstr "Ausleiher bearbeiten"
 
+msgid "Borrowed Media List"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete marked Media"
+msgid "Checkin marked media"
+msgstr "Martkierte Medien löschen"
+
+#, fuzzy
+#| msgid "All borrowers"
+msgid "List Borrowers"
+msgstr "Alle Ausleiher"
+
+msgid "Barcode Scanner"
+msgstr ""
+
 msgid "Id"
 msgstr "Id"
 
 msgid "Edit"
 msgstr "Bearbeiten"
+
+msgid "Checkin/checkout with barcode scanner"
+msgstr ""
+
+msgid "Enter an isbn each line and press 'Process'."
+msgstr ""
+
+msgid "Process"
+msgstr ""
+
+msgid "What should i do with these?"
+msgstr ""
+
+msgid "Available Media"
+msgstr ""
+
+msgid "Please select one"
+msgstr "Bitte wählen etwas aus"
+
+#, fuzzy
+#| msgid "Delete marked Media"
+msgid "Checkout marked media"
+msgstr "Martkierte Medien löschen"
+
+msgid "Return Media"
+msgstr ""
 
 msgid "Edit Medium"
 msgstr "Medium  ändern"
@@ -292,14 +362,26 @@ msgstr "Erzeugt"
 msgid "Updated"
 msgstr "Aktualisiert"
 
+msgid "Do you really want to remove this person from the medium?"
+msgstr ""
+
 msgid "Asins"
 msgstr "Asins"
 
+msgid "Do you really want to remove this ASIN from the medium?"
+msgstr ""
+
+msgid "Role"
+msgstr "Rolle"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Add"
+msgstr ""
+
 msgid "Attach to Amazon"
 msgstr "Mit Amazon verbinden"
-
-msgid "Query Amazon"
-msgstr "Amazon abfragen"
 
 msgid "Select image from Amazon"
 msgstr "Bild von Amazon auswählen"
@@ -307,16 +389,22 @@ msgstr "Bild von Amazon auswählen"
 msgid "Crop Image"
 msgstr "Bild beschneiden"
 
-msgid "Really delete this medium?"
-msgstr "Dieses Medium wirklich löschen?"
-
 #, python-format
 msgid "Delete '%s'"
 msgstr "Lösche '%s'"
 
+msgid "Really delete this medium?"
+msgstr "Dieses Medium wirklich löschen?"
+
+msgid "Query Amazon"
+msgstr "Amazon abfragen"
+
+msgid "Remove all Persons"
+msgstr ""
+
 #, fuzzy
-#| msgid "Every Person"
-msgid "Clear Persons"
+#| msgid "Clear Persons"
+msgid "Merge marked Persons"
 msgstr "Alle Personen"
 
 msgid "Sort by"
@@ -332,12 +420,10 @@ msgid "Delete marked Media"
 msgstr "Martkierte Medien löschen"
 
 #, fuzzy
-#| msgid "Title"
 msgid "Liste"
 msgstr "Titel"
 
 #, fuzzy
-#| msgid "DVDs Gallery"
 msgid "As Gallery"
 msgstr "DVD Gallerie"
 
@@ -353,9 +439,6 @@ msgstr "Ein einzelnes Medium hinzugefügen"
 msgid "Type"
 msgstr "Art"
 
-msgid "Please select one"
-msgstr "Bitte wählen etwas aus"
-
 msgid "Add many media"
 msgstr "Viele Media hinzugefügen"
 
@@ -363,17 +446,34 @@ msgstr "Viele Media hinzugefügen"
 msgid "Edit Person - '%s'"
 msgstr "Person '%s' bearbeiten"
 
-msgid "Name"
-msgstr "Name"
+#, fuzzy
+#| msgid "created_ts"
+msgid "Create Alias"
+msgstr "Erzeugt am"
+
+msgid "Aliases"
+msgstr ""
 
 msgid "Appeared in this media"
 msgstr "Taucht in folgenden Medien auf"
 
-msgid "Role"
-msgstr "Rolle"
-
 msgid "Filter"
 msgstr "Filter"
+
+#, fuzzy
+#| msgid "Clear Persons"
+msgid "Merge Persons"
+msgstr "Alle Personen"
+
+msgid ""
+"Please select the name you want to be displayed. All other Persons will "
+"be merged into this one."
+msgstr ""
+
+#, fuzzy
+#| msgid "Image"
+msgid "Merge"
+msgstr "Bild"
 
 msgid "Top Ten Persons"
 msgstr "Top Ten Personen"

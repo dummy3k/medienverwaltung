@@ -78,6 +78,7 @@ medienverwaltungweb/public/js/jcrop/js/jquery.Jcrop.min.js
 medienverwaltungweb/public/js/jcrop/js/jquery.min.js
 medienverwaltungweb/templates/js_pager.mako
 medienverwaltungweb/templates/layout-default.mako
+medienverwaltungweb/templates/snippets.mako
 medienverwaltungweb/templates/amazon/add_these.mako
 medienverwaltungweb/templates/amazon/image_list.mako
 medienverwaltungweb/templates/amazon/item_lookup_result.mako
