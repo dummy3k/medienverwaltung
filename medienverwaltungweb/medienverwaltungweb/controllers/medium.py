@@ -29,13 +29,6 @@ _('Dvd')
 
 anchor_tmpl = Template("<a href='${url}'>${text|h}</a>")
 
-class UnsafeString():
-    def __init__(self, value):
-        self.value = value
-
-    def __unicode__(self):
-        return self.value
-
 class MediumController(BaseController):
     def index(self, id=None, type=None, page=1, tag=None):
         if id:
@@ -230,7 +223,7 @@ class MediumController(BaseController):
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
-            h.flash(_("deleted: %s") % h.html_escape(db_item.title))
+            h.flash(_("deleted: %s") % db_item.title)
 
         meta.Session.commit()
 
