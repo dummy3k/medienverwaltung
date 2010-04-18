@@ -10,7 +10,7 @@ class RefHelper():
     def __repr__(self):
         return self.value
         
-def add_persons(item, relation_name, medium_id, msg, session):
+def add_persons(item, relation_name, medium_id, added_persons, session):
     if not relation_name in item.ItemAttributes.__dict__:
         log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
         return
@@ -47,7 +47,6 @@ def add_persons(item, relation_name, medium_id, msg, session):
                 session.add(actor)
                 session.commit()
                 log.debug("Actor.name, after cm: %s" % actor.name)
-                msg.value += u"%s, " % actor.name
 
         query = session.query(model.PersonToMedia)
         record = query.filter(model.PersonToMedia.person_id==actor.id)\
@@ -57,8 +56,7 @@ def add_persons(item, relation_name, medium_id, msg, session):
         else:
             record = model.PersonToMedia()
             record.person_id = actor.id
-            #~ record.medium_id = medium_id
             record.type_id = actor_relation.id
             medium.persons_to_media.append(record)
-            #~ session.add(record)
-            #~ h.flash("added: %s" % record)
+
+            added_persons.append(actor)

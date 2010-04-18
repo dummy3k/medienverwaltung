@@ -9,33 +9,39 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-04 15:46+0100\n"
+"PO-Revision-Date: 2010-04-18 15:53+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0dev-r0\n"
-
-msgid "No image available"
-msgstr ""
-
-msgid "image is to big."
-msgstr ""
+"Generated-By: Babel 0.9.4\n"
 
 #, python-format
-msgid "removed %d persons"
-msgstr ""
+msgid "added persons: %s"
+msgstr "Hinzugefügte Personen: %s"
+
+msgid "No image available"
+msgstr "Kein Bild verfügbar"
+
+msgid "image is to big."
+msgstr "Das Bild ist zu groß."
+
+#, python-format
+#| msgid "Remove all Persons"
+msgid "removed %d person"
+msgid_plural "removed %d persons"
+msgstr[0] "%d Person entfernt"
+msgstr[1] "%d Personen entfernt"
 
 #, python-format
 msgid "%(medium)s borrowed to %(to)s"
 msgstr "%(to)s hat sich %(medium)s ausgeliehen"
 
-#, fuzzy, python-format
-#| msgid "added: %s"
+#, python-format
 msgid "added: '%s %s'"
-msgstr "'%s' hinzugefügt"
+msgstr "'%s %s' hinzugefügt"
 
 msgid "All borrowers"
 msgstr "Alle Ausleiher"
@@ -44,10 +50,9 @@ msgstr "Alle Ausleiher"
 msgid "updated: %s"
 msgstr "%s wurde aktualisert"
 
-#, fuzzy, python-format
-#| msgid "Delete '%s %s'"
+#, python-format
 msgid "deleted: '%s %s'"
-msgstr "Lösche '%s %s'"
+msgstr "Gelöscht '%s %s'"
 
 msgid "Borrow History"
 msgstr "Verleih Historie"
@@ -58,7 +63,7 @@ msgstr "%s hat das Medium '%s' zurück gegeben"
 
 #, python-format
 msgid "Isbn '%s' not found"
-msgstr ""
+msgstr "ISBN '%s' wurde nicht gefunden"
 
 msgid "Author"
 msgstr "Autor"
@@ -84,9 +89,8 @@ msgstr "Dvd"
 msgid "please specify name"
 msgstr "Bitte geben Sie einen Namen an"
 
-#, fuzzy
 msgid "please specify media type"
-msgstr "Bitte geben Sie einen Namen an"
+msgstr "Bitte geben Sie einen Medien-Typ an"
 
 #, python-format
 msgid "medium elready exists: %s"
@@ -130,11 +134,11 @@ msgstr ", getagged %s"
 
 #, python-format
 msgid ", sorted by %s descending"
-msgstr ""
+msgstr ", sortiert nach %s absteigend"
 
-#, fuzzy, python-format
+#, python-format
 msgid ", sorted by %s"
-msgstr ", getagged %s"
+msgstr ", sortiert nach %s"
 
 #, python-format
 msgid ", page %s"
@@ -167,19 +171,17 @@ msgstr "Personen des Types '%s'"
 msgid "Every Person"
 msgstr "Alle Personen"
 
-#, fuzzy, python-format
-#| msgid "added medium %(media)s"
-#| msgid_plural "added %(num)d media: %(media)s"
+#, python-format
 msgid "added: %(person)s to %(medium)s"
-msgstr "Medium '%(media)s' hinzugefügt"
+msgstr "Hinzugefügt: %(person)s zu %(medium)s"
 
 #, python-format
 msgid "removed: %(person)s from %(medium)s"
-msgstr ""
+msgstr "%(person)s vom Medium %(medium)s entfernt"
 
 #, python-format
 msgid "Removed %(person_cnt)d, added %(media_cnt)d media"
-msgstr ""
+msgstr "Entfernt %(person_cnt)d, hinzugefügt %(media_cnt)d media"
 
 msgid "Books"
 msgstr "Bücher"
@@ -224,7 +226,7 @@ msgid "Actions"
 msgstr "Aktionen"
 
 msgid "Show Amazon Page"
-msgstr ""
+msgstr "Amazon Seite anzeigen"
 
 msgid "Amazon Search Results"
 msgstr "Amazon Suchergebnisse"
@@ -299,20 +301,16 @@ msgid "Edit Borrower"
 msgstr "Ausleiher bearbeiten"
 
 msgid "Borrowed Media List"
-msgstr ""
+msgstr "Verleih Liste"
 
-#, fuzzy
-#| msgid "Delete marked Media"
 msgid "Checkin marked media"
-msgstr "Martkierte Medien löschen"
+msgstr "Martkierte Medien zurückgeben"
 
-#, fuzzy
-#| msgid "All borrowers"
 msgid "List Borrowers"
-msgstr "Alle Ausleiher"
+msgstr "Ausleiher Liste"
 
 msgid "Barcode Scanner"
-msgstr ""
+msgstr "Barcode Scanner"
 
 msgid "Id"
 msgstr "Id"
@@ -321,30 +319,28 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 msgid "Checkin/checkout with barcode scanner"
-msgstr ""
+msgstr "Ver/Ausleihen mit Barcode-Scanner"
 
 msgid "Enter an isbn each line and press 'Process'."
-msgstr ""
+msgstr "Eine ISBN pro Zeile eintragen und 'Verarbeiten' drücken."
 
 msgid "Process"
-msgstr ""
+msgstr "Verarbeiten"
 
 msgid "What should i do with these?"
-msgstr ""
+msgstr "Was soll ich machen?"
 
 msgid "Available Media"
-msgstr ""
+msgstr "Verfügbare Medien"
 
 msgid "Please select one"
 msgstr "Bitte wählen etwas aus"
 
-#, fuzzy
-#| msgid "Delete marked Media"
 msgid "Checkout marked media"
-msgstr "Martkierte Medien löschen"
+msgstr "Martkierte Medien ausleihen"
 
 msgid "Return Media"
-msgstr ""
+msgstr "Medium zurückgeben"
 
 msgid "Edit Medium"
 msgstr "Medium  ändern"
@@ -363,13 +359,13 @@ msgid "Updated"
 msgstr "Aktualisiert"
 
 msgid "Do you really want to remove this person from the medium?"
-msgstr ""
+msgstr "Sollen wirklich alle Personen von diesem Medium entfernt werden?"
 
 msgid "Asins"
 msgstr "Asins"
 
 msgid "Do you really want to remove this ASIN from the medium?"
-msgstr ""
+msgstr "Soll diese ASIN wirklich von diesem Medium entfernt werden?"
 
 msgid "Role"
 msgstr "Rolle"
@@ -378,7 +374,7 @@ msgid "Name"
 msgstr "Name"
 
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 msgid "Attach to Amazon"
 msgstr "Mit Amazon verbinden"
@@ -400,12 +396,10 @@ msgid "Query Amazon"
 msgstr "Amazon abfragen"
 
 msgid "Remove all Persons"
-msgstr ""
+msgstr "Alle Personen entfernen"
 
-#, fuzzy
-#| msgid "Clear Persons"
 msgid "Merge marked Persons"
-msgstr "Alle Personen"
+msgstr "Markierte Personen zusammenführen"
 
 msgid "Sort by"
 msgstr "Sortieren"
@@ -423,9 +417,8 @@ msgstr "Martkierte Medien löschen"
 msgid "Liste"
 msgstr "Titel"
 
-#, fuzzy
 msgid "As Gallery"
-msgstr "DVD Gallerie"
+msgstr "Als Gallerie"
 
 msgid "Gallery"
 msgstr "Gallerie"
@@ -446,13 +439,11 @@ msgstr "Viele Media hinzugefügen"
 msgid "Edit Person - '%s'"
 msgstr "Person '%s' bearbeiten"
 
-#, fuzzy
-#| msgid "created_ts"
 msgid "Create Alias"
-msgstr "Erzeugt am"
+msgstr "Alias erzeugen"
 
 msgid "Aliases"
-msgstr ""
+msgstr "Aliase"
 
 msgid "Appeared in this media"
 msgstr "Taucht in folgenden Medien auf"
@@ -460,20 +451,14 @@ msgstr "Taucht in folgenden Medien auf"
 msgid "Filter"
 msgstr "Filter"
 
-#, fuzzy
-#| msgid "Clear Persons"
 msgid "Merge Persons"
-msgstr "Alle Personen"
+msgstr "Personen zusammenführen"
 
-msgid ""
-"Please select the name you want to be displayed. All other Persons will "
-"be merged into this one."
-msgstr ""
+msgid "Please select the name you want to be displayed. All other Persons will be merged into this one."
+msgstr "Wähle den Namen aus der angezeigt werden sollen. Alle anderen Namen werden mit diesem zusammen geführt."
 
-#, fuzzy
-#| msgid "Image"
 msgid "Merge"
-msgstr "Bild"
+msgstr "Zusammenführen"
 
 msgid "Top Ten Persons"
 msgstr "Top Ten Personen"
@@ -486,4 +471,7 @@ msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
 msgstr "Alle Autoren..."
+
+#~ msgid "removed %d persons"
+#~ msgstr ""
 

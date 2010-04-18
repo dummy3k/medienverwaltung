@@ -95,8 +95,6 @@ class AmazonController(BaseController):
         query = meta.Session.query(model.MediaToAsin)\
                             .filter(model.MediaToAsin.media_id==id)
         asins = map(lambda item: item.asin, query.all())
-        msg = RefHelper(u"added: ")
-
         log.debug("asins: %s" % asins)
         try:
             node = self.api.item_lookup(",".join(asins),
@@ -105,18 +103,28 @@ class AmazonController(BaseController):
             h.flash("%s: %s" % (type(ex), ex))
             return redirect_to(controller='medium', action='edit')
 
+        added_persons = []
         for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
-            add_persons(item, 'Actor', id, msg, meta.Session)
-            add_persons(item, 'Creator', id, msg, meta.Session)
-            add_persons(item, 'Director', id, msg, meta.Session)
-            add_persons(item, 'Manufacturer', id, msg, meta.Session)
+            add_persons(item, 'Actor', id, added_persons, meta.Session)
+            add_persons(item, 'Creator', id, added_persons, meta.Session)
+            add_persons(item, 'Director', id, added_persons, meta.Session)
+            add_persons(item, 'Manufacturer', id, added_persons, meta.Session)
 
         meta.Session.commit()
-        if len(msg.value) > len(u"added: "):
-            h.flash(msg.value)
+        #~ if len(msg.value) > len(u"added: "):
+            #~ h.flash(msg.value)
 
+        from pylons import config
+        template_name = 'person/snippets.mako'
+        def_name = 'link_to_person'
+        template = config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)
+
+        person_list = map(lambda item: template.render(item=item, h=h), added_persons)
+        person_list = ", ".join(person_list)
+        h.flash(_("added persons: %s") % person_list, escape=False)
+        
 
     def query_images(self, id):
         """ show the user a selection of available images """
@@ -188,7 +196,7 @@ class AmazonController(BaseController):
             cnt += 1
 
         meta.Session.commit()
-        h.flash(_("removed %d persons") % cnt)
+        h.flash(ungettext("removed %d person", "removed %d persons", cnt) % cnt)
         return redirect_to(controller='medium', action='edit')
 
 
