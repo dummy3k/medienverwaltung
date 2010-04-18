@@ -26,9 +26,15 @@
     <tr>
         <td class='simple'>${_('Images')}</td>
         <td class='simple'>
+        % if 'SmallImage' in c.item.__dict__:
         <img src="${unicode(c.item.SmallImage.URL)}" />
+        % endif
+        % if 'MediumImage' in c.item.__dict__:
         <img src="${unicode(c.item.MediumImage.URL)}" />
+        % endif
+        % if 'LargeImage' in c.item.__dict__:
         <img src="${unicode(c.item.LargeImage.URL)}" />
+        % endif
         </td>
     </tr>
 </table>

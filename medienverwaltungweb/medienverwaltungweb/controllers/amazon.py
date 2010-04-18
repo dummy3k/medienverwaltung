@@ -98,16 +98,13 @@ class AmazonController(BaseController):
         msg = RefHelper(u"added: ")
 
         log.debug("asins: %s" % asins)
-        #~ node = self.api.item_lookup(",".join(asins),
-                                    #~ ResponseGroup="Images,ItemAttributes")
         try:
             node = self.api.item_lookup(",".join(asins),
                                         ResponseGroup="Images,ItemAttributes")
         except Exception, ex:
-            #~ h.flash(dir(ex))
             h.flash("%s: %s" % (type(ex), ex))
-            return redirect_to(controller='medium', action='edit') 
-            
+            return redirect_to(controller='medium', action='edit')
+
         for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
@@ -182,16 +179,16 @@ class AmazonController(BaseController):
         meta.Session.delete(asin)
         meta.Session.commit()
         return redirect_to(controller='medium', action='edit')
-        
+
     def clear_persons(self, id):
         item = meta.find(model.Medium, id)
         cnt = 0
         for person2media in item.persons_to_media:
             meta.Session.delete(person2media)
             cnt += 1
-            
+
         meta.Session.commit()
-        h.flash(_("removed %d persons") % cnt)            
+        h.flash(_("removed %d persons") % cnt)
         return redirect_to(controller='medium', action='edit')
-        
-        
+
+

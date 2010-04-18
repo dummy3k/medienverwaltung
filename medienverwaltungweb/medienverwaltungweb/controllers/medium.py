@@ -54,7 +54,7 @@ class MediumController(BaseController):
         for item in request.params.get('title').split('\n'):
             if not item:
                 continue
-                
+
             query = meta.Session\
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
@@ -64,7 +64,7 @@ class MediumController(BaseController):
                     anchor_tmpl.render(url=h.url_for(action='edit', id=first_item.id),
                                        text=h.html_escape(first_item.title)))
                 continue
-                
+
             record = model.Medium()
             record.title = item.strip()
             record.created_ts = datetime.now()
@@ -83,7 +83,7 @@ class MediumController(BaseController):
                             "added %(num)d media: %(media)s",
                             len(new_media)) % {'num':len(new_media),
                                                'media':link_list}
-            h.flash(msg)
+            h.flash(msg, escape=False)
             #~ h.flash(UnsafeString(msg))
 
         meta.Session.commit()
@@ -143,11 +143,11 @@ class MediumController(BaseController):
         if tag_name:
             tag_query = tag_query.where(sub_tags_table.c.name==tag_name)
             tag_query = tag_query.where(model.tags_table.c.name != tag_name)
-            
+
         if media_type_name:
             tag_query = tag_query.where(sub_media_types_table.c.name==media_type_name)
             log.debug("tag_query: %s" % tag_query)
-            
+
         #~ tag_query = tag_query.group_by(model.tags_table.c.name)\
                              #~ .order_by(cnt_col.desc())
 
@@ -161,7 +161,7 @@ class MediumController(BaseController):
 
         retval = map(lambda x: (x[0], x[1]), query.execute())
         return retval
-        
+
     def __prepare_list__(self, with_images, type=None, page=1, tag=None):
         if tag:
             c.title += _(", tagged %s") % tag.capitalize()
@@ -172,9 +172,9 @@ class MediumController(BaseController):
         log.debug("type: %s" % type)
         c.tags = self.__get_tags__(tag, type)
         log.debug("c.tags: %s" % len(c.tags))
-        
+
         query = meta.Session.query(model.Medium)
-        
+
         if type:
             query = query.join(model.MediaType)\
                          .filter(model.MediaType.name==type)
@@ -197,7 +197,7 @@ class MediumController(BaseController):
         else:
             query = query.order_by(model.Medium.__dict__[c.order])
             c.title += _(", sorted by %s") % _(c.order.capitalize())
-            
+
         log.debug("c.items: %s" % len(c.items))
         c.page = paginate.Page(query, page, items_per_page=14)
         c.page_args = {'controller':'medium',
@@ -234,7 +234,7 @@ class MediumController(BaseController):
         db_item = meta.find(model.Medium, id)
         meta.Session.delete(db_item)
         meta.Session.commit()
-        h.flash(_("deleted: %s") % h.html_escape(db_item.title))
+        h.flash(_("deleted: %s") % db_item.title)
         return redirect_to(action='index', id=None)
 
     def edit(self, id):
@@ -278,7 +278,7 @@ class MediumController(BaseController):
         query = query.order_by(cnt_col.desc())
         query.bind = meta.engine
         c.tags = map(lambda x: (x[0], x[1]), query.execute())
-        
+
         return render('medium/edit.mako')
 
     def edit_post(self):
@@ -299,7 +299,7 @@ class MediumController(BaseController):
         else:
             #~ return redirect_to()
             return redirect_to(action='edit', id=id)
-            
+
         #~ return redirect_to(action='edit', id=id)
 
     def image(self, id, width, height):
@@ -311,7 +311,7 @@ class MediumController(BaseController):
 
         if item.image_crop:
             img = img.crop(item.image_crop)
-            
+
         #~ log.debug("size: %s, %s" % (width, height))
         size = int(width), int(height)
         img.thumbnail(size)
@@ -349,12 +349,12 @@ class MediumController(BaseController):
         if not medium:
             h.flash(_("all media after this have an image"))
             return redirect_to(action='edit', id=id)
-            
+
         return redirect_to(action='edit', id=medium.id)
     def crop_image(self, id):
         c.item = meta.find(model.Medium, id)
         return render('medium/crop_image.mako')
-        
+
     def crop_image_post(self, id):
         crop = (int(request.params.get('x')),
                 int(request.params.get('y')),
