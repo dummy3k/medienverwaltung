@@ -84,14 +84,16 @@ def one(isbn):
     medium.asins.append(asin)
 
     # Languages
-    msg = RefHelper(u"added: ")
-    add_persons(item, 'Author', medium.id, msg, session)
-    add_persons(item, 'Creator', medium.id, msg, session)
-    add_persons(item, 'Manufacturer', medium.id, msg, session)
+    #~ msg = RefHelper(u"added: ")
+    added_persons = []
+    add_persons(item, 'Author', medium.id, added_persons, session)
+    add_persons(item, 'Creator', medium.id, added_persons, session)
+    add_persons(item, 'Manufacturer', medium.id, added_persons, session)
 
     session.commit()
     #~ print unicode(msg.value, errors='replace')
-    print msg.value
+    #~ print msg.value
+    print "added: %s" % ", ".join(map(lambda x: x.name, added_persons))
     
 
 def for_ever():
