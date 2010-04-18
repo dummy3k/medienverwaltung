@@ -11,7 +11,7 @@
     </div>
     % endif
     <div style="float:left;margin:5px;">
-    <a href="${h.url_for(controller='medium', action='edit', id=item.id, page=None, type=None, tag=None, return_to=None)}">
+    <a href="${h.url_for(controller='medium', action='edit', id=item.id, page=None, type=None, tag=None, return_to=c.return_to)}">
     ${item.title}</a><br>
     
     % for subitem in item.tags:

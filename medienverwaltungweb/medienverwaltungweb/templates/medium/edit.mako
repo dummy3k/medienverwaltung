@@ -6,7 +6,7 @@
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
-<p><img src="${h.url_for(action='image', width=400, height=300)}" /><p>
+<p><img src="${h.url_for(action='image', width=200, height=300)}" /><p>
 </div>
 % endif
 
@@ -74,7 +74,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     % endif
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
-<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
+##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 <p><input type="submit" value="${_('Save')}"/></p>
 </form>
 
@@ -104,7 +104,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     <h2>${_('Actions')}:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">${_("Attach to Amazon")}</a></li>
-        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id)}">${_("Next w/o Image")}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id, return_to=h.url_for())}">${_("Next w/o Image")}</a></li>
         % if len(c.item.asins) > 0:
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>
         % endif
@@ -115,7 +115,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         ##<li><a style="cursor:pointer" onclick="if (confirm('${_("Really delete this medium?")}')) {location.href = '${h.url_for(controller='medium', action='delete_one')}';}">${_("Delete '%s'") % c.item.title}</a></li>
         <li>
             ${self.confirm(_("Delete '%s'") % c.item.title,
-                           h.url_for(controller='medium', action='delete_one'),
+                           h.url_for(controller='medium', action='delete_one', return_to=request.params.get('return_to')),
                            _("Really delete this medium?"))}
         </li>
     </ul>

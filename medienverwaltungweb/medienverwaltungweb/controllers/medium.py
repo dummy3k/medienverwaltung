@@ -75,6 +75,7 @@ class MediumController(BaseController):
             new_media.append(record)
 
         if len(new_media) > 0:
+            meta.Session.commit()
             log.debug("new_media: %s" % unicode(new_media[0].title))
             log.debug("type new_media: %s" % type(new_media[0].title))
             link_list = map(lambda x: anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
@@ -86,7 +87,6 @@ class MediumController(BaseController):
             h.flash(msg, escape=False)
             #~ h.flash(UnsafeString(msg))
 
-        meta.Session.commit()
         return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
@@ -102,6 +102,7 @@ class MediumController(BaseController):
         self.__prepare_list__(False, type, page, tag)
 
         c.pager_action = "list"
+        c.return_to = h.url_for(order=c.order)
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
@@ -235,7 +236,10 @@ class MediumController(BaseController):
         meta.Session.delete(db_item)
         meta.Session.commit()
         h.flash(_("deleted: %s") % db_item.title)
-        return redirect_to(action='index', id=None)
+        if request.params.get('return_to'):
+            return redirect_to(str(request.params.get('return_to')))
+        else:
+            return redirect_to(action='index', id=None)
 
     def edit(self, id):
         log.debug("id: %s" % id)
@@ -350,7 +354,7 @@ class MediumController(BaseController):
             h.flash(_("all media after this have an image"))
             return redirect_to(action='edit', id=id)
 
-        return redirect_to(action='edit', id=medium.id)
+        return redirect_to(action='edit', id=medium.id, return_to=request.params.get('return_to'))
     def crop_image(self, id):
         c.item = meta.find(model.Medium, id)
         return render('medium/crop_image.mako')
