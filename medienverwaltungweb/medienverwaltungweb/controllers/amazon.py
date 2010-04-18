@@ -121,7 +121,7 @@ class AmazonController(BaseController):
         def_name = 'link_to_person'
         template = config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)
 
-        person_list = map(lambda item: template.render(item=item, h=h), added_persons)
+        person_list = map(lambda item: template.render_unicode(item=item, h=h), added_persons)
         person_list = ", ".join(person_list)
         h.flash(_("added persons: %s") % person_list, escape=False)
         

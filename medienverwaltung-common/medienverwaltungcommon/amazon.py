@@ -29,7 +29,6 @@ def add_persons(item, relation_name, medium_id, added_persons, session):
 
     for subitem in item.ItemAttributes.__dict__[relation_name]:
         subitem = unicode(subitem)
-        log.debug("AUTHOR: %s" % subitem)
         alias = session.query(model.PersonAlias)\
                        .filter(model.PersonAlias.name==subitem)\
                        .first()
