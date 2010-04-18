@@ -104,13 +104,15 @@ class AmazonController(BaseController):
             return redirect_to(controller='medium', action='edit')
 
         added_persons = []
+        medium = meta.Session.query(model.Medium).get(id)
         for item in node.Items.Item:
             log.debug("item.title: %s" % item.ItemAttributes.Title)
             log.debug("item: %s" % item.ASIN)
-            add_persons(item, 'Actor', id, added_persons, meta.Session)
-            add_persons(item, 'Creator', id, added_persons, meta.Session)
-            add_persons(item, 'Director', id, added_persons, meta.Session)
-            add_persons(item, 'Manufacturer', id, added_persons, meta.Session)
+            add_persons(item, 'Actor', medium, added_persons, meta.Session)
+            add_persons(item, 'Author', medium, added_persons, meta.Session)
+            add_persons(item, 'Creator', medium, added_persons, meta.Session)
+            add_persons(item, 'Director', medium, added_persons, meta.Session)
+            add_persons(item, 'Manufacturer', medium, added_persons, meta.Session)
 
         meta.Session.commit()
         #~ if len(msg.value) > len(u"added: "):
@@ -121,10 +123,12 @@ class AmazonController(BaseController):
         def_name = 'link_to_person'
         template = config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)
 
-        person_list = map(lambda item: template.render_unicode(item=item, h=h), added_persons)
-        person_list = ", ".join(person_list)
-        h.flash(_("added persons: %s") % person_list, escape=False)
-        
+        if len(added_persons) > 0:
+            person_list = map(lambda item: template.render_unicode(item=item, h=h), added_persons)
+            person_list = ", ".join(person_list)
+            h.flash(_("added persons: %s") % person_list, escape=False)
+        else:
+            h.flash("no person added")
 
     def query_images(self, id):
         """ show the user a selection of available images """

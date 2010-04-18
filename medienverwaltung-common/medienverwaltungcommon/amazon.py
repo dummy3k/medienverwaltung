@@ -9,8 +9,16 @@ class RefHelper():
 
     def __repr__(self):
         return self.value
+
+def find(haystack, condition):
+    for x in haystack:
+        if condition(x):
+            return x
+
+    raise KeyError("condition did not match")
+
         
-def add_persons(item, relation_name, medium_id, added_persons, session):
+def add_persons(item, relation_name, medium, added_persons, session):
     if not relation_name in item.ItemAttributes.__dict__:
         log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
         return
@@ -25,7 +33,7 @@ def add_persons(item, relation_name, medium_id, added_persons, session):
         #~ abort(404)
         
     log.debug("actor_relation: %s" % actor_relation)
-    medium = session.query(model.Medium).get(medium_id)
+    #~ medium = session.query(model.Medium).get(medium_id)
 
     for subitem in item.ItemAttributes.__dict__[relation_name]:
         subitem = unicode(subitem)
@@ -47,9 +55,14 @@ def add_persons(item, relation_name, medium_id, added_persons, session):
                 session.commit()
                 log.debug("Actor.name, after cm: %s" % actor.name)
 
-        query = session.query(model.PersonToMedia)
-        record = query.filter(model.PersonToMedia.person_id==actor.id)\
-                      .filter(model.PersonToMedia.medium_id==medium_id).first()
+        #~ query = session.query(model.PersonToMedia)
+        #~ record = query.filter(model.PersonToMedia.person_id==actor.id)\
+                      #~ .filter(model.PersonToMedia.medium_id==medium.id).first()
+        try:
+            record = find(medium.persons_to_media, lambda item: item.person_id==actor.id and item.medium_id==medium.id)
+        except KeyError:
+            record = None
+
         if record:
             log.info("!!!!!!! %s already exists" % record)
         else:

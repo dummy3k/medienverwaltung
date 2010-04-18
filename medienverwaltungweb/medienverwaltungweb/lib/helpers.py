@@ -64,3 +64,11 @@ def iif(expr, a, b):
 
 def tmpl(template_name, def_name):
     return config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)
+
+def find(haystack, condition):
+    for x in haystack:
+        if condition(x):
+            return x
+
+    raise KeyError("condition did not match")
+
