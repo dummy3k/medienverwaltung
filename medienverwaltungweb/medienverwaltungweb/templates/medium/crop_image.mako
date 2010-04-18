@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Crop Image for Medium - "${c.item.title}"</%def>
+<%def name="title()">${_("Crop Medium '%s' Image") % c.item.title}</%def>
 
 <%def name="html_head()">
 <script src="/js/jcrop/js/jquery.Jcrop.js"></script>
@@ -41,7 +41,7 @@
     <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
     <label>W <input type="text" size="4" id="w" name="w" /></label>
     <label>H <input type="text" size="4" id="h" name="h" /></label>
-    <input type="submit" value="Crop" />
+    <input type='submit' value='${_("Crop")}' />
 </form>
 
 <p>

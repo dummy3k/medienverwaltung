@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-18 15:53+0100\n"
+"PO-Revision-Date: 2010-04-18 19:56+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -22,6 +22,9 @@ msgstr ""
 msgid "added persons: %s"
 msgstr "Hinzugefügte Personen: %s"
 
+msgid "Only one image available. It was automatically choosen."
+msgstr "Es ist nur ein Bild verfügbar. Dieses wurde automatisch ausgewählt."
+
 msgid "No image available"
 msgstr "Kein Bild verfügbar"
 
@@ -29,7 +32,6 @@ msgid "image is to big."
 msgstr "Das Bild ist zu groß."
 
 #, python-format
-#| msgid "Remove all Persons"
 msgid "removed %d person"
 msgid_plural "removed %d persons"
 msgstr[0] "%d Person entfernt"
@@ -207,6 +209,12 @@ msgstr "Medien ohne Bild"
 msgid "Search"
 msgstr "Suchen"
 
+msgid "Select image"
+msgstr "Bild auswählen"
+
+msgid "Click the image you want to attach to the medium."
+msgstr "Klicke auf das Bild, welches Du mit dem Medium verbinden möchtest."
+
 msgid "Amazon Item Lookup Results"
 msgstr "Amazon Detail Ansicht"
 
@@ -342,6 +350,13 @@ msgstr "Martkierte Medien ausleihen"
 msgid "Return Media"
 msgstr "Medium zurückgeben"
 
+#, python-format
+msgid "Crop Medium '%s' Image"
+msgstr "Medium '%s' Bild beschneiden"
+
+msgid "Crop"
+msgstr "Beschneiden"
+
 msgid "Edit Medium"
 msgstr "Medium  ändern"
 
@@ -413,9 +428,8 @@ msgstr "Aktualisert am"
 msgid "Delete marked Media"
 msgstr "Martkierte Medien löschen"
 
-#, fuzzy
-msgid "Liste"
-msgstr "Titel"
+msgid "List"
+msgstr "Liste"
 
 msgid "As Gallery"
 msgstr "Als Gallerie"
@@ -471,7 +485,4 @@ msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
 msgstr "Alle Autoren..."
-
-#~ msgid "removed %d persons"
-#~ msgstr ""
 

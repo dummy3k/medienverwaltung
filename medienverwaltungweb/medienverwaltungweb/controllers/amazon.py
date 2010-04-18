@@ -84,7 +84,10 @@ class AmazonController(BaseController):
 
         meta.Session.commit()
         self.__query_actors__(media_id)
-        return redirect_to(controller='amazon', action='query_images')
+        if not medium.image_data:
+            return redirect_to(controller='amazon', action='query_images')
+        else:
+            return redirect_to(controller='medium', action='edit')
 
     def query_actors(self, id):
         self.__query_actors__(id)
@@ -147,6 +150,7 @@ class AmazonController(BaseController):
             url = None
             try:
                 url = c.items[0].LargeImage.URL
+                h.flash(_("Only one image available. It was automatically choosen."))
             except:
                 h.flash(_("No image available"))
 

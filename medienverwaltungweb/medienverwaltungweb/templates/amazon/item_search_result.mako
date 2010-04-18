@@ -39,7 +39,7 @@
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
-<p><input type="submit" value="${_("Attach to '%s'" % c.item.title)}"/></p>
+<p><input type="submit" value="${_("Attach to '%s'") % c.item.title}"/></p>
 </form>
 </%def>
 

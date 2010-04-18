@@ -19,6 +19,7 @@ medienverwaltungweb/config/middleware.py
 medienverwaltungweb/config/routing.py
 medienverwaltungweb/controllers/__init__.py
 medienverwaltungweb/controllers/amazon.py
+medienverwaltungweb/controllers/api.py
 medienverwaltungweb/controllers/borrow.py
 medienverwaltungweb/controllers/error.py
 medienverwaltungweb/controllers/medium.py
@@ -110,6 +111,7 @@ medienverwaltungweb/tests/__init__.py
 medienverwaltungweb/tests/test_models.py
 medienverwaltungweb/tests/functional/__init__.py
 medienverwaltungweb/tests/functional/test_amazon.py
+medienverwaltungweb/tests/functional/test_api.py
 medienverwaltungweb/tests/functional/test_borrow.py
 medienverwaltungweb/tests/functional/test_medium.py
 medienverwaltungweb/tests/functional/test_search.py

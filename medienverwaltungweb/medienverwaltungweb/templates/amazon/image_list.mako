@@ -1,8 +1,9 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">Select image</%def>
+<%def name="title()">${_("Select image")}</%def>
 
 <%def name="content()">
+<p>${_("Click the image you want to attach to the medium.")}</p>
 
 % for item in c.items:
 %   if 'LargeImage' in dir(item):

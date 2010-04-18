@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-18 15:52+0200\n"
+"POT-Creation-Date: 2010-04-18 19:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,9 @@ msgstr ""
 
 #, python-format
 msgid "added persons: %s"
+msgstr ""
+
+msgid "Only one image available. It was automatically choosen."
 msgstr ""
 
 msgid "No image available"
@@ -206,6 +209,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Select image"
+msgstr ""
+
+msgid "Click the image you want to attach to the medium."
+msgstr ""
+
 msgid "Amazon Item Lookup Results"
 msgstr ""
 
@@ -341,6 +350,13 @@ msgstr ""
 msgid "Return Media"
 msgstr ""
 
+#, python-format
+msgid "Crop Medium '%s' Image"
+msgstr ""
+
+msgid "Crop"
+msgstr ""
+
 msgid "Edit Medium"
 msgstr ""
 
@@ -412,7 +428,7 @@ msgstr ""
 msgid "Delete marked Media"
 msgstr ""
 
-msgid "Liste"
+msgid "List"
 msgstr ""
 
 msgid "As Gallery"

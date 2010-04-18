@@ -61,7 +61,7 @@ ${_("Sort by")}:
 
 <%def name="side()">
 	<div class="box">
-        <h2>${_("Liste")}:</h2>
+        <h2>${_("List")}:</h2>
         <ul>
         <li><a href="${h.url_for(action='list_gallery', id=None, page=None)}">${_("As Gallery")}</a></li>
         </ul>
