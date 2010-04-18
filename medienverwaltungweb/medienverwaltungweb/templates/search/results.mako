@@ -9,10 +9,8 @@
 <div class="contentbox">
 % if c.media_page:
 <h2>Media</h2>
-##    <%namespace name='medium' file='../medium/list.mako' />
-##    ${medium.bare_content(c.media_page, 'list')}
 % for item in c.media_page:
-<p>${medium_block.medium_block(item)}</p>
+${medium_block.medium_block(item)}
 % endfor
 % endif
 </div>

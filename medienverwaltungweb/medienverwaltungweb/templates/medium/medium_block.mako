@@ -1,6 +1,6 @@
 <%def name="medium_block(item)">
 
-<div>
+<div style='overflow: auto;'>
     % if item.image_data:
     <div style="float:left;margin:5px;">
 ##        %if item.tags:
