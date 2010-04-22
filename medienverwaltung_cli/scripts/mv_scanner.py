@@ -6,6 +6,7 @@ import logging
 import xmlrpclib
 from optfunc import optfunc
 from pprint import pprint, pformat
+import os
 
 log = logging.getLogger(__name__)
 isbn_log = logging.getLogger('isbn')
@@ -29,7 +30,7 @@ def one(url, isbn):
 
     return result['success']
 
-def for_ever():
+def for_ever(url):
     while True:
         try:
             user_input = raw_input("ISBN:")
@@ -44,10 +45,10 @@ def for_ever():
         if not user_input:
             continue
 
-        if one(user_input):
-            os.system('play -q audio/success.wav')
+        if one(url, user_input):
+            os.system('play -q ../audio/success.wav')
         else:
-            os.system('play -q audio/failure.wav')
+            os.system('play -q ../audio/failure.wav')
 
 if __name__ == '__main__':
     #~ optfunc.run(find)
