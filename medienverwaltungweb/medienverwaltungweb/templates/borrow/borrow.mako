@@ -1,7 +1,7 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">Borrow - "${c.item.title}"</%def>
+<%def name="title()">${_("Borrow")} - "${c.item.title}"</%def>
 
 <%def name="content()">
 % if c.item.image_data:
@@ -34,7 +34,7 @@
 <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="Borrow"/>
+<input type="submit" value="${_("Borrow")}"/>
 </p>
 </form>
 </%def>

@@ -1,7 +1,7 @@
 <%inherit file="/layout-default.mako"/>\
 <%namespace name='medium_block' file='../medium/medium_block.mako' />
 
-<%def name="title()">Add new Borrower</%def>
+<%def name="title()">${_("Add new Borrower")}</%def>
 
 <%def name="content()">
 <form id="signin-form" method="post" action="${h.url_for(action='add_borrower_post')}">
@@ -22,7 +22,7 @@
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 <input type="hidden" name="media_ids" value="${request.params.get('media_ids')}"/>
-<input type="submit" value="Add"/>
+<input type="submit" value="${_("Add")}"/>
 </p>
 </form>
 </%def>

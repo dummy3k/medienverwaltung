@@ -64,7 +64,8 @@ class BorrowController(BaseController):
         medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
                        .render_unicode(item=medium, h=h)
         h.flash(_("%(medium)s borrowed to %(to)s") % {'medium':medium_link,
-                                                      'to':borrower_link})
+                                                      'to':borrower_link},
+                escape=False)
         
     def add_borrower(self):
         c.item = model.Borrower()
@@ -175,7 +176,8 @@ class BorrowController(BaseController):
                              .render(item=record.borrower, h=h)
             medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
                            .render_unicode(item=record.medium, h=h)
-            h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link))
+            h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link),
+                    escape=False)
 
         #~ meta.Session.commit()
         return redirect_to(action='index')

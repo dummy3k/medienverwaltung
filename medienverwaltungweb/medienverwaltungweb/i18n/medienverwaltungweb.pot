@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-18 22:09+0200\n"
+"POT-Creation-Date: 2010-04-23 00:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,6 +263,9 @@ msgstr ""
 msgid "If you click on the small image the checkbox toggles."
 msgstr ""
 
+msgid "Add new Borrower"
+msgstr ""
+
 msgid "First Name"
 msgstr ""
 
@@ -270,6 +273,9 @@ msgid "Last Name"
 msgstr ""
 
 msgid "eMail"
+msgstr ""
+
+msgid "Add"
 msgstr ""
 
 msgid "Medium"
@@ -394,9 +400,6 @@ msgid "Role"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Add"
 msgstr ""
 
 msgid "Attach to Amazon"

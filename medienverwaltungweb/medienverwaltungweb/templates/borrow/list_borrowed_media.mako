@@ -40,7 +40,7 @@
 
 <%def name="side()">
 	<div class="box">
-        <h2>Actions:</h2>
+        <h2>${_("Actions")}:</h2>
         <ul>
             <li><a href="${h.url_for(controller='borrow', action='add_borrower', id=None)}">${_("Add Borrower")}</a></li>
             <li><a href="${h.url_for(controller='borrow', action='list_borrowers')}">${_("List Borrowers")}</a></li>
