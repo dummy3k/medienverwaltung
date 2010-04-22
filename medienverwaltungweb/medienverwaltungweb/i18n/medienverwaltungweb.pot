@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-18 19:56+0200\n"
+"POT-Creation-Date: 2010-04-18 22:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,8 +182,16 @@ msgid "removed: %(person)s from %(medium)s"
 msgstr ""
 
 #, python-format
-msgid "Removed %(person_cnt)d, added %(media_cnt)d media"
-msgstr ""
+msgid "Removed %d person"
+msgid_plural "Removed %d persons"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Added %(cnt)d medium to '%(person)s'"
+msgid_plural "Added %(cnt)d media to '%(person)s'"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Books"
 msgstr ""
@@ -200,7 +208,7 @@ msgstr ""
 msgid "Todo"
 msgstr ""
 
-msgid "Add Medium"
+msgid "Add Media"
 msgstr ""
 
 msgid "Media without Image"
@@ -440,13 +448,7 @@ msgstr ""
 msgid "As List"
 msgstr ""
 
-msgid "Add one single medium"
-msgstr ""
-
 msgid "Type"
-msgstr ""
-
-msgid "Add many media"
 msgstr ""
 
 #, python-format

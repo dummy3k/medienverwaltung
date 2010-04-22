@@ -62,7 +62,7 @@ class MediumController(BaseController):
                 first_item = query.first()
                 h.flash(_("medium elready exists: %s") %\
                     anchor_tmpl.render(url=h.url_for(action='edit', id=first_item.id),
-                                       text=h.html_escape(first_item.title)))
+                                       text=h.html_escape(first_item.title)), escape=False)
                 continue
 
             record = model.Medium()

@@ -56,7 +56,7 @@
 	<div class="box">
         <h2>${_("Todo")}:</h2>
         <ul>
-        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None, tag=None)}">${_("Add Medium")}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='mass_add', id=None, page=None, type=None, tag=None)}">${_("Add Media")}</a></li>
         <li><a href="${h.url_for(controller='medium', action='list_no_image', id=None, page=None, tag=None)}">${_("Media without Image")}</a></li>
         </ul>
 	</div>

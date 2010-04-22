@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-18 19:56+0100\n"
+"PO-Revision-Date: 2010-04-18 22:10+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -182,8 +182,16 @@ msgid "removed: %(person)s from %(medium)s"
 msgstr "%(person)s vom Medium %(medium)s entfernt"
 
 #, python-format
-msgid "Removed %(person_cnt)d, added %(media_cnt)d media"
-msgstr "Entfernt %(person_cnt)d, hinzugefügt %(media_cnt)d media"
+msgid "Removed %d person"
+msgid_plural "Removed %d persons"
+msgstr[0] "%d Person entfernt"
+msgstr[1] "%d Personen entfernt"
+
+#, python-format
+msgid "Added %(cnt)d medium to '%(person)s'"
+msgid_plural "Added %(cnt)d media to '%(person)s'"
+msgstr[0] "%(cnt)d Medium zu '%(person)s' hinzugefügt"
+msgstr[1] "%(cnt)d Medien zu '%(person)s' hinzugefügt"
 
 msgid "Books"
 msgstr "Bücher"
@@ -200,8 +208,8 @@ msgstr "Ausleihen"
 msgid "Todo"
 msgstr "Todo"
 
-msgid "Add Medium"
-msgstr "Medium  hinzugefügen"
+msgid "Add Media"
+msgstr "Medien hinzufügen"
 
 msgid "Media without Image"
 msgstr "Medien ohne Bild"
@@ -374,7 +382,7 @@ msgid "Updated"
 msgstr "Aktualisiert"
 
 msgid "Do you really want to remove this person from the medium?"
-msgstr "Sollen wirklich alle Personen von diesem Medium entfernt werden?"
+msgstr "Sollen diese Personen wirklich von diesem Medium entfernt werden?"
 
 msgid "Asins"
 msgstr "Asins"
@@ -440,14 +448,8 @@ msgstr "Gallerie"
 msgid "As List"
 msgstr "Als Liste"
 
-msgid "Add one single medium"
-msgstr "Ein einzelnes Medium hinzugefügen"
-
 msgid "Type"
 msgstr "Art"
-
-msgid "Add many media"
-msgstr "Viele Media hinzugefügen"
 
 #, python-format
 msgid "Edit Person - '%s'"
@@ -485,4 +487,7 @@ msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
 msgstr "Alle Autoren..."
+
+#~ msgid "Add Medium"
+#~ msgstr "Medium  hinzugefügen"
 

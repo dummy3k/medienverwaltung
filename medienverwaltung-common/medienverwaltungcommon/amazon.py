@@ -46,18 +46,20 @@ def add_persons(item, relation_name, medium, added_persons, session):
         else:
             query = session.query(model.Person)
             actor = query.filter(model.Person.name==subitem).first()
-            if not actor:
-                log.info("new actor: %s" % subitem)
-                actor = model.Person()
-                actor.name = subitem
-                log.debug("Actor.name, bf commit: %s" % actor.name)
-                session.add(actor)
-                session.commit()
-                log.debug("Actor.name, after cm: %s" % actor.name)
+
+        if not actor:
+            log.info("new actor: %s" % subitem)
+            actor = model.Person()
+            actor.name = subitem
+            log.debug("Actor.name, bf commit: %s" % actor.name)
+            #~ session.add(actor)
+            session.commit()
+            log.debug("Actor.name, after cm: %s" % actor.name)
 
         #~ query = session.query(model.PersonToMedia)
         #~ record = query.filter(model.PersonToMedia.person_id==actor.id)\
                       #~ .filter(model.PersonToMedia.medium_id==medium.id).first()
+
         try:
             record = find(medium.persons_to_media, lambda item: item.person_id==actor.id and item.medium_id==medium.id)
         except KeyError:

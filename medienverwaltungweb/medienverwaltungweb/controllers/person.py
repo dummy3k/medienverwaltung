@@ -192,9 +192,18 @@ class PersonController(BaseController):
             meta.Session.delete(secondary)
 
         meta.Session.commit()
-        h.flash(_("Removed %(person_cnt)d, added %(media_cnt)d media") %\
-                {'person_cnt':len(person_ids), 'media_cnt':remap_cnt})
+        #~ h.flash(_("Removed %(person_cnt)d, added %(media_cnt)d media") %\
+                #~ {'person_cnt':len(person_ids), 'media_cnt':remap_cnt})
 
+        h.flash(ungettext("Removed %d person",
+                          "Removed %d persons",
+                          len(person_ids)) % len(person_ids))
+                          
+        h.flash(ungettext("Added %(cnt)d medium to '%(person)s'",
+                          "Added %(cnt)d media to '%(person)s'",
+                          remap_cnt) % {'cnt':remap_cnt,
+                                             'person':primary.name})
+                          
         return_to = request.params.get('return_to',
                                        h.url_for(controller='person',
                                                  action='edit',
