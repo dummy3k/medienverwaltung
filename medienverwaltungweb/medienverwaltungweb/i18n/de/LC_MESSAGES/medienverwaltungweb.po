@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-23 00:12+0100\n"
+"PO-Revision-Date: 2010-04-23 22:55+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -19,8 +19,15 @@ msgstr ""
 "Generated-By: Babel 0.9.4\n"
 
 #, python-format
+msgid "attached %s amazon ids to media id %s: %s"
+msgstr "%s Amazon Ids zu Medium %s hinzugefügt: %s"
+
+#, python-format
 msgid "added persons: %s"
 msgstr "Hinzugefügte Personen: %s"
+
+msgid "no person added"
+msgstr "Keine Person hinzugefügt"
 
 msgid "Only one image available. It was automatically choosen."
 msgstr "Es ist nur ein Bild verfügbar. Dieses wurde automatisch ausgewählt."
@@ -263,7 +270,6 @@ msgstr "Tipp"
 msgid "If you click on the small image the checkbox toggles."
 msgstr "Ein Klick auf das kleine Bild schaltet die Checkbox an und aus."
 
-#| msgid "Add Borrower"
 msgid "Add new Borrower"
 msgstr "Neuen Ausleiher hinzufügen"
 

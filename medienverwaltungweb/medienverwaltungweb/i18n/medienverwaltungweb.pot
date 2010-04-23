@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-23 00:12+0200\n"
+"POT-Creation-Date: 2010-04-23 22:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,14 @@ msgstr ""
 "Generated-By: Babel 0.9.4\n"
 
 #, python-format
+msgid "attached %s amazon ids to media id %s: %s"
+msgstr ""
+
+#, python-format
 msgid "added persons: %s"
+msgstr ""
+
+msgid "no person added"
 msgstr ""
 
 msgid "Only one image available. It was automatically choosen."
