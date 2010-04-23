@@ -79,7 +79,7 @@ class AmazonController(BaseController):
             asins.append(item)
             medium.asins.append(record)
 
-        h.flash("attached %s amazon ids to media id %s: %s"\
+        h.flash(_("attached %s amazon ids to media id %s: %s")\
                 % (len(asins), media_id, ", ".join(asins)))
 
         meta.Session.commit()
@@ -131,7 +131,7 @@ class AmazonController(BaseController):
             person_list = ", ".join(person_list)
             h.flash(_("added persons: %s") % person_list, escape=False)
         else:
-            h.flash("no person added")
+            h.flash(_("no person added"))
 
     def query_images(self, id):
         """ show the user a selection of available images """

@@ -37,6 +37,7 @@ def add_persons(item, relation_name, medium, added_persons, session):
 
     for subitem in item.ItemAttributes.__dict__[relation_name]:
         subitem = unicode(subitem)
+        log.debug("amazon person: %s" % subitem)
         alias = session.query(model.PersonAlias)\
                        .filter(model.PersonAlias.name==subitem)\
                        .first()
@@ -51,10 +52,10 @@ def add_persons(item, relation_name, medium, added_persons, session):
             log.info("new actor: %s" % subitem)
             actor = model.Person()
             actor.name = subitem
-            log.debug("Actor.name, bf commit: %s" % actor.name)
-            #~ session.add(actor)
+            #log.debug("Actor.name, bf commit: %s" % actor)
+            session.add(actor)
             session.commit()
-            log.debug("Actor.name, after cm: %s" % actor.name)
+            #log.debug("Actor.name, after cm: %s" % actor)
 
         #~ query = session.query(model.PersonToMedia)
         #~ record = query.filter(model.PersonToMedia.person_id==actor.id)\

@@ -42,7 +42,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'>${_(subitem)}</td>
         <td class='simple'>
         ##<ul>
-        %for subsubitem in c.persons[subitem]:
+        % for subsubitem in c.persons[subitem]:
         ##<p>
             <input type="checkbox" name="person_id_${subsubitem.person.id}" value="${subsubitem.person.id}"/>
             ${person_snippets.link_to_person(subsubitem.person, h)}
