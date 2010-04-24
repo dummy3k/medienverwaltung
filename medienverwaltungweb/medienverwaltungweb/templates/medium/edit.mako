@@ -8,7 +8,7 @@
 <div style="float:right">
 <p>
     <a href="${h.url_for(action='raw_image')}">
-    <img src="${h.url_for(action='image', width=200, height=300)}" />
+    <img src="${h.url_for(action='image', width=200, height=300)}" class="plain"/>
     </a>
 </p>
 </div>

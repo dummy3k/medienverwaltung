@@ -15,7 +15,7 @@ ${js_pager.js_pager(e)}
 , <a href="${h.url_for(controller='medium', action='edit', id=item.id, type=None, tag=None, page=None)}">
 ${item.title}</a>\
 %       else:
-<a href="${h.url_for(controller='medium', action='edit', id=item.id)}", type=None, tag=None, page=None>
+<a href="${h.url_for(controller='medium', action='edit', id=item.id, type=None, tag=None, page=None)}">
 ${item.title}</a>\
 %       endif
 %   endfor
