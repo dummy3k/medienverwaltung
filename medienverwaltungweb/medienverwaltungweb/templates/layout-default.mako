@@ -6,6 +6,7 @@
     <title>${self.title()} - ${config['page_title']}</title>
 
 	<link href="/css/default.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/css/awesome-buttons.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/minimalistic/style.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
@@ -63,8 +64,11 @@
 	<div class="box">
         <h2>${_("Search")}:</h2>
         <form id="signin-form" method="post" action="${h.url_for(controller='search', action='search_post', id=None, page=None, tag=None, type=None)}">
-            <input type="text" name="query"/>
-            <input type="submit" value="${_("Search")}"/>
+			<input type="text" name="query" />
+			
+			<p>
+				<input type="submit" value="${_('Search')}" class="button" />
+			</p>
         </form>
 	</div>
 </div>

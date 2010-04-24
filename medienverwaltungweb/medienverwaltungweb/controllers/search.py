@@ -3,6 +3,8 @@ import logging
 from sqlalchemy.sql import select, join, and_, or_, not_
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
+from pylons.controllers.util import abort
+from pylons.i18n import _, ungettext
 
 from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
@@ -20,7 +22,7 @@ class SearchController(BaseController):
     def search_post(self):
         query = request.params.get('query')
         if not query:
-            h.flash("please enter search query")
+            h.flash(_("please enter search query"))
             return redirect_to(action='index')
 
         like_query = "%%%s%%" % query
