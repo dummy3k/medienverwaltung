@@ -214,7 +214,12 @@ class MediumController(BaseController):
             c.title += _(", sorted by %s") % _(c.order.capitalize())
 
         log.debug("c.items: %s" % len(c.items))
-        c.page = paginate.Page(query, page, items_per_page=14)
+        if not 'items_per_page' in session:
+            items_per_page = 14
+        else:
+            items_per_page = session['items_per_page']
+
+        c.page = paginate.Page(query, page, items_per_page=items_per_page)
         c.page_args = {'controller':'medium',
                        'action':'list',
                        'order':c.order}
@@ -401,3 +406,16 @@ class MediumController(BaseController):
         #~ h.flash(u"testing \xc3\xa4")
         h.flash("<i>blah</i>", False)
         return redirect_to(action='index')
+    def set_view_options(self, type=None, tag=None):
+        items_per_page = request.params.get('items_per_page')
+        if not items_per_page or int(items_per_page) <= 0:
+            h.flash(_("'Number of images' must be greater then null"))
+            return redirect_to(action='list_gallery', type=type, tag=tag)
+
+        items_per_page = int(items_per_page)
+        h.flash("%d images will be display for now on" % items_per_page)
+        session['items_per_page'] = items_per_page
+        session.save()
+
+        #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
+        return redirect_to(action='list_gallery', type=type, tag=tag)
