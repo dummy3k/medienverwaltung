@@ -34,6 +34,8 @@ app_instance_uuid = ${app_instance_uuid}
 
 # SQLAlchemy database URL
 sqlalchemy.url = sqlite:///production.db
+#sqlalchemy.url = mysql://user:pass@127.0.0.1/database?charset=utf8
+#sqlalchemy.pool_recycle = 1800
 
 # WARNING: *THE LINE BELOW MUST BE UNCOMMENTED ON A PRODUCTION ENVIRONMENT*
 # Debug mode will enable the interactive debugging tool, allowing ANYONE to

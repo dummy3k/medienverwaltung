@@ -8,8 +8,18 @@ b)  libxml2-dev libxslt-dev build-essential python-dev
     sudo easy_install lxml
 
 easy_install -U medienverwaltung-common
-mv_manage_db.py version_control --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
-mv_manage_db.py upgrade --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
+
+Create the Database:
+====================
+
+mv_manage_db.py manage manage_local.py --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
+chmod a+x manage_local.py
+./manage_local.py version_control
+./manage_local.py upgrade
+
+
+Other
+=====
 
 this might work:
 
