@@ -29,7 +29,7 @@
                 ${item.medium.title}
             </a>
         </td>
-        <td class='simple'>${item.borrowed_ts}</td>
+        <td class='simple'>${h.strftime(item.borrowed_ts)}</td>
     </tr>
     %endfor
 </table>

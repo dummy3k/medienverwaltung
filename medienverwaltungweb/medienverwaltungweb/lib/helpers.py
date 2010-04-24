@@ -8,6 +8,7 @@ import logging
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
 from pylons import config
+from pylons.i18n import _, ungettext
 from webhelpers.pylonslib import Flash as _Flash
 from routes import url_for
 from mako.filters import html_escape
@@ -72,3 +73,9 @@ def find(haystack, condition):
 
     raise KeyError("condition did not match")
 
+
+def strftime(value):
+    if not value:
+        return None
+    else:
+        return value.strftime(_("%Y-%m-%d %H:%M"))

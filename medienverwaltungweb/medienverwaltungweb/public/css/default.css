@@ -55,3 +55,7 @@ a.jslink {
 p.slim {
 	margin-top: 4px;
 }
+
+#layoutImg {
+	cursor: pointer;
+}

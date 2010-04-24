@@ -15,7 +15,7 @@
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Medium')}</td>
-        <td class='simple' width="100%">
+        <td class='simple'>
             ${medium_block.medium_block(c.item)}
         </td>
     </tr>

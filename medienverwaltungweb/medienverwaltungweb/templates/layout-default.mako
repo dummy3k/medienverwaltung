@@ -10,6 +10,7 @@
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/minimalistic/style.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+	<script src="/js/application.js" type="text/javascript"></script>
     <link rel="shortcut icon" href="/css/book_open.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="/css/book_open.ico" type="image/vnd.microsoft.icon">
 ##    % for x in c.rss_feeds:

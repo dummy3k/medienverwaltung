@@ -35,11 +35,11 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     </tr>
     <tr>
         <td class='simple'>${_('Created')}</td>
-        <td class='simple'>${c.item.created_ts.strftime(_("%Y-%m-%d %H:%M"))}</td>
+        <td class='simple'>${h.strftime(c.item.created_ts)}</td>
     </tr>
     <tr>
         <td class='simple'>${_('Updated')}</td>
-        <td class='simple'>${c.item.updated_ts.strftime(_("%Y-%m-%d %H:%M"))}</td>
+        <td class='simple'>${h.strftime(c.item.updated_ts)}</td>
     </tr>
     %for subitem in c.persons:
     <tr>

@@ -30,8 +30,8 @@ ${js_pager.js_pager(e)}
                 ${item.medium.title}
             </a>
         </td>
-        <td class='simple'>${item.borrowed_ts}</td>
-        <td class='simple'>${item.returned_ts}</td>
+        <td class='simple'>${h.strftime(item.borrowed_ts)}</td>
+        <td class='simple'>${h.strftime(item.returned_ts)}</td>
     </tr>
     %endfor
 </table>
