@@ -78,4 +78,4 @@ def strftime(value):
     if not value:
         return None
     else:
-        return value.strftime(_("%Y-%m-%d %H:%M"))
+        return value.strftime(str(_("%Y-%m-%d %H:%M")))
