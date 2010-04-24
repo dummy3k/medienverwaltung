@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-24 03:27+0100\n"
+"PO-Revision-Date: 2010-04-24 08:50+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -206,6 +206,10 @@ msgstr[1] "%(cnt)d Medien zu '%(person)s' hinzugefügt"
 msgid "please enter search query"
 msgstr "Bitte Suchanfrage eingeben"
 
+#, python-format
+msgid "%Y-%m-%d %H:%M"
+msgstr "%d.%m.%Y %H:%M"
+
 msgid "Books"
 msgstr "Bücher"
 
@@ -397,10 +401,6 @@ msgstr "Tags"
 msgid "Created"
 msgstr "Erzeugt"
 
-#, python-format
-msgid "%Y-%m-%d %H:%M"
-msgstr "%d.%m.%Y %H:%M"
-
 msgid "Updated"
 msgstr "Aktualisiert"
 
@@ -464,6 +464,19 @@ msgstr "Liste"
 
 msgid "As Gallery"
 msgstr "Als Gallerie"
+
+msgid "This medium is not shown, because it has no image:"
+msgid_plural "These media are not shown, because they have no image:"
+msgstr[0] "Dieses Medium wird nicht angezeigt, weil es kein Bild hat:"
+msgstr[1] "Diese Medien werden nicht angezeigt, weil sie keine Bilder haben:"
+
+#, python-format
+#| msgid "all media after this have an image"
+msgid "%d media are not shown, because they have no image."
+msgstr "%d Medien werden nicht angezeigt, weil sie keine Bilder haben."
+
+msgid "Show a list of these media."
+msgstr "Zeige eine Liste diese Medien an."
 
 msgid "Gallery"
 msgstr "Gallerie"

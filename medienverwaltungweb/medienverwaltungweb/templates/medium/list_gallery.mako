@@ -6,14 +6,36 @@
 <%namespace name='js_pager' file='../js_pager.mako' />
 ${js_pager.js_pager(e)}
 
-<p>${c.page.pager(controller='medium', action='list_gallery')}</p>
+% if c.without_images:
+<p>${ungettext("This medium is not shown, because it has no image:",
+               "These media are not shown, because they have no image:",
+               c.without_images_cnt)}
+%   for index, item in enumerate(c.without_images):
+%       if index > 0:
+, <a href="${h.url_for(controller='medium', action='edit', id=item.id, type=None, tag=None, page=None)}">
+${item.title}</a>\
+%       else:
+<a href="${h.url_for(controller='medium', action='edit', id=item.id)}", type=None, tag=None, page=None>
+${item.title}</a>\
+%       endif
+%   endfor
+</p>
+% elif c.without_images_cnt > 0:
+<p>${_("%d media are not shown, because they have no image.") % c.without_images_cnt}
+   <a href="${h.url_for(controller='medium', action='list_no_image', page=None)}">
+   ${_("Show a list of these media.")}
+   </a>
+</p>
+% endif
 
+<p>${c.page.pager(controller='medium', action='list_gallery')}</p>
+<p>
 % for item in c.page.items:
 <a href="${h.url_for(controller='medium', action='index', id=item.id, page=None, type=None, tag=None)}">
 <img class="plain" src="${h.url_for(action='image', id=item.id, width=100, height=140, type=None, tag=None, page=None)}" />
 </a>
 % endfor
-
+</p>
 <p>${c.page.pager(controller='medium', action='list_gallery')}</p>
 
 </%def>

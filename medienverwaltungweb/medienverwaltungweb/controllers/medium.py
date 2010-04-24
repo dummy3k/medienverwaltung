@@ -163,7 +163,8 @@ class MediumController(BaseController):
         retval = map(lambda x: (x[0], x[1]), query.execute())
         return retval
 
-    def __prepare_list__(self, with_images, type=None, page=1, tag=None):
+    def __prepare_list__(self, with_images, type=None, page=1, tag=None,
+                         no_images=False):
         if tag:
             c.title += _(", tagged %s") % tag.capitalize()
 
@@ -186,8 +187,15 @@ class MediumController(BaseController):
                          .filter(model.Tag.name==tag)
 
         if with_images:
+            c.without_images_cnt = query.filter(model.Medium.image_data==None).count()
+            if c.without_images_cnt > 0 and c.without_images_cnt < 5:
+                c.without_images = query.filter(model.Medium.image_data==None)
+                
             query = query.filter(model.Medium.image_data!=None)
 
+        elif no_images:
+            query = query.filter(model.Medium.image_data==None)
+            
         c.order = request.params.get('order')
         if not c.order:
             query = query.order_by(model.Medium.title)
@@ -209,13 +217,16 @@ class MediumController(BaseController):
             c.title += _(", page %s") % c.page.page
 
 
-    def list_no_image(self, page=1):
-        query = meta.Session\
-            .query(model.Medium)\
-            .filter(model.Medium.image_data == None)
-        query = query.order_by(model.Medium.id.desc())
-        c.items = query.all()
-        c.page = paginate.Page(query, page)
+    def list_no_image(self, page=1, type=None, tag=None):
+        #~ query = meta.Session\
+            #~ .query(model.Medium)\
+            #~ .filter(model.Medium.image_data == None)
+        #~ query = query.order_by(model.Medium.id.desc())
+        #~ c.items = query.all()
+        #~ c.page = paginate.Page(query, page)
+
+        self.__prepare_list__(False, type, page, tag)
+        
         c.title = _("Media without images")
         c.pager_action = "list_no_image"
         return render('medium/list.mako')

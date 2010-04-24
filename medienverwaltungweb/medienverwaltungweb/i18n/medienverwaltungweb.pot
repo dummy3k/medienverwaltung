@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-24 03:27+0200\n"
+"POT-Creation-Date: 2010-04-24 08:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,6 +206,10 @@ msgstr[1] ""
 msgid "please enter search query"
 msgstr ""
 
+#, python-format
+msgid "%Y-%m-%d %H:%M"
+msgstr ""
+
 msgid "Books"
 msgstr ""
 
@@ -397,10 +401,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#, python-format
-msgid "%Y-%m-%d %H:%M"
-msgstr ""
-
 msgid "Updated"
 msgstr ""
 
@@ -463,6 +463,18 @@ msgid "List"
 msgstr ""
 
 msgid "As Gallery"
+msgstr ""
+
+msgid "This medium is not shown, because it has no image:"
+msgid_plural "These media are not shown, because they have no image:"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%d media are not shown, because they have no image."
+msgstr ""
+
+msgid "Show a list of these media."
 msgstr ""
 
 msgid "Gallery"
