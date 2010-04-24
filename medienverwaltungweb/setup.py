@@ -6,7 +6,6 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(
-    breakme,
     name='medienverwaltungweb',
     version='0.1',
     description='',
