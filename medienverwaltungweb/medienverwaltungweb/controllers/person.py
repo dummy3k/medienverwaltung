@@ -109,6 +109,9 @@ class PersonController(BaseController):
     def add_to_medium_post(self, id):
         medium = meta.Session.query(model.Medium).get(id)
         name = request.params.get('name')
+        if len(name.strip()) == 0:
+            h.flash(_("Please enter the persons name"))
+            return redirect_to(controller='medium', action='edit', id=id)
 
         person = meta.Session.query(model.Person)\
                              .filter(model.Person.name == name)\

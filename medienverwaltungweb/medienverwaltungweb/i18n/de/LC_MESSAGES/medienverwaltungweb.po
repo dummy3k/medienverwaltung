@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-23 22:55+0100\n"
+"PO-Revision-Date: 2010-04-24 03:27+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -180,6 +180,9 @@ msgstr "Personen des Types '%s'"
 msgid "Every Person"
 msgstr "Alle Personen"
 
+msgid "Please enter the persons name"
+msgstr "Bitte geben Sie den Namen der Person ein"
+
 #, python-format
 msgid "added: %(person)s to %(medium)s"
 msgstr "Hinzugefügt: %(person)s zu %(medium)s"
@@ -199,6 +202,9 @@ msgid "Added %(cnt)d medium to '%(person)s'"
 msgid_plural "Added %(cnt)d media to '%(person)s'"
 msgstr[0] "%(cnt)d Medium zu '%(person)s' hinzugefügt"
 msgstr[1] "%(cnt)d Medien zu '%(person)s' hinzugefügt"
+
+msgid "please enter search query"
+msgstr "Bitte Suchanfrage eingeben"
 
 msgid "Books"
 msgstr "Bücher"
@@ -333,7 +339,7 @@ msgid "Borrowed Media List"
 msgstr "Verleih Liste"
 
 msgid "Checkin marked media"
-msgstr "Martkierte Medien zurückgeben"
+msgstr "Markierte Medien zurückgeben"
 
 msgid "List Borrowers"
 msgstr "Ausleiher Liste"
@@ -366,7 +372,7 @@ msgid "Please select one"
 msgstr "Bitte wählen etwas aus"
 
 msgid "Checkout marked media"
-msgstr "Martkierte Medien ausleihen"
+msgstr "Markierte Medien ausleihen"
 
 msgid "Return Media"
 msgstr "Medium zurückgeben"
@@ -391,6 +397,10 @@ msgstr "Tags"
 msgid "Created"
 msgstr "Erzeugt"
 
+#, python-format
+msgid "%Y-%m-%d %H:%M"
+msgstr "%d.%m.%Y %H:%M"
+
 msgid "Updated"
 msgstr "Aktualisiert"
 
@@ -402,6 +412,9 @@ msgstr "Asins"
 
 msgid "Do you really want to remove this ASIN from the medium?"
 msgstr "Soll diese ASIN wirklich von diesem Medium entfernt werden?"
+
+msgid "Add Person"
+msgstr "Person hinzufügen"
 
 msgid "Role"
 msgstr "Rolle"
@@ -444,7 +457,7 @@ msgid "updated_ts"
 msgstr "Aktualisert am"
 
 msgid "Delete marked Media"
-msgstr "Martkierte Medien löschen"
+msgstr "Markierte Medien löschen"
 
 msgid "List"
 msgstr "Liste"
@@ -497,4 +510,14 @@ msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
 msgstr "Alle Autoren..."
+
+msgid "Find"
+msgstr "Suchen"
+
+#, python-format
+msgid "Search Results for '%s'"
+msgstr "Suchergebnisse für '%s'"
+
+msgid "Media"
+msgstr "Medien"
 

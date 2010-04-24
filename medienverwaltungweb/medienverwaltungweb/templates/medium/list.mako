@@ -52,7 +52,7 @@ ${_("Sort by")}:
 <p>${pager.pager(controller='medium', action=pager_action)}</p>
 
 <p>
-<p><input type="submit" value="${_("Delete marked Media")}"/></p>
+<p><input type="submit" value="${_("Delete marked Media")}" class="button"/></p>
 ##<a href="${h.url_for(action='delete', id=None)}">${_("Delete marked Media")}</a>
 </p>
 </form>

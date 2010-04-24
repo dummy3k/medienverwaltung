@@ -64,11 +64,12 @@
 	<div class="box">
         <h2>${_("Search")}:</h2>
         <form id="signin-form" method="post" action="${h.url_for(controller='search', action='search_post', id=None, page=None, tag=None, type=None)}">
-			<input type="text" name="query" />
-			
-			<p>
-				<input type="submit" value="${_('Search')}" class="button" />
-			</p>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr><td>
+				<input type="text" name="query" style="width: 93%" />
+			</td><td>
+				<input type="submit" value="${_('Search')}" class="button" style="width: 100%"/>
+</td></tr></table>			
         </form>
 	</div>
 </div>

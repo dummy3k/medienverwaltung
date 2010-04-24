@@ -32,7 +32,7 @@
         <option value="${item.id}">${item.first_name} ${item.last_name}</option>
         % endfor
     </select>
-    <input type="submit" value="${_("Checkout marked media")}"/>
+    <input type="submit" value="${_("Checkout marked media")}" class="button"/>
 </p>
 </form>
 % endif
@@ -67,7 +67,7 @@
     </tr>
     % endfor
 </table>
-<p><input type="submit" value="${_("Checkin marked media")}"/></p>
+<p><input type="submit" value="${_("Checkin marked media")}" class="button"/></p>
 </form>
 % endif
 

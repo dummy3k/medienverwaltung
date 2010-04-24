@@ -122,3 +122,7 @@ a.pager_link {
 	padding: 0.2em 0.2em;
 	font-size: 0.8em;
 }
+
+a.pager_link:hover {
+	background-color: white;
+}

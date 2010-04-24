@@ -33,7 +33,7 @@
     </tr>
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
-<p><input type="submit" value="${_("Save")}"/></p>
+<p><input type="submit" value="${_("Save")}" class="button"/></p>
 </form>
 
 

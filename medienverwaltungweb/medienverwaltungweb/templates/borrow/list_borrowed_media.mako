@@ -16,7 +16,7 @@
     % for item in c.borrow_acts:
     <tr>
         <td class='simple'>
-            <input type='checkbox' name='item_id_${item.id}' value='${item.id}'/>
+            <input type='checkbox' name='item_id_${item.id}' value='${item.id}' class="button"/>
         </td>
         <td class='simple'>
             <a href="${h.url_for(action='edit_borrower', id=item.borrower.id, page=None)}">
@@ -33,7 +33,7 @@
     </tr>
     %endfor
 </table>
-<p><input type="submit" value="${_("Checkin marked media")}"/></p>
+<p><input type="submit" value="${_("Checkin marked media")}" class="button"/></p>
 </form>
 
 </%def>

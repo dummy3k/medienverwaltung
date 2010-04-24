@@ -22,7 +22,7 @@
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
 <input type="hidden" name="media_ids" value="${request.params.get('media_ids')}"/>
-<input type="submit" value="${_("Add")}"/>
+<input type="submit" value="${_("Add")}" class="button"/>
 </p>
 </form>
 </%def>

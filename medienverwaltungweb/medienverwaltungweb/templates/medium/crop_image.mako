@@ -41,7 +41,7 @@
     <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
     <label>W <input type="text" size="4" id="w" name="w" /></label>
     <label>H <input type="text" size="4" id="h" name="h" /></label>
-    <input type='submit' value='${_("Crop")}' />
+    <input type='submit' value='${_("Crop")}' class="button"/>
 </form>
 
 <p>

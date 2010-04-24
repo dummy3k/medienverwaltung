@@ -34,7 +34,7 @@
 <input type="hidden" name="item_id_${c.item.id}" value="${c.item.id}" />
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="${_("Borrow")}"/>
+<input type="submit" value="${_("Borrow")}" class="button"/>
 </p>
 </form>
 </%def>

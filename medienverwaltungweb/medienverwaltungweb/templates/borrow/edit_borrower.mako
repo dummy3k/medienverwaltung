@@ -22,7 +22,7 @@
 </table>
 <p>
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<input type="submit" value="${_("Save")}"/>
+<input type="submit" value="${_("Save")}" class="button"/>
 </p>
 </form>
 
@@ -41,7 +41,7 @@
     </tr>
 % endfor
 </table>
-<input type="submit" value="${_("Checkin")}"/>
+<input type="submit" value="${_("Checkin")}" class="button"/>
 </form>
 % endif
 

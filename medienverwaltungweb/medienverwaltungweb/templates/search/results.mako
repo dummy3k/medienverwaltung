@@ -2,13 +2,13 @@
 <%namespace name='medium_block' file='/medium/medium_block.mako' />
 <%namespace name='person_snippets' file='/person/snippets.mako' />
 
-<%def name="title()">Search Results for '${c.query}'</%def>
+<%def name="title()">${_("Search Results for '%s'") % c.query}'</%def>
 
 <%def name="content()">
 
 <div class="contentbox">
 % if c.media_page:
-<h2>Media</h2>
+<h2>${_("Media")}</h2>
 % for item in c.media_page:
 ${medium_block.medium_block(item)}
 % endfor
@@ -17,7 +17,7 @@ ${medium_block.medium_block(item)}
 
 <div class="contentbox">
 % if c.persons_result:
-<h2>Persons</h2>
+<h2>${_("Persons")}</h2>
 <ul>
     % for item in c.persons_result:
     <li>

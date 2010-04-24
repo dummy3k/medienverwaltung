@@ -16,6 +16,6 @@
 %   endif
 % endfor
 ##<input type="hidden" name="media_id" value="${c.media_id}" />
-##<input type="submit" value="Attach to '${c.item}'"/>
+##<input type="submit" value="Attach to '${c.item}'" class="button"/>
 </form>
 </%def>

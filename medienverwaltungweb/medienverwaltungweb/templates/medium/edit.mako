@@ -6,7 +6,11 @@
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
-<p><img src="${h.url_for(action='image', width=200, height=300)}" /><p>
+<p>
+    <a href="${h.url_for(action='raw_image')}">
+    <img src="${h.url_for(action='image', width=200, height=300)}" />
+    </a>
+</p>
 </div>
 % endif
 
@@ -31,11 +35,11 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     </tr>
     <tr>
         <td class='simple'>${_('Created')}</td>
-        <td class='simple'>${c.item.created_ts}</td>
+        <td class='simple'>${c.item.created_ts.strftime(_("%Y-%m-%d %H:%M"))}</td>
     </tr>
     <tr>
         <td class='simple'>${_('Updated')}</td>
-        <td class='simple'>${c.item.updated_ts}</td>
+        <td class='simple'>${c.item.updated_ts.strftime(_("%Y-%m-%d %H:%M"))}</td>
     </tr>
     %for subitem in c.persons:
     <tr>
@@ -75,10 +79,10 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
 </table>
 <input type="hidden" name="id" value="${c.item.id}" />
 ##<input type="hidden" name="return_to" value="${request.params.get('return_to')}"/>
-<p><input type="submit" value="${_('Save')}"/></p>
+<p><input type="submit" value="${_('Save')}" class="button"/></p>
 </form>
 
-<h2>Add Person</h2>
+<h2>${_("Add Person")}</h2>
 <form id="signin-form" method="post" action="${h.url_for(controller='person', action='add_to_medium_post')}">
 <table border=1 class='simple'>
     <tr>
@@ -94,7 +98,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'><input type="text" name="name" value="" size=50 /></td>
     </tr>
 </table>
-<p><input type="submit" value="${_('Add')}"/></p>
+<p><input type="submit" value="${_('Add')}" class="button"/></p>
 </form>
 </%def>
 
@@ -122,7 +126,9 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
 	</div>
 	<div class="box">
     <h2>${_('Persons')}:</h2>
+        % if len(c.item.asins) > 0:
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
+        % endif
         <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Remove all Persons")}</a></li>
         <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for())}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
     </ul>

@@ -32,7 +32,7 @@ ${js_pager.js_pager(e)}
 
 <p>
 <p>${c.page.pager(role=request.params.get('role'))}</p>
-<input type="submit" value="Delete marked Media"/>
+<input type="submit" value='${_("Delete marked Media")}' class="button"/>
 </p>
 </form>
 </%def>

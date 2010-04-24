@@ -51,3 +51,7 @@ div.contentbox {
 a.jslink {
     cursor:pointer;
 }
+
+p.slim {
+	margin-top: 4px;
+}

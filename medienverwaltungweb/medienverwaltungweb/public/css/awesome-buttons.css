@@ -100,7 +100,7 @@
 
 .button {
   padding: 4px 7px 5px !important; 
-  font-size: 12px !important;
+  font-size: 12px !important
 }
 
 /* Safari doesn't support inset box shadow, so we better remove it */

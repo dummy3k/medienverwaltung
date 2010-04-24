@@ -8,7 +8,7 @@
 
 <form id="signin-form" method="post" action="${h.url_for(action='scanner_post')}">
     <textarea name="isbns" cols="50" rows="10"></textarea>
-    <p><input type="submit" value="${_("Process")}"/></p>
+    <p><input type="submit" value="${_("Process")}" class="button"/></p>
 </form>
 
 </%def>

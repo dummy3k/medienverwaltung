@@ -52,7 +52,7 @@ class MediumController(BaseController):
         count = 0
         new_media = []
         for item in request.params.get('title').split('\n'):
-            if not item:
+            if not item.strip():
                 continue
 
             query = meta.Session\

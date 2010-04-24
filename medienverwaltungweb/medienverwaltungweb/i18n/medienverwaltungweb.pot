@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-23 22:54+0200\n"
+"POT-Creation-Date: 2010-04-24 03:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,6 +180,9 @@ msgstr ""
 msgid "Every Person"
 msgstr ""
 
+msgid "Please enter the persons name"
+msgstr ""
+
 #, python-format
 msgid "added: %(person)s to %(medium)s"
 msgstr ""
@@ -199,6 +202,9 @@ msgid "Added %(cnt)d medium to '%(person)s'"
 msgid_plural "Added %(cnt)d media to '%(person)s'"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "please enter search query"
+msgstr ""
 
 msgid "Books"
 msgstr ""
@@ -391,6 +397,10 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+#, python-format
+msgid "%Y-%m-%d %H:%M"
+msgstr ""
+
 msgid "Updated"
 msgstr ""
 
@@ -401,6 +411,9 @@ msgid "Asins"
 msgstr ""
 
 msgid "Do you really want to remove this ASIN from the medium?"
+msgstr ""
+
+msgid "Add Person"
 msgstr ""
 
 msgid "Role"
@@ -498,5 +511,15 @@ msgid "All Directors..."
 msgstr ""
 
 msgid "All Authors..."
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+#, python-format
+msgid "Search Results for '%s'"
+msgstr ""
+
+msgid "Media"
 msgstr ""
 

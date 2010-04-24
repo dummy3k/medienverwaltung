@@ -6,7 +6,7 @@
 <form id="signin-form" method="post" action="${h.url_for(query=None)}">
 <p>
     <input type="text" name="query" value="${c.query}" />
-    <input type="submit" value="${_('Search')}"/>
+    <input type="submit" value="${_('Search')}" class="button"/>
 </p>
 </form>
 
@@ -31,7 +31,7 @@
             </a>
         </td>
         %else:
-        <td class='simple'>No image available</td>
+        <td class='simple'><nobr>${_("No image available")}</nobr></td>
         %endif
         <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
         <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
@@ -39,7 +39,7 @@
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
-<p><input type="submit" value="${_("Attach to '%s'") % c.item.title}"/></p>
+<p><input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/></p>
 </form>
 </%def>
 
