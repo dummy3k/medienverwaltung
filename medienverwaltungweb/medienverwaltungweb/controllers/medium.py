@@ -26,6 +26,8 @@ _('Manufacturer')
 _('Creator')
 _('Book')
 _('Dvd')
+_('Created_ts')
+_('Updated_ts')
 
 anchor_tmpl = Template("<a href='${url}'>${text|h}</a>")
 
@@ -200,12 +202,14 @@ class MediumController(BaseController):
             query = query.filter(model.Medium.image_data==None)
 
         c.order = request.params.get('order')
+        log.debug("c.order: '%s'" % c.order.capitalize())
         if not c.order:
             query = query.order_by(model.Medium.title)
         elif c.order.endswith('_desc'):
             sort_name = c.order[:-5]
             query = query.order_by(model.Medium.__dict__[sort_name].desc())
             c.title += _(", sorted by %s descending") % _(sort_name.capitalize())
+            log.debug("c.order: '%s'" % sort_name.capitalize())
         else:
             query = query.order_by(model.Medium.__dict__[c.order])
             c.title += _(", sorted by %s") % _(c.order.capitalize())
