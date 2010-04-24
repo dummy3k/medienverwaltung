@@ -10,3 +10,24 @@ b)  libxml2-dev libxslt-dev build-essential python-dev
 easy_install -U medienverwaltung-common
 mv_manage_db.py version_control --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
 mv_manage_db.py upgrade --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
+
+this might work:
+
+FILE: /etc/init.d/medienverwaltung
+source /var/www/medienverwaltung/env/bin/activate
+
+case "$1" in
+  start)
+    paster serve --daemon --pid-file=/var/run/medienverwaltung.pid --log-file=/var/log/apache2/medienverwaltung.log /var/www/medienverwaltung/production.ini start
+    ;;
+  stop)
+    paster serve --daemon --pid-file=/var/run/medienverwaltung.pid --log-file=/var/log/apache2/medienverwaltung.log /var/www/medienverwaltung/production.ini stop
+    ;;
+  restart)
+    paster serve  --daemon --pid-file=/var/run/medienverwaltung.pid --log-file=/var/log/apache2/medienverwaltung.log /var/www/medienverwaltung/production.ini  restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+update-rc.d medienverwaltung defaults 
