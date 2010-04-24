@@ -202,7 +202,6 @@ class MediumController(BaseController):
             query = query.filter(model.Medium.image_data==None)
 
         c.order = request.params.get('order')
-        log.debug("c.order: '%s'" % c.order.capitalize())
         if not c.order:
             query = query.order_by(model.Medium.title)
         elif c.order.endswith('_desc'):
