@@ -87,7 +87,10 @@ class MediumController(BaseController):
             h.flash(msg, escape=False)
             #~ h.flash(UnsafeString(msg))
 
-        return redirect_to(action='index')
+        if len(new_media) == 1:
+            return redirect_to(action='edit', id=new_media[0].id)
+        else:
+            return redirect_to(action='index')
 
     def list(self, type=None, page=1, tag=None):
         if type == 'books':
@@ -190,12 +193,12 @@ class MediumController(BaseController):
             c.without_images_cnt = query.filter(model.Medium.image_data==None).count()
             if c.without_images_cnt > 0 and c.without_images_cnt < 5:
                 c.without_images = query.filter(model.Medium.image_data==None)
-                
+
             query = query.filter(model.Medium.image_data!=None)
 
         elif no_images:
             query = query.filter(model.Medium.image_data==None)
-            
+
         c.order = request.params.get('order')
         if not c.order:
             query = query.order_by(model.Medium.title)
@@ -226,7 +229,7 @@ class MediumController(BaseController):
         #~ c.page = paginate.Page(query, page)
 
         self.__prepare_list__(False, type, page, tag)
-        
+
         c.title = _("Media without images")
         c.pager_action = "list_no_image"
         return render('medium/list.mako')
