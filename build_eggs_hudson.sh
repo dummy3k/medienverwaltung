@@ -21,9 +21,10 @@ cd ../medienverwaltungweb
 #python2.5 setup.py compile_catalog || exit 1
 if [ $do_setup == "YES" ];
 then
+    easy_install nosexunit
     python setup.py develop
 fi
-nosetests || exit 1
+nosetests --with-xunit || exit 1
 python2.5 setup.py bdist_egg || exit 1
 
 cd ../medienverwaltung_cli
