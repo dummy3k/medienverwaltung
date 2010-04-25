@@ -21,6 +21,7 @@ cd ../medienverwaltungweb
 #python2.5 setup.py compile_catalog || exit 1
 if [ $do_setup == "YES" ];
 then
+    easy_install http://dl.dropbox.com/u/530973/py/python_amazon_product_api-0.2.3-py2.5.egg
     python setup.py develop
 fi
 nosetests || exit 1
