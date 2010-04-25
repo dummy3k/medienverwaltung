@@ -1,7 +1,5 @@
 #~ echo `pwd`/medienverwaltung-common/medienverwaltungcommon
 #~ exit 0
-common_path=`python where_is_common.py`
-
 if [ -d "unittest.env" ];
 then
     echo "Unittest environment exists"
@@ -21,6 +19,8 @@ then
 fi
 python2.5 setup.py bdist_egg || exit 1
 #~ common_path=`pwd`
+common_path=`python ../where_is_common.py`
+
 
 cd ../medienverwaltungweb
 #python2.5 setup.py compile_catalog || exit 1
