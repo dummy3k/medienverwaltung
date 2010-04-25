@@ -1,10 +1,5 @@
-import logging
-from pprint import pprint, pformat
-
 from medienverwaltungweb.tests import *
-from medienverwaltungweb.model import meta
-import medienverwaltungweb.model as model
-
+from medienverwaltungweb.tests.functional import *
 log = logging.getLogger(__name__)
 
 class TestBorrowController(TestController):
