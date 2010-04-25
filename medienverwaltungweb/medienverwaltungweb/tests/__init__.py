@@ -31,6 +31,7 @@ environ = {}
 class TestController(TestCase):
 
     def __init__(self, *args, **kwargs):
+        #~ log.debug("kwargs: %s" % args)
         if pylons.test.pylonsapp:
             wsgiapp = pylons.test.pylonsapp
         else:

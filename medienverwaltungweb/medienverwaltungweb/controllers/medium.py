@@ -73,7 +73,7 @@ class MediumController(BaseController):
             record.created_ts = datetime.now()
             record.updated_ts = datetime.now()
             record.media_type_id = request.params.get('media_type')
-            meta.Session.save(record)
+            meta.Session.add(record)
             count += 1
             new_media.append(record)
 
