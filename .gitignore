@@ -4,6 +4,7 @@
 *.log
 *.egg
 *.egg-info
+*.env
 */local/*
 medienverwaltung-common/medienverwaltungcommon/local/*
 */build/*
