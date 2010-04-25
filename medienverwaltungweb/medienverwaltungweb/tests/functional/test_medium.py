@@ -162,3 +162,6 @@ class TestMediumControllerWithData(TestController):
                                  params={'items_per_page':'123'})
 
         self.assertEqual( 123 , response.session['items_per_page'])
+
+    def testFail(self):
+        self.assertEqual(1,2)
