@@ -14,7 +14,7 @@ class TestSearchController(TestController):
         meta.Session.add(record)
         meta.Session.commit()
 
-        meta.Session.commit()
+        self.assertEqual(1, record.id)
 
     def test_index(self):
         response = self.app.get(url(controller='search', action='index'))
