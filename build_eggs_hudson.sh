@@ -31,7 +31,8 @@ then
     python setup.py develop
 fi
 nosetests --with-xunit --with-coverage --cover-package=medienverwaltungweb || exit 1
-coverage html -i --omit=/usr/,data/,$common_path || exit 1
+#coverage html -i --omit=/usr/,data/,$common_path || exit 1
+coverage html -i || exit 1
 python2.5 setup.py bdist_egg || exit 1
 
 cd ../medienverwaltung_cli
