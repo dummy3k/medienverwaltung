@@ -21,11 +21,12 @@ cd ../medienverwaltungweb
 #python2.5 setup.py compile_catalog || exit 1
 if [ $do_setup == "YES" ];
 then
-    easy_install nosexunit
+    easy_install -U nosexunit coverage
     easy_install http://dl.dropbox.com/u/530973/py/python_amazon_product_api-0.2.3-py2.5.egg
     python setup.py develop
 fi
-nosetests --with-xunit || exit 1
+nosetests --with-xunit --with-coverage --cover-package=medienverwaltungweb || exit 1
+coverage html -i --omit=/usr/,data/,*/medienverwaltungcommon || exit 1
 python2.5 setup.py bdist_egg || exit 1
 
 cd ../medienverwaltung_cli
