@@ -244,6 +244,9 @@ class MediumController(BaseController):
         return render('medium/list.mako')
 
     def delete(self):
+        return self.delete_many()
+
+    def delete_many(self):
         for item in h.checkboxes(request, 'item_id_'):
             db_item = meta.find(model.Medium, item)
             meta.Session.delete(db_item)
@@ -315,7 +318,7 @@ class MediumController(BaseController):
         item.image_url = request.params.get('image_url')
         item.updated_ts = datetime.now()
         item.set_tagstring(request.params.get('tags'))
-        meta.Session.update(item)
+        meta.Session.add(item)
         meta.Session.commit()
         h.flash(_("updated: '%s'") % h.html_escape(item.title))
 
@@ -378,6 +381,7 @@ class MediumController(BaseController):
             return redirect_to(action='edit', id=id)
 
         return redirect_to(action='edit', id=medium.id, return_to=request.params.get('return_to'))
+
     def crop_image(self, id):
         c.item = meta.find(model.Medium, id)
         return render('medium/crop_image.mako')
@@ -391,7 +395,7 @@ class MediumController(BaseController):
         item = meta.find(model.Medium, id)
         item.image_crop = crop
         item.updated_ts = datetime.now()
-        meta.Session.update(item)
+        meta.Session.add(item)
         meta.Session.commit()
         h.flash(_("updated: '%s'") % h.html_escape(item.title))
 
