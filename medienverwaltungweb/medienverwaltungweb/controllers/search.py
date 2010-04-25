@@ -15,7 +15,6 @@ from webhelpers import paginate
 log = logging.getLogger(__name__)
 
 class SearchController(BaseController):
-
     def index(self):
         return render('search/index.mako')
 
@@ -27,7 +26,7 @@ class SearchController(BaseController):
 
         like_query = "%%%s%%" % query
         c.query = query
-        
+
         media_query = meta.Session\
                           .query(model.Medium)\
                           .filter(or_(model.Medium.title.like(like_query),
@@ -40,4 +39,4 @@ class SearchController(BaseController):
                           .filter(model.Person.name.like(like_query))
         c.persons_result = persons_query.all()
         return render('search/results.mako')
-        
+
