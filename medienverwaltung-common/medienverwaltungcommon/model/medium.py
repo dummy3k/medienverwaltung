@@ -6,12 +6,12 @@ import tag
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('title', Unicode(100)),
-    Column('image_data', PickleType),
+    Column('image_data', PickleType(mutable=False)),
     Column('media_type_id', Integer, ForeignKey('media_types.id')),
     Column('isbn', String(15)),
     Column('created_ts', DateTime),
     Column('updated_ts', DateTime),
-    Column('image_crop', PickleType),
+    Column('image_crop', PickleType(mutable=False)),
 )
 
 class Medium(object):
@@ -30,7 +30,7 @@ class Medium(object):
                 retval += " "
 
             retval += item.name
-            
+
         return retval
 
     def set_tagstring(self, s):
@@ -49,4 +49,4 @@ class Medium(object):
                 if tagobj.name == item:
                     self.tags.remove(tagobj)
                     break
-                    
+
