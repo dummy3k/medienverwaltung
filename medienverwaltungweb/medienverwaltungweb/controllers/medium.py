@@ -2,6 +2,7 @@ import logging
 import Image, ImageFile
 from StringIO import StringIO
 from datetime import datetime
+from pprint import pprint, pformat
 
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
@@ -330,6 +331,7 @@ class MediumController(BaseController):
 
     def image(self, id, width, height):
         item = meta.find(model.Medium, id)
+        etag_cache(str(item.updated_ts))
 
         p = ImageFile.Parser()
         p.feed(item.image_data.getvalue())
@@ -347,7 +349,6 @@ class MediumController(BaseController):
         img.save(buffer, format='png')
         response.content_type = 'image/png'
 
-        etag_cache(str(item.updated_ts))
         return buffer.getvalue()
 
     def raw_image(self, id):
