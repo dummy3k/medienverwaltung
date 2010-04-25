@@ -236,7 +236,7 @@ class MediumController(BaseController):
         #~ c.items = query.all()
         #~ c.page = paginate.Page(query, page)
 
-        self.__prepare_list__(False, type, page, tag)
+        self.__prepare_list__(False, type, page, tag, no_images=True)
 
         c.title = _("Media without images")
         c.pager_action = "list_no_image"
