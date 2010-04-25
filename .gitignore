@@ -5,6 +5,7 @@
 *.egg
 *.egg-info
 *.env
+*.orig
 */local/*
 medienverwaltung-common/medienverwaltungcommon/local/*
 */build/*
