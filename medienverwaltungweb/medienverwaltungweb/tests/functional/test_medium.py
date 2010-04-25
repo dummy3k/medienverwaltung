@@ -1,8 +1,6 @@
 import logging
 from pprint import pprint, pformat
 
-#~ from pylons import c, g, cache, request, response, session
-
 from medienverwaltungweb.tests import *
 from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
