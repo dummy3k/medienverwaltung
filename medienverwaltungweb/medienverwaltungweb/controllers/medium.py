@@ -413,7 +413,7 @@ class MediumController(BaseController):
             return redirect_to(action='list_gallery', type=type, tag=tag)
 
         items_per_page = int(items_per_page)
-        h.flash("%d images will be display for now on" % items_per_page)
+        h.flash(_("%d images will be display for now on") % items_per_page)
         session['items_per_page'] = items_per_page
         session.save()
 
