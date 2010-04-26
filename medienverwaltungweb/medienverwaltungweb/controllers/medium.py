@@ -27,6 +27,8 @@ _('Manufacturer')
 _('Creator')
 _('Book')
 _('Dvd')
+_('Created_ts')
+_('Updated_ts')
 
 anchor_tmpl = Template("<a href='${url}'>${text|h}</a>")
 

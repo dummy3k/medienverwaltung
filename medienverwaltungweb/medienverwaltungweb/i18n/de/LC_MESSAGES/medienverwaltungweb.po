@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-24 08:50+0100\n"
+"PO-Revision-Date: 2010-04-26 23:55+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -94,6 +94,13 @@ msgstr "Buch"
 
 msgid "Dvd"
 msgstr "Dvd"
+
+msgid "Created_ts"
+msgstr "Erzeugt am"
+
+#| msgid "updated_ts"
+msgid "Updated_ts"
+msgstr "Aktualisert am"
 
 msgid "please specify name"
 msgstr "Bitte geben Sie einen Namen an"
@@ -471,7 +478,6 @@ msgstr[0] "Dieses Medium wird nicht angezeigt, weil es kein Bild hat:"
 msgstr[1] "Diese Medien werden nicht angezeigt, weil sie keine Bilder haben:"
 
 #, python-format
-#| msgid "all media after this have an image"
 msgid "%d media are not shown, because they have no image."
 msgstr "%d Medien werden nicht angezeigt, weil sie keine Bilder haben."
 

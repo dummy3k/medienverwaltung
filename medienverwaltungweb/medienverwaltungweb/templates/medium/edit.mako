@@ -33,14 +33,12 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <td class='simple'>${_('Tags')}</td>
         <td class='simple'><input type="text" name="tags" value="${c.item.get_tagstring()}" size=50 /></td>
     </tr>
+    % if c.item.isbn:
     <tr>
-        <td class='simple'>${_('Created')}</td>
-        <td class='simple'>${h.strftime(c.item.created_ts)}</td>
+        <td class='simple'>${_('ISBN')}</td>
+        <td class='simple'>${c.item.isbn}</td>
     </tr>
-    <tr>
-        <td class='simple'>${_('Updated')}</td>
-        <td class='simple'>${h.strftime(c.item.updated_ts)}</td>
-    </tr>
+    % endif
     %for subitem in c.persons:
     <tr>
         <td class='simple'>${_(subitem)}</td>
@@ -60,6 +58,14 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         </td>
     </tr>
     %endfor
+    <tr>
+        <td class='simple'>${_('Created')}</td>
+        <td class='simple'>${h.strftime(c.item.created_ts)}</td>
+    </tr>
+    <tr>
+        <td class='simple'>${_('Updated')}</td>
+        <td class='simple'>${h.strftime(c.item.updated_ts)}</td>
+    </tr>
     %if c.asins:
     <tr>
     <td class='simple'>${_('Asins')}</td>
