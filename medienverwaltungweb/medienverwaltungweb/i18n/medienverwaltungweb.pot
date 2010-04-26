@@ -1,0 +1,562 @@
+# Translations template for medienverwaltungweb.
+# Copyright (C) 2010 ORGANIZATION
+# This file is distributed under the same license as the medienverwaltungweb
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: medienverwaltungweb 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2010-04-27 00:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.4\n"
+
+#, python-format
+msgid "attached %s amazon ids to media id %s: %s"
+msgstr ""
+
+#, python-format
+msgid "added persons: %s"
+msgstr ""
+
+msgid "no person added"
+msgstr ""
+
+msgid "Only one image available. It was automatically choosen."
+msgstr ""
+
+msgid "No image available"
+msgstr ""
+
+msgid "image is to big."
+msgstr ""
+
+#, python-format
+msgid "removed %d person"
+msgid_plural "removed %d persons"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(medium)s borrowed to %(to)s"
+msgstr ""
+
+#, python-format
+msgid "added: '%s %s'"
+msgstr ""
+
+msgid "All borrowers"
+msgstr ""
+
+#, python-format
+msgid "updated: %s"
+msgstr ""
+
+#, python-format
+msgid "deleted: '%s %s'"
+msgstr ""
+
+msgid "Borrow History"
+msgstr ""
+
+#, python-format
+msgid "%s has returned medium '%s'"
+msgstr ""
+
+#, python-format
+msgid "Isbn '%s' not found"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Actor"
+msgstr ""
+
+msgid "Director"
+msgstr ""
+
+msgid "Manufacturer"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Book"
+msgstr ""
+
+msgid "Dvd"
+msgstr ""
+
+msgid "Created_ts"
+msgstr ""
+
+msgid "Updated_ts"
+msgstr ""
+
+msgid "please specify name"
+msgstr ""
+
+msgid "please specify media type"
+msgstr ""
+
+#, python-format
+msgid "medium elready exists: %s"
+msgstr ""
+
+#, python-format
+msgid "added medium %(media)s"
+msgid_plural "added %(num)d media: %(media)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Books List"
+msgstr ""
+
+msgid "DVDs List"
+msgstr ""
+
+#, python-format
+msgid "List of unknown type '%s'"
+msgstr ""
+
+msgid "All Media List"
+msgstr ""
+
+msgid "Books Gallery"
+msgstr ""
+
+msgid "DVDs Gallery"
+msgstr ""
+
+#, python-format
+msgid "Gallery of unknown type '%s'"
+msgstr ""
+
+msgid "All Media Gallery"
+msgstr ""
+
+#, python-format
+msgid ", tagged %s"
+msgstr ""
+
+#, python-format
+msgid ", sorted by %s descending"
+msgstr ""
+
+#, python-format
+msgid ", sorted by %s"
+msgstr ""
+
+#, python-format
+msgid ", page %s"
+msgstr ""
+
+msgid "Media without images"
+msgstr ""
+
+#, python-format
+msgid "deleted: %s"
+msgstr ""
+
+#, python-format
+msgid "updated: '%s'"
+msgstr ""
+
+msgid "all media after this have an image"
+msgstr ""
+
+msgid "'Number of images' must be greater then null"
+msgstr ""
+
+#, python-format
+msgid "%d images will be display for now on"
+msgstr ""
+
+msgid "Directors"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+#, python-format
+msgid "Persons of type '%s'"
+msgstr ""
+
+msgid "Every Person"
+msgstr ""
+
+msgid "Please enter the persons name"
+msgstr ""
+
+#, python-format
+msgid "added: %(person)s to %(medium)s"
+msgstr ""
+
+#, python-format
+msgid "removed: %(person)s from %(medium)s"
+msgstr ""
+
+#, python-format
+msgid "Removed %d person"
+msgid_plural "Removed %d persons"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Added %(cnt)d medium to '%(person)s'"
+msgid_plural "Added %(cnt)d media to '%(person)s'"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "please enter search query"
+msgstr ""
+
+#, python-format
+msgid "%Y-%m-%d %H:%M"
+msgstr ""
+
+msgid "Books"
+msgstr ""
+
+msgid "DVDs"
+msgstr ""
+
+msgid "Persons"
+msgstr ""
+
+msgid "Borrow"
+msgstr ""
+
+msgid "Todo"
+msgstr ""
+
+msgid "Add Media"
+msgstr ""
+
+msgid "Media without Image"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Click the image you want to attach to the medium."
+msgstr ""
+
+msgid "Amazon Item Lookup Results"
+msgstr ""
+
+msgid "ASIN"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Actors"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Show Amazon Page"
+msgstr ""
+
+msgid "Amazon Search Results"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+#, python-format
+msgid "Attach to '%s'"
+msgstr ""
+
+msgid "Next w/o Image"
+msgstr ""
+
+msgid "Hint"
+msgstr ""
+
+msgid "If you click on the small image the checkbox toggles."
+msgstr ""
+
+msgid "Add new Borrower"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Last Name"
+msgstr ""
+
+msgid "eMail"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Borrower"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+#, python-format
+msgid "Edit Borrower - '%s %s'"
+msgstr ""
+
+msgid "Borrower Details"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Borrowed Items"
+msgstr ""
+
+msgid "Checkin"
+msgstr ""
+
+msgid "Add Borrower"
+msgstr ""
+
+msgid "Really delete this borrower?"
+msgstr ""
+
+#, python-format
+msgid "Delete '%s %s'"
+msgstr ""
+
+msgid "Checkout Date"
+msgstr ""
+
+msgid "Checkin Date"
+msgstr ""
+
+msgid "Edit Borrower"
+msgstr ""
+
+msgid "Borrowed Media List"
+msgstr ""
+
+msgid "Checkin marked media"
+msgstr ""
+
+msgid "List Borrowers"
+msgstr ""
+
+msgid "Barcode Scanner"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Checkin/checkout with barcode scanner"
+msgstr ""
+
+msgid "Enter an isbn each line and press 'Process'."
+msgstr ""
+
+msgid "Process"
+msgstr ""
+
+msgid "What should i do with these?"
+msgstr ""
+
+msgid "Available Media"
+msgstr ""
+
+msgid "Please select one"
+msgstr ""
+
+msgid "Checkout marked media"
+msgstr ""
+
+msgid "Return Media"
+msgstr ""
+
+#, python-format
+msgid "Crop Medium '%s' Image"
+msgstr ""
+
+msgid "Crop"
+msgstr ""
+
+msgid "Edit Medium"
+msgstr ""
+
+#, python-format
+msgid "This medium ist currently borrowed to %s"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "ISBN"
+msgstr ""
+
+msgid "Do you really want to remove this person from the medium?"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Updated"
+msgstr ""
+
+msgid "Asins"
+msgstr ""
+
+msgid "Do you really want to remove this ASIN from the medium?"
+msgstr ""
+
+msgid "Add Person"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Attach to Amazon"
+msgstr ""
+
+msgid "Select image from Amazon"
+msgstr ""
+
+msgid "Crop Image"
+msgstr ""
+
+#, python-format
+msgid "Delete '%s'"
+msgstr ""
+
+msgid "Really delete this medium?"
+msgstr ""
+
+msgid "Query Amazon"
+msgstr ""
+
+msgid "Remove all Persons"
+msgstr ""
+
+msgid "Merge marked Persons"
+msgstr ""
+
+msgid "Sort by"
+msgstr ""
+
+msgid "created_ts"
+msgstr ""
+
+msgid "updated_ts"
+msgstr ""
+
+msgid "Delete marked Media"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "As Gallery"
+msgstr ""
+
+msgid "This medium is not shown, because it has no image:"
+msgid_plural "These media are not shown, because they have no image:"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%d media are not shown, because they have no image."
+msgstr ""
+
+msgid "Show a list of these media."
+msgstr ""
+
+msgid "Gallery"
+msgstr ""
+
+msgid "As List"
+msgstr ""
+
+msgid "View Options"
+msgstr ""
+
+msgid "Number of images:"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+#, python-format
+msgid "Edit Person - '%s'"
+msgstr ""
+
+msgid "Create Alias"
+msgstr ""
+
+msgid "Aliases"
+msgstr ""
+
+msgid "Appeared in this media"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Merge Persons"
+msgstr ""
+
+msgid ""
+"Please select the name you want to be displayed. All other Persons will be "
+"merged into this one."
+msgstr ""
+
+msgid "Merge"
+msgstr ""
+
+msgid "Top Ten Persons"
+msgstr ""
+
+msgid "All Actors..."
+msgstr ""
+
+msgid "All Directors..."
+msgstr ""
+
+msgid "All Authors..."
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+#, python-format
+msgid "Search Results for '%s'"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
