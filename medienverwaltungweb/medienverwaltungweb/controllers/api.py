@@ -9,11 +9,12 @@ from pylons.controllers.util import abort, redirect_to
 from pylons.controllers import XMLRPCController
 from pylons import config
 
-from medienverwaltungweb.lib.base import BaseController, render, amazon
-from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
-from medienverwaltungcommon.amazon import add_persons
 import medienverwaltungweb.lib.helpers as h
+import medienverwaltungweb.lib.amazon as amazon
+from medienverwaltungweb.lib.base import BaseController, render
+from medienverwaltungweb.model import meta
+from medienverwaltungcommon.amazon import add_persons
 
 log = logging.getLogger(__name__)
 
