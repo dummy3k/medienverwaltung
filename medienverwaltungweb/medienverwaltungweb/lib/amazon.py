@@ -78,6 +78,7 @@ def AddMediumByISBN(isbn):
         
         response['medium_url'] = h.url_for(controller='medium', action='edit', id=medium.id)
         response['success'] = True
+        response['medium_id'] = medium.id
         response['message'] = "Successfully added '%s'" % isbn
     except Exception, ex:
         log.error("AddMediumByISBN: %s" % ex)
@@ -85,10 +86,4 @@ def AddMediumByISBN(isbn):
         response['message'] = str(ex)
         
     return response
-
-    #~ medium.image_data = buffer.getvalue()
-
-            
-    #~ print unicode(msg.value, errors='replace')
-    #~ print msg.value
     log.info("added: %s" % ", ".join(map(lambda x: x.name, added_persons)))

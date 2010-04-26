@@ -56,16 +56,10 @@ class MediumController(BaseController):
             if not item.strip():
                 continue
 
-            log.debug("!!!item: %s" % item)
-            if re.match('^\d+\s*$', item):
-                log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
-                import medienverwaltungweb.lib.amazon as amazon
-                amazon.AddMediumByISBN(item)
-                continue
-                
             query = meta.Session\
                 .query(model.Medium)\
-                .filter(model.Medium.title==item)
+                .filter(or_(model.Medium.title==item,
+                            model.Medium.isbn==item))
             if query.first() != None:
                 first_item = query.first()
                 h.flash(_("medium elready exists: %s") %\
@@ -73,6 +67,15 @@ class MediumController(BaseController):
                                        text=h.html_escape(first_item.title)), escape=False)
                 continue
 
+            log.debug("!!!item: %s" % item)
+            if re.match('^\d+\s*$', item):
+                log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
+                import medienverwaltungweb.lib.amazon as amazon
+                medium_id = amazon.AddMediumByISBN(item)['medium_id']
+                record = meta.Session.query(model.Medium).get(medium_id)
+                new_media.append(record)
+                continue
+                
             record = model.Medium()
             record.title = item.strip()
             record.created_ts = datetime.now()
