@@ -1,5 +1,6 @@
 import logging
 import Image, ImageFile
+import re
 from StringIO import StringIO
 from datetime import datetime
 
@@ -55,6 +56,13 @@ class MediumController(BaseController):
             if not item.strip():
                 continue
 
+            log.debug("!!!item: %s" % item)
+            if re.match('^\d+\s*$', item):
+                log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
+                import medienverwaltungweb.lib.amazon as amazon
+                amazon.AddMediumByISBN(item)
+                continue
+                
             query = meta.Session\
                 .query(model.Medium)\
                 .filter(model.Medium.title==item)
