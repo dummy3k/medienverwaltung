@@ -55,7 +55,9 @@ def AddMediumByISBN(isbn):
                 log.warn("image is too big")
             else:
                 medium.image_data = buffer
-
+        else:
+            url = ""
+            
         response['image_url'] = url
 
         meta.Session.add(medium)
@@ -84,6 +86,7 @@ def AddMediumByISBN(isbn):
         log.error("AddMediumByISBN: %s" % ex)
         response['success'] = False
         response['message'] = str(ex)
-        
+
+    log.debug("response: %s" % response)
     return response
     log.info("added: %s" % ", ".join(map(lambda x: x.name, added_persons)))

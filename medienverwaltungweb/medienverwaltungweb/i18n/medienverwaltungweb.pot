@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-26 23:55+0200\n"
+"POT-Creation-Date: 2010-04-27 00:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -404,13 +404,16 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
+msgid "ISBN"
+msgstr ""
+
+msgid "Do you really want to remove this person from the medium?"
+msgstr ""
+
 msgid "Created"
 msgstr ""
 
 msgid "Updated"
-msgstr ""
-
-msgid "Do you really want to remove this person from the medium?"
 msgstr ""
 
 msgid "Asins"
