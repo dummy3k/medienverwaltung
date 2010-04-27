@@ -66,7 +66,7 @@ class BorrowController(BaseController):
             raise Exception("could not find medium: %s" % media_id)
 
         borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
-                         .render(item=borrower, h=h)
+                         .render_unicode(item=borrower, h=h)
         medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
                        .render_unicode(item=medium, h=h)
         h.flash(_("%(medium)s borrowed to %(to)s") % {'medium':medium_link,
@@ -185,7 +185,7 @@ class BorrowController(BaseController):
             record.returned_ts = datetime.now()
             meta.Session.add(record)
             borrower_link = h.tmpl('borrow/snippets.mako', 'link_to_borrower')\
-                             .render(item=record.borrower, h=h)
+                             .render_unicode(item=record.borrower, h=h)
             medium_link = h.tmpl('medium/snippets.mako', 'link_to_medium')\
                            .render_unicode(item=record.medium, h=h)
             h.flash(_("%s has returned medium '%s'") % (borrower_link, medium_link),
