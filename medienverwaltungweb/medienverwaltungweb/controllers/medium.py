@@ -450,6 +450,8 @@ class MediumController(BaseController):
     def __create_feed__(self, query, title):
         myItems = []
         base_url = "http://127.0.0.1:5000"
+        query = query.limit(10)
+
 
         template = h.template('/medium/rss_item.mako', 'description')
         
@@ -457,7 +459,7 @@ class MediumController(BaseController):
             newItem = PyRSS2Gen.RSSItem(
                 title = item.title.encode('ascii', 'replace'),
                 link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
-                description = template(item, h).encode('ascii', 'replace'),
+                description = template(item, h, base_url).encode('ascii', 'replace'),
                 guid = PyRSS2Gen.Guid(str(item.id)),
                 pubDate = item.created_ts)
             
