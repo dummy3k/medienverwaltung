@@ -5,6 +5,7 @@ from StringIO import StringIO
 from datetime import datetime
 from pprint import pprint, pformat
 
+import PyRSS2Gen
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
@@ -435,3 +436,29 @@ class MediumController(BaseController):
 
         #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
         return redirect_to(action='list_gallery', type=type, tag=tag)
+    def new_media_rss(self):
+        myItems = []
+
+        query = meta.Session.query(model.Medium)\
+                            .order_by(model.Medium.created_ts)
+
+        for item in query.all():
+            newItem = PyRSS2Gen.RSSItem(
+                title = item.title.encode('ascii', 'replace'),
+                link = "http://example.com",
+                description = "blah",
+                guid = PyRSS2Gen.Guid(str(item.id)),
+                pubDate = item.created_ts)
+            
+            myItems.append(newItem)
+            
+        
+        rss = PyRSS2Gen.RSS2(
+            title = _("New Media"),
+            link = h.url_for(controller='/medium', action='list'),
+            description = _("New Media"),
+            lastBuildDate = datetime.now(),
+            items = myItems)
+
+        return rss.to_xml()
+        
