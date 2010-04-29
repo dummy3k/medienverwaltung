@@ -12,6 +12,7 @@ from pylons.i18n import _, ungettext
 from webhelpers.pylonslib import Flash as _Flash
 from routes import url_for
 from mako.filters import html_escape
+from mako.template import Template
 
 log = logging.getLogger(__name__)
 
@@ -79,3 +80,10 @@ def strftime(value):
         return None
     else:
         return value.strftime(str(_("%Y-%m-%d %H:%M")))
+
+def template(name, fn):
+    return config['pylons.app_globals'].mako_lookup\
+                                       .get_template(name)\
+                                       .get_def(fn)\
+                                       .render_unicode
+

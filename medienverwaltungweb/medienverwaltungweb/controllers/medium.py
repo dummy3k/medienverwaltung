@@ -13,6 +13,7 @@ from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to, etag_cache
 from pylons.i18n import _, ungettext
 from mako.template import Template
+from mako.filters import html_escape
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -437,16 +438,26 @@ class MediumController(BaseController):
         #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
         return redirect_to(action='list_gallery', type=type, tag=tag)
     def new_media_rss(self):
-        myItems = []
-
         query = meta.Session.query(model.Medium)\
-                            .order_by(model.Medium.created_ts)
+                            .order_by(model.Medium.created_ts.desc())
+        return self.__create_feed__(query, _("New Media"))
+        
+    def updated_media_rss(self):
+        query = meta.Session.query(model.Medium)\
+                            .order_by(model.Medium.updated_ts.desc())
+        return self.__create_feed__(query, _("Updated Media"))
+        
+    def __create_feed__(self, query, title):
+        myItems = []
+        base_url = "http://127.0.0.1:5000"
 
+        template = h.template('/medium/rss_item.mako', 'description')
+        
         for item in query.all():
             newItem = PyRSS2Gen.RSSItem(
                 title = item.title.encode('ascii', 'replace'),
-                link = "http://example.com",
-                description = "blah",
+                link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
+                description = template(item, h).encode('ascii', 'replace'),
                 guid = PyRSS2Gen.Guid(str(item.id)),
                 pubDate = item.created_ts)
             
@@ -454,8 +465,8 @@ class MediumController(BaseController):
             
         
         rss = PyRSS2Gen.RSS2(
-            title = _("New Media"),
-            link = h.url_for(controller='/medium', action='list'),
+            title = title,
+            link = base_url + h.url_for(controller='/medium', action='list'),
             description = _("New Media"),
             lastBuildDate = datetime.now(),
             items = myItems)
