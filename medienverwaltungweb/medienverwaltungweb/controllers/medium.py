@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import Image, ImageFile
 import re
@@ -80,7 +82,7 @@ class MediumController(BaseController):
                 record = meta.Session.query(model.Medium).get(medium_id)
                 new_media.append(record)
                 continue
-                
+
             record = model.Medium()
             record.title = item.strip()
             record.created_ts = datetime.now()
@@ -441,12 +443,12 @@ class MediumController(BaseController):
         query = meta.Session.query(model.Medium)\
                             .order_by(model.Medium.created_ts.desc())
         return self.__create_feed__(query, _("New Media"))
-        
+
     def updated_media_rss(self):
         query = meta.Session.query(model.Medium)\
                             .order_by(model.Medium.updated_ts.desc())
         return self.__create_feed__(query, _("Updated Media"))
-        
+
     def __create_feed__(self, query, title):
         myItems = []
         base_url = "http://127.0.0.1:5000"
@@ -454,18 +456,18 @@ class MediumController(BaseController):
 
 
         template = h.template('/medium/rss_item.mako', 'description')
-        
+
         for item in query.all():
             newItem = PyRSS2Gen.RSSItem(
-                title = item.title.encode('ascii', 'replace'),
+                title = item.title,
                 link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
-                description = template(item, h, base_url).encode('ascii', 'replace'),
+                description = template(item, h, base_url),
                 guid = PyRSS2Gen.Guid(str(item.id)),
                 pubDate = item.created_ts)
-            
+
             myItems.append(newItem)
-            
-        
+
+
         rss = PyRSS2Gen.RSS2(
             title = title,
             link = base_url + h.url_for(controller='/medium', action='list'),
@@ -473,5 +475,5 @@ class MediumController(BaseController):
             lastBuildDate = datetime.now(),
             items = myItems)
 
-        return rss.to_xml()
-        
+        return rss.to_xml(encoding="utf-8")
+
