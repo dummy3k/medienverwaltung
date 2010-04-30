@@ -6,12 +6,21 @@ class TestPersonController(TestController):
     def setUp(self):
         TestController.setUp(self)
 
-        record = model.Person()
-        record.name = u"Bruce Schneier"
-        meta.Session.add(record)
+        self.bruce = model.Person()
+        self.bruce.name = u"Bruce Schneier"
+        meta.Session.add(self.bruce)
+
+        self.medium = model.Medium()
+        self.medium.title = u"A Medium"
+        meta.Session.add(self.medium)
+
+        self.relation = model.RelationType()
+        self.relation.name = u"Author"
+        meta.Session.add(self.relation)
+
         meta.Session.commit()
 
-        self.assertEqual(1, record.id)
+        self.assertEqual(1, self.bruce.id)
 
     def test_edit(self):
         response = self.app.get(url(controller='person',
@@ -40,7 +49,6 @@ class TestPersonController(TestController):
         self.assertEqual('Changed', record.name)
         self.assertEqual(1, len(record.aliases))
 
-
     def test_list(self):
         record = model.Person()
         record.name = u"Chuck Norries"
@@ -54,19 +62,10 @@ class TestPersonController(TestController):
         assert "Chuck Norries" in response
 
     def test_top_ten(self):
-        medium = model.Medium()
-        medium.title = u"A Medium"
-        meta.Session.add(medium)
-
-        relation = model.RelationType()
-        relation.name = u"Author"
-        meta.Session.add(relation)
-
         record = model.PersonToMedia()
-        bruce = meta.Session.query(model.Person).get(1)
-        bruce.persons_to_media.append(record)
-        medium.persons_to_media.append(record)
-        relation.persons_to_media.append(record)
+        self.bruce.persons_to_media.append(record)
+        self.medium.persons_to_media.append(record)
+        self.relation.persons_to_media.append(record)
         meta.Session.add(record)
 
         meta.Session.commit()
@@ -78,3 +77,58 @@ class TestPersonController(TestController):
         assert "Author" in response
         assert not "Actor" in response
 
+    def test_add_to_medium_post(self):
+        response = self.app.get(url(controller='person',
+                                    action='add_to_medium_post',
+                                    id='1'),
+                                 params={'name':'Foo',
+                                         'role':'Author'})
+
+        record = meta.Session.query(model.Person).get(2)
+        self.assertNotEqual(None, record)
+        self.assertEqual('Foo', record.name)
+        self.assertEqual('A Medium', record.persons_to_media[0].medium.title)
+
+    def test_merge_post(self):
+        record = model.PersonToMedia()
+        self.bruce.persons_to_media.append(record)
+        self.medium.persons_to_media.append(record)
+        self.relation.persons_to_media.append(record)
+        meta.Session.add(record)
+
+        john = model.Person()
+        john.name = u"John"
+        meta.Session.add(john)
+
+        record = model.PersonToMedia()
+        john.persons_to_media.append(record)
+        self.medium.persons_to_media.append(record)
+        self.relation.persons_to_media.append(record)
+        meta.Session.add(record)
+
+        meta.Session.commit()
+
+        response = self.app.get(url(controller='person',
+                                    action='merge_post'),
+                                 params={'primary_id':'2',
+                                         'person_ids_str':'1,2'})
+
+        #~ record = meta.Session.query(model.PersonToMedia).get(1)
+        #~ self.assertEqual(None, record)
+
+    def test_remove_from_media(self):
+        record = model.PersonToMedia()
+        self.bruce.persons_to_media.append(record)
+        self.medium.persons_to_media.append(record)
+        self.relation.persons_to_media.append(record)
+        meta.Session.add(record)
+        meta.Session.commit()
+
+        response = self.app.get(url(controller='person',
+                                    action='remove_from_media',
+                                    id='1'),
+                                 params={'name':'Foo',
+                                         'role':'Author'})
+
+        record = meta.Session.query(model.PersonToMedia).get(1)
+        self.assertEqual(None, record)
