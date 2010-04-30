@@ -1,4 +1,3 @@
-*.ini
 *.db
 nosetests.xml
 data/*

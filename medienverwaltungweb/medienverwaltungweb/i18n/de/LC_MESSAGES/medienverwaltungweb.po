@@ -1,18 +1,18 @@
-# Translations template for medienverwaltungweb.
+# German translations for medienverwaltungweb.
 # Copyright (C) 2010 ORGANIZATION
 # This file is distributed under the same license as the medienverwaltungweb
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2010-04-30 20:53+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2010-04-30 20:50+0100\n"
+"Last-Translator: dummy3k <l4711@gmx.net>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,549 +20,551 @@ msgstr ""
 
 #, python-format
 msgid "attached %s amazon ids to media id %s: %s"
-msgstr ""
+msgstr "%s Amazon Ids zu Medium %s hinzugefügt: %s"
 
 #, python-format
 msgid "added persons: %s"
-msgstr ""
+msgstr "Hinzugefügte Personen: %s"
 
 msgid "no person added"
-msgstr ""
+msgstr "Keine Person hinzugefügt"
 
 msgid "Only one image available. It was automatically choosen."
-msgstr ""
+msgstr "Es ist nur ein Bild verfügbar. Dieses wurde automatisch ausgewählt."
 
 msgid "No image available"
-msgstr ""
+msgstr "Kein Bild verfügbar"
 
 msgid "image is to big."
-msgstr ""
+msgstr "Das Bild ist zu groß."
 
 #, python-format
 msgid "removed %d person"
 msgid_plural "removed %d persons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Person entfernt"
+msgstr[1] "%d Personen entfernt"
 
 #, python-format
 msgid "%(medium)s borrowed to %(to)s"
-msgstr ""
+msgstr "%(to)s hat sich %(medium)s ausgeliehen"
 
 #, python-format
 msgid "added: '%s %s'"
-msgstr ""
+msgstr "'%s %s' hinzugefügt"
 
 msgid "All borrowers"
-msgstr ""
+msgstr "Alle Ausleiher"
 
 #, python-format
 msgid "updated: %s"
-msgstr ""
+msgstr "%s wurde aktualisert"
 
 #, python-format
 msgid "deleted: '%s %s'"
-msgstr ""
+msgstr "Gelöscht '%s %s'"
 
 msgid "Borrow History"
-msgstr ""
+msgstr "Verleih Historie"
 
 #, python-format
 msgid "%s has returned medium '%s'"
-msgstr ""
+msgstr "%s hat das Medium '%s' zurück gegeben"
 
 #, python-format
 msgid "Isbn '%s' not found"
-msgstr ""
+msgstr "ISBN '%s' wurde nicht gefunden"
 
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 msgid "Actor"
-msgstr ""
+msgstr "Schauspieler"
 
 msgid "Director"
-msgstr ""
+msgstr "Regisseur"
 
 msgid "Manufacturer"
-msgstr ""
+msgstr "Hersteller"
 
 msgid "Creator"
-msgstr ""
+msgstr "Erzeuger"
 
 msgid "Book"
-msgstr ""
+msgstr "Buch"
 
 msgid "Dvd"
-msgstr ""
+msgstr "Dvd"
 
 msgid "Created_ts"
-msgstr ""
+msgstr "Erzeugt am"
 
 msgid "Updated_ts"
-msgstr ""
+msgstr "Aktualisert am"
 
 msgid "please specify name"
-msgstr ""
+msgstr "Bitte geben Sie einen Namen an"
 
 msgid "please specify media type"
-msgstr ""
+msgstr "Bitte geben Sie einen Medien-Typ an"
 
 #, python-format
 msgid "medium elready exists: %s"
-msgstr ""
+msgstr "Das Medium '%s' existiert bereits"
 
 #, python-format
 msgid "added medium %(media)s"
 msgid_plural "added %(num)d media: %(media)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Medium '%(media)s' hinzugefügt"
+msgstr[1] "%(num)d Medien hinzugefügt: %(media)s"
 
 msgid "Books List"
-msgstr ""
+msgstr "Bücher Liste"
 
 msgid "DVDs List"
-msgstr ""
+msgstr "DVD Liste"
 
 #, python-format
 msgid "List of unknown type '%s'"
-msgstr ""
+msgstr "Liste unbekannten Types '%s'"
 
 msgid "All Media List"
-msgstr ""
+msgstr "Alle Medien Liste"
 
 msgid "New Media"
-msgstr ""
+msgstr "Neue Medien"
 
 msgid "Updated Media"
-msgstr ""
+msgstr "Aktualiserte Medien"
 
 msgid "Books Gallery"
-msgstr ""
+msgstr "Bücher Galerie"
 
 msgid "DVDs Gallery"
-msgstr ""
+msgstr "DVD Galerie"
 
 #, python-format
 msgid "Gallery of unknown type '%s'"
-msgstr ""
+msgstr "Galerie unbekannten Types '%s'"
 
 msgid "All Media Gallery"
-msgstr ""
+msgstr "Alle Medien Galerie"
 
 #, python-format
 msgid ", tagged %s"
-msgstr ""
+msgstr ", getagged %s"
 
 #, python-format
 msgid ", sorted by %s descending"
-msgstr ""
+msgstr ", sortiert nach %s absteigend"
 
 #, python-format
 msgid ", sorted by %s"
-msgstr ""
+msgstr ", sortiert nach %s"
 
 #, python-format
 msgid ", page %s"
-msgstr ""
+msgstr ", Seite %s"
 
 msgid "Media without images"
-msgstr ""
+msgstr "Medien ohne Bild"
 
 #, python-format
 msgid "deleted: %s"
-msgstr ""
+msgstr "'%s' wurde gelöscht"
 
 #, python-format
 msgid "updated: '%s'"
-msgstr ""
+msgstr "'%s' wurde aktualisert"
 
 msgid "all media after this have an image"
-msgstr ""
+msgstr "Alle folgenden Medien haben ein Bild"
 
 msgid "'Number of images' must be greater then null"
-msgstr ""
+msgstr "'Anzahl Bilder' muss größer als Null sein"
 
 #, python-format
 msgid "%d images will be display for now on"
-msgstr ""
+msgstr "Von nun an werden %d Bilder angezeigt"
 
 msgid "Directors"
-msgstr ""
+msgstr "Regisseure"
 
 msgid "Authors"
-msgstr ""
+msgstr "Autoren"
 
 #, python-format
 msgid "Persons of type '%s'"
-msgstr ""
+msgstr "Personen des Types '%s'"
 
 msgid "Every Person"
-msgstr ""
+msgstr "Alle Personen"
 
 msgid "Please enter the persons name"
-msgstr ""
+msgstr "Bitte geben Sie den Namen der Person ein"
 
 #, python-format
 msgid "added: %(person)s to %(medium)s"
-msgstr ""
+msgstr "Hinzugefügt: %(person)s zu %(medium)s"
 
 #, python-format
 msgid "removed: %(person)s from %(medium)s"
-msgstr ""
+msgstr "%(person)s vom Medium %(medium)s entfernt"
 
 #, python-format
 msgid "Removed %d person"
 msgid_plural "Removed %d persons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Person entfernt"
+msgstr[1] "%d Personen entfernt"
 
 #, python-format
 msgid "Added %(cnt)d medium to '%(person)s'"
 msgid_plural "Added %(cnt)d media to '%(person)s'"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(cnt)d Medium zu '%(person)s' hinzugefügt"
+msgstr[1] "%(cnt)d Medien zu '%(person)s' hinzugefügt"
 
 msgid "please enter search query"
-msgstr ""
+msgstr "Bitte Suchanfrage eingeben"
 
 #, python-format
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%d.%m.%Y %H:%M"
 
 msgid "Books"
-msgstr ""
+msgstr "Bücher"
 
 msgid "DVDs"
-msgstr ""
+msgstr "DVDs"
 
 msgid "Persons"
-msgstr ""
+msgstr "Personen"
 
 msgid "Borrow"
-msgstr ""
+msgstr "Ausleihen"
 
 msgid "Todo"
-msgstr ""
+msgstr "Todo"
 
 msgid "Add Media"
-msgstr ""
+msgstr "Medien hinzufügen"
 
 msgid "Media without Image"
-msgstr ""
+msgstr "Medien ohne Bild"
 
 msgid "Search"
-msgstr ""
+msgstr "Suchen"
 
 msgid "Select image"
-msgstr ""
+msgstr "Bild auswählen"
 
 msgid "Click the image you want to attach to the medium."
-msgstr ""
+msgstr "Klicke auf das Bild, welches Du mit dem Medium verbinden möchtest."
 
 msgid "Amazon Item Lookup Results"
-msgstr ""
+msgstr "Amazon Detail Ansicht"
 
 msgid "ASIN"
-msgstr ""
+msgstr "ASIN"
 
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 msgid "Actors"
-msgstr ""
+msgstr "Schauspieler"
 
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 msgid "Show Amazon Page"
-msgstr ""
+msgstr "Amazon Seite anzeigen"
 
 msgid "Amazon Search Results"
-msgstr ""
+msgstr "Amazon Suchergebnisse"
 
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #, python-format
 msgid "Attach to '%s'"
-msgstr ""
+msgstr "Verbinde mit '%s'"
 
 msgid "Next w/o Image"
-msgstr ""
+msgstr "Nächstes ohne Bild"
 
 msgid "Hint"
-msgstr ""
+msgstr "Tipp"
 
 msgid "If you click on the small image the checkbox toggles."
-msgstr ""
+msgstr "Ein Klick auf das kleine Bild schaltet die Checkbox an und aus."
 
 msgid "Add new Borrower"
-msgstr ""
+msgstr "Neuen Ausleiher hinzufügen"
 
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 msgid "eMail"
-msgstr ""
+msgstr "eMail"
 
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 msgid "Borrower"
-msgstr ""
+msgstr "Ausleiher"
 
 msgid "Add New"
-msgstr ""
+msgstr "Neu Anlegen"
 
 #, python-format
 msgid "Edit Borrower - '%s %s'"
-msgstr ""
+msgstr "Ausleiher '%s %s' bearbeiten"
 
 msgid "Borrower Details"
-msgstr ""
+msgstr "Ausleiher Details"
 
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 msgid "Borrowed Items"
-msgstr ""
+msgstr "Geliehene Medien"
 
 msgid "Checkin"
-msgstr ""
+msgstr "Zurückgeben"
 
 msgid "Add Borrower"
-msgstr ""
+msgstr "Ausleiher hinzufügen"
 
 msgid "Really delete this borrower?"
-msgstr ""
+msgstr "Diesen Ausleiher wirklich löschen?"
 
 #, python-format
 msgid "Delete '%s %s'"
-msgstr ""
+msgstr "Lösche '%s %s'"
 
 msgid "Checkout Date"
-msgstr ""
+msgstr "Ausleihdatum"
 
 msgid "Checkin Date"
-msgstr ""
+msgstr "Rückgabedatum"
 
 msgid "Edit Borrower"
-msgstr ""
+msgstr "Ausleiher bearbeiten"
 
 msgid "Borrowed Media List"
-msgstr ""
+msgstr "Verleih Liste"
 
 msgid "Checkin marked media"
-msgstr ""
+msgstr "Markierte Medien zurückgeben"
 
 msgid "List Borrowers"
-msgstr ""
+msgstr "Ausleiher Liste"
 
 msgid "Barcode Scanner"
-msgstr ""
+msgstr "Barcode Scanner"
 
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 msgid "Checkin/checkout with barcode scanner"
-msgstr ""
+msgstr "Ver/Ausleihen mit Barcode-Scanner"
 
 msgid "Enter an isbn each line and press 'Process'."
-msgstr ""
+msgstr "Eine ISBN pro Zeile eintragen und 'Verarbeiten' drücken."
 
 msgid "Process"
-msgstr ""
+msgstr "Verarbeiten"
 
 msgid "What should i do with these?"
-msgstr ""
+msgstr "Was soll ich machen?"
 
 msgid "Available Media"
-msgstr ""
+msgstr "Verfügbare Medien"
 
 msgid "Please select one"
-msgstr ""
+msgstr "Bitte wählen etwas aus"
 
 msgid "Checkout marked media"
-msgstr ""
+msgstr "Markierte Medien ausleihen"
 
 msgid "Return Media"
-msgstr ""
+msgstr "Medium zurückgeben"
 
 #, python-format
 msgid "Crop Medium '%s' Image"
-msgstr ""
+msgstr "Medium '%s' Bild beschneiden"
 
 msgid "Crop"
-msgstr ""
+msgstr "Beschneiden"
 
 msgid "Edit Medium"
-msgstr ""
+msgstr "Medium  ändern"
 
 #, python-format
 msgid "This medium ist currently borrowed to %s"
-msgstr ""
+msgstr "Dieses Medium hat sich %s zur Zeit ausgeliehen"
 
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 msgid "ISBN"
-msgstr ""
+msgstr "ISBN"
 
 msgid "Do you really want to remove this person from the medium?"
-msgstr ""
+msgstr "Sollen diese Personen wirklich von diesem Medium entfernt werden?"
 
 msgid "Created"
-msgstr ""
+msgstr "Erzeugt"
 
 msgid "Updated"
-msgstr ""
+msgstr "Aktualisiert"
 
 msgid "Asins"
-msgstr ""
+msgstr "Asins"
 
 msgid "Do you really want to remove this ASIN from the medium?"
-msgstr ""
+msgstr "Soll diese ASIN wirklich von diesem Medium entfernt werden?"
 
 msgid "Add Person"
-msgstr ""
+msgstr "Person hinzufügen"
 
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "Attach to Amazon"
-msgstr ""
+msgstr "Mit Amazon verbinden"
 
 msgid "Select image from Amazon"
-msgstr ""
+msgstr "Bild von Amazon auswählen"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Bild beschneiden"
 
 #, python-format
 msgid "Delete '%s'"
-msgstr ""
+msgstr "Lösche '%s'"
 
 msgid "Really delete this medium?"
-msgstr ""
+msgstr "Dieses Medium wirklich löschen?"
 
 msgid "Query Amazon"
-msgstr ""
+msgstr "Amazon abfragen"
 
 msgid "Remove all Persons"
-msgstr ""
+msgstr "Alle Personen entfernen"
 
 msgid "Merge marked Persons"
-msgstr ""
+msgstr "Markierte Personen zusammenführen"
 
 msgid "Sort by"
-msgstr ""
+msgstr "Sortieren"
 
 msgid "created_ts"
-msgstr ""
+msgstr "Erzeugt am"
 
 msgid "updated_ts"
-msgstr ""
+msgstr "Aktualisert am"
 
 msgid "Delete marked Media"
-msgstr ""
+msgstr "Markierte Medien löschen"
 
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 msgid "As Gallery"
-msgstr ""
+msgstr "Als Galerie"
 
 msgid "This medium is not shown, because it has no image:"
 msgid_plural "These media are not shown, because they have no image:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dieses Medium wird nicht angezeigt, weil es kein Bild hat:"
+msgstr[1] "Diese Medien werden nicht angezeigt, weil sie keine Bilder haben:"
 
 #, python-format
 msgid "%d media are not shown, because they have no image."
-msgstr ""
+msgstr "%d Medien werden nicht angezeigt, weil sie keine Bilder haben."
 
 msgid "Show a list of these media."
-msgstr ""
+msgstr "Zeige eine Liste diese Medien an."
 
 msgid "Gallery"
-msgstr ""
+msgstr "Galerie"
 
 msgid "As List"
-msgstr ""
+msgstr "Als Liste"
 
 msgid "View Options"
-msgstr ""
+msgstr "Ansicht Optionen"
 
 msgid "Number of images:"
-msgstr ""
+msgstr "Anzahl Bilder:"
 
 msgid "Apply"
-msgstr ""
+msgstr "Übernehmen"
 
 msgid "Type"
-msgstr ""
+msgstr "Art"
 
 #, python-format
 msgid "Edit Person - '%s'"
-msgstr ""
+msgstr "Person '%s' bearbeiten"
 
 msgid "Create Alias"
-msgstr ""
+msgstr "Alias erzeugen"
 
 msgid "Aliases"
-msgstr ""
+msgstr "Aliase"
 
 msgid "Appeared in this media"
-msgstr ""
+msgstr "Taucht in folgenden Medien auf"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Merge Persons"
-msgstr ""
+msgstr "Personen zusammenführen"
 
 msgid ""
-"Please select the name you want to be displayed. All other Persons will be "
-"merged into this one."
+"Please select the name you want to be displayed. All other Persons will "
+"be merged into this one."
 msgstr ""
+"Wähle den Namen aus der angezeigt werden sollen. Alle anderen Namen "
+"werden mit diesem zusammen geführt."
 
 msgid "Merge"
-msgstr ""
+msgstr "Zusammenführen"
 
 msgid "Top Ten Persons"
-msgstr ""
+msgstr "Top Ten Personen"
 
 msgid "All Actors..."
-msgstr ""
+msgstr "Alle Schauspieler..."
 
 msgid "All Directors..."
-msgstr ""
+msgstr "Alle Regisseure..."
 
 msgid "All Authors..."
-msgstr ""
+msgstr "Alle Autoren..."
 
 msgid "Find"
-msgstr ""
+msgstr "Suchen"
 
 #, python-format
 msgid "Search Results for '%s'"
-msgstr ""
+msgstr "Suchergebnisse für '%s'"
 
 msgid "Media"
-msgstr ""
+msgstr "Medien"
 

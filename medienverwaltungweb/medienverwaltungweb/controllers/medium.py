@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import Image, ImageFile
 import re
@@ -5,13 +7,16 @@ from StringIO import StringIO
 from datetime import datetime
 from pprint import pprint, pformat
 
+import PyRSS2Gen
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
+from pylons import config
 from pylons.controllers.util import abort, redirect_to, etag_cache
 from pylons.i18n import _, ungettext
 from mako.template import Template
+from mako.filters import html_escape
 
 import medienverwaltungweb.lib.helpers as h
 from medienverwaltungweb.lib.base import BaseController, render
@@ -83,7 +88,7 @@ class MediumController(BaseController):
                 record = meta.Session.query(model.Medium).get(medium_id)
                 new_media.append(record)
                 continue
-                
+
             record = model.Medium()
             record.title = item.strip()
             record.created_ts = datetime.now()
@@ -125,6 +130,11 @@ class MediumController(BaseController):
 
         c.pager_action = "list"
         c.return_to = h.url_for(order=c.order)
+
+        c.rss_feeds = [{'title':_("New Media"),
+                        'link':h.url_for(controller='medium', action='new_media_rss')},
+                       {'title':_("Updated Media"),
+                        'link':h.url_for(controller='medium', action='updated_media_rss')}]
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
@@ -140,6 +150,10 @@ class MediumController(BaseController):
         self.__prepare_list__(True, type, page, tag)
 
         c.pager_action = "list_gallery"
+        c.rss_feeds = [{'title':_("New Media"),
+                        'link':h.url_for(controller='medium', action='new_media_rss')},
+                       {'title':_("Updated Media"),
+                        'link':h.url_for(controller='medium', action='updated_media_rss')}]
         return render('medium/list_gallery.mako')
 
     def __get_tags__(self, tag_name, media_type_name):
@@ -336,17 +350,14 @@ class MediumController(BaseController):
         item.set_tagstring(request.params.get('tags'))
         meta.Session.add(item)
         meta.Session.commit()
-        h.flash(_("updated: '%s'") % h.html_escape(item.title))
+        h.flash(_("updated: '%s'") % item.title)
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
         if return_to:
             return redirect_to(str(return_to))
         else:
-            #~ return redirect_to()
             return redirect_to(action='edit', id=id)
-
-        #~ return redirect_to(action='edit', id=id)
 
     def image(self, id, width, height):
         item = meta.find(model.Medium, id)
@@ -440,3 +451,42 @@ class MediumController(BaseController):
 
         #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
         return redirect_to(action='list_gallery', type=type, tag=tag)
+    def new_media_rss(self):
+        query = meta.Session.query(model.Medium)\
+                            .order_by(model.Medium.created_ts.desc())
+        return self.__create_feed__(query, _("New Media"), 'created_ts')
+
+    def updated_media_rss(self):
+        query = meta.Session.query(model.Medium)\
+                            .order_by(model.Medium.updated_ts.desc())
+        return self.__create_feed__(query, _("Updated Media"), 'updated_ts')
+
+    def __create_feed__(self, query, title, key_field):
+        myItems = []
+        base_url = config['base_url']
+        query = query.limit(10)
+
+
+        template = h.template('/medium/rss_item.mako', 'description')
+
+        for item in query.all():
+            newItem = PyRSS2Gen.RSSItem(
+                title = item.title,
+                link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
+                description = template(item, h, base_url),
+                #~ guid = PyRSS2Gen.Guid(str(item.id)),
+                guid = PyRSS2Gen.Guid("%s, %s" % (item.id, item.__dict__[key_field])),
+                pubDate = item.__dict__[key_field])
+
+            myItems.append(newItem)
+
+
+        rss = PyRSS2Gen.RSS2(
+            title = title,
+            link = base_url + h.url_for(controller='/medium', action='list'),
+            description = _("New Media"),
+            lastBuildDate = datetime.now(),
+            items = myItems)
+
+        return rss.to_xml(encoding="utf-8")
+

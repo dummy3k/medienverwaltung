@@ -13,9 +13,9 @@
 	<script src="/js/application.js" type="text/javascript"></script>
     <link rel="shortcut icon" href="/css/book_open.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="/css/book_open.ico" type="image/vnd.microsoft.icon">
-##    % for x in c.rss_feeds:
-##    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
-##    % endfor
+    % for x in c.rss_feeds:
+    <link rel="alternate" type="application/rss+xml" title="${x['title']}" href="${x['link']}" />
+    % endfor
     ${self.html_head()}
 </head>
 <body>
@@ -70,7 +70,7 @@
 				<input type="text" name="query" style="width: 93%" />
 			</td><td>
 				<input type="submit" value="${_('Search')}" class="button" style="width: 100%"/>
-</td></tr></table>			
+</td></tr></table>
         </form>
 	</div>
 </div>

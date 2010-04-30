@@ -1,3 +1,4 @@
+.coveragerc
 *.swp
 .coverage
 *.pyc
@@ -7,6 +8,7 @@
 *.egg
 *.egg-info
 *.env
+*.ini
 *.orig
 *,cover
 */local/*
