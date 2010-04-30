@@ -56,10 +56,11 @@ class MediumController(BaseController):
 
         if int(request.params.get('media_type', -1)) < 0:
             h.flash(_("please specify media type"))
-            return redirect_to(action='mass_add')
+            return self.mass_add()
 
         count = 0
         new_media = []
+        failed = []
         for item in request.params.get('title').split('\n'):
             if not item.strip():
                 continue
@@ -83,10 +84,12 @@ class MediumController(BaseController):
                 if not result:
                     #~ h.flash(_("I tried to use '%s' as an isbn, but amazon didn't find it.") % item)
                     h.flash(_("Amzon does not knwo what '%s' is.") % item)
+                    failed.append(item)
                     continue
 
                 elif not result['success']:
                     h.flash(_("Amazon Lookup failed with the following error: %s") % result['message'])
+                    failed.append(item)
                     continue
 
                 medium_id = result['medium_id']

@@ -11,7 +11,7 @@
         % endfor
         </ul>
     </p>
-    <p><textarea name="title" cols="50" rows="10"></textarea></p>
+    <p><textarea name="title" cols="50" rows="10">${request.params.get('title')}</textarea></p>
     <input type="submit" value="Process" class="button" />
 </form>
 
