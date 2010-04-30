@@ -18,6 +18,7 @@ port = 5000
 use = egg:medienverwaltungweb
 full_stack = true
 static_files = true
+base_url = http://127.0.0.1:5000
 language = en
 page_title = Medienverwaltung
 

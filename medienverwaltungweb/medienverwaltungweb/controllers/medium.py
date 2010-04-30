@@ -12,6 +12,7 @@ from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
+from pylons import config
 from pylons.controllers.util import abort, redirect_to, etag_cache
 from pylons.i18n import _, ungettext
 from mako.template import Template
@@ -460,7 +461,7 @@ class MediumController(BaseController):
 
     def __create_feed__(self, query, title, key_field):
         myItems = []
-        base_url = "http://127.0.0.1:5000"
+        base_url = config['base_url']
         query = query.limit(10)
 
 
