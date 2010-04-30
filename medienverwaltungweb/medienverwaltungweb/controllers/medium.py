@@ -80,10 +80,15 @@ class MediumController(BaseController):
                 log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
                 import medienverwaltungweb.lib.amazon as amazon
                 result = amazon.AddMediumByISBN(item)
-                #~ if not result['success']:
-                    #~ h.flash(_("Amazon Lookup failed with the following error: %") % result['message']
-                    #~ continue
-                    
+                if not result:
+                    #~ h.flash(_("I tried to use '%s' as an isbn, but amazon didn't find it.") % item)
+                    h.flash(_("Amzon does not knwo what '%s' is.") % item)
+                    continue
+
+                elif not result['success']:
+                    h.flash(_("Amazon Lookup failed with the following error: %s") % result['message'])
+                    continue
+
                 medium_id = result['medium_id']
                 record = meta.Session.query(model.Medium).get(medium_id)
                 new_media.append(record)

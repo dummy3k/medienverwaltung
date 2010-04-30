@@ -18,10 +18,15 @@ def AddMediumByISBN(isbn):
         api = amazonproduct.API(config['Amazon.AccessKeyID'],
                                 config['Amazon.SecretAccessKey'])
 
-        node = api.item_lookup(isbn,
-                               IdType='ISBN',
-                               SearchIndex='Books',
-                                ResponseGroup="Images,ItemAttributes")
+        try:
+            node = api.item_lookup(isbn,
+                                   IdType='ISBN',
+                                   SearchIndex='Books',
+                                   ResponseGroup="Images,ItemAttributes")
+        except:
+        #~ log.warn("FOLLOW ME")
+            return
+
         item = node.Items.Item
         title = unicode(item.ItemAttributes.Title)
         response['title'] = title
@@ -45,7 +50,7 @@ def AddMediumByISBN(isbn):
         except:
             url = None
             log.warn("%s has no image" % medium)
-            
+
         if url:
             print url
             webFile = urllib.urlopen(url)
@@ -57,7 +62,7 @@ def AddMediumByISBN(isbn):
                 medium.image_data = buffer
         else:
             url = ""
-            
+
         response['image_url'] = url
 
         meta.Session.add(medium)
@@ -77,7 +82,7 @@ def AddMediumByISBN(isbn):
         response['persons'] = map(lambda x: x.name, added_persons)
 
         meta.Session.commit()
-        
+
         response['medium_url'] = h.url_for(controller='medium', action='edit', id=medium.id)
         response['success'] = True
         response['medium_id'] = medium.id
