@@ -124,6 +124,11 @@ class MediumController(BaseController):
 
         c.pager_action = "list"
         c.return_to = h.url_for(order=c.order)
+
+        c.rss_feeds = [{'title':_("New Media"),
+                        'link':h.url_for(controller='medium', action='new_media_rss')},
+                       {'title':_("Updated Media"),
+                        'link':h.url_for(controller='medium', action='updated_media_rss')}]
         return render('medium/list.mako')
 
     def list_gallery(self, type=None, page=1, tag=None):
@@ -139,6 +144,10 @@ class MediumController(BaseController):
         self.__prepare_list__(True, type, page, tag)
 
         c.pager_action = "list_gallery"
+        c.rss_feeds = [{'title':_("New Media"),
+                        'link':h.url_for(controller='medium', action='new_media_rss')},
+                       {'title':_("Updated Media"),
+                        'link':h.url_for(controller='medium', action='updated_media_rss')}]
         return render('medium/list_gallery.mako')
 
     def __get_tags__(self, tag_name, media_type_name):
