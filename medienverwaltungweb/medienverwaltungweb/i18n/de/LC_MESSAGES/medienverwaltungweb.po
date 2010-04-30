@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: medienverwaltungweb 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2010-04-17 12:05+0200\n"
-"PO-Revision-Date: 2010-04-29 20:22+0100\n"
+"POT-Creation-Date: 2010-04-30 20:53+0200\n"
+"PO-Revision-Date: 2010-04-30 20:50+0100\n"
 "Last-Translator: dummy3k <l4711@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.4\n"
+"Generated-By: Babel 1.0dev-r0\n"
 
 #, python-format
 msgid "attached %s amazon ids to media id %s: %s"
@@ -130,18 +130,24 @@ msgstr "Liste unbekannten Types '%s'"
 msgid "All Media List"
 msgstr "Alle Medien Liste"
 
+msgid "New Media"
+msgstr "Neue Medien"
+
+msgid "Updated Media"
+msgstr "Aktualiserte Medien"
+
 msgid "Books Gallery"
-msgstr "Bücher Gallerie"
+msgstr "Bücher Galerie"
 
 msgid "DVDs Gallery"
-msgstr "DVD Gallerie"
+msgstr "DVD Galerie"
 
 #, python-format
 msgid "Gallery of unknown type '%s'"
-msgstr "Gallerie unbekannten Types '%s'"
+msgstr "Galerie unbekannten Types '%s'"
 
 msgid "All Media Gallery"
-msgstr "Alle Medien Gallerie"
+msgstr "Alle Medien Galerie"
 
 #, python-format
 msgid ", tagged %s"
@@ -479,7 +485,7 @@ msgid "List"
 msgstr "Liste"
 
 msgid "As Gallery"
-msgstr "Als Gallerie"
+msgstr "Als Galerie"
 
 msgid "This medium is not shown, because it has no image:"
 msgid_plural "These media are not shown, because they have no image:"
@@ -494,7 +500,7 @@ msgid "Show a list of these media."
 msgstr "Zeige eine Liste diese Medien an."
 
 msgid "Gallery"
-msgstr "Gallerie"
+msgstr "Galerie"
 
 msgid "As List"
 msgstr "Als Liste"
@@ -530,8 +536,12 @@ msgstr "Filter"
 msgid "Merge Persons"
 msgstr "Personen zusammenführen"
 
-msgid "Please select the name you want to be displayed. All other Persons will be merged into this one."
-msgstr "Wähle den Namen aus der angezeigt werden sollen. Alle anderen Namen werden mit diesem zusammen geführt."
+msgid ""
+"Please select the name you want to be displayed. All other Persons will "
+"be merged into this one."
+msgstr ""
+"Wähle den Namen aus der angezeigt werden sollen. Alle anderen Namen "
+"werden mit diesem zusammen geführt."
 
 msgid "Merge"
 msgstr "Zusammenführen"
