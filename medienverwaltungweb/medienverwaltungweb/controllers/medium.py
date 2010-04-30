@@ -74,7 +74,12 @@ class MediumController(BaseController):
             if re.match('^\d+\s*$', item):
                 log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
                 import medienverwaltungweb.lib.amazon as amazon
-                medium_id = amazon.AddMediumByISBN(item)['medium_id']
+                result = amazon.AddMediumByISBN(item)
+                #~ if not result['success']:
+                    #~ h.flash(_("Amazon Lookup failed with the following error: %") % result['message']
+                    #~ continue
+                    
+                medium_id = result['medium_id']
                 record = meta.Session.query(model.Medium).get(medium_id)
                 new_media.append(record)
                 continue
