@@ -451,14 +451,14 @@ class MediumController(BaseController):
     def new_media_rss(self):
         query = meta.Session.query(model.Medium)\
                             .order_by(model.Medium.created_ts.desc())
-        return self.__create_feed__(query, _("New Media"))
+        return self.__create_feed__(query, _("New Media"), 'created_ts')
 
     def updated_media_rss(self):
         query = meta.Session.query(model.Medium)\
                             .order_by(model.Medium.updated_ts.desc())
-        return self.__create_feed__(query, _("Updated Media"))
+        return self.__create_feed__(query, _("Updated Media"), 'updated_ts')
 
-    def __create_feed__(self, query, title):
+    def __create_feed__(self, query, title, key_field):
         myItems = []
         base_url = "http://127.0.0.1:5000"
         query = query.limit(10)
@@ -471,8 +471,9 @@ class MediumController(BaseController):
                 title = item.title,
                 link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
                 description = template(item, h, base_url),
-                guid = PyRSS2Gen.Guid(str(item.id)),
-                pubDate = item.created_ts)
+                #~ guid = PyRSS2Gen.Guid(str(item.id)),
+                guid = PyRSS2Gen.Guid("%s, %s" % (item.id, item.__dict__[key_field])),
+                pubDate = item.__dict__[key_field])
 
             myItems.append(newItem)
 
