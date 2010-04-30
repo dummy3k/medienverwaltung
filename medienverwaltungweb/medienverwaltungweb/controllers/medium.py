@@ -345,17 +345,14 @@ class MediumController(BaseController):
         item.set_tagstring(request.params.get('tags'))
         meta.Session.add(item)
         meta.Session.commit()
-        h.flash(_("updated: '%s'") % h.html_escape(item.title))
+        h.flash(_("updated: '%s'") % item.title)
 
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
         if return_to:
             return redirect_to(str(return_to))
         else:
-            #~ return redirect_to()
             return redirect_to(action='edit', id=id)
-
-        #~ return redirect_to(action='edit', id=id)
 
     def image(self, id, width, height):
         item = meta.find(model.Medium, id)
