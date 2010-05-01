@@ -86,4 +86,3 @@ def template(name, fn):
                                        .get_template(name)\
                                        .get_def(fn)\
                                        .render_unicode
-

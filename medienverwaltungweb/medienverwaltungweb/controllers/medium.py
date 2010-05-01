@@ -328,6 +328,17 @@ class MediumController(BaseController):
             else:
                 c.persons[item.relation.name] = [item]
 
+        for relation_name in c.persons:
+            log.debug("relation_name: %s" % relation_name)
+            #~ log.debug("relation_name: %s" % c.persons[relation_name])
+
+            c.persons[relation_name].sort(key=lambda x: len(x.person.persons_to_media))
+            c.persons[relation_name].reverse()
+
+            for item in c.persons[relation_name]:
+                log.debug("item: %d - %s" % (len(item.person.persons_to_media),
+                                             item.person))
+
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\
                                     .filter(model.BorrowAct.media_id == id)\
