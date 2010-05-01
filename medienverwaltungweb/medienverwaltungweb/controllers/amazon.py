@@ -58,6 +58,15 @@ class AmazonController(BaseController):
         search_index = str(c.item.type.amzon_search_index)
         log.debug("search_index: %s" % search_index)
 
+        selected_asins = request.params.get('selected_asins')
+        log.debug("selected_asin: %s" % selected_asins)
+        #~ for item in request.params.get('selected_asins', '').split(','):
+            #~ log.debug("selected_asin: %s" % item)
+
+        node = self.api.item_lookup(selected_asins,
+                                        ResponseGroup="Images,ItemAttributes")
+        c.selected_items = node.Items.Item
+
         try:
             node = self.api.item_search(search_index,
                                         Title=query.encode('utf-8'),
@@ -77,18 +86,21 @@ class AmazonController(BaseController):
         if request.params.get('next_page', None):
             page = int(request.params.get('page', 1))
             log.debug("page: %s" % page)
+
+            selected_asins = ','.join(h.checkboxes(request, 'item_id_'))
+            log.debug("selected_asins: %s" % selected_asins)
+
             return redirect_to(controller='amazon',
                                action='map_to_medium',
                                id=media_id,
-                               page=page + 1)
+                               page=page + 1,
+                               selected_asins=selected_asins)
 
         medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
         for item in h.checkboxes(request, 'item_id_'):
             record = model.MediaToAsin()
-            #~ record.media_id = media_id
             record.asin = item
-            #~ meta.Session.save(record)
             asins.append(item)
             medium.asins.append(record)
 

@@ -18,24 +18,11 @@
         <td class='simple'>${_('Title')}</td>
         <td class='simple'>${_('ASIN')}</td>
     </tr>
-
+    % for item in c.selected_items:
+    ${self.row(item, True)}
+    %endfor
     % for item in c.items:
-    <tr>
-        <td class='simple'>
-            <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}">
-        </td>
-        %if 'SmallImage' in dir(item):
-        <td class='simple'>
-            <a onclick="document.list.item_id_${item.ASIN}.checked = !document.list.item_id_${item.ASIN}.checked;">
-                <img src="${unicode(item.SmallImage.URL)}" />
-            </a>
-        </td>
-        %else:
-        <td class='simple'><nobr>${_("No image available")}</nobr></td>
-        %endif
-        <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
-        <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
-    </tr>
+    ${self.row(item, False)}
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
@@ -47,6 +34,25 @@
 </form>
 </%def>
 
+
+<%def name="row(item, selected)">
+<tr>
+    <td class='simple'>
+        <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}" ${h.iif(selected, 'checked="true"', '')}>
+    </td>
+    %if 'SmallImage' in dir(item):
+    <td class='simple'>
+        <a onclick="document.list.item_id_${item.ASIN}.checked = !document.list.item_id_${item.ASIN}.checked;">
+            <img src="${unicode(item.SmallImage.URL)}" />
+        </a>
+    </td>
+    %else:
+    <td class='simple'><nobr>${_("No image available")}</nobr></td>
+    %endif
+    <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
+    <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
+</tr>
+</%def>
 
 <%def name="side()">
 	<div class="box">
