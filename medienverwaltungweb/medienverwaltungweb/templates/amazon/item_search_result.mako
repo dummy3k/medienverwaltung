@@ -27,9 +27,12 @@
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
 <input type="hidden" name="page" value="${c.page}" />
+<input type="hidden" name="query" value="${c.query}" />
 <p>
     <input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/>
+    % if c.items:
     <input type="submit" name='next_page' value="${_("Next Page")}" class="button"/>
+    % endif
 </p>
 </form>
 </%def>

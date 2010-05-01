@@ -59,13 +59,11 @@ class AmazonController(BaseController):
         log.debug("search_index: %s" % search_index)
 
         selected_asins = request.params.get('selected_asins')
-        log.debug("selected_asin: %s" % selected_asins)
-        #~ for item in request.params.get('selected_asins', '').split(','):
-            #~ log.debug("selected_asin: %s" % item)
-
-        node = self.api.item_lookup(selected_asins,
-                                        ResponseGroup="Images,ItemAttributes")
-        c.selected_items = node.Items.Item
+        if selected_asins:
+            log.debug("selected_asin: %s" % selected_asins)
+            node = self.api.item_lookup(selected_asins,
+                                            ResponseGroup="Images,ItemAttributes")
+            c.selected_items = node.Items.Item
 
         try:
             node = self.api.item_search(search_index,
@@ -90,11 +88,15 @@ class AmazonController(BaseController):
             selected_asins = ','.join(h.checkboxes(request, 'item_id_'))
             log.debug("selected_asins: %s" % selected_asins)
 
+            query = request.params.get('query')
+            log.debug("query: %s" % query)
+
             return redirect_to(controller='amazon',
                                action='map_to_medium',
                                id=media_id,
                                page=page + 1,
-                               selected_asins=selected_asins)
+                               selected_asins=selected_asins,
+                               query=query)
 
         medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
@@ -110,9 +112,9 @@ class AmazonController(BaseController):
         meta.Session.commit()
         self.__query_actors__(media_id)
         if not medium.image_data:
-            return redirect_to(controller='amazon', action='query_images')
+            return redirect_to(controller='amazon', action='query_images', page=None)
         else:
-            return redirect_to(controller='medium', action='edit')
+            return redirect_to(controller='medium', action='edit', page=None)
 
     def query_actors(self, id):
         self.__query_actors__(id)
