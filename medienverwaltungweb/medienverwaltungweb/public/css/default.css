@@ -2,6 +2,7 @@ table.simple, td.simple
 {
     border-color: #black;
     border-style: solid;
+    text-align: left;
 }
 
 table.simple

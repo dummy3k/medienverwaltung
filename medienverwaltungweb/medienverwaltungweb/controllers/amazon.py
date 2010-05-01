@@ -76,6 +76,9 @@ class AmazonController(BaseController):
             c.items = []
 
         c.query = query
+        c.title = _("Amazon Search Results for '%s'" % query)
+        if page > 1:
+            c.title += _(", page %s") % c.page
         return render('/amazon/item_search_result.mako')
 
     def map_to_medium_post(self):

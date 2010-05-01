@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">${_("Amazon Search Results")}</%def>
+<%def name="title()">${c.title}</%def>
 
 <%def name="content()">
 <form id="signin-form" method="post" action="${h.url_for(query=None)}">
@@ -16,6 +16,8 @@
         <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Image')}</td>
         <td class='simple'>${_('Title')}</td>
+        <td class='simple'>${_('Actors')}</td>
+        <td class='simple'>${_('Director')}</td>
         <td class='simple'>${_('ASIN')}</td>
     </tr>
     % for item in c.selected_items:
@@ -52,7 +54,27 @@
     %else:
     <td class='simple'><nobr>${_("No image available")}</nobr></td>
     %endif
-    <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
+    <td class='simple'>
+        <p>${unicode(item.ItemAttributes.Title)}</p>
+    </td>
+    <td class='simple'>
+        % if 'Actor' in item.ItemAttributes.__dict__:
+        <ul>
+            % for subitem in item.ItemAttributes.Actor:
+            <li>${subitem}</li>
+            % endfor
+        </ul>
+        % endif
+    </td>
+    <td class='simple'>
+        % if 'Director' in item.ItemAttributes.__dict__:
+        <ul>
+            % for subitem in item.ItemAttributes.Director:
+            <li>${subitem}</li>
+            % endfor
+        </ul>
+        % endif
+    </td>
     <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
 </tr>
 </%def>
