@@ -1,9 +1,10 @@
 import logging
 import amazonproduct
 import urllib
-from StringIO import StringIO
 import pickle
+from StringIO import StringIO
 from datetime import datetime
+from pprint import pprint, pformat
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -11,10 +12,10 @@ from pylons import config
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
 
-from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
-from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
+from medienverwaltungweb.lib.base import BaseController, render
+from medienverwaltungweb.model import meta
 from medienverwaltungcommon.amazon import add_persons, RefHelper
 
 log = logging.getLogger(__name__)
@@ -47,9 +48,10 @@ class AmazonController(BaseController):
         c.item = node.Items.Item[0]
         return render('/amazon/item_lookup_result.mako')
 
-    def map_to_medium(self, id):
+    def map_to_medium(self, id, page=1):
         """ id is media.id """
         c.item = meta.find(model.Medium, id)
+        c.page = page
 
         query = request.params.get('query', c.item.title)
         log.debug("c.item.type: %s" % c.item.type)
@@ -59,9 +61,11 @@ class AmazonController(BaseController):
         try:
             node = self.api.item_search(search_index,
                                         Title=query.encode('utf-8'),
-                                        ResponseGroup="Images,ItemAttributes")
+                                        ResponseGroup="Images,ItemAttributes",
+                                        ItemPage=page)
             c.items = node.Items.Item
-        except:
+        except Exception, ex:
+            log.warn("Amzon Search error: %s" % ex)
             c.items = []
 
         c.query = query
@@ -69,6 +73,15 @@ class AmazonController(BaseController):
 
     def map_to_medium_post(self):
         media_id = request.params.get('media_id', None)
+
+        if request.params.get('next_page', None):
+            page = int(request.params.get('page', 1))
+            log.debug("page: %s" % page)
+            return redirect_to(controller='amazon',
+                               action='map_to_medium',
+                               id=media_id,
+                               page=page + 1)
+
         medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
         for item in h.checkboxes(request, 'item_id_'):
@@ -206,5 +219,4 @@ class AmazonController(BaseController):
         meta.Session.commit()
         h.flash(ungettext("removed %d person", "removed %d persons", cnt) % cnt)
         return redirect_to(controller='medium', action='edit')
-
 

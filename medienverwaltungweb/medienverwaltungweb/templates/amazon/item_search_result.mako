@@ -39,7 +39,11 @@
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
-<p><input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/></p>
+<input type="hidden" name="page" value="${c.page}" />
+<p>
+    <input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/>
+    <input type="submit" name='next_page' value="${_("Next Page")}" class="button"/>
+</p>
 </form>
 </%def>
 
