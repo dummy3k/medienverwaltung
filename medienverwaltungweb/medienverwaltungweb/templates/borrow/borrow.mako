@@ -6,7 +6,7 @@
 <%def name="content()">
 % if c.item.image_data:
 <div style="float:right">
-<p><img src="${h.url_for(controller='medium', action='image', width=400, height=300, id=c.item.id)}" /><p>
+<p><img src="${h.url_for(controller='medium', action='thumbnail', width=400, height=300, id=c.item.id)}" /><p>
 <p>${c.item.title}</p>
 </div>
 % endif

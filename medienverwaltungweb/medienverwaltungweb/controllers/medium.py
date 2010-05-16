@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import Image, ImageFile
+import Image, ImageFile #remove me
 import re
-from StringIO import StringIO
+from StringIO import StringIO  #remove me
 from datetime import datetime
 from pprint import pprint, pformat
 
@@ -366,28 +366,6 @@ class MediumController(BaseController):
             return redirect_to(str(return_to))
         else:
             return redirect_to(action='edit', id=id)
-
-    def image(self, id, width, height):
-        item = meta.find(model.Medium, id)
-        etag_cache(str(item.updated_ts))
-
-        p = ImageFile.Parser()
-        p.feed(item.image_data.getvalue())
-        img = p.close()
-
-        if item.image_crop:
-            img = img.crop(item.image_crop)
-
-        #~ log.debug("size: %s, %s" % (width, height))
-        size = int(width), int(height)
-        img.thumbnail(size)
-        #~ log.debug("imgsize: %s, %s" % img.size)
-
-        buffer = StringIO()
-        img.save(buffer, format='png')
-        response.content_type = 'image/png'
-
-        return buffer.getvalue()
 
     def raw_image(self, id):
         item = meta.find(model.Medium, id)
