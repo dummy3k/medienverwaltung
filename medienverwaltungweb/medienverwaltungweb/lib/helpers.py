@@ -74,16 +74,8 @@ def find(haystack, condition):
 
     raise KeyError("condition did not match")
 
-
 def strftime(value):
     if not value:
         return None
     else:
         return value.strftime(str(_("%Y-%m-%d %H:%M")))
-
-def template(name, fn):
-    return config['pylons.app_globals'].mako_lookup\
-                                       .get_template(name)\
-                                       .get_def(fn)\
-                                       .render_unicode
-

@@ -9,3 +9,6 @@ class TestPersonController(TestCase):
 
     def testFind(self):
         self.assertEqual(1, h.find(range(10), lambda x: x==1))
+
+    def testFind(self):
+        self.assertRaises(Exception, h.find(range(10), lambda x: x==1))
