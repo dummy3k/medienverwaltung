@@ -10,7 +10,11 @@ media_table = Table('media', meta.metadata,
 )
 
 ### New tables and columns
-media_type_id_colum = Column('media_type_id', Integer, ForeignKey('media_types.id'))
+if migrate_engine.name == 'sqlite':
+    media_type_id_colum = Column('media_type_id', Integer)
+else:
+    media_type_id_colum = Column('media_type_id', Integer, ForeignKey('media_types.id'))
+    
 isbn_colum = Column('isbn', Unicode(15))
 
 media_types_table = Table('media_types', meta.metadata,
