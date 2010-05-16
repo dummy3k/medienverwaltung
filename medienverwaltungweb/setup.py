@@ -17,7 +17,8 @@ setup(
         "SQLAlchemy==0.5.7",
 #        "python-amazon-product-api>=0.2.3",
         "sqlalchemy-migrate",
-        "babel"
+        "babel",
+        "PyRSS2Gen"
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),

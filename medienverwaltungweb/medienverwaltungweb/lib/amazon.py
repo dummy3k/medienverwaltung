@@ -63,7 +63,7 @@ def AddMediumByISBN(isbn, search_index):
         except:
             url = None
             log.warn("%s has no image" % medium)
-            
+
         if url:
             print url
             webFile = urllib.urlopen(url)
@@ -75,7 +75,7 @@ def AddMediumByISBN(isbn, search_index):
                 medium.image_data = buffer
         else:
             url = ""
-            
+
         response['image_url'] = url
 
         meta.Session.add(medium)
@@ -95,7 +95,7 @@ def AddMediumByISBN(isbn, search_index):
         response['persons'] = map(lambda x: x.name, added_persons)
 
         meta.Session.commit()
-        
+
         response['medium_url'] = h.url_for(controller='medium', action='edit', id=medium.id)
         response['success'] = True
         response['medium_id'] = medium.id

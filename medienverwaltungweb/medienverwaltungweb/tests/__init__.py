@@ -42,6 +42,7 @@ class TestController(TestCase):
 
     def setUp(self):
         #~ log.debug("FOLLOW ME: setUp")
+        meta.Session.rollback()
         meta.metadata.create_all(meta.engine)
 
     def tearDown(self):
