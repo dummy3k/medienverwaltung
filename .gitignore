@@ -11,6 +11,7 @@
 *.orig
 *,cover
 */local/*
+*/dist/*
 */htmlcov/*
 medienverwaltung-common/medienverwaltungcommon/local/*
 */build/*

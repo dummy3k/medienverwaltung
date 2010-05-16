@@ -15,8 +15,8 @@ setup(name='medienverwaltungcommon',
       url='',
       license='',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      scripts=['scripts/mv_find_dvds.py',
-               'scripts/mv_manage_db.py'],
+      #~ scripts=['scripts/mv_find_dvds.py',
+               #~ 'scripts/mv_manage_db.py'],
       data_files=[('medienverwaltungcommon/db_repo', ['medienverwaltungcommon/db_repo/migrate.cfg'])],
       include_package_data=True,
       zip_safe=False,
@@ -25,6 +25,7 @@ setup(name='medienverwaltungcommon',
             "sqlalchemy-migrate"
         ],
       entry_points="""
-      # -*- Entry points: -*-
+      [console_scripts]
+      mv_manage_db = medienverwaltungcommon.scripts.mv_manage_db:main
       """,
       )

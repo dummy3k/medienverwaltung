@@ -1,4 +1,4 @@
-cd medienverwaltung-common/
+cd medienverwaltungcommon/
 #~ python2.5 setup.py bdist_egg
 #~ python2.6 setup.py bdist_egg
 python setup.py bdist_egg || exit 1
