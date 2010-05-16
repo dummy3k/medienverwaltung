@@ -39,6 +39,32 @@ class TestMediumController(TestController):
         assert 'Foo' in response2
         assert 'added medium' in response2
 
+    def test_mass_add_post_blank_lines(self):
+        response = self.app.get(url(controller='medium',
+                                    action='mass_add_post',
+                                    title="Foo3\n",
+                                    media_type="1"))
+        self.assertEqual('http://localhost/medium/edit/1', response.location)
+
+        response2 = self.app.get(response.location)
+        print response2
+        assert 'Foo' in response2
+        assert 'added medium' in response2
+
+    def test_mass_add_post_double(self):
+        response = self.app.get(url(controller='medium',
+                                    action='mass_add_post',
+                                    title="Foo3",
+                                    media_type="1"))
+
+        response = self.app.get(url(controller='medium',
+                                    action='mass_add_post',
+                                    title="Foo3",
+                                    media_type="1"))
+        response2 = self.app.get(response.location)
+        #~ print response
+        assert 'medium already exists:' in response2
+
     def test_list_gallery(self):
         response = self.app.get(url(controller='medium', action='list_gallery'))
 

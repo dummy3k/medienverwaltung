@@ -73,7 +73,7 @@ class MediumController(BaseController):
                             model.Medium.isbn==item))
             if query.first() != None:
                 first_item = query.first()
-                h.flash(_("medium elready exists: %s") %\
+                h.flash(_("medium already exists: %s") %\
                     anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=first_item.id),
                                        text=h.html_escape(first_item.title)), escape=False)
                 continue
