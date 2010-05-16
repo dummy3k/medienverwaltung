@@ -12,15 +12,33 @@ from medienverwaltungcommon.amazon import add_persons
 
 log = logging.getLogger(__name__)
 
-def AddMediumByISBN(isbn):
+def AddMediumByISBN(isbn, search_index):
+    """
+        id_type: ISBN,
+        search_index: Books, DVD
+    """
     response = {'input_isbn':isbn}
     try:
         api = amazonproduct.API(config['Amazon.AccessKeyID'],
                                 config['Amazon.SecretAccessKey'])
 
+        #~ log.debug("FOLLOW ME FOLLOW ME FOLLOW ME")
+        #~ # Valid Values: SKU | UPC | EAN | ISBN (US only, when search
+        #~ # index is Books) | JAN. UPC is not valid in the CA locale
+        #~ id_type = 'SKU'
+        #~ log.debug("id_type: %s" % id_type)
+
+        #~ search_index = 'DVD'
+        if search_index == 'Books':
+            id_type = 'ISBN'
+        elif search_index == 'DVD':
+            id_type = 'EAN'
+        else:
+            raise Excpetion("unknown search_index: '%s'" % search_index)
+            
         node = api.item_lookup(isbn,
-                               IdType='ISBN',
-                               SearchIndex='Books',
+                               IdType=id_type,
+                               SearchIndex=search_index,
                                 ResponseGroup="Images,ItemAttributes")
         item = node.Items.Item
         title = unicode(item.ItemAttributes.Title)

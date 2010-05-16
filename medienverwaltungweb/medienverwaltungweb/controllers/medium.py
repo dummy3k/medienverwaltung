@@ -53,6 +53,9 @@ class MediumController(BaseController):
             h.flash(_("please specify media type"))
             return redirect_to(action='mass_add')
 
+        media_type_obj = meta.Session.query(model.MediaType).get(request.params.get('media_type', -1))
+        
+        
         count = 0
         new_media = []
         for item in request.params.get('title').split('\n'):
@@ -72,12 +75,12 @@ class MediumController(BaseController):
 
             log.debug("!!!item: %s" % item)
             if re.match('^\d+\s*$', item):
-                log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
+                #~ log.info("@@@@@@@@@@@@@@@@@@ treat input as isbn: %s" % item)
                 import medienverwaltungweb.lib.amazon as amazon
-                result = amazon.AddMediumByISBN(item)
-                #~ if not result['success']:
-                    #~ h.flash(_("Amazon Lookup failed with the following error: %") % result['message']
-                    #~ continue
+                result = amazon.AddMediumByISBN(item, media_type_obj.amzon_search_index)
+                if not result['success']:
+                    h.flash(_("Amazon Lookup failed with the following error: %s") % result['message'])
+                    continue
                     
                 medium_id = result['medium_id']
                 record = meta.Session.query(model.Medium).get(medium_id)
