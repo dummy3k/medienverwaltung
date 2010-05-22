@@ -5,7 +5,7 @@
 
 <%def name="content()">
 <h2>${_("Borrower Details")}</h2>
-<form id="signin-form" method="post" action="${h.url_for(action='edit_borrower_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='borrow', action='edit_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'><nobr>${_('First Name')}</nobr></td>
@@ -28,7 +28,7 @@
 
 % if c.borrowed_media:
 <h2>${_("Borrowed Items")}</h2>
-<form id="signin-form" method="post" action="${h.url_for(action='checkin_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='borrow', action='checkin_post')}">
 <table>
 % for item in c.borrowed_media:
     <tr>

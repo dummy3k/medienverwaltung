@@ -21,7 +21,7 @@ setup(name='medienverwaltungcommon',
       include_package_data=True,
       zip_safe=False,
         install_requires=[
-            "SQLAlchemy",
+            "SQLAlchemy<0.5.99",
             "sqlalchemy-migrate"
         ],
       entry_points="""

@@ -19,7 +19,7 @@
             <input type='checkbox' name='item_id_${item.id}' value='${item.id}' class="button"/>
         </td>
         <td class='simple'>
-            <a href="${h.url_for(action='edit_borrower', id=item.borrower.id, page=None)}">
+            <a href="${h.url_for(controller='borrow', action='edit_borrower', id=item.borrower.id, page=None)}">
                 ${item.borrower.first_name}
                 ${item.borrower.last_name}
             </a>

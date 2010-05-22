@@ -19,7 +19,7 @@
 ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render_unicode(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
-<form id="mainform" method="post" action="${h.url_for(action='edit_post', id=None)}">
+<form id="mainform" method="post" action="${h.url_for(controller='medium', action='edit_post', id=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Id')}</td>
@@ -114,7 +114,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     <h2>${_('Actions')}:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">${_("Attach to Amazon")}</a></li>
-        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id, return_to=h.url_for())}">${_("Next w/o Image")}</a></li>
+        ##FIXME <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id, return_to=h.url_for())}">${_("Next w/o Image")}</a></li>
         % if len(c.item.asins) > 0:
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>
         % endif
@@ -136,7 +136,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
         % endif
         <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Remove all Persons")}</a></li>
-        <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for())}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
+        ##FIXME <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for())}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
     </ul>
 	</div>
     % if c.tags:

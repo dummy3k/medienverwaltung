@@ -10,11 +10,11 @@
 <h2>${_("Actors")}</h2>
 <ol>
     % for item in c.actors:
-    <li><a href="${h.url_for(action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
+    <li><a href="${h.url_for(controller='person', action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
     % endfor
 </ol>
 
-<a href="${h.url_for(action='list', role='Actor')}">${_("All Actors...")}</a>
+<a href="${h.url_for(controller='person', action='list', role='Actor')}">${_("All Actors...")}</a>
 </div>
 % endif
 
@@ -23,10 +23,10 @@
 <h2>${_("Directors")}</h2>
 <ol>
     % for item in c.directors:
-    <li><a href="${h.url_for(action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
+    <li><a href="${h.url_for(controller='person', action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
     % endfor
 </ol>
-<a href="${h.url_for(action='list', role='Actor')}">${_("All Directors...")}</a>
+<a href="${h.url_for(controller='person', action='list', role='Actor')}">${_("All Directors...")}</a>
 </div>
 % endif
 
@@ -35,10 +35,10 @@
 <h2>${_("Authors")}</h2>
 <ol>
     % for item in c.authors:
-    <li><a href="${h.url_for(action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
+    <li><a href="${h.url_for(controller='person', action='edit', id=item[0].id)}">${item[0].name}</a> ${item[1]}x</li>
     % endfor
 </ol>
-<a href="${h.url_for(action='list', role='Author')}">${_("All Authors...")}</a>
+<a href="${h.url_for(controller='person', action='list', role='Author')}">${_("All Authors...")}</a>
 </div>
 % endif
 

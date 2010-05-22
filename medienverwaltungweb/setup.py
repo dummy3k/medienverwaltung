@@ -15,7 +15,7 @@ setup(
     install_requires=[
         "Pylons",
         "SQLAlchemy",
-#        "python-amazon-product-api>=0.2.3",
+        "python-amazon-product-api>=0.2.3",
         "sqlalchemy-migrate",
         "babel",
         "PyRSS2Gen",

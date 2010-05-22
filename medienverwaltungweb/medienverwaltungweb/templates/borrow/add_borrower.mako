@@ -4,7 +4,7 @@
 <%def name="title()">${_("Add new Borrower")}</%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(action='add_borrower_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='borrow', action='add_borrower_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'><nobr>${_('First Name')}</nobr></td>

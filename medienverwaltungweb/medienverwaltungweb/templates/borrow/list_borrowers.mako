@@ -9,7 +9,7 @@ ${js_pager.js_pager(e)}
 
 <p>${c.page.pager()}</p>
 
-<form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
+<form id="signin-form" method="post" action="${h.url_for(controller='borrow', action='delete', page=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -21,14 +21,12 @@ ${js_pager.js_pager(e)}
     % for item in c.page.items:
     <tr>
         <td class='simple'>
-##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit_borrower', id=item.id, page=None)}">${_("Edit")}</a>
+            <a href="${h.url_for(controller='borrow', action='edit_borrower', id=item.id, page=None)}">${_("Edit")}</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.first_name}</td>
         <td class='simple'>${item.last_name}</td>
         <td class='simple'>${item.email}</td>
-##        <td class='simple'><a href="${h.url_for(action='add_asin', id=item.ASIN)}">Add this to db</a></td>
     </tr>
     %endfor
 </table>

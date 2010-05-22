@@ -9,7 +9,7 @@ ${js_pager.js_pager(e)}
 
 <p>${c.page.pager(role=request.params.get('role'))}</p>
 
-<form id="signin-form" method="post" action="${h.url_for(action='delete', page=None)}">
+<form id="signin-form" method="post" action="${h.url_for(controller='person', action='delete', page=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -22,7 +22,7 @@ ${js_pager.js_pager(e)}
     <tr>
         <td class='simple'>
 ##            <input type="checkbox" name="item_id_${item.id}" value="${item.id}">
-            <a href="${h.url_for(action='edit', id=item.id, page=None)}">${_("Edit")}</a>
+            <a href="${h.url_for(controller='person', action='edit', id=item.id, page=None)}">${_("Edit")}</a>
         </td>
         <td class='simple'>${item.id}</td>
         <td class='simple'>${item.name}</td>
@@ -42,8 +42,8 @@ ${js_pager.js_pager(e)}
 	<div class="box">
         <h2>${_("Filter")}:</h2>
         <ul>
-        <li><a href="${h.url_for(role='Actor', page=None)}">${_("Actors")}</a></li>
-        <li><a href="${h.url_for(role='Director', page=None)}">${_("Directors")}</a></li>
+        <li><a href="${h.url_for(controller='person', action='list', role='Actor', page=None)}">${_("Actors")}</a></li>
+        <li><a href="${h.url_for(controller='person', action='list', role='Director', page=None)}">${_("Directors")}</a></li>
         </ul>
 	</div>
 </%def>

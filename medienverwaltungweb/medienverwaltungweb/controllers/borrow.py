@@ -192,7 +192,7 @@ class BorrowController(BaseController):
                     escape=False)
 
         meta.Session.commit()
-        return redirect_to(action='index')
+        return redirect_to(controller='borrow', action='index')
 
     def list_borrowed_media(self):
         c.borrow_acts = meta.Session.query(model.BorrowAct)\

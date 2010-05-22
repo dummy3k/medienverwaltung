@@ -11,7 +11,7 @@
 </div>
 % endif
 
-<form id="signin-form" method="post" action="${h.url_for(action='checkout_post', id=None)}">
+<form id="signin-form" method="post" action="${h.url_for(controller='borrow', action='checkout_post', id=None)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Medium')}</td>
