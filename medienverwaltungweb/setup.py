@@ -14,7 +14,7 @@ setup(
     url='',
     install_requires=[
         "Pylons",
-        "SQLAlchemy",
+        "SQLAlchemy<0.5.99",
         "python-amazon-product-api>=0.2.3",
         "sqlalchemy-migrate",
         "babel",

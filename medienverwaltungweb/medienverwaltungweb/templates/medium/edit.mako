@@ -89,7 +89,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
 </form>
 
 <h2>${_("Add Person")}</h2>
-<form id="signin-form" method="post" action="${h.url_for(controller='person', action='add_to_medium_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='person', action='add_to_medium_post', id=c.item.id)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Role')}</td>
