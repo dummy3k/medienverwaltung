@@ -3,7 +3,7 @@
 <%def name="title()">${_("Add Media")}</%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(action='mass_add_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='medium', action='mass_add_post')}">
     <p>${_("Type")}:
         % for item in c.types:
         <input type="radio" name="media_type" value="${item.id}" id="radio${item.id}">

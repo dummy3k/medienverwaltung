@@ -74,7 +74,7 @@ class MediumController(BaseController):
             if query.first() != None:
                 first_item = query.first()
                 h.flash(_("medium already exists: %s") %\
-                    anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=first_item.id),
+                    anchor_tmpl.render_unicode(url=h.url_for(controller='medium', action='edit', id=first_item.id),
                                        text=h.html_escape(first_item.title)), escape=False)
                 continue
 
@@ -110,7 +110,7 @@ class MediumController(BaseController):
             meta.Session.commit()
             log.debug("new_media: %s" % unicode(new_media[0].title))
             log.debug("type new_media: %s" % type(new_media[0].title))
-            link_list = map(lambda x: anchor_tmpl.render_unicode(url=h.url_for(action='edit', id=x.id), text=x.title), new_media)
+            link_list = map(lambda x: anchor_tmpl.render_unicode(url=h.url_for(controller='medium', action='edit', id=x.id), text=x.title), new_media)
             link_list = ", ".join(link_list)
             msg = ungettext("added medium %(media)s",
                             "added %(num)d media: %(media)s",
@@ -120,9 +120,9 @@ class MediumController(BaseController):
             #~ h.flash(UnsafeString(msg))
 
         if len(new_media) == 1:
-            return redirect_to(action='edit', id=new_media[0].id)
+            return redirect_to(controller='medium', action='edit', id=new_media[0].id)
         else:
-            return redirect_to(action='index')
+            return redirect_to(controller='medium', action='index')
 
     def list(self, type=None, page=1, tag=None):
         if type == 'books':
@@ -134,10 +134,12 @@ class MediumController(BaseController):
         else:
             c.title = _("All Media List")
 
+
+
         self.__prepare_list__(False, type, page, tag)
 
         c.pager_action = "list"
-        c.return_to = h.url_for(order=c.order)
+        c.return_to = h.url_for(controller='medium', action='list', order=c.order)
 
         c.rss_feeds = [{'title':_("New Media"),
                         'link':h.url_for(controller='medium', action='new_media_rss')},
