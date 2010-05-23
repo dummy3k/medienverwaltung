@@ -460,13 +460,13 @@ class MediumController(BaseController):
         query = query.limit(10)
 
 
-        template = h.template('/medium/rss_item.mako', 'description')
+        template = h.tmpl('/medium/rss_item.mako', 'description')
 
         for item in query.all():
             newItem = PyRSS2Gen.RSSItem(
                 title = item.title,
                 link = base_url + h.url_for(controller='/medium', action="edit", id=item.id),
-                description = template(item, h, base_url),
+                description = template.render_unicode(item, h, base_url),
                 #~ guid = PyRSS2Gen.Guid(str(item.id)),
                 guid = PyRSS2Gen.Guid("%s, %s" % (item.id, item.__dict__[key_field])),
                 pubDate = item.__dict__[key_field])

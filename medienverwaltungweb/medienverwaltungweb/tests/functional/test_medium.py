@@ -1,5 +1,6 @@
 from medienverwaltungweb.tests import *
 from medienverwaltungweb.tests.functional import *
+from pylons import config, url
 log = logging.getLogger(__name__)
 
 class TestMediumController(TestController):
@@ -93,6 +94,36 @@ class TestMediumControllerWithData(TestController):
     def test_list(self):
         response = self.app.get(url(controller='medium', action='list'))
         self.check_list(response)
+
+    def test_list_tagged(self):
+        record = model.Tag()
+        record.name = u"MyTag"
+        
+        medium = meta.Session.query(model.Medium).get(1)
+        medium.tags.append(record)
+
+        response = self.app.get(url(controller='medium',
+                                    action='list',
+                                    tag='MyTag'))
+
+        assert 'A_Media_Title' in response
+        assert 'Second_Medium' not in response
+
+    def test_list_typed(self):
+        response = self.app.get(url(controller='medium',
+                                    action='list',
+                                    type='books'))
+
+        assert 'A_Media_Title' in response
+        #~ assert 'Second_Medium' in response
+
+    def test_new_media_rss(self):
+        config['base_url'] = ''
+        response = self.app.get(url(controller='medium',
+                                    action='new_media_rss'))
+
+        assert 'A_Media_Title' in response
+        assert 'Second_Medium' in response
 
     def check_list(self, response):
         assert 'All Media List' in response
