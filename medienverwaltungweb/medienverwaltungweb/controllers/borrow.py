@@ -2,7 +2,8 @@ import logging
 from datetime import datetime
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons import url
+from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 from webhelpers import paginate
 
@@ -33,7 +34,7 @@ class BorrowController(BaseController):
 
             ids = ','.join(h.checkboxes(request, 'item_id_'))
             log.debug("ids: %s" % ids)
-            return redirect_to(controller='borrow', action='add_borrower', media_ids=ids)
+            return redirect(url(controller='borrow', action='add_borrower', media_ids=ids))
         else:
             borrower = meta.Session.query(model.Borrower).get(borrower_id)
             if not borrower:
@@ -45,7 +46,7 @@ class BorrowController(BaseController):
             self.__checkout_post__(item, borrower)
 
         meta.Session.commit()
-        return redirect_to(controller='borrow', action='edit_borrower', id=borrower_id)
+        return redirect(url(controller='borrow', action='edit_borrower', id=borrower_id))
 
     def __checkout_post__(self, media_id, borrower):
         log.debug("")
@@ -97,7 +98,7 @@ class BorrowController(BaseController):
         log.debug("media_ids %s "% media_ids)
         if not media_ids:
             meta.Session.commit()
-            return redirect_to(controller='borrow', action='list_borrowers')
+            return redirect(url(controller='borrow', action='list_borrowers'))
         else:
             log.debug("FOLLOW ME, media_id: %s" % media_ids)
             log.debug("url: %s" % h.url_for(controller='borrow', action='edit_borrower', id=record.id))
@@ -106,13 +107,7 @@ class BorrowController(BaseController):
                 self.__checkout_post__(item, record)
 
             meta.Session.commit()
-            return redirect_to(controller='borrow', action='edit_borrower', id=record.id)
-            #~ return redirect_to(controller='borrow',
-                               #~ action='checkout_post',
-                               #~ borrower_id=record.id,
-                               #~ media_id=media_id)
-            #~ return self.checkout_post()
-        #~ meta.Session.commit()
+            return redirect(url(controller='borrow', action='edit_borrower', id=record.id))
 
     def list_borrowers(self, page=1):
         query = meta.Session\
@@ -153,7 +148,7 @@ class BorrowController(BaseController):
         meta.Session.commit()
 
         h.flash(_("updated: %s") % record)
-        return redirect_to(controller='borrow', action='edit_borrower', id=id)
+        return redirect(url(controller='borrow', action='edit_borrower', id=id))
 
     def delete_borrower_post(self, id):
         record = meta.find(model.Borrower, id)
@@ -161,7 +156,7 @@ class BorrowController(BaseController):
         meta.Session.commit()
 
         h.flash(_("deleted: '%s %s'") % (record.first_name, record.last_name))
-        return redirect_to(controller='borrow', action='list_borrowers')
+        return redirect(url(controller='borrow', action='list_borrowers'))
 
     def show_history(self, id, page=1):
         c.item = meta.find(model.Borrower, id)
@@ -192,7 +187,7 @@ class BorrowController(BaseController):
                     escape=False)
 
         meta.Session.commit()
-        return redirect_to(controller='borrow', action='index')
+        return redirect(url(controller='borrow', action='index'))
 
     def list_borrowed_media(self):
         c.borrow_acts = meta.Session.query(model.BorrowAct)\

@@ -20,10 +20,10 @@ setup(name='medienverwaltungcommon',
       data_files=[('medienverwaltungcommon/db_repo', ['medienverwaltungcommon/db_repo/migrate.cfg'])],
       include_package_data=True,
       zip_safe=False,
-        install_requires=[
-            "SQLAlchemy<0.5.99",
-            "sqlalchemy-migrate"
-        ],
+		install_requires=[
+			"SQLAlchemy<0.5.99",
+		],
+		setup_requires=["sqlalchemy-migrate"],
       entry_points="""
       [console_scripts]
       mv_manage_db = medienverwaltungcommon.scripts.mv_manage_db:main

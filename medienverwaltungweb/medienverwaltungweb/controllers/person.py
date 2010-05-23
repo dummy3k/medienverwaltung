@@ -3,7 +3,8 @@ import logging
 from webhelpers import paginate
 import urllib
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons import url
+from pylons.controllers.util import abort, redirect
 from pylons.i18n import _, ungettext
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
@@ -39,7 +40,7 @@ class PersonController(BaseController):
         
         meta.Session.commit()
         h.flash(_("updated: '%s'") % item.name)
-        return redirect_to(controller='person', action='edit', id=id)
+        return redirect(url(controller='person', action='edit', id=id))
         
     def list(self, page=1):
         relation_type = request.params.get('role')
@@ -111,7 +112,7 @@ class PersonController(BaseController):
         name = request.params.get('name')
         if len(name.strip()) == 0:
             h.flash(_("Please enter the persons name"))
-            return redirect_to(controller='medium', action='edit', id=id)
+            return redirect(url(controller='medium', action='edit', id=id))
 
         person = meta.Session.query(model.Person)\
                              .filter(model.Person.name == name)\
@@ -137,7 +138,7 @@ class PersonController(BaseController):
 
         h.flash(_("added: %(person)s to %(medium)s") % {'person':person.name,
                                                         'medium':medium.title})
-        return redirect_to(controller='medium', action='edit', id=id)
+        return redirect(url(controller='medium', action='edit', id=id))
         
     def remove_from_media(self, id):
         item = meta.Session.query(model.PersonToMedia).get(id)
@@ -146,7 +147,7 @@ class PersonController(BaseController):
         h.flash(_("removed: %(person)s from %(medium)s") % {'person':item.person.name,
                                                             'medium':item.medium.title})
         meta.Session.commit()
-        return redirect_to(controller='medium', action='edit', id=item.medium.id)
+        return redirect(url(controller='medium', action='edit', id=item.medium.id))
     def merge(self):
         person_ids = h.checkboxes(request, 'person_id_')
 
@@ -211,5 +212,5 @@ class PersonController(BaseController):
                                        h.url_for(controller='person',
                                                  action='edit',
                                                  id=primary.id))
-        return redirect_to(str(return_to))
+        return redirect(str(return_to))
         

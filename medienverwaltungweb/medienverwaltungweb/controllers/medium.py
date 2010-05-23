@@ -12,8 +12,8 @@ from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
 from webhelpers import paginate
 from pylons import request, response, session, tmpl_context as c
-from pylons import config
-from pylons.controllers.util import abort, redirect_to, etag_cache
+from pylons import config, url
+from pylons.controllers.util import abort, redirect, etag_cache
 from pylons.i18n import _, ungettext
 from mako.template import Template
 from mako.filters import html_escape
@@ -52,11 +52,11 @@ class MediumController(BaseController):
     def mass_add_post(self):
         if not request.params.get('title'):
             h.flash(_("please specify name"))
-            return redirect_to(controller='medium', action='mass_add')
+            return redirect(url(controller='medium', action='mass_add'))
 
         if int(request.params.get('media_type', -1)) < 0:
             h.flash(_("please specify media type"))
-            return redirect_to(controller='medium', action='mass_add')
+            return redirect(url(controller='medium', action='mass_add'))
 
         media_type_obj = meta.Session.query(model.MediaType).get(request.params.get('media_type', -1))
         
@@ -120,9 +120,9 @@ class MediumController(BaseController):
             #~ h.flash(UnsafeString(msg))
 
         if len(new_media) == 1:
-            return redirect_to(controller='medium', action='edit', id=new_media[0].id)
+            return redirect(url(controller='medium', action='edit', id=new_media[0].id))
         else:
-            return redirect_to(controller='medium', action='index')
+            return redirect(url(controller='medium', action='index'))
 
     def list(self, type=None, page=1, tag=None):
         if type == 'books':
@@ -293,7 +293,7 @@ class MediumController(BaseController):
 
         meta.Session.commit()
 
-        return redirect_to(controller='medium', action='index')
+        return redirect(url(controller='medium', action='index'))
 
     def delete_one(self, id):
         log.debug("delete_one(%s)" % id)
@@ -302,9 +302,9 @@ class MediumController(BaseController):
         meta.Session.commit()
         h.flash(_("deleted: %s") % db_item.title)
         if request.params.get('return_to'):
-            return redirect_to(str(request.params.get('return_to')))
+            return redirect(str(request.params.get('return_to')))
         else:
-            return redirect_to(controller='medium', action='index', id=None)
+            return redirect(url(controller='medium', action='index', id=None))
 
     def edit(self, id):
         log.debug("id: %s" % id)
@@ -364,9 +364,9 @@ class MediumController(BaseController):
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
         if return_to:
-            return redirect_to(str(return_to))
+            return redirect(str(return_to))
         else:
-            return redirect_to(controller='medium', action='edit', id=id)
+            return redirect(url(controller='medium', action='edit', id=id))
 
     def raw_image(self, id):
         item = meta.find(model.Medium, id)
@@ -392,13 +392,13 @@ class MediumController(BaseController):
         medium = query.first()
         if not medium:
             h.flash(_("all media after this have an image"))
-            return redirect_to(controller='medium', action='edit', id=id)
+            return redirect(url(controller='medium', action='edit', id=id))
 
         return_to=request.params.get('return_to')
         if return_to:
-            return redirect_to(controller='medium', action='edit', id=medium.id, return_to=request.params.get('return_to'))
+            return redirect(url(controller='medium', action='edit', id=medium.id, return_to=request.params.get('return_to')))
         else:
-            return redirect_to(controller='medium', action='edit', id=medium.id)
+            return redirect(url(controller='medium', action='edit', id=medium.id))
 
     def crop_image(self, id):
         c.item = meta.find(model.Medium, id)
@@ -420,21 +420,21 @@ class MediumController(BaseController):
         return_to = request.params.get('return_to')
         log.debug("return_to: %s" % return_to)
         if return_to:
-            return redirect_to(str(return_to))
+            return redirect(str(return_to))
         else:
-            return redirect_to(controller='medium', action='edit', id=id)
+            return redirect(url(controller='medium', action='edit', id=id))
 
     def debug(self):
         log.debug("START DEBUG")
         #~ h.flash(u"testing \xc3\xa4")
         h.flash("<i>blah</i>", False)
-        return redirect_to(controller='medium', action='index')
+        return redirect(url(controller='medium', action='index'))
         
     def set_view_options(self, type=None, tag=None):
         items_per_page = request.params.get('items_per_page')
         if not items_per_page or int(items_per_page) <= 0:
             h.flash(_("'Number of images' must be greater then null"))
-            return redirect_to(controller='medium', action='list_gallery', type=type, tag=tag)
+            return redirect(url(controller='medium', action='list_gallery', type=type, tag=tag))
 
         items_per_page = int(items_per_page)
         h.flash(_("%d images will be display for now on") % items_per_page)
@@ -442,7 +442,7 @@ class MediumController(BaseController):
         session.save()
 
         #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
-        return redirect_to(controller='medium', action='list_gallery', type=type, tag=tag)
+        return redirect(url(controller='medium', action='list_gallery', type=type, tag=tag))
         
     def new_media_rss(self):
         query = meta.Session.query(model.Medium)\

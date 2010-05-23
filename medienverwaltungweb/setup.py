@@ -16,6 +16,7 @@ setup(
         "Pylons",
         "SQLAlchemy<0.5.99",
         "python-amazon-product-api>=0.2.3",
+        "lxml",
         "sqlalchemy-migrate",
         "babel",
         "PyRSS2Gen",
