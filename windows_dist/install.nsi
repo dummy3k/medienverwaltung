@@ -53,7 +53,7 @@ ShowInstDetails show
 # UnInstallPages
 !insertmacro MUI_UNPAGE_WELCOME
 !insertmacro MUI_UNPAGE_CONFIRM
-#!insertmacro MUI_UNPAGE_COMPONENTS
+!insertmacro MUI_UNPAGE_COMPONENTS
 !insertmacro MUI_UNPAGE_INSTFILES
 
 !insertmacro MUI_LANGUAGE "German"
@@ -127,13 +127,14 @@ FunctionEnd
 
 Section "Python26"
     SetOutPath $INSTDIR
-    File /r /x Doc /x tcl C:\Python26
+    File /r /x Doc /x tcl /x test C:\Python26
     File python26.dll
     File install.cmd
     File show.cmd
     File start.cmd
     
     DetailPrint "Downloading and installing runtime environment"
+    AddSize 30000
     nsExec::ExecToLog /OEM '"$INSTDIR\install.cmd"'
     call checkRetVal
 
@@ -141,6 +142,7 @@ Section "Python26"
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Start Webserver.lnk" "$INSTDIR\start.cmd"
+#    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Edit config.lnk" "$INSTDIR\production.ini"
     !insertmacro MUI_STARTMENU_WRITE_END
     
 #        File "..\Medienverwaltung.exe"
@@ -150,6 +152,10 @@ Section "Python26"
 
 SectionEnd
 
+Section /o "Un.Database"
+    Delete $INSTDIR\production.db
+SectionEnd
+
 Section "-Un.Remove_What_is_Left"
     ReadRegStr $STARTMENU_FOLDER HKLM "Software\Medienverwaltung" "Start Menu Folder"
     Delete "$SMPROGRAMS\$STARTMENU_FOLDER\Start Webserver.lnk"
@@ -157,13 +163,15 @@ Section "-Un.Remove_What_is_Left"
     RMDir "$SMPROGRAMS\$STARTMENU_FOLDER"
     DeleteRegKey HKLM "Software\Medienverwaltung"
 
-    RMDir /r $INSTDIR\Python26
-    RMDir /r $INSTDIR\local.env
-    RMDir /r $INSTDIR\Data
     Delete $INSTDIR\python26.dll
     Delete $INSTDIR\install.cmd
     Delete $INSTDIR\show.cmd
     Delete $INSTDIR\start.cmd
     Delete $INSTDIR\manage_local.py
+    Delete $INSTDIR\production.ini
     Delete $INSTDIR\Uninstall.exe
+    RMDir /r $INSTDIR\Python26
+    RMDir /r $INSTDIR\local.env
+    RMDir /r $INSTDIR\Data
+    RMDir $INSTDIR
 SectionEnd
