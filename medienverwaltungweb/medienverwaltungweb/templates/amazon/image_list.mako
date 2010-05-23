@@ -7,7 +7,7 @@
 
 % for item in c.items:
 %   if 'LargeImage' in dir(item):
-<form id="signin-form" method="post" action="${h.url_for(action='query_images_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='amazon', action='query_images_post')}">
 <input type="hidden" name="url" value="${unicode(item.LargeImage.URL)}">
 <input type="image" src="${unicode(item.LargeImage.URL)}">
 </form>

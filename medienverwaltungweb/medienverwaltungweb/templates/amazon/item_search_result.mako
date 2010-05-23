@@ -3,14 +3,14 @@
 <%def name="title()">${_("Amazon Search Results")}</%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(query=None)}">
+<form id="signin-form" method="post" action="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">
 <p>
     <input type="text" name="query" value="${c.query}" />
     <input type="submit" value="${_('Search')}" class="button"/>
 </p>
 </form>
 
-<form id="signin-form" method="post" name="list" action="${h.url_for(action='map_to_medium_post')}">
+<form id="signin-form" method="post" name="list" action="${h.url_for(controller='amazon', action='map_to_medium_post', id=c.item.id, query=c.query)}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>&nbsp;</td>
@@ -34,7 +34,7 @@
         <td class='simple'><nobr>${_("No image available")}</nobr></td>
         %endif
         <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
-        <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
+        <td class='simple'><a href="${h.url_for(controller='amazon', action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
     </tr>
     %endfor
 </table>
