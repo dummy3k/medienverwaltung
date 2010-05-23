@@ -6,8 +6,8 @@ import pickle
 from datetime import datetime
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
-from pylons import config
+from pylons.controllers.util import abort, redirect
+from pylons import config, url
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
 
@@ -85,13 +85,13 @@ class AmazonController(BaseController):
         meta.Session.commit()
         self.__query_actors__(media_id)
         if not medium.image_data:
-            return redirect_to(controller='amazon', action='query_images')
+            return redirect(url(controller='amazon', action='query_images'))
         else:
-            return redirect_to(controller='medium', action='edit')
+            return redirect(url(controller='medium', action='edit'))
 
     def query_actors(self, id):
         self.__query_actors__(id)
-        return redirect_to(controller='medium', action='edit')
+        return redirect(url(controller='medium', action='edit'))
 
     def __query_actors__(self, id):
         """ id = media.id """
@@ -104,7 +104,7 @@ class AmazonController(BaseController):
                                         ResponseGroup="Images,ItemAttributes")
         except Exception, ex:
             h.flash("%s: %s" % (type(ex), ex))
-            return redirect_to(controller='medium', action='edit')
+            return redirect(url(controller='medium', action='edit'))
 
         added_persons = []
         medium = meta.Session.query(model.Medium).get(id)
@@ -156,14 +156,14 @@ class AmazonController(BaseController):
 
             if url:
                 self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
-            return redirect_to(controller='medium', action='edit')
+            return redirect(url(controller='medium', action='edit', id=id))
 
         return render("amazon/image_list.mako")
 
     def query_images_post(self, id):
         url = request.params.get('url', None)
         self.__query_images_post__(id, url)
-        return redirect_to(controller='medium', action='edit')
+        return redirect(url(controller='medium', action='edit', id=id))
 
     def __query_images_post__(self, id, url):
         webFile = urllib.urlopen(url)
@@ -177,7 +177,7 @@ class AmazonController(BaseController):
 
             # dont do this, might be an infinite loop
             #~ return redirect_to(controller='amazon', action='query_images')
-            return redirect_to(controller='medium', action='edit')
+            return redirect(url(controller='medium', action='edit', id=id))
 
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
@@ -194,7 +194,7 @@ class AmazonController(BaseController):
 
         meta.Session.delete(asin)
         meta.Session.commit()
-        return redirect_to(controller='medium', action='edit')
+        return redirect(url(controller='medium', action='edit', id=id))
 
     def clear_persons(self, id):
         item = meta.find(model.Medium, id)
@@ -205,6 +205,6 @@ class AmazonController(BaseController):
 
         meta.Session.commit()
         h.flash(ungettext("removed %d person", "removed %d persons", cnt) % cnt)
-        return redirect_to(controller='medium', action='edit')
+        return redirect(url(controller='medium', action='edit', id=id))
 
 
