@@ -8,7 +8,8 @@
 # Optionen
 name "Medienverwaltung"
 OutFile "Install_Medienverwaltung.exe"
-InstallDir "$PROGRAMFILES\Medienverwaltung"
+#InstallDir "$PROGRAMFILES\Medienverwaltung"
+InstallDir "$APPDATA\Medienverwaltung"
 !ifdef DEBUG
     SetCompressor zlib
     SetCompress off
@@ -28,7 +29,7 @@ Var STARTMENU_FOLDER
 !insertmacro MUI_PAGE_WELCOME
 
 ;Zielverzeichnis
-InstallDirRegKey HKLM Software\sis\Medienverwaltung InstallLocation
+#InstallDirRegKey HKLM Software\sis\Medienverwaltung InstallLocation
 !insertmacro MUI_PAGE_DIRECTORY
 
 ;Was soll installiert werden?
@@ -47,8 +48,15 @@ ShowInstDetails show
 !define MUI_FINISHPAGE_RUN "$INSTDIR\start.cmd"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !insertmacro MUI_PAGE_FINISH
-!insertmacro MUI_LANGUAGE "German"
 
+#=============================================================================
+# UnInstallPages
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_CONFIRM
+#!insertmacro MUI_UNPAGE_COMPONENTS
+!insertmacro MUI_UNPAGE_INSTFILES
+
+!insertmacro MUI_LANGUAGE "German"
 
 #=============================================================================
 #!macro InstExe SourceDir Filename
@@ -86,12 +94,19 @@ Function .onInit
 FunctionEnd
 
 Function .onInstSuccess
-  IfRebootFlag 0 noreboot
-    MessageBox MB_YESNO "A reboot is required to finish the installation. Do you wish to reboot now?" IDNO noreboot
-    Reboot
-  noreboot:
+    WriteUninstaller $INSTDIR\Uninstall.exe
 
-  WriteRegStr HKLM Software\sis\Medienverwaltung InstallLocation $INSTDIR
+    ;Create shortcuts
+    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+    !insertmacro MUI_STARTMENU_WRITE_END
+    
+    WriteRegStr HKLM Software\sis\Medienverwaltung InstallLocation $INSTDIR
+
+    IfRebootFlag 0 noreboot
+        MessageBox MB_YESNO "A reboot is required to finish the installation. Do you wish to reboot now?" IDNO noreboot
+        Reboot
+    noreboot:
 FunctionEnd
 
 Function checkRetVal
@@ -112,8 +127,7 @@ FunctionEnd
 
 Section "Python26"
     SetOutPath $INSTDIR
-    
-    File /r C:\Python26
+    File /r /x Doc /x tcl C:\Python26
     File python26.dll
     File install.cmd
     File show.cmd
@@ -134,4 +148,22 @@ Section "Python26"
 #        File "..\*.SnapshotProperties"
 
 
+SectionEnd
+
+Section "-Un.Remove_What_is_Left"
+    ReadRegStr $STARTMENU_FOLDER HKLM "Software\Medienverwaltung" "Start Menu Folder"
+    Delete "$SMPROGRAMS\$STARTMENU_FOLDER\Start Webserver.lnk"
+    Delete "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk"
+    RMDir "$SMPROGRAMS\$STARTMENU_FOLDER"
+    DeleteRegKey HKLM "Software\Medienverwaltung"
+
+    RMDir /r $INSTDIR\Python26
+    RMDir /r $INSTDIR\local.env
+    RMDir /r $INSTDIR\Data
+    Delete $INSTDIR\python26.dll
+    Delete $INSTDIR\install.cmd
+    Delete $INSTDIR\show.cmd
+    Delete $INSTDIR\start.cmd
+    Delete $INSTDIR\manage_local.py
+    Delete $INSTDIR\Uninstall.exe
 SectionEnd
