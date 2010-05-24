@@ -1,6 +1,6 @@
 <%inherit file="/layout-default.mako"/>\
 
-<%def name="title()">${_("Amazon Search Results")}</%def>
+<%def name="title()">${c.title}</%def>
 
 <%def name="content()">
 <form id="signin-form" method="post" action="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">
@@ -16,33 +16,65 @@
         <td class='simple'>&nbsp;</td>
         <td class='simple'>${_('Image')}</td>
         <td class='simple'>${_('Title')}</td>
+        <td class='simple'>${_('Actors')}</td>
+        <td class='simple'>${_('Director')}</td>
         <td class='simple'>${_('ASIN')}</td>
     </tr>
-
-    % for item in c.items:
-    <tr>
-        <td class='simple'>
-            <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}">
-        </td>
-        %if 'SmallImage' in dir(item):
-        <td class='simple'>
-            <a onclick="document.list.item_id_${item.ASIN}.checked = !document.list.item_id_${item.ASIN}.checked;">
-                <img src="${unicode(item.SmallImage.URL)}" />
-            </a>
-        </td>
-        %else:
-        <td class='simple'><nobr>${_("No image available")}</nobr></td>
-        %endif
-        <td class='simple'>${unicode(item.ItemAttributes.Title)}</td>
-        <td class='simple'><a href="${h.url_for(controller='amazon', action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
-    </tr>
+    % for item in c.selected_items:
+    ${self.row(item, True)}
     %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
-<p><input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/></p>
+<input type="hidden" name="page" value="${c.page}" />
+<input type="hidden" name="query" value="${c.query}" />
+<p>
+    <input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/>
+    % if c.items:
+    <input type="submit" name='next_page' value="${_("Next Page")}" class="button"/>
+    % endif
+</p>
 </form>
 </%def>
 
+
+<%def name="row(item, selected)">
+<tr>
+    <td class='simple'>
+        <input type="checkbox" name="item_id_${item.ASIN}" value="${item.ASIN}" ${h.iif(selected, 'checked="true"', '')}>
+    </td>
+    %if 'SmallImage' in dir(item):
+    <td class='simple'>
+        <a onclick="document.list.item_id_${item.ASIN}.checked = !document.list.item_id_${item.ASIN}.checked;">
+            <img src="${unicode(item.SmallImage.URL)}" />
+        </a>
+    </td>
+    %else:
+    <td class='simple'><nobr>${_("No image available")}</nobr></td>
+    %endif
+    <td class='simple'>
+        <p>${unicode(item.ItemAttributes.Title)}</p>
+    </td>
+    <td class='simple'>
+        % if 'Actor' in item.ItemAttributes.__dict__:
+        <ul>
+            % for subitem in item.ItemAttributes.Actor:
+            <li>${subitem}</li>
+            % endfor
+        </ul>
+        % endif
+    </td>
+    <td class='simple'>
+        % if 'Director' in item.ItemAttributes.__dict__:
+        <ul>
+            % for subitem in item.ItemAttributes.Director:
+            <li>${subitem}</li>
+            % endfor
+        </ul>
+        % endif
+    </td>
+    <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
+</tr>
+</%def>
 
 <%def name="side()">
 	<div class="box">

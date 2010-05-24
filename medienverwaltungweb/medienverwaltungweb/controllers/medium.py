@@ -56,13 +56,14 @@ class MediumController(BaseController):
 
         if int(request.params.get('media_type', -1)) < 0:
             h.flash(_("please specify media type"))
-            return redirect(url(controller='medium', action='mass_add'))
+            return self.mass_add()
 
         media_type_obj = meta.Session.query(model.MediaType).get(request.params.get('media_type', -1))
         
         
         count = 0
         new_media = []
+        failed = []
         for item in request.params.get('title').split('\n'):
             if not item.strip():
                 continue
@@ -86,10 +87,12 @@ class MediumController(BaseController):
                 if not result:
                     #~ h.flash(_("I tried to use '%s' as an isbn, but amazon didn't find it.") % item)
                     h.flash(_("Amzon does not knwo what '%s' is.") % item)
+                    failed.append(item)
                     continue
 
                 elif not result['success']:
                     h.flash(_("Amazon Lookup failed with the following error: %s") % result['message'])
+                    failed.append(item)
                     continue
 
                 medium_id = result['medium_id']
@@ -328,6 +331,17 @@ class MediumController(BaseController):
                 c.persons[item.relation.name].append(item)
             else:
                 c.persons[item.relation.name] = [item]
+
+        for relation_name in c.persons:
+            log.debug("relation_name: %s" % relation_name)
+            #~ log.debug("relation_name: %s" % c.persons[relation_name])
+
+            c.persons[relation_name].sort(key=lambda x: len(x.person.persons_to_media))
+            c.persons[relation_name].reverse()
+
+            for item in c.persons[relation_name]:
+                log.debug("item: %d - %s" % (len(item.person.persons_to_media),
+                                             item.person))
 
         c.borrowed_by = meta.Session.query(model.Borrower)\
                                     .join(model.BorrowAct)\

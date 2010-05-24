@@ -1,9 +1,10 @@
 import logging
 import amazonproduct
 import urllib
-from StringIO import StringIO
 import pickle
+from StringIO import StringIO
 from datetime import datetime
+from pprint import pprint, pformat
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect
@@ -11,10 +12,10 @@ from pylons import config, url
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
 
-from medienverwaltungweb.lib.base import BaseController, render
 import medienverwaltungweb.lib.helpers as h
-from medienverwaltungweb.model import meta
 import medienverwaltungweb.model as model
+from medienverwaltungweb.lib.base import BaseController, render
+from medienverwaltungweb.model import meta
 from medienverwaltungcommon.amazon import add_persons, RefHelper
 
 log = logging.getLogger(__name__)
@@ -47,35 +48,64 @@ class AmazonController(BaseController):
         c.item = node.Items.Item[0]
         return render('/amazon/item_lookup_result.mako')
 
-    def map_to_medium(self, id):
+    def map_to_medium(self, id, page=1):
         """ id is media.id """
         c.item = meta.find(model.Medium, id)
+        c.page = page
 
         query = request.params.get('query', c.item.title)
         log.debug("c.item.type: %s" % c.item.type)
         search_index = str(c.item.type.amzon_search_index)
         log.debug("search_index: %s" % search_index)
 
+        selected_asins = request.params.get('selected_asins')
+        if selected_asins:
+            log.debug("selected_asin: %s" % selected_asins)
+            node = self.api.item_lookup(selected_asins,
+                                            ResponseGroup="Images,ItemAttributes")
+            c.selected_items = node.Items.Item
+
         try:
             node = self.api.item_search(search_index,
                                         Title=query.encode('utf-8'),
-                                        ResponseGroup="Images,ItemAttributes")
+                                        ResponseGroup="Images,ItemAttributes",
+                                        ItemPage=page)
             c.items = node.Items.Item
-        except:
+        except Exception, ex:
+            log.warn("Amzon Search error: %s" % ex)
             c.items = []
 
         c.query = query
+        c.title = _("Amazon Search Results for '%s'" % query)
+        if page > 1:
+            c.title += _(", page %s") % c.page
         return render('/amazon/item_search_result.mako')
 
     def map_to_medium_post(self):
         media_id = request.params.get('media_id', None)
+
+        if request.params.get('next_page', None):
+            page = int(request.params.get('page', 1))
+            log.debug("page: %s" % page)
+
+            selected_asins = ','.join(h.checkboxes(request, 'item_id_'))
+            log.debug("selected_asins: %s" % selected_asins)
+
+            query = request.params.get('query')
+            log.debug("query: %s" % query)
+
+            return redirect_to(controller='amazon',
+                               action='map_to_medium',
+                               id=media_id,
+                               page=page + 1,
+                               selected_asins=selected_asins,
+                               query=query)
+
         medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
         for item in h.checkboxes(request, 'item_id_'):
             record = model.MediaToAsin()
-            #~ record.media_id = media_id
             record.asin = item
-            #~ meta.Session.save(record)
             asins.append(item)
             medium.asins.append(record)
 
@@ -85,9 +115,9 @@ class AmazonController(BaseController):
         meta.Session.commit()
         self.__query_actors__(media_id)
         if not medium.image_data:
-            return redirect(url(controller='amazon', action='query_images'))
+            return redirect(url(controller='amazon', action='query_images', page=None))
         else:
-            return redirect(url(controller='medium', action='edit'))
+            return redirect(url(controller='medium', action='edit', page=None))
 
     def query_actors(self, id):
         self.__query_actors__(id)

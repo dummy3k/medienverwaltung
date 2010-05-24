@@ -23,10 +23,8 @@ class TestMediumController(TestController):
         response = self.app.get(url(controller='medium',
                                     action='mass_add_post',
                                     title="Foo"))
-        assert 'http://localhost/medium/mass_add' == response.location
-
-        response2 = self.app.get(response.location)
-        assert 'please specify media type' in response2
+        assert 'please specify media type' in response
+        assert 'Foo' in response
 
     def test_mass_add_post(self):
         response = self.app.get(url(controller='medium',
