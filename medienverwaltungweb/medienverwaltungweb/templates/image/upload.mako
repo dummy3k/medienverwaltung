@@ -3,18 +3,17 @@
 <%def name="title()">${_("Manually add Image to Media")}</%def>
 
 <%def name="content()">
+
+<h2>${_("Upload local File")}</h2>
 <form method="post" action="${h.url_for(controller='image', action='upload_post')}" enctype="multipart/form-data">
 <p><input type="file" name="myfile"></p>
 <p><input type="submit" value="${_("Upload")}" class="button" /></p>
+</form>
 
-##    <p>${_("Type")}:
-##        % for item in c.types:
-##        <input type="radio" name="media_type" value="${item.id}" id="radio${item.id}">
-##        <label for="radio${item.id}">${_(item.name.capitalize())}</label>
-##        % endfor
-##        </ul>
-##    </p>
-##    <p><textarea name="title" cols="50" rows="10">${request.params.get('title')}</textarea></p>
+<h2>${_("Fetch URL")}</h2>
+<form method="post" action="${h.url_for(controller='image', action='download_post')}" enctype="multipart/form-data">
+<p><input type="text" name="url" size='90'></p>
+<p><input type="submit" value="${_("Fetch")}" class="button"/></p>
 </form>
 
 </%def>

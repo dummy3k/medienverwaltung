@@ -212,6 +212,7 @@ class AmazonController(BaseController):
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.image_data = buffer
+        item.image_crop = None
         item.updated_ts = datetime.now()
         meta.Session.update(item)
         meta.Session.commit()

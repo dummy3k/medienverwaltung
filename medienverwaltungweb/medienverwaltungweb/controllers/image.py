@@ -1,5 +1,6 @@
 import logging
 import Image, ImageFile
+import urllib
 from StringIO import StringIO
 from datetime import datetime
 
@@ -43,12 +44,7 @@ class ImageController(BaseController):
         
     def upload_post(self, id):
         myfile = request.POST['myfile']
-        #~ h.flash(_("added image: %s" % type(myfile)))
-        #~ h.flash(_("len: %s" % len(myfile.value)))
-        #~ if len(myfile.value) > 64000:
-            #~ h.flash(_("image too big"))
-            #~ return redirect(url(controller='medium', action='edit', id=id))
-            
+
         buffer = StringIO()
         buffer.write(myfile.file.read())
         if buffer.len >= 65536:
@@ -58,6 +54,27 @@ class ImageController(BaseController):
         
         record = meta.Session.query(model.Medium).get(id)
         record.image_data = buffer
+        record.image_crop = None
+        record.updated_ts = datetime.now()
+        meta.Session.update(record)
+        meta.Session.commit()
+        
+        h.flash(_("added image (%d bytes)") % buffer.len)
+        return redirect(url(controller='medium', action='edit', id=id))
+        
+    def download_post(self, id):
+        image_url = request.params.get('url')
+        webFile = urllib.urlopen(image_url)
+        buffer = StringIO()
+        buffer.write(webFile.read())
+        if buffer.len >= 65536:
+            # 69198 defenitly fails. if the size is to blame.
+            # i dont know :(
+            h.flash(_("image is to big."))
+        
+        record = meta.Session.query(model.Medium).get(id)
+        record.image_data = buffer
+        record.image_crop = None
         record.updated_ts = datetime.now()
         meta.Session.update(record)
         meta.Session.commit()
