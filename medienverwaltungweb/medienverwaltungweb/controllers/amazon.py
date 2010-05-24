@@ -94,12 +94,12 @@ class AmazonController(BaseController):
             query = request.params.get('query')
             log.debug("query: %s" % query)
 
-            return redirect_to(controller='amazon',
+            return redirect(url(controller='amazon',
                                action='map_to_medium',
                                id=media_id,
                                page=page + 1,
                                selected_asins=selected_asins,
-                               query=query)
+                               query=query))
 
         medium = meta.Session.query(model.Medium).get(media_id)
         asins = []
@@ -115,13 +115,13 @@ class AmazonController(BaseController):
         meta.Session.commit()
         self.__query_actors__(media_id)
         if not medium.image_data:
-            return redirect(url(controller='amazon', action='query_images', page=None))
+            return redirect(url(controller='amazon', action='query_images', id=media_id, page=None))
         else:
-            return redirect(url(controller='medium', action='edit', page=None))
+            return redirect(url(controller='medium', action='edit', id=media_id, page=None))
 
     def query_actors(self, id):
         self.__query_actors__(id)
-        return redirect(url(controller='medium', action='edit'))
+        return redirect(url(controller='medium', action='edit', id=id))
 
     def __query_actors__(self, id):
         """ id = media.id """
@@ -134,7 +134,7 @@ class AmazonController(BaseController):
                                         ResponseGroup="Images,ItemAttributes")
         except Exception, ex:
             h.flash("%s: %s" % (type(ex), ex))
-            return redirect(url(controller='medium', action='edit'))
+            return redirect(url(controller='medium', action='edit', id=id))
 
         added_persons = []
         medium = meta.Session.query(model.Medium).get(id)
@@ -191,8 +191,8 @@ class AmazonController(BaseController):
         return render("amazon/image_list.mako")
 
     def query_images_post(self, id):
-        url = request.params.get('url', None)
-        self.__query_images_post__(id, url)
+        image_url = request.params.get('url', None)
+        self.__query_images_post__(id, image_url)
         return redirect(url(controller='medium', action='edit', id=id))
 
     def __query_images_post__(self, id, url):
