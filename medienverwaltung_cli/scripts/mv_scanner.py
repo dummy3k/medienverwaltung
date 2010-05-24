@@ -11,13 +11,13 @@ import os
 log = logging.getLogger(__name__)
 isbn_log = logging.getLogger('isbn')
 
-def one(url, isbn):
+def one(url, isbn, search_index='Books'):
     print "ISBN: %s" % isbn
     isbn_log.info("ISBN: %s" % isbn)
 
     service_url = "%s/api/index" % url
     server = xmlrpclib.Server(service_url)
-    result = server.AddMediumByISBN(isbn)
+    result = server.AddMediumByISBN(isbn, search_index)
     log.debug("result:\n%s" % pformat(result))
     if not result['success']:
         print "Failure: %s" % result['message']

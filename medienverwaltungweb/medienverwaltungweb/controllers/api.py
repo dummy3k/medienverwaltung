@@ -24,11 +24,8 @@ class ApiController(XMLRPCController):
         
     def sayhello(self, s):
         return 'Hello %s' % s
-
     sayhello.signature = [ ['struct', 'string'] ]
 
-
-    def AddMediumByISBN(self, isbn):
-        return amazon.AddMediumByISBN(isbn)
-    
-    AddMediumByISBN.signature = [ ['struct', 'string'] ]
+    def AddMediumByISBN(self, isbn, search_index):
+        return amazon.AddMediumByISBN(isbn, search_index)
+    AddMediumByISBN.signature = [ ['struct', 'string', 'string'] ]

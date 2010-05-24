@@ -34,7 +34,7 @@ def AddMediumByISBN(isbn, search_index):
         elif search_index == 'DVD':
             id_type = 'EAN'
         else:
-            raise Excpetion("unknown search_index: '%s'" % search_index)
+            raise Exception("unknown search_index: '%s'" % search_index)
             
         node = api.item_lookup(isbn,
                                IdType=id_type,
