@@ -12,7 +12,7 @@ fi
 
 source unittest.env/bin/activate
 
-cd medienverwaltung-common/
+cd medienverwaltungcommon/
 if [ $do_setup == "YES" ];
 then
     python setup.py develop
