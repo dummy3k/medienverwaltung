@@ -19,6 +19,9 @@ def find_dvds(directory):
             else:
                 find_dvds(sub_dir)
 
-if __name__ == '__main__':
+def main():
     optfunc.run(find_dvds)
     #~ optfunc.main([find_dvds,])
+
+if __name__ == '__main__':
+    main()

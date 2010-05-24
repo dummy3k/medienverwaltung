@@ -18,9 +18,11 @@ setup(name='medienverwaltung_cli',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          "feedparser"
+          #~ "feedparser"
+          "optfunc",
       ],
       entry_points="""
-      # -*- Entry points: -*-
+      [console_scripts]
+      mv_find_dvds = medienverwaltung_cli.scripts.mv_find_dvds:main
       """,
       )
