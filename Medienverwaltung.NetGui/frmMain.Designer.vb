@@ -79,7 +79,6 @@ Partial Class frmMain
         Label2.Size = New System.Drawing.Size(30, 13)
         Label2.TabIndex = 3
         Label2.Text = "Title:"
-        AddHandler Label2.Click, AddressOf Me.Label2_Click
         '
         'txtBarcode
         '

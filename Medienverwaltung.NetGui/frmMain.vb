@@ -1,8 +1,11 @@
 ﻿Imports Microsoft.Win32
 Imports CookComputing.XmlRpc
+Imports System.Media
 
 Public Class frmMain
     Private mRegistry As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\" & Application.ProductName)
+    Private mPlaySuccess As New SoundPlayer(My.Resources.success)
+    Private mPlayFailure As New SoundPlayer(My.Resources.failure)
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         mRegistry.SetValue("txtUrl", txtUrl.Text)
@@ -15,23 +18,37 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdFetch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdFetch.Click
+        Fetch()
+    End Sub
+
+    Private Function Fetch() As Boolean
+        If txtBarcode.Text.Trim() = "" Then Return False
+
         Dim proxy = XmlRpcProxyGen.Create(Of IMvApi)()
         proxy.Url = txtUrl.Text
         Dim result = proxy.AddMediumByISBN(txtBarcode.Text, "Books")
         If Not result("success") Then
+            mPlayFailure.PlaySync()
             MsgBox("Failure: " & result("success"))
-            Return
+            Return False
         End If
 
         txtTitle.Text = result("title")
-        'Stop
+        'Beep()
+        mPlaySuccess.Play()
+        Return True
+    End Function
+
+    Private Sub txtBarcode_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBarcode.KeyDown
+        If e.KeyCode <> Keys.Return Then Return
+        e.SuppressKeyPress = True
     End Sub
 
-    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTitle.TextChanged
-
+    Private Sub txtBarcode_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBarcode.KeyUp
+        If e.KeyCode <> Keys.Return Then Return
+        e.SuppressKeyPress = True
+        If Fetch() Then
+            txtBarcode.Text = ""
+        End If
     End Sub
 End Class
