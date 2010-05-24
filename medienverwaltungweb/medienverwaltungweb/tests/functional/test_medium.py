@@ -183,27 +183,6 @@ class TestMediumControllerWithData(TestController):
 
         self.assertEqual('http://localhost/medium/edit/1', response.location)
 
-    def test_crop_image(self):
-        response = self.app.get(url(controller='medium',
-                                    action='crop_image',
-                                    id='2'))
-
-        print response
-        assert "Crop Medium" in response
-
-    def test_crop_image_post(self):
-        response = self.app.post(url(controller='medium',
-                                     action='crop_image_post',
-                                     id='2'),
-                                 params={'x':'1',
-                                         'y':'2',
-                                         'x2':'3',
-                                         'y2':'4'})
-
-        print response
-        record = meta.Session.query(model.Medium).get(2)
-        self.assertEqual( (1,2,3,4) , record.image_crop)
-
     def test_set_view_options(self):
         response = self.app.post(url(controller='medium',
                                      action='set_view_options'),

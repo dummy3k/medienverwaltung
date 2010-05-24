@@ -126,7 +126,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
 	<div class="box">
     <h2>${_('Image')}:</h2>
         % if c.item.image_data:
-        <li><a href="${h.url_for(controller='medium', action='crop_image', id=c.item.id)}">${_("Crop Image")}</a></li>
+        <li><a href="${h.url_for(controller='image', action='crop_image', id=c.item.id)}">${_("Crop Image")}</a></li>
         % endif
         % if len(c.item.asins) > 0:
         <li><a href="${h.url_for(controller='amazon', action='query_images', id=c.item.id)}">${_("Select image from Amazon")}</a></li>

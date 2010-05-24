@@ -34,7 +34,7 @@
 </%def>
 
 <%def name="content()">
-<form id="signin-form" method="post" action="${h.url_for(controller='medium', action='crop_image_post')}">
+<form id="signin-form" method="post" action="${h.url_for(controller='image', action='crop_image_post')}">
     <label>X1 <input type="text" size="4" id="x" name="x" /></label>
     <label>Y1 <input type="text" size="4" id="y" name="y" /></label>
     <label>X2 <input type="text" size="4" id="x2" name="x2" /></label>

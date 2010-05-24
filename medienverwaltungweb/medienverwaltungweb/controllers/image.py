@@ -85,3 +85,27 @@ class ImageController(BaseController):
         etag_cache(str(item.updated_ts))
         return buffer.getvalue()
 
+    def crop_image(self, id):
+        c.item = meta.find(model.Medium, id)
+        return render('image/crop_image.mako')
+
+    def crop_image_post(self, id):
+        crop = (int(request.params.get('x')),
+                int(request.params.get('y')),
+                int(request.params.get('x2')),
+                int(request.params.get('y2')))
+
+        item = meta.find(model.Medium, id)
+        item.image_crop = crop
+        item.updated_ts = datetime.now()
+        meta.Session.add(item)
+        meta.Session.commit()
+        h.flash(_("updated: '%s'") % h.html_escape(item.title))
+
+        return_to = request.params.get('return_to')
+        log.debug("return_to: %s" % return_to)
+        if return_to:
+            return redirect(str(return_to))
+        else:
+            return redirect(url(controller='medium', action='edit', id=id))
+
