@@ -1,7 +1,13 @@
+import logging
+import Image, ImageFile
+from StringIO import StringIO
+from datetime import datetime
+
 from sqlalchemy import *
-#~ from medienverwaltungweb.model import meta
 import meta
 import tag
+
+log = logging.getLogger(__name__)
 
 media_table = Table('media', meta.metadata,
     Column('id', Integer, primary_key=True),
@@ -13,6 +19,33 @@ media_table = Table('media', meta.metadata,
     Column('updated_ts', DateTime),
     Column('image_crop', PickleType(mutable=False)),
 )
+
+def __shrink__(original_buffer):
+    smaller_buffer = original_buffer
+    percent = 1
+    while smaller_buffer.len >= 65536:
+        percent -= 0.1
+        log.debug("percent: %s" % percent)
+        if percent < 0.01:
+            raise Exception("can't shrink image")
+        
+        p = ImageFile.Parser()
+        p.feed(original_buffer.getvalue())
+        img = p.close()
+
+        log.debug("Before Size: %d,%d" % img.size)
+        img.thumbnail((int(img.size[0] * percent),
+                       int(img.size[1] * percent)))
+        log.debug("After Size: %d,%d" % img.size)
+
+        smaller_buffer = StringIO()
+        img.save(smaller_buffer, format='png')
+        log.debug("smaller_buffer size: %d" % smaller_buffer.len)
+
+    if percent < 1:
+        log.info("reduced image size by %d%%" % (percent * 100,))
+        
+    return smaller_buffer
 
 class Medium(object):
     def __unicode__(self):
@@ -50,3 +83,12 @@ class Medium(object):
                     self.tags.remove(tagobj)
                     break
 
+
+    def set_image_buffer(self, buffer):
+        self.image_data = __shrink__(buffer)
+        if self.image_data.len >= 65536:
+            raise Exception("image to big")
+            
+        self.image_crop = None
+        self.updated_ts = datetime.now()
+        
