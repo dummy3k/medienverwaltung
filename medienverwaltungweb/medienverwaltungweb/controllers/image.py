@@ -1,13 +1,17 @@
 import logging
 import Image, ImageFile
 from StringIO import StringIO
+from datetime import datetime
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to, etag_cache
+from pylons import url
+from pylons.controllers.util import abort, redirect, etag_cache
+from pylons.i18n import _, ungettext
 
+import medienverwaltungweb.lib.helpers as h
+import medienverwaltungweb.model as model
 from medienverwaltungweb.lib.base import BaseController, render
 from medienverwaltungweb.model import meta
-import medienverwaltungweb.model as model
 
 log = logging.getLogger(__name__)
 
@@ -34,3 +38,30 @@ class ImageController(BaseController):
 
         return buffer.getvalue()
 
+    def upload(self, id):
+        return render('image/upload.mako')
+        
+    def upload_post(self, id):
+        myfile = request.POST['myfile']
+        #~ h.flash(_("added image: %s" % type(myfile)))
+        #~ h.flash(_("len: %s" % len(myfile.value)))
+        #~ if len(myfile.value) > 64000:
+            #~ h.flash(_("image too big"))
+            #~ return redirect(url(controller='medium', action='edit', id=id))
+            
+        buffer = StringIO()
+        buffer.write(myfile.file.read())
+        if buffer.len >= 65536:
+            # 69198 defenitly fails. if the size is to blame.
+            # i dont know :(
+            h.flash(_("image is to big."))
+        
+        record = meta.Session.query(model.Medium).get(id)
+        record.image_data = buffer
+        record.updated_ts = datetime.now()
+        meta.Session.update(record)
+        meta.Session.commit()
+        
+        h.flash(_("added image (%d bytes)") % buffer.len)
+        return redirect(url(controller='medium', action='edit', id=id))
+        

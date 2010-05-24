@@ -19,9 +19,9 @@ from mako.template import Template
 from mako.filters import html_escape
 
 import medienverwaltungweb.lib.helpers as h
+import medienverwaltungweb.model as model
 from medienverwaltungweb.lib.base import BaseController, render
 from medienverwaltungweb.model import meta
-import medienverwaltungweb.model as model
 
 log = logging.getLogger(__name__)
 
