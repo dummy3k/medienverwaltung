@@ -23,6 +23,9 @@
     % for item in c.selected_items:
     ${self.row(item, True)}
     %endfor
+    % for item in c.items:
+    ${self.row(item, False)}
+    %endfor
 </table>
 <input type="hidden" name="media_id" value="${c.item.id}" />
 <input type="hidden" name="page" value="${c.page}" />
