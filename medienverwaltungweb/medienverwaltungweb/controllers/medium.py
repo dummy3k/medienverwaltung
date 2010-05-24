@@ -432,7 +432,7 @@ class MediumController(BaseController):
 
     def __create_feed__(self, query, title, key_field):
         myItems = []
-        base_url = config['base_url']
+        base_url = config.get('base_url', 'http://127.0.0.1:5000')
         query = query.limit(10)
 
 
