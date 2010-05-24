@@ -7,7 +7,7 @@
 % if c.item.image_data:
 <div style="float:right">
 <p>
-    <a href="${h.url_for(action='raw_image')}">
+    <a href="${h.url_for(controller='image', action='raw_image')}">
     <img src="${h.url_for(controller='image', action='thumbnail', width=200, height=300)}" class="plain"/>
     </a>
 </p>

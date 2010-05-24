@@ -45,7 +45,7 @@
 </form>
 
 <p>
-    <img src="${h.url_for(controller='medium', action='raw_image')}" id="cropbox"/>
+    <img src="${h.url_for(controller='image', action='raw_image')}" id="cropbox"/>
 </p>
 
 </%def>

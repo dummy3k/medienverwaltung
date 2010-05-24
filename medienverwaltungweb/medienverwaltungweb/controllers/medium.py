@@ -382,20 +382,6 @@ class MediumController(BaseController):
         else:
             return redirect(url(controller='medium', action='edit', id=id))
 
-    def raw_image(self, id):
-        item = meta.find(model.Medium, id)
-
-        p = ImageFile.Parser()
-        p.feed(item.image_data.getvalue())
-        img = p.close()
-
-        buffer = StringIO()
-        img.save(buffer, format='png')
-        response.content_type = 'image/png'
-
-        etag_cache(str(item.updated_ts))
-        return buffer.getvalue()
-
     def next_without_image(self, id):
         query = meta.Session\
             .query(model.Medium)\
