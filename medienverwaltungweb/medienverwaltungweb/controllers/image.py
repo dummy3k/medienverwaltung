@@ -47,6 +47,8 @@ class ImageController(BaseController):
 
         buffer = StringIO()
         buffer.write(myfile.file.read())
+        buffer = self.__shrink__(buffer)
+        
         if buffer.len >= 65536:
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
@@ -68,6 +70,7 @@ class ImageController(BaseController):
         webFile = urllib.urlopen(image_url)
         buffer = StringIO()
         buffer.write(webFile.read())
+        buffer = self.__shrink__(buffer)
         if buffer.len >= 65536:
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
@@ -84,7 +87,29 @@ class ImageController(BaseController):
         h.flash(_("added image (%d bytes)") % buffer.len)
         return redirect(url(controller='medium', action='edit', id=id))
         
-    def __shrink__(self, image):
-        while True:
-            pass
+    def __shrink__(self, original_buffer):
+        smaller_buffer = original_buffer
+        percent = 1
+        while smaller_buffer.len >= 65536:
+            percent -= 0.1
+            log.debug("percent: %s" % percent)
+            if percent < 0.01:
+                raise Exception("can't shrink image")
             
+            p = ImageFile.Parser()
+            p.feed(original_buffer.getvalue())
+            img = p.close()
+
+            log.debug("Before Size: %d,%d" % img.size)
+            img.thumbnail((int(img.size[0] * percent),
+                           int(img.size[1] * percent)))
+            log.debug("After Size: %d,%d" % img.size)
+
+            smaller_buffer = StringIO()
+            img.save(smaller_buffer, format='png')
+            log.debug("smaller_buffer size: %d" % smaller_buffer.len)
+
+        if percent < 1:
+            h.flash(_("reduced image size by %d%%") % (percent * 100,))
+            
+        return smaller_buffer
