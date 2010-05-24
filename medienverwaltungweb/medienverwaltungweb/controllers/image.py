@@ -51,6 +51,7 @@ class ImageController(BaseController):
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
             h.flash(_("image is to big."))
+            return redirect(url(controller='image', action='upload', id=id))
         
         record = meta.Session.query(model.Medium).get(id)
         record.image_data = buffer
@@ -71,6 +72,7 @@ class ImageController(BaseController):
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
             h.flash(_("image is to big."))
+            return redirect(url(controller='image', action='upload', id=id))
         
         record = meta.Session.query(model.Medium).get(id)
         record.image_data = buffer
@@ -82,3 +84,7 @@ class ImageController(BaseController):
         h.flash(_("added image (%d bytes)") % buffer.len)
         return redirect(url(controller='medium', action='edit', id=id))
         
+    def __shrink__(self, image):
+        while True:
+            pass
+            
