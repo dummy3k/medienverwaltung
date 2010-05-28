@@ -14,5 +14,5 @@ General
 Debian, Ubuntu
 --------------
 
-* [MySQL](#)
-* [/etc/init.d/ Script](#)
+* [MySQL](mysql.html)
+* [/etc/init.d/ Script](init-script.html)

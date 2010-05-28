@@ -17,7 +17,8 @@ and actors of a movie or the author of a book.
 Please have a look at the [screenshots](screenshots.html) to see what it
 looks like.
 
-Current Features:
+Current Features
+----------------
 
 - Use Amazon Webservice to enrich meta data, including images
 - Nice [Gallery](screenshots/gallery.png)
