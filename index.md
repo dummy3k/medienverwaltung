@@ -24,5 +24,5 @@ Current Features
 - Nice [Gallery](screenshots/gallery.png)
 - Tagging
 - Which medium is currently borrowed to whom
-- On size [image cropping](screenshots/cropping.png)
+- On site [image cropping](screenshots/cropping.png)
 
