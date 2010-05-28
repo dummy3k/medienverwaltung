@@ -53,8 +53,8 @@ body {
 /*
     border-left:solid 1px #999999;
     background:url("/images/buecher-patrickgage.png") no-repeat scroll 0 0 #F7F7F7;
+    background:url("./images/buecher-patrickgage.png") no-repeat scroll 0 0 transparent;
 */
-    background:url("/images/buecher-patrickgage.png") no-repeat scroll 0 0 transparent;
 }
 #pagetitle{
 	position:relative; float:left; width:608px; height:110px; background-color:#F7F7F7; border-right:solid 1px #999999;
