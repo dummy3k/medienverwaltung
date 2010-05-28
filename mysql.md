@@ -15,7 +15,7 @@ Now modify the following url to match your needs:
 Create the database management script this way:
 
     mv_manage_db manage manage_local.py --url=mysql://USER:PASSWORD@localhost/DATABASE?charset=utf8
-    hmod a+x local/manage_local.py
+    chmod a+x local/manage_local.py
     ./local/manage_local.py version_control
     ./local/manage_local.py upgrade
 
