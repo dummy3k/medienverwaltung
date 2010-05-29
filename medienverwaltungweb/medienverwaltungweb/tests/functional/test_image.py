@@ -31,7 +31,7 @@ class TestImageController(TestController):
                                          'x2':'3',
                                          'y2':'4'})
 
-        print response
+        self.app.get(response.location)
         record = meta.Session.query(model.Medium).get(1)
         self.assertEqual( (1,2,3,4) , record.image_crop)
 

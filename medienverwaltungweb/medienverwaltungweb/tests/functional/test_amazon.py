@@ -27,6 +27,7 @@ class TestAmazonController(TestController):
 								    action='remove_asin',
 								    id=1,
 								    asin='A12345'))
+        self.app.get(response.location)
         self.assertEqual(None, meta.Session.query(model.MediaToAsin).get(1))
 
     def test_clear_persons(self):
@@ -43,4 +44,5 @@ class TestAmazonController(TestController):
         response = self.app.get(url(controller='amazon',
 								    action='clear_persons',
 								    id=1))
+        self.app.get(response.location)
         self.assertEqual(None, meta.Session.query(model.PersonToMedia).get(1))

@@ -35,6 +35,7 @@ class TestPersonController(TestController):
                                     id='1'),
                                  params={'name':'Changed'})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.Person).get(1)
         self.assertEqual('Changed', record.name)
 
@@ -45,6 +46,7 @@ class TestPersonController(TestController):
                                  params={'name':'Changed',
                                          'create_alias':'yes'})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.Person).get(1)
         self.assertEqual('Changed', record.name)
         self.assertEqual(1, len(record.aliases))
@@ -84,6 +86,7 @@ class TestPersonController(TestController):
                                  params={'name':'Foo',
                                          'role':'Author'})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.Person).get(2)
         self.assertNotEqual(None, record)
         self.assertEqual('Foo', record.name)
@@ -113,8 +116,9 @@ class TestPersonController(TestController):
                                  params={'primary_id':'2',
                                          'person_ids_str':'1,2'})
 
-        #~ record = meta.Session.query(model.PersonToMedia).get(1)
-        #~ self.assertEqual(None, record)
+        self.app.get(response.location)
+        record = meta.Session.query(model.PersonToMedia).get(1)
+        self.assertEqual(None, record)
 
     def test_remove_from_media(self):
         record = model.PersonToMedia()
@@ -130,5 +134,6 @@ class TestPersonController(TestController):
                                  params={'name':'Foo',
                                          'role':'Author'})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.PersonToMedia).get(1)
         self.assertEqual(None, record)

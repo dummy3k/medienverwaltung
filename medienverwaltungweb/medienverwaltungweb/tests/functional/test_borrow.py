@@ -76,6 +76,8 @@ class TestBorrowController(TestController):
 
         self.assertEqual('http://localhost/borrow/add_borrower?media_ids=1',
                          response.location)
+        self.app.get(response.location)
+                         
         record = meta.Session.query(model.Borrower).get(2)
         self.assertEqual(None, record)
 
@@ -83,6 +85,7 @@ class TestBorrowController(TestController):
                                     action='add_borrower_post'),
                                  params={'media_ids':'1',
                                          'first_name':'NewOne'})
+        self.app.get(response.location)
 
         record = meta.Session.query(model.Borrower).get(2)
         self.assertEqual('NewOne', record.first_name)
@@ -92,6 +95,7 @@ class TestBorrowController(TestController):
         response = self.app.get(url(controller='borrow',
                                     action='add_borrower_post'),
                                  params={'first_name':'AnotherNewOne'})
+        self.app.get(response.location)
 
         record = meta.Session.query(model.Borrower).get(2)
         self.assertEqual('AnotherNewOne', record.first_name)
@@ -125,6 +129,7 @@ class TestBorrowController(TestController):
                                  params={'first_name':'Changed',
                                          'last_name':'Doe'})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.Borrower).get(1)
         self.assertEqual('Changed', record.first_name)
         self.assertEqual('Doe', record.last_name)

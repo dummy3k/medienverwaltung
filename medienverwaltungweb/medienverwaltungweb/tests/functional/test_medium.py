@@ -55,13 +55,13 @@ class TestMediumController(TestController):
                                     action='mass_add_post',
                                     title="Foo3",
                                     media_type="1"))
+        self.app.get(response.location)
 
         response = self.app.get(url(controller='medium',
                                     action='mass_add_post',
                                     title="Foo3",
                                     media_type="1"))
         response2 = self.app.get(response.location)
-        #~ print response
         assert 'medium already exists:' in response2
 
     def test_list_gallery(self):
@@ -156,6 +156,7 @@ class TestMediumControllerWithData(TestController):
         response = self.app.get(url(controller='medium',
                                     action='delete_many',
                                     item_id_1='1'))
+        self.app.get(response.location)
         self.assertEqual(None, meta.Session.query(model.Medium).get(1))
         self.assertNotEqual(None, meta.Session.query(model.Medium).get(2))
 
@@ -163,6 +164,7 @@ class TestMediumControllerWithData(TestController):
         response = self.app.get(url(controller='medium',
                                     action='delete_one',
                                     id='2'))
+        self.app.get(response.location)
         self.assertEqual(None, meta.Session.query(model.Medium).get(2))
         self.assertNotEqual(None, meta.Session.query(model.Medium).get(1))
 
@@ -173,6 +175,7 @@ class TestMediumControllerWithData(TestController):
                                          'title':'Other title',
                                          'tags':''})
 
+        self.app.get(response.location)
         record = meta.Session.query(model.Medium).get(2)
         self.assertEqual('Other title', record.title)
 
@@ -188,6 +191,7 @@ class TestMediumControllerWithData(TestController):
                                      action='set_view_options'),
                                  params={'items_per_page':'123'})
 
+        self.app.get(response.location)
         self.assertEqual( 123 , response.session['items_per_page'])
 
 if __name__ == '__main__':
