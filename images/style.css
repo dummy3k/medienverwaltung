@@ -49,8 +49,9 @@ body {
 * 
 */
 #logo{
-	float:left; width:191px; height:110px; background-color:#F7F7F7;
+	float:left; width:191px; height:110px;
 /*
+    background-color:#F7F7F7;
     border-left:solid 1px #999999;
     background:url("/images/buecher-patrickgage.png") no-repeat scroll 0 0 #F7F7F7;
     background:url("./images/buecher-patrickgage.png") no-repeat scroll 0 0 transparent;
