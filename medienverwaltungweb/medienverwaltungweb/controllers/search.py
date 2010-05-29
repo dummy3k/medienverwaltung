@@ -2,7 +2,8 @@ import logging
 
 from sqlalchemy.sql import select, join, and_, or_, not_
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons import url
+from pylons.controllers.util import abort, redirect
 from pylons.controllers.util import abort
 from pylons.i18n import _, ungettext
 
@@ -22,7 +23,7 @@ class SearchController(BaseController):
         query = request.params.get('query')
         if not query:
             h.flash(_("please enter search query"))
-            return redirect_to(action='index')
+            return redirect(url(controller='search', action='index'))
 
         like_query = "%%%s%%" % query
         c.query = query

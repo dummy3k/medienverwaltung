@@ -1,7 +1,8 @@
 import logging
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons import url
+from pylons.controllers.util import abort, redirect
 
 from medienverwaltungweb.lib.base import BaseController, render
 

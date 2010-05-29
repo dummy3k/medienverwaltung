@@ -22,8 +22,8 @@
 <div id="header">
 <div id="layoutImg"></div>
 <div id="titel">
-##    <a class ="titel" href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">
-    <a class ="titel" href="${h.url_for('/')}">
+    <a class ="titel" href="${h.url_for(controller='medium', action='list_gallery')}">
+##    <a class ="titel" href="${h.url_for('/')}">
         Medienverwaltung
     </a>
 </div>

@@ -114,7 +114,7 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     <h2>${_('Actions')}:</h2>
         <ul>
         <li><a href="${h.url_for(controller='amazon', action='map_to_medium', id=c.item.id)}">${_("Attach to Amazon")}</a></li>
-        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id, return_to=h.url_for())}">${_("Next w/o Image")}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='next_without_image', id=c.item.id, return_to=h.url_for(controller='medium', action='edit', id=c.item.id))}">${_("Next w/o Image")}</a></li>
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">${_("Borrow")}</a></li>
         <li>
             ${self.confirm(_("Delete '%s'") % c.item.title,
@@ -140,14 +140,14 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='amazon', action='query_actors', id=c.item.id)}">${_("Query Amazon")}</a></li>
         % endif
         <li><a href="${h.url_for(controller='amazon', action='clear_persons', id=c.item.id)}">${_("Remove all Persons")}</a></li>
-        <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for())}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
+        <li><a class="jslink" onclick="document.forms['mainform'].action='${h.url_for(controller='person', action='merge', id=None, return_to=h.url_for(controller='medium', action='edit', id=c.item.id))}';document.forms['mainform'].submit();return true;">${_("Merge marked Persons")}</a></li>
     </ul>
 	</div>
     % if c.tags:
 	<div class="box">
     <h2>${_("Tags")}:</h2>
         % for item in c.tags[:10]:
-        <a href="${h.url_for(action='list', tag=item[0], page=None, id=None)}">${item[0]}&nbsp;(${item[1]})</a>
+        <a href="${h.url_for(controller='medium', action='list', tag=item[0], page=None, id=None)}">${item[0]}&nbsp;(${item[1]})</a>
         % endfor
     </span>
 	</div>
