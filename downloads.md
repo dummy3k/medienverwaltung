@@ -30,7 +30,7 @@ Install needed dependencies:
 Create and activate virtual environment
     
     virtualenv production.env
-    production.env\Scripts\activate.bat
+    . production.env\bin\activate
     
 Easy install the medienverwaltungweb package
 
