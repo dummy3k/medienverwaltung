@@ -19,7 +19,7 @@
 ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render_unicode(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
-<form id="mainform" method="post" action="${h.url_for(controller='medium', action='edit_post', id=None)}">
+<form id="mainform" method="post" action="${h.url_for(controller='medium', action='edit_post')}">
 <table border=1 class='simple'>
     <tr>
         <td class='simple'>${_('Id')}</td>
