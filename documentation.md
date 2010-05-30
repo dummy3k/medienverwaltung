@@ -16,3 +16,4 @@ Debian, Ubuntu
 
 * [MySQL](mysql.html)
 * [/etc/init.d/ Script](init-script.html)
+* [Debian Lenny](debian_lenny.html)
