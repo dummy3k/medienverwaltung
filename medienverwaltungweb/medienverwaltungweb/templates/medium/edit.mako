@@ -118,7 +118,10 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
         <li><a href="${h.url_for(controller='borrow', action='checkout', id=c.item.id)}">${_("Borrow")}</a></li>
         <li>
             ${self.confirm(_("Delete '%s'") % c.item.title,
-                           h.url_for(controller='medium', action='delete_one', return_to=request.params.get('return_to')),
+                           h.url_for(controller='medium',
+                                     action='delete_one',
+                                     id=c.item.id,
+                                     return_to=request.params.get('return_to')),
                            _("Really delete this medium?"))}
         </li>
     </ul>

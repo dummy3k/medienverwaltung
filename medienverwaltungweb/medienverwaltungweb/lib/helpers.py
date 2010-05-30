@@ -4,18 +4,26 @@ Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
 import logging
-
-# Import helpers as desired, or define your own, ie:
-#from webhelpers.html.tags import checkbox, password
+import routes
 from pylons import config
 from pylons.i18n import _, ungettext
 from webhelpers.pylonslib import Flash as _Flash
-from routes import url_for
 from mako.filters import html_escape
 from mako.template import Template
 
 log = logging.getLogger(__name__)
 
+def url_for(**kwargs):
+    """ removes empty values """
+
+    #~ log.debug("kwargs: %s" % kwargs)
+    new_args = {}
+    for key, value in kwargs.iteritems():
+        if value:
+            new_args[key] = value
+            
+    return routes.url_for(**new_args)
+    
 class MvFlash(_Flash):
     """ Default is to escape the string, but it *might* be overridden
         and wont be escaped

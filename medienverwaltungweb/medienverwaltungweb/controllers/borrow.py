@@ -117,7 +117,7 @@ class BorrowController(BaseController):
         #~ c.items = query.all()
         c.page = paginate.Page(query, page)
         c.title = _("All borrowers")
-        #~ c.pager_action = "list_no_image"
+        c.pager_action = 'list_borrowers'
         return render('borrow/list_borrowers.mako')
 
     def edit_borrower(self, id):
@@ -136,6 +136,7 @@ class BorrowController(BaseController):
                           .order_by(model.BorrowAct.id.desc())\
                           .all()
 
+        c.pager_action = 'edit_borrower'
         return render('borrow/edit_borrower.mako')
 
     def edit_borrower_post(self, id):

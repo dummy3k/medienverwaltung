@@ -304,10 +304,12 @@ class MediumController(BaseController):
         meta.Session.delete(db_item)
         meta.Session.commit()
         h.flash(_("deleted: %s") % db_item.title)
-        if request.params.get('return_to'):
+        ret_to = request.params.get('return_to')
+        log.debug("ret_to: %s" % ret_to)
+        if ret_to and ret_to != None:
             return redirect(str(request.params.get('return_to')))
         else:
-            return redirect(url(controller='medium', action='index', id=None))
+            return redirect(url(controller='medium', action='index'))
 
     def edit(self, id):
         log.debug("id: %s" % id)
