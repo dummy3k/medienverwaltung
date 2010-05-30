@@ -196,8 +196,8 @@ class AmazonController(BaseController):
         self.__query_images_post__(id, image_url)
         return redirect(url(controller='medium', action='edit', id=id))
 
-    def __query_images_post__(self, id, url):
-        webFile = urllib.urlopen(url)
+    def __query_images_post__(self, id, image_url):
+        webFile = urllib.urlopen(image_url)
         buffer = StringIO()
         buffer.write(webFile.read())
 
