@@ -177,15 +177,15 @@ class AmazonController(BaseController):
                                     ResponseGroup="Images")
         c.items = node.Items.Item
         if len(c.items) == 1:
-            url = None
+            image_url = None
             try:
-                url = c.items[0].LargeImage.URL
+                image_url = c.items[0].LargeImage.URL
                 h.flash(_("Only one image available. It was automatically choosen."))
             except:
                 h.flash(_("No image available"))
 
-            if url:
-                self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
+            if image_url:
+                self.__query_images_post__(id, str(image_url))
             return redirect(url(controller='medium', action='edit', id=id))
 
         c.media_id = id
