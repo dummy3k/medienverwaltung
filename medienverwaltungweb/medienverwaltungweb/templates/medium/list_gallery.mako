@@ -52,7 +52,7 @@ ${item.title}</a>\
         <h2>${_("Tags")}:</h2>
         <span class="tags">
         % for item in c.tags[:10]:
-        <a href="${h.url_for(tag=item[0], page=None)}">${item[0]}&nbsp;(${item[1]})</a>
+        <a href="${h.url_for(controller='medium', action='list_gallery', tag=item[0], page=None)}">${item[0]}&nbsp;(${item[1]})</a>
         % endfor
         </span>
 	</div>

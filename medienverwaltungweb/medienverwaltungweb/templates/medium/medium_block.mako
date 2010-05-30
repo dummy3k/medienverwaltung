@@ -4,7 +4,7 @@
     % if item.image_data:
     <div style="float:left;margin:5px;">
 ##        %if item.tags:
-        <img src="${h.url_for(controller='medium', action='thumbnail', id=item.id, page=None, type=None, tag=None, return_to=None, width=32, height=32)}">
+        <img src="${h.url_for(controller='image', action='thumbnail', id=item.id, page=None, type=None, tag=None, return_to=None, width=32, height=32)}">
 ##        % else:
 ##        <img src="${h.url_for(controller='medium', action='thumbnail', id=item.id, page=None, type=None, tag=None, return_to=None, width=16, height=16)}">
 ##        % endif
