@@ -40,6 +40,7 @@ class ImageController(BaseController):
         return buffer.getvalue()
 
     def upload(self, id):
+        c.id = id
         return render('image/upload.mako')
         
     def upload_post(self, id):
