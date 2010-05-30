@@ -24,18 +24,19 @@ __all__ = ['environ', 'url', 'TestController']
 log = logging.getLogger(__name__)
 
 # Invoke websetup with the current config file
-SetupCommand('setup-app').run([config['__file__']])
+SetupCommand('setup-app').run([pylons.test.pylonsapp.config['__file__']])
 
 environ = {}
 
 class TestController(TestCase):
 
     def __init__(self, *args, **kwargs):
-        #~ log.debug("kwargs: %s" % args)
         if pylons.test.pylonsapp:
             wsgiapp = pylons.test.pylonsapp
         else:
             wsgiapp = loadapp('config:%s' % config['__file__'])
+
+        config = wsgiapp.config
         self.app = TestApp(wsgiapp)
         url._push_object(URLGenerator(config['routes.map'], environ))
         TestCase.__init__(self, *args, **kwargs)
