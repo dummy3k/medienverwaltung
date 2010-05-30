@@ -188,6 +188,7 @@ class AmazonController(BaseController):
                 self.__query_images_post__(id, str(c.items[0].LargeImage.URL))
             return redirect(url(controller='medium', action='edit', id=id))
 
+        c.media_id = id
         return render("amazon/image_list.mako")
 
     def query_images_post(self, id):
@@ -212,7 +213,7 @@ class AmazonController(BaseController):
         log.debug("id: %s" % id)
         item = meta.find(model.Medium, id)
         item.set_image_buffer(buffer)
-        meta.Session.update(item)
+        meta.Session.add(item)
         meta.Session.commit()
 
     def remove_asin(self, id):

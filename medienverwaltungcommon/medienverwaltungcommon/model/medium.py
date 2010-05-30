@@ -91,4 +91,3 @@ class Medium(object):
             
         self.image_crop = None
         self.updated_ts = datetime.now()
-        

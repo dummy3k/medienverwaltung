@@ -75,7 +75,7 @@
         </ul>
         % endif
     </td>
-    <td class='simple'><a href="${h.url_for(action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
+    <td class='simple'><a href="${h.url_for(controller='amazon', action='show_asin', id=item.ASIN)}">${item.ASIN}</a></td>
 </tr>
 </%def>
 
