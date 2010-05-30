@@ -24,6 +24,7 @@ orm.mapper(Medium, media_table, properties = {
     'type' : orm.relation(MediaType),
     'tags' : orm.relation(Tag, cascade="all, delete, delete-orphan"),
     'persons_to_media' : orm.relation(PersonToMedia, cascade="all, delete, delete-orphan"),
+    'acts' : orm.relation(BorrowAct, cascade="all, delete, delete-orphan"),
     })
 
 orm.mapper(PersonToMedia, person_to_media_table, properties = {
