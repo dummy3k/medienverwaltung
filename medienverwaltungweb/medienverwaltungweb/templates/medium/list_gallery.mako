@@ -60,7 +60,7 @@ ${item.title}</a>\
     % if c.page.page == 1 and c.page.item_count > 14:
 	<div class="box">
         <h2>${_("View Options")}:</h2>
-        <form id="signin-form" method="post" action="${h.url_for(action='set_view_options', page=None)}">
+        <form method="post" action="${h.url_for(controller='medium', action='set_view_options', page=None)}">
         <p>${_("Number of images:")} <input name="items_per_page" type="text" size="4" value="${c.page.items_per_page}" /></p>
         <input type="submit" value='${_("Apply")}' class="button"/>
         </form>
