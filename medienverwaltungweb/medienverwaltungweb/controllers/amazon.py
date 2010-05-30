@@ -201,7 +201,11 @@ class AmazonController(BaseController):
         buffer = StringIO()
         buffer.write(webFile.read())
 
-        if buffer.len >= 65536:
+        log.debug("id: %s" % id)
+        item = meta.find(model.Medium, id)
+        item.set_image_buffer(buffer)
+
+        if item.image_data.len >= 65536:
             # 69198 defenitly fails. if the size is to blame.
             # i dont know :(
             h.flash(_("image is to big."))
@@ -210,9 +214,6 @@ class AmazonController(BaseController):
             #~ return redirect_to(controller='amazon', action='query_images')
             return redirect(url(controller='medium', action='edit', id=id))
 
-        log.debug("id: %s" % id)
-        item = meta.find(model.Medium, id)
-        item.set_image_buffer(buffer)
         meta.Session.add(item)
         meta.Session.commit()
 
