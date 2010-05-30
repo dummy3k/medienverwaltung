@@ -3,7 +3,7 @@
 % if item.image_data:
 <p>
     <a href="${base_url + h.url_for(controller='medium', action='edit', id=item.id)}">
-    <img src="${base_url + h.url_for(controller='medium', action='thumbnail', id=item.id, width=120, height=120)}" />
+    <img src="${base_url + h.url_for(controller='image', action='thumbnail', id=item.id, width=120, height=120)}" />
     </a>
 </p>
 % endif
