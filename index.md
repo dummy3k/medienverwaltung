@@ -3,6 +3,8 @@ title: Home
 layout: default
 ---
 
+<img src="images/box.png" style="float:right;" />
+
 Medienverwaltung
 ================
 
