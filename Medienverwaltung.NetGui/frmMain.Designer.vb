@@ -29,6 +29,7 @@ Partial Class frmMain
         Me.cmdFetch = New System.Windows.Forms.Button
         Me.txtTitle = New System.Windows.Forms.TextBox
         Me.txtBarcode = New System.Windows.Forms.TextBox
+        Me.chktTab = New System.Windows.Forms.CheckBox
         Label1 = New System.Windows.Forms.Label
         Label2 = New System.Windows.Forms.Label
         Label3 = New System.Windows.Forms.Label
@@ -42,6 +43,24 @@ Partial Class frmMain
         Label1.Size = New System.Drawing.Size(23, 13)
         Label1.TabIndex = 0
         Label1.Text = "Url:"
+        '
+        'Label2
+        '
+        Label2.AutoSize = True
+        Label2.Location = New System.Drawing.Point(12, 91)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(30, 13)
+        Label2.TabIndex = 3
+        Label2.Text = "Title:"
+        '
+        'Label3
+        '
+        Label3.AutoSize = True
+        Label3.Location = New System.Drawing.Point(12, 41)
+        Label3.Name = "Label3"
+        Label3.Size = New System.Drawing.Size(50, 13)
+        Label3.TabIndex = 5
+        Label3.Text = "Barcode:"
         '
         'txtUrl
         '
@@ -71,15 +90,6 @@ Partial Class frmMain
         Me.txtTitle.Size = New System.Drawing.Size(410, 20)
         Me.txtTitle.TabIndex = 4
         '
-        'Label2
-        '
-        Label2.AutoSize = True
-        Label2.Location = New System.Drawing.Point(12, 91)
-        Label2.Name = "Label2"
-        Label2.Size = New System.Drawing.Size(30, 13)
-        Label2.TabIndex = 3
-        Label2.Text = "Title:"
-        '
         'txtBarcode
         '
         Me.txtBarcode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -89,20 +99,22 @@ Partial Class frmMain
         Me.txtBarcode.Size = New System.Drawing.Size(410, 20)
         Me.txtBarcode.TabIndex = 6
         '
-        'Label3
+        'chktTab
         '
-        Label3.AutoSize = True
-        Label3.Location = New System.Drawing.Point(12, 41)
-        Label3.Name = "Label3"
-        Label3.Size = New System.Drawing.Size(50, 13)
-        Label3.TabIndex = 5
-        Label3.Text = "Barcode:"
+        Me.chktTab.AutoSize = True
+        Me.chktTab.Location = New System.Drawing.Point(155, 64)
+        Me.chktTab.Name = "chktTab"
+        Me.chktTab.Size = New System.Drawing.Size(88, 17)
+        Me.chktTab.TabIndex = 7
+        Me.chktTab.Text = "Tab Scanner"
+        Me.chktTab.UseVisualStyleBackColor = True
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(490, 448)
+        Me.Controls.Add(Me.chktTab)
         Me.Controls.Add(Me.txtBarcode)
         Me.Controls.Add(Label3)
         Me.Controls.Add(Me.txtTitle)
@@ -120,5 +132,6 @@ Partial Class frmMain
     Friend WithEvents cmdFetch As System.Windows.Forms.Button
     Friend WithEvents txtTitle As System.Windows.Forms.TextBox
     Friend WithEvents txtBarcode As System.Windows.Forms.TextBox
+    Friend WithEvents chktTab As System.Windows.Forms.CheckBox
 
 End Class

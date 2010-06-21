@@ -22,14 +22,25 @@ Public Class frmMain
     End Sub
 
     Private Function Fetch() As Boolean
+        '978345315232801690
+        '9 -> 12
+
+        Dim isbn = txtBarcode.Text.Trim()
+        If isbn.StartsWith("9") Then
+            isbn = isbn.Substring(0, 13)
+        ElseIf isbn.StartsWith("3") Then
+            isbn = isbn.Substring(0, 10)
+        End If
+
         If txtBarcode.Text.Trim() = "" Then Return False
 
         Dim proxy = XmlRpcProxyGen.Create(Of IMvApi)()
         proxy.Url = txtUrl.Text
-        Dim result = proxy.AddMediumByISBN(txtBarcode.Text, "Books")
+        Dim result = proxy.AddMediumByISBN(isbn, "Books")
         If Not result("success") Then
             mPlayFailure.PlaySync()
-            MsgBox("Failure: " & result("success"))
+            'MsgBox("Failure: " & result("success"))
+            txtBarcode.SelectAll()
             Return False
         End If
 
@@ -40,15 +51,27 @@ Public Class frmMain
     End Function
 
     Private Sub txtBarcode_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBarcode.KeyDown
-        If e.KeyCode <> Keys.Return Then Return
+        If e.KeyCode <> Keys.Return And e.KeyCode <> Keys.Tab Then Return
         e.SuppressKeyPress = True
     End Sub
 
     Private Sub txtBarcode_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBarcode.KeyUp
-        If e.KeyCode <> Keys.Return Then Return
+        If e.KeyCode <> Keys.Return And e.KeyCode <> Keys.Tab Then Return
         e.SuppressKeyPress = True
         If Fetch() Then
             txtBarcode.Text = ""
         End If
+    End Sub
+
+    Private Sub txtBarcode_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtBarcode.Validating
+        If txtBarcode.Text.Trim() = "" Then
+            e.Cancel = False
+            Return
+        End If
+
+        If Fetch() Then
+            txtBarcode.Text = ""
+        End If
+        e.Cancel = True
     End Sub
 End Class
