@@ -30,4 +30,11 @@
 </div>
 % endfor
 
+<div class='centered'>
+<form id="mainform" method="post" action="${h.url_for(controller='mobile', action='add_post')}">
+<input type="hidden" name="isbn" value="${c.response['isbn']}"/>
+<input type="submit" value="${_('Add to Collection')}" class="button"/>
+</form>
+</div>
+
 </%def>

@@ -36,3 +36,8 @@ class MobileController(BaseController):
             
         return render('mobile/lookup.mako')
         #~ return request.params.get('q')
+
+    def add_post(self):
+        isbn = request.params.get('isbn')
+        retval = amazon.AddMediumByISBN(isbn, 'Books')
+        return redirect(url(controller='mobile', action='lookup', q=isbn))

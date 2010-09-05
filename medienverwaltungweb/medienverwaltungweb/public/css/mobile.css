@@ -20,3 +20,8 @@ table, td {
 span.field_name {
     font-weight:bold;
 }
+
+div.centered {
+    text-align:center;
+    padding: 1em;
+}
