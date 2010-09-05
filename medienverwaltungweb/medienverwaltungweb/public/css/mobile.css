@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    font:1em sans-serif;
+    height:100%;
+    width:100%;
+}
+
+h1 {
+    background-color:#90B2D2;
+    color:white;
+    margin:0;
+}
+
+table, td {
+    border: None;
+}
