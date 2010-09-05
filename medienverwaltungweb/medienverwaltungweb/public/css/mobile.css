@@ -6,6 +6,8 @@ body {
 }
 
 h1 {
+    font:1.5em sans-serif;
+    font-weight:bold;
     background-color:#90B2D2;
     color:white;
     margin:0;
@@ -13,4 +15,8 @@ h1 {
 
 table, td {
     border: None;
+}
+
+span.field_name {
+    font-weight:bold;
 }
