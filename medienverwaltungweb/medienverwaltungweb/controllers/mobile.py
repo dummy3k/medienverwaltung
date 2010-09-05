@@ -4,6 +4,7 @@ from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
 import medienverwaltungweb.model as model
+import medienverwaltungweb.lib.amazon as amazon
 from medienverwaltungweb.lib.base import BaseController, render
 from medienverwaltungweb.model import meta
 
@@ -27,6 +28,11 @@ class MobileController(BaseController):
         c.item = meta.Session.query(model.Medium)\
                              .filter(model.Medium.isbn==isbn)\
                              .first()
-                             
+
+        if not c.item:
+            c.response = amazon.GetTmpMediumByISBN(isbn, 'Books')
+            return render('mobile/new_item.mako')
+            #~ return "new"
+            
         return render('mobile/lookup.mako')
-        return request.params.get('q')
+        #~ return request.params.get('q')

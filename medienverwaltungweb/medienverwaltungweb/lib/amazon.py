@@ -108,3 +108,58 @@ def AddMediumByISBN(isbn, search_index):
     log.debug("response: %s" % response)
     return response
     log.info("added: %s" % ", ".join(map(lambda x: x.name, added_persons)))
+
+def GetTmpMediumByISBN(isbn, search_index):
+    """
+        id_type: ISBN,
+        search_index: Books, DVD
+    """
+    response = {'isbn':isbn}
+    api = amazonproduct.API(config['Amazon.AccessKeyID'],
+                            config['Amazon.SecretAccessKey'])
+
+    #~ # Valid Values: SKU | UPC | EAN | ISBN (US only, when search
+    #~ # index is Books) | JAN. UPC is not valid in the CA locale
+    #~ id_type = 'SKU'
+    #~ log.debug("id_type: %s" % id_type)
+
+    #~ search_index = 'DVD'
+    if search_index == 'Books':
+        id_type = 'ISBN'
+    elif search_index == 'DVD':
+        id_type = 'EAN'
+    else:
+        raise Exception("unknown search_index: '%s'" % search_index)
+        
+    node = api.item_lookup(isbn,
+                           IdType=id_type,
+                           SearchIndex=search_index,
+                           ResponseGroup="Images,ItemAttributes")
+    item = node.Items.Item
+    response['title'] = unicode(item.ItemAttributes.Title)
+    try:
+        #~ response['image_url'] = str(item.LargeImage.URL)
+        response['image_url'] = str(item.MediumImage.URL)
+    except:
+        response['image_url'] = None
+        log.warn("%s has no image" % medium)
+
+    response['persons'] = {'Author':['John Doe', 'Some One'],
+                           'Creator':['Foo Corp.']}
+
+    response['persons'] = {}
+    add_persons_response(item, 'Author', response['persons'])
+    add_persons_response(item, 'Creator', response['persons'])
+    add_persons_response(item, 'Manufacturer', response['persons'])
+    return response
+
+def add_persons_response(item, relation_name, persons):
+    if not relation_name in item.ItemAttributes.__dict__:
+        log.warn("asin %s has no '%s'" % (item.ASIN, relation_name))
+        return
+
+    persons[relation_name] = []
+    for subitem in item.ItemAttributes.__dict__[relation_name]:
+        subitem = unicode(subitem)
+        log.debug("amazon person: %s" % subitem)
+        persons[relation_name].append(subitem)
