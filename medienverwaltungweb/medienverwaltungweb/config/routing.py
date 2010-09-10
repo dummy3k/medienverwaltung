@@ -22,6 +22,10 @@ def make_map(config):
 
     #~ map.connect('/{controller}/{id}/page/{page}', controller='feed', action='show_feed')
     map.connect('/', controller='medium', action='list_gallery')
+    map.connect('/{controller}/{action}/{id}', mobile=False)
+    map.connect('/m/{controller}/{action}/{id}', mobile=True)
+    map.connect('/foo/{id}', controller='medium', action='edit', mobile=True)
+    map.connect('/bar/{id}', controller='medium', action='edit', mobile=False)
     map.connect('/m/{action}', controller='mobile')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/page/{page}')

@@ -33,8 +33,9 @@ class MobileController(BaseController):
             c.response = amazon.GetTmpMediumByISBN(isbn, 'Books')
             return render('mobile/new_item.mako')
             #~ return "new"
-            
-        return render('mobile/lookup.mako')
+
+        redirect(url(controller='medium', action='edit', id=c.item.id, mobile=True))
+        #~ return render('mobile/lookup.mako')
         #~ return request.params.get('q')
 
     def add_post(self):

@@ -311,8 +311,12 @@ class MediumController(BaseController):
         else:
             return redirect(url(controller='medium', action='index'))
 
-    def edit(self, id):
+    def edit(self, id, mobile=False):
         log.debug("id: %s" % id)
+        log.debug("mobile: %s" % mobile)
+        #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=True))
+        #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=False))
+        #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id))
         c.item = meta.find(model.Medium, id)
         c.persons = {}
 
@@ -364,7 +368,10 @@ class MediumController(BaseController):
         query.bind = meta.engine
         c.tags = map(lambda x: (x[0], x[1]), query.execute())
 
-        return render('medium/edit.mako')
+        if mobile:
+            return render('mobile/medium/edit.mako')
+        else:
+            return render('medium/edit.mako')
 
     def edit_post(self):
         id = request.params.get('id')
