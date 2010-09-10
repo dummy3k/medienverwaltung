@@ -312,9 +312,9 @@ class MediumController(BaseController):
         else:
             return redirect(url(controller='medium', action='index'))
 
-    def edit(self, id, mobile=False):
+    def edit(self, id):
         log.debug("id: %s" % id)
-        log.debug("mobile: %s" % mobile)
+        log.debug("c.mobile: %s" % c.mobile)
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=True))
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=False))
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id))
@@ -370,7 +370,7 @@ class MediumController(BaseController):
         query.bind = meta.engine
         c.tags = map(lambda x: (x[0], x[1]), query.execute())
 
-        if mobile:
+        if c.mobile:
             return render('mobile/medium/edit.mako')
         else:
             return render('medium/edit.mako')

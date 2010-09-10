@@ -122,13 +122,6 @@ class BorrowController(BaseController):
 
     def edit_borrower(self, id):
         c.item = meta.find(model.Borrower, id)
-        #~ c.borrowed_media = meta.Session\
-                          #~ .query(model.Medium)\
-                          #~ .join(model.BorrowAct)\
-                          #~ .filter(model.BorrowAct.borrower_id == id)\
-                          #~ .filter(model.BorrowAct.returned_ts == None)\
-                          #~ .order_by(model.BorrowAct.id.desc())\
-                          #~ .all()
         c.borrowed_media = meta.Session\
                           .query(model.BorrowAct)\
                           .filter(model.BorrowAct.borrower_id == id)\
@@ -137,7 +130,10 @@ class BorrowController(BaseController):
                           .all()
 
         c.pager_action = 'edit_borrower'
-        return render('borrow/edit_borrower.mako')
+        if c.mobile:
+            return render('mobile/borrow/edit_borrower.mako')
+        else:
+            return render('borrow/edit_borrower.mako')
 
     def edit_borrower_post(self, id):
         record = meta.find(model.Borrower, id)
