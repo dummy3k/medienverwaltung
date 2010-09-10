@@ -7,6 +7,7 @@ from StringIO import StringIO  #remove me
 from datetime import datetime
 from pprint import pprint, pformat
 
+
 import PyRSS2Gen
 from sqlalchemy import func
 from sqlalchemy.sql import select, join, and_, or_, not_
@@ -317,6 +318,7 @@ class MediumController(BaseController):
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=True))
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id, mobile=False))
         #~ log.debug("DEBUG: %s" % url(controller='medium', action='edit', id=id))
+        #~ log.debug("DEBUG: %s" % request.params.get('mobile'))
         c.item = meta.find(model.Medium, id)
         c.persons = {}
 

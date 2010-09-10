@@ -1,8 +1,6 @@
 ## -*- coding: utf-8 -*-
 <%inherit file="/layout-default.mako"/>\
-<%!
-    import urllib
-%>
+<%! import urllib %>
 <%namespace name='medium_block' file='/medium/medium_block.mako' />
 
 <%def name="title()">${_("Edit Person - '%s'") % c.item.name}</%def>

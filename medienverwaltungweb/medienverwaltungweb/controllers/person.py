@@ -27,7 +27,10 @@ class PersonController(BaseController):
                     .order_by(model.Medium.title)
             
         c.page = paginate.Page(query, page)
-        return render('person/display.mako')
+        if c.mobile:
+            return render('mobile/person/display.mako')
+        else:
+            return render('person/display.mako')
 
     def edit_post(self, id):
         item = meta.Session.query(model.Person).get(id)

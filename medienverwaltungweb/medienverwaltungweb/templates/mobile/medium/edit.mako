@@ -27,7 +27,7 @@
 
 % if c.borrowed_by:
 <p>
-${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render_unicode(item=c.borrowed_by, h=h) |n}
+${_("This medium ist currently borrowed to %s.") % h.tmpl('borrow/snippets.mako', 'link_to_borrower').render_unicode(item=c.borrowed_by, h=h) |n}
 </p>
 % endif
 
