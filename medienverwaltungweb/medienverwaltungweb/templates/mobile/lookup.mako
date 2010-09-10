@@ -35,10 +35,12 @@ ${_("This medium ist currently borrowed to %s") % h.tmpl('borrow/snippets.mako',
     <span class='field_name'>${_('Id')}</span>
     <span class='field_value'>${c.item.id}</span>
 </div>
+% if len(c.item.tags) > 0:
 <div>
     <span class='field_name'>${_('Tags')}</span>
     <span class='field_value'>${c.item.get_tagstring()}</span>
 </div>
+% endif
 % if c.item.isbn:
 <div>
     <span class='field_name'>${_('ISBN')}</span>
