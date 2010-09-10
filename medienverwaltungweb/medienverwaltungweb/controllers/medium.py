@@ -168,7 +168,11 @@ class MediumController(BaseController):
                         'link':h.url_for(controller='medium', action='new_media_rss')},
                        {'title':_("Updated Media"),
                         'link':h.url_for(controller='medium', action='updated_media_rss')}]
-        return render('medium/list_gallery.mako')
+
+        if c.mobile:
+            return render('mobile/medium/list_gallery.mako')
+        else:
+            return render('medium/list_gallery.mako')
 
     def __get_tags__(self, tag_name, media_type_name):
         """ get all tags from all media.

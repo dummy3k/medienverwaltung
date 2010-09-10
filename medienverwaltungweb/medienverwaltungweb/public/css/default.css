@@ -30,12 +30,6 @@ td.simple
     margin-bottom: 10px;
 }
 
-img.plain
-{
-    border: hidden;
-}
-
-
 a.button
 {
     border: 1px solid black;

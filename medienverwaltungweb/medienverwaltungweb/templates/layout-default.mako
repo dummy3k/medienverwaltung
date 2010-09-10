@@ -5,6 +5,7 @@
 
     <title>${self.title()} - ${config['page_title']}</title>
 
+	<link href="/css/common.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="/css/default.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="/css/awesome-buttons.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/css/ui-lightness/jquery-ui-1.7.2.custom.css" media="screen" rel="stylesheet" type="text/css" />
