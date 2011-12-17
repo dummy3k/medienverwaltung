@@ -155,8 +155,6 @@ class AmazonController(BaseController):
             add_persons(item, 'Manufacturer', medium, added_persons, meta.Session)
 
         meta.Session.commit()
-        #~ if len(msg.value) > len(u"added: "):
-            #~ h.flash(msg.value)
 
         from pylons import config
         template_name = 'person/snippets.mako'
@@ -164,7 +162,7 @@ class AmazonController(BaseController):
         template = config['pylons.app_globals'].mako_lookup.get_template(template_name).get_def(def_name)
 
         if len(added_persons) > 0:
-            person_list = map(lambda item: template.render_unicode(item=item, h=h), added_persons)
+            person_list = map(lambda item: template.render_unicode(item=item, h=h, c=c), added_persons)
             person_list = ", ".join(person_list)
             h.flash(_("added persons: %s") % person_list, escape=False)
         else:
