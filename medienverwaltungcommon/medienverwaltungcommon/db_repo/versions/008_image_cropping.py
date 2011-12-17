@@ -3,17 +3,19 @@ from migrate import *
 import migrate.changeset
 from datetime import datetime
 
-meta = MetaData(migrate_engine)
+meta = MetaData()
 
-media_table = Table('media', meta.metadata,
+media_table = Table('media', meta,
     Column('id', Integer, primary_key=True),
     Column('title', Unicode(100)),
 )
 
 image_crop = Column('image_crop', PickleType)
 
-def upgrade():
+def upgrade(migrate_engine):
+    meta.bind = migrate_engine
     image_crop.create(media_table)
 
-def downgrade():
+def downgrade(migrate_engine):
+    meta.bind = migrate_engine
     image_crop.drop(media_table)
