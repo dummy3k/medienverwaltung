@@ -1,15 +1,17 @@
 from sqlalchemy import *
 from migrate import *
 
-meta = MetaData(migrate_engine)
+meta = MetaData()
 
-media_table = Table('media', meta.metadata,
+media_table = Table('media', meta,
     Column('id', Integer, primary_key=True),
     Column('title', Unicode(100)),
 )
 
-def upgrade():
+def upgrade(migrate_engine):
+    meta.bind = migrate_engine
     media_table.create()
 
-def downgrade():
+def downgrade(migrate_engine):
+    meta.bind = migrate_engine
     media_table.drop()

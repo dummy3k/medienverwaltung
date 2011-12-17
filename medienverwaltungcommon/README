@@ -19,6 +19,8 @@ chmod a+x manage_local.py
 ./manage_local.py upgrade
 
 
+python db_repo/manage.py upgrade --url=sqlite:///tmp.db && python db_repo/manage.py downgrade --url=sqlite:///tmp.db 0
+
 Other
 =====
 
@@ -41,4 +43,4 @@ case "$1" in
     echo $"Usage: $0 {start|stop|restart}"
     exit 1
 esac
-update-rc.d medienverwaltung defaults 
+update-rc.d medienverwaltung defaults
