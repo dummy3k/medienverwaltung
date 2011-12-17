@@ -4,13 +4,22 @@ you would include information such as the information below:
 Installation and Setup
 ======================
 
+Prerequisite:
 
-Install ``medienverwaltungweb`` using easy_install::
+    sudo aptitude install python-imaging libxml2-dev libxslt1-dev
 
-    sudo aptitude install python-imaging
+Install ``medienverwaltungweb`` using easy_install:
 
     easy_install medienverwaltungweb
     (this won't work)
+
+Install for development:
+    virtualenv --system-site-packages local.env
+    . local.env/bin/activate
+
+    sudo aptitude remove python-decorator
+
+    python setup.py develop
 
 Make a config file as follows::
 
@@ -21,7 +30,7 @@ Tweak the config file and especially edited these values:
     - sqlalchemy.url
     - Amazon.AccessKeyID
     - Amazon.SecretAccessKey
-    
+
 Then setup the application::
 
     paster setup-app config.ini
