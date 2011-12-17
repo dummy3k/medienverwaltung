@@ -32,7 +32,7 @@
 <input type="hidden" name="query" value="${c.query}" />
 <p>
     <input type="submit" value="${_("Attach to '%s'") % c.item.title}" class="button"/>
-    % if c.items:
+    % if len(c.items) > 0:
     <input type="submit" name='next_page' value="${_("Next Page")}" class="button"/>
     % endif
 </p>

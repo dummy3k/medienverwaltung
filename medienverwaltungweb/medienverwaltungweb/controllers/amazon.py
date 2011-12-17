@@ -24,7 +24,9 @@ class AmazonController(BaseController):
     def __init__(self):
         BaseController.__init__(self)
         self.api = amazonproduct.API(config['Amazon.AccessKeyID'],
-                                     config['Amazon.SecretAccessKey'])
+                                     config['Amazon.SecretAccessKey'],
+                                     config['Amazon.Locale'],
+                                     config['Amazon.AssociateTag'])
         self.SearchIndex = 'DVD'
 
     def index(self):
@@ -70,7 +72,12 @@ class AmazonController(BaseController):
                                         Title=query.encode('utf-8'),
                                         ResponseGroup="Images,ItemAttributes",
                                         ItemPage=page)
-            c.items = node.Items.Item
+            #~ c.items = node.Items.Item
+            # https://bitbucket.org/basti/python-amazon-product-api/issue/25/api-suddenly-not-working
+            for page in node:
+                c.items = page.Items.Item
+                break #just the first page
+
         except Exception, ex:
             log.warn("Amzon Search error: %s" % ex)
             c.items = []
