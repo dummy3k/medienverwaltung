@@ -19,6 +19,7 @@ setup(
         "babel",
         "PyRSS2Gen",
         "medienverwaltungcommon",
+        "repoze.who",
     ],
     setup_requires=[
         "PasteScript>=1.6.3",
