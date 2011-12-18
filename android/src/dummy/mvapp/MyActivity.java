@@ -4,11 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.net.URI;
 
 public class MyActivity extends Activity
 {
+    private static final String TAG = "MyActivity";
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -17,6 +25,39 @@ public class MyActivity extends Activity
         setContentView(R.layout.main);
     }
 
+    public void api(View view) {
+        //this.toast("ho");
+        try{
+            String theString = IOUtils.toString(new URI("http://192.168.120.24:5000/JsonApi/isbn?q=3442367263"));
+            Log.d(TAG, "theString: " + theString);
+            JSONObject result = new JSONObject(theString);
+            Log.d(TAG, result.getString("isbn"));
+            JSONArray media = result.getJSONArray("media");
+            for (int i=0; i< media.length(); i++) {
+                JSONObject medium = media.getJSONObject(i);
+                Log.d(TAG, medium.getString("title"));
+            }
+
+        } catch (Exception ex) {
+            this.toast(ex);
+        }
+            
+
+    }
+
+    private void toast(Exception ex) {
+        Log.e(TAG, ex.toString());
+        this.toast(ex.toString());
+    }
+    
+    private void toast(String s) {
+        Context context = getApplicationContext();
+        CharSequence text = "Hello toast!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast.makeText(context, s, duration).show();
+    }
+    
     public void selfDestruct(View view) {
         // Kabloey
 

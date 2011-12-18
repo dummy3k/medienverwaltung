@@ -12,11 +12,18 @@
 
 
     <Button
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Scan"
-    android:onClick="selfDestruct"
-    />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:onClick="selfDestruct"
+            />
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Api"
+            android:onClick="api"
+            />
 
 </LinearLayout>
 

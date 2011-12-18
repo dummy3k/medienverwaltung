@@ -478,3 +478,7 @@ class MediumController(BaseController):
 
         return rss.to_xml(encoding="utf-8")
 
+    def api(self):
+        q = request.params.get('q')
+        return q
+

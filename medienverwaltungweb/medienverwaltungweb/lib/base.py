@@ -28,6 +28,8 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        for k, v in environ.items():
+            log.debug("environ[%s] = %s" % (k, v))
         identity = environ.get('repoze.who.identity')
         if identity:
             openid = identity['repoze.who.userid']
