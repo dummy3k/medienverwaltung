@@ -250,9 +250,9 @@ class MediumController(BaseController):
         elif no_images:
             query = query.filter(model.Medium.image_data==None)
 
-        #~ if not c.user:
-            #~ abort(401, 'You are not authenticated')
-        #~ query = query.filter(model.Medium.image_data==None)
+        if not c.user:
+            abort(401, 'You are not authenticated')
+        query = query.filter(model.Medium.creator_user_id==c.user.id)
 
         c.order = request.params.get('order')
         if not c.order:
