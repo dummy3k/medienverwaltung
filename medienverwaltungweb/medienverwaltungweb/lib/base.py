@@ -10,6 +10,7 @@ from pylons.i18n import get_lang, set_lang
 from pylons import config
 from pylons import tmpl_context as c
 
+import medienverwaltungweb.model as model
 from medienverwaltungweb.model import meta
 
 log = logging.getLogger(__name__)
@@ -20,25 +21,37 @@ class BaseController(WSGIController):
         lng = config['language']
         if lng != "en":
             set_lang(lng)
-        
+
     def __call__(self, environ, start_response):
         """Invoke the Controller"""
         # WSGIController.__call__ dispatches to the Controller method
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        identity = environ.get('repoze.who.identity')
+        if identity:
+            openid = identity['repoze.who.userid']
+            log.debug("openid: %s" % openid)
+            openid_model = meta.Session\
+                            .query(model.UserOpenId)\
+                            .filter(model.UserOpenId.openid==openid)\
+                            .first()
+            if openid_model:
+                log.debug("!!!!!!!!!")
+                c.user = openid_model.user
+
         log.debug("__call__(): %s" % environ['pylons.routes_dict'])
         if 'mobile' in environ['pylons.routes_dict']:
             c.mobile = (environ['pylons.routes_dict']['mobile'] == u'True')
         else:
             c.mobile = False
-            
+
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:
             meta.Session.remove()
 
-        
+
     def __before__(self):
         log.debug("__before__()")
-        
+

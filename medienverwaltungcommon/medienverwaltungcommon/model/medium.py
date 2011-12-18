@@ -18,6 +18,7 @@ media_table = Table('media', meta.metadata,
     Column('created_ts', DateTime),
     Column('updated_ts', DateTime),
     Column('image_crop', PickleType(mutable=False)),
+    Column('creator_user_id', Integer, ForeignKey('users.id')),
 )
 
 def __shrink__(original_buffer):
@@ -28,7 +29,7 @@ def __shrink__(original_buffer):
         log.debug("percent: %s" % percent)
         if percent < 0.01:
             raise Exception("can't shrink image")
-        
+
         p = ImageFile.Parser()
         p.feed(original_buffer.getvalue())
         img = p.close()
@@ -44,7 +45,7 @@ def __shrink__(original_buffer):
 
     if percent < 1:
         log.info("reduced image size by %d%%" % (percent * 100,))
-        
+
     return smaller_buffer
 
 class Medium(object):
@@ -88,6 +89,6 @@ class Medium(object):
         self.image_data = __shrink__(buffer)
         if self.image_data.len >= 65536:
             raise Exception("image to big")
-            
+
         self.image_crop = None
         self.updated_ts = datetime.now()

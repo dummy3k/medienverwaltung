@@ -14,6 +14,7 @@ from media_type import MediaType, media_types_table
 from tag import Tag, tags_table
 from borrower import Borrower, borrowers_table
 from borrower import BorrowAct, borrow_acts_table
+from user import User, UserOpenId, user_openids_table, users_table
 
 orm.mapper(MediaToAsin, media_to_asin_table)
 orm.mapper(MediaType, media_types_table)
@@ -54,3 +55,12 @@ orm.mapper(Borrower, borrowers_table, properties = {
 orm.mapper(PersonAlias, person_aliases_table, properties = {
     'person' : orm.relation(Person),
     })
+
+orm.mapper(UserOpenId, user_openids_table, properties = {
+    'user' : orm.relation(User),
+    })
+
+orm.mapper(User, users_table, properties = {
+    'media' : orm.relation(Medium),
+    })
+
