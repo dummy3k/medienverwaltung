@@ -29,12 +29,19 @@
     </a>
 </div>
  <div id="menu">
-  <ul id="nav">
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">${_('Books')}</a></li>
-    <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">${_('DVDs')}</a></li>
-    <li><a href="${h.url_for(controller='person', action='top_ten', id=None, page=None, type=None, tag=None)}">${_('Persons')}</a></li>
-    <li><a href="${h.url_for(controller='borrow', action='list_borrowed_media', id=None, page=None, type=None, tag=None)}">${_('Borrow')}</a></li>
-  </ul>
+    <div id="user_box">
+        % if c.user:
+        <a href="${h.url_for(controller='login', action='logout', id=None, page=None, type=None, tag=None)}">${c.user.name}</a>
+        % else:
+        <a href="${h.url_for(controller='login', action='login_form', id=None, page=None, type=None, tag=None)}">${_('Login')}</a>
+        % endif
+    </div>
+    <ul id="nav">
+        <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='books', tag=None)}">${_('Books')}</a></li>
+        <li><a href="${h.url_for(controller='medium', action='list_gallery', id=None, page=None, type='dvds', tag=None)}">${_('DVDs')}</a></li>
+        <li><a href="${h.url_for(controller='person', action='top_ten', id=None, page=None, type=None, tag=None)}">${_('Persons')}</a></li>
+        <li><a href="${h.url_for(controller='borrow', action='list_borrowed_media', id=None, page=None, type=None, tag=None)}">${_('Borrow')}</a></li>
+    </ul>
  </div>
 </div>
 

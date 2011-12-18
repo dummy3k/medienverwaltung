@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import Image, ImageFile #remove me
+#~ import Image, ImageFile #remove me
 import re
-from StringIO import StringIO  #remove me
+#~ from StringIO import StringIO  #remove me
 from datetime import datetime
 from pprint import pprint, pformat
 
@@ -60,8 +60,8 @@ class MediumController(BaseController):
             return self.mass_add()
 
         media_type_obj = meta.Session.query(model.MediaType).get(request.params.get('media_type', -1))
-        
-        
+
+
         count = 0
         new_media = []
         failed = []
@@ -250,6 +250,11 @@ class MediumController(BaseController):
         elif no_images:
             query = query.filter(model.Medium.image_data==None)
 
+        log.debug("!!!!!!!!!!!!!")
+        if not c.user:
+            abort(401, 'You are not authenticated')
+        #~ query = query.filter(model.Medium.image_data==None)
+
         c.order = request.params.get('order')
         if not c.order:
             query = query.order_by(model.Medium.title)
@@ -420,7 +425,7 @@ class MediumController(BaseController):
         #~ h.flash(u"testing \xc3\xa4")
         h.flash("<i>blah</i>", False)
         return redirect(url(controller='medium', action='index'))
-        
+
     def set_view_options(self, type=None, tag=None):
         items_per_page = request.params.get('items_per_page')
         if not items_per_page or int(items_per_page) <= 0:
@@ -434,7 +439,7 @@ class MediumController(BaseController):
 
         #~ h.flash("session, items_per_page: %s" % session['items_per_page'])
         return redirect(url(controller='medium', action='list_gallery', type=type, tag=tag))
-        
+
     def new_media_rss(self):
         query = meta.Session.query(model.Medium)\
                             .order_by(model.Medium.created_ts.desc())

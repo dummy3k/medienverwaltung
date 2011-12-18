@@ -54,3 +54,7 @@ p.slim {
 #layoutImg {
 	cursor: pointer;
 }
+div#user_box {
+    display: inline;
+    margin: 0 0 0 70px;
+}
