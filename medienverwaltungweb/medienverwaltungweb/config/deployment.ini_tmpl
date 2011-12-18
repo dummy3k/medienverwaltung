@@ -46,6 +46,14 @@ set debug = false
 # Add your secrets here:
 Amazon.AccessKeyID=ABCDEFGHIJKLMNOP1234
 Amazon.SecretAccessKey=diofpidsofpaiofpdifaopsidpoifpaosdifpoii
+Amazon.Locale = us
+Amazon.AssociateTag=xxx-20
+
+# who config
+who.config_file = %(here)s/who.ini
+who.log_level = warning
+who.log_file = stdout
+
 
 # Logging configuration
 [loggers]
