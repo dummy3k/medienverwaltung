@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using System.Collections;
+using System.Globalization;
 
 
 namespace MedienverwaltungPlayer
@@ -51,11 +52,27 @@ namespace MedienverwaltungPlayer
 
         public void scanDirectory(String path, int lvl = 0)
         {
-            if (path == "")
+            if (path == null || path == "")
             {
-
                 return;
             }
+
+            string[] extensions = {".ASX", ".DTS", ".GXF", ".M2V", 
+                                      ".M3U", ".M4V", ".MPEG1", ".MPEG2",
+                                      ".MTS", ".MXF", ".OGM", ".PLS", 
+                                      ".BUP", ".A52", ".AAC", ".B4S", 
+                                      ".CUE", ".DIVX", ".DV", ".FLV", 
+                                      ".M1V", ".M2TS", ".MKV", ".MOV", 
+                                      ".MPEG4", ".OMA", ".SPX", ".TS", 
+                                      ".VLC", ".VOB", ".XSPF", ".DAT", 
+                                      ".BIN", ".IFO", ".PART", ".3G2", 
+                                      ".AVI", ".MPEG", ".MPG", ".FLAC", 
+                                      ".M4A", ".MP1", ".OGG", ".WAV", 
+                                      ".XM", ".3GP", ".SRT", ".WMV", 
+                                      ".AC3", ".ASF", ".MOD", ".MP2", 
+                                      ".MP3", ".MP4", ".WMA", ".MKA", 
+                                      ".MAP" 
+                                  };
 
 
             string[] files = Directory.GetFiles(path);
@@ -69,6 +86,18 @@ namespace MedienverwaltungPlayer
 
             foreach (var filename in Directory.GetFiles(path))
             {
+                Boolean valid = false;
+                foreach (var validExtension in extensions)
+                {
+                    if (filename.EndsWith(validExtension, true, CultureInfo.CurrentCulture))
+                    {
+                        valid = true;
+                    }
+                }
+
+
+                if (!valid) continue;
+
                 log.Debug("adding file '" + filename + "' to playlist '" + name + "'");
                 PlaylistEntry entry = new PlaylistEntry(Path.Combine(path, filename), this);
                 playlistEntries.Add(entry);
@@ -91,13 +120,25 @@ namespace MedienverwaltungPlayer
 
             foreach (var entry in updatedEntries.playlistEntries)
             {
-                
+                PlaylistEntry existing = null;
+                foreach (var existingEntry in playlistEntries)
+                {
+                    if (entry.path == existingEntry.path)
+                    {
+                        existing = existingEntry;
+                        break;
+                    }
+                }
+
+                if (existing == null)
+                {
+                    playlistEntries.Add(entry);
+                }
             }
 
-
-            foreach (var entry in playlistEntries)
+            foreach (var existingEntry in playlistEntries)
             {
-                entry.check();
+                existingEntry.check();
             }
         }
 

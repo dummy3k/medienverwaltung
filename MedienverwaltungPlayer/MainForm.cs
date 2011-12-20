@@ -147,9 +147,8 @@ namespace MedienverwaltungPlayer
 
         public void save()
         {
-            var appData = System.Environment.GetEnvironmentVariable("APPDATA");
-
-            var settingsFolder = Path.Combine(appData, "mvPlayer");
+            var settingsFolder = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.LocalApplicationData), "mvPlayer");
             var settingsFile = Path.Combine(settingsFolder, "playlists.data");
 
             if (!File.Exists(settingsFolder))
@@ -522,9 +521,8 @@ namespace MedienverwaltungPlayer
             
             onPlayingChange(false);
 
-            var appData = System.Environment.GetEnvironmentVariable("APPDATA");
-
-            var settingsFolder = Path.Combine(appData, "mvPlayer");
+            var settingsFolder = Path.Combine(Environment.GetFolderPath(
+                        Environment.SpecialFolder.LocalApplicationData), "mvPlayer");
             var settingsFile = Path.Combine(settingsFolder, "playlists.data");
 
             if (!File.Exists(settingsFolder))
@@ -560,7 +558,7 @@ namespace MedienverwaltungPlayer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Hide();
+            Show();
             if (checkVlcLocation())
             {
                 PlaylistManager.vlcPlayer.readStatus();
