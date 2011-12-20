@@ -53,7 +53,7 @@ namespace MedienverwaltungPlayer
             log.Info("creating VlcPlayer with baseUrl= '" + baseUrl + "'");
 
             this.baseUrl = baseUrl;
-            this.vlcLocation = @"C:\Program Files (x86)\VideoLAN\VLC2\vlc.exe";
+            this.vlcLocation = @"C:\Program Files (x86)\VideoLAN\VLC\vlc.exe";
             resetStatus();
         }
 
