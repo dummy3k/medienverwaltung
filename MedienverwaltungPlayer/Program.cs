@@ -17,7 +17,7 @@ namespace MedienverwaltungPlayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Form1 form1 = new Form1();
+            MainForm mainForm = new MainForm();
             Application.Run();
         }
     }

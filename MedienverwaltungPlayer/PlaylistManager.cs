@@ -15,14 +15,27 @@ namespace MedienverwaltungPlayer
         public static VlcPlayer vlcPlayer = new VlcPlayer();
         public List<Playlist> playlists { get; private set; }
         public Playlist currentPlaylist { get; set; }
-        private Boolean tryNextTick = false;
 
         public String rootFolder { get; set; }
         
-        public PlaylistManager()
+        private PlaylistManager()
         {
             this.playlists = new List<Playlist>();
+            
+            
         }
+
+        private static PlaylistManager instance = null;
+        public static PlaylistManager getInstance()
+        {
+            if (instance == null)
+            {
+                log.Info("creating PlaylistMangager Instance");
+                instance = new PlaylistManager();
+                vlcPlayer.playlistManager = instance;
+            }
+            return instance;
+        }             
 
         public String currentlyPlayedFile()
         {
@@ -34,17 +47,30 @@ namespace MedienverwaltungPlayer
             return null;
         }
 
-        public Playlist findByName(String name)
+        public Playlist findPlaylistById(Int32 id)
         {
             foreach (var playlist in playlists)
             {
-                if (playlist.name == name)
+                if (playlist.id == id)
                 {
                     return playlist;
                 }
             }
 
             return null;
+        }
+
+        public void select(Playlist playlist=null)
+        {
+            if (playlist == null && currentPlaylist == null)
+            {
+                currentPlaylist = playlists.FirstOrDefault();
+            }
+
+            if (playlist != null)
+            {
+                currentPlaylist = playlist;
+            }
         }
 
         public void play(Playlist playlist)
@@ -79,7 +105,6 @@ namespace MedienverwaltungPlayer
 
             if (currentPlaylist != null)
             {
-                tryNextTick = false;
                 currentPlaylist.stop();
             }
         }
@@ -105,28 +130,7 @@ namespace MedienverwaltungPlayer
         {
             if (currentPlaylist != null)
             {
-                if (vlcPlayer.playing)
-                {
-                    log.Info("updating!");
-                    currentPlaylist.update();
-                    tryNextTick = true;
-                }
-                else
-                {
-                    if (tryNextTick)
-                    {
-                        log.Info("updating once more!");
-                        currentPlaylist.update();
-
-                        tryNextTick = false;
-                    }
-                    else
-                    {
-                        log.Info("NOT updating because vlcPlayer.playing = " + vlcPlayer.playing);
-                    }
-    
-                }
-                              
+                currentPlaylist.update();
             }
         }
 
@@ -172,6 +176,16 @@ namespace MedienverwaltungPlayer
             using (var file = System.IO.File.Open(path, System.IO.FileMode.Create))
             {
                 binaryFormatter.Serialize(file, this);
+            }
+        }
+
+        public void deleteCurrentPlaylist()
+        {
+            if (this.currentPlaylist != null)
+            {
+                this.playlists.Remove(this.currentPlaylist);
+                this.currentPlaylist = null;
+                select();
             }
         }
     }

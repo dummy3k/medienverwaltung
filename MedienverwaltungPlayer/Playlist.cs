@@ -15,9 +15,16 @@ namespace MedienverwaltungPlayer
         private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
  
         public String rootPath { get; private set; }
-        public String name { get; private set; }
+        public String name { get; set; }
         public List<PlaylistEntry> playlistEntries { get; set; }
         public PlaylistEntry currentPlaylistEntry { get; set; }
+        public Int32 id = 0;
+
+
+        public override String ToString()
+        {
+            return name;
+        }
 
         public Playlist(String rootPath, String name)
         {
@@ -66,6 +73,32 @@ namespace MedienverwaltungPlayer
                 log.Debug("adding file '" + filename + "' to playlist '" + name + "'");
                 PlaylistEntry entry = new PlaylistEntry(Path.Combine(path, filename), this);
                 playlistEntries.Add(entry);
+            }
+        }
+
+        public void deleteEntry(PlaylistEntry entry)
+        {
+            if (entry == currentPlaylistEntry)
+            {
+                currentPlaylistEntry.stop();
+            }
+
+            playlistEntries.Remove(entry);
+        }
+
+        public void check()
+        {
+            var updatedEntries = new Playlist(rootPath, name);
+
+            foreach (var entry in updatedEntries.playlistEntries)
+            {
+                
+            }
+
+
+            foreach (var entry in playlistEntries)
+            {
+                entry.check();
             }
         }
 
@@ -118,19 +151,33 @@ namespace MedienverwaltungPlayer
             if (currentPlaylistEntry != null)
             {
                 currentPlaylistEntry.update();
-            }            
+            }
+            else
+            {
+                if (PlaylistManager.vlcPlayer.readStatus())
+                {
+                    foreach (var entry in playlistEntries)
+                    {
+                        if (entry.filename == PlaylistManager.vlcPlayer.currentFilename)
+                        {
+                            currentPlaylistEntry = entry;
+                            currentPlaylistEntry.update();
+                            return;
+                        }
+                    }
+                }
+            }
         }
 
         public void next()
         {
-            log.Info("next()");
             stop();
 
             Boolean useNext = false;
 
             foreach (var entry in playlistEntries)
             {
-                if ((useNext || currentPlaylistEntry == null) && entry.watched == false )
+                if (entry.watched == false && (useNext || currentPlaylistEntry == null))
                 {
                     log.Info("next() found '" + entry.path + "' with watched = " + entry.watched + " @ " + entry.time);
                     currentPlaylistEntry = entry;
@@ -138,7 +185,7 @@ namespace MedienverwaltungPlayer
                     return;
                 }
 
-                if (entry.path == currentPlaylistEntry.path)
+                if (currentPlaylistEntry != null && entry.path == currentPlaylistEntry.path)
                 {
                     useNext = true;
                 }
@@ -149,24 +196,25 @@ namespace MedienverwaltungPlayer
 
         public void prev()
         {
-            log.Info("prev()");
             stop();
-            
-            PlaylistEntry prevEntry = null;
 
-            foreach (var entry in playlistEntries)
+            Boolean useNext = false;
+
+            foreach (var entry in (from x in playlistEntries
+                                    orderby x.path descending
+                                    select x))
             {
-                if (entry.path == currentPlaylistEntry.path)
+                if (entry.watched == false && (useNext || currentPlaylistEntry == null))
                 {
-                    log.Info("prev() found '" + prevEntry.path + "' with watched = " + entry.watched + " @ " + entry.time);
-                    currentPlaylistEntry = prevEntry;
+                    log.Info("prev() found '" + entry.path + "' with watched = " + entry.watched + " @ " + entry.time);
+                    currentPlaylistEntry = entry;
                     play();
                     return;
                 }
 
-                if (entry.watched == false)
+                if (currentPlaylistEntry != null && entry.path == currentPlaylistEntry.path)
                 {
-                    prevEntry = entry;
+                    useNext = true;
                 }
             }
             log.Info("prev() found nothing!");

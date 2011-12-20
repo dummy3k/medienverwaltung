@@ -26,6 +26,13 @@ namespace MedienverwaltungPlayer
         public Int32 time { get; set; }
         public Int32 length { get; set; }
         public Boolean watched { get; set; }
+        public Boolean fileNotFound { get; set; }
+
+        public Boolean check()
+        {
+            fileNotFound = File.Exists(path) == false;
+            return !fileNotFound;
+        }
 
         public Playlist parent { get; private set; }
         
@@ -35,15 +42,12 @@ namespace MedienverwaltungPlayer
             this.path = path;
             this.time = 0;
             this.watched = false;
+            this.fileNotFound = false;
         }
 
         public void play()
         {
-            var time = this.time;
-            log.Info("playing " + path);
-            PlaylistManager.vlcPlayer.start(path);
-            log.Info("seeking to " + time);
-            PlaylistManager.vlcPlayer.seek(time);
+            PlaylistManager.vlcPlayer.play(path, this.time);
         }
 
         public void stop()
@@ -54,36 +58,45 @@ namespace MedienverwaltungPlayer
 
         public void update()
         {
-            PlaylistManager.vlcPlayer.readStatus();
+            if (PlaylistManager.vlcPlayer.readStatus())
+            {
+                if (PlaylistManager.vlcPlayer.currentFilename == filename)
+                {
+                    if (PlaylistManager.vlcPlayer.time != 0)
+                    {
+                        log.Info("update(): setting saved time to " + PlaylistManager.vlcPlayer.time);
+                        this.time = PlaylistManager.vlcPlayer.time;
+                    }
 
-            if (PlaylistManager.vlcPlayer.time != 0)
-            {
-                log.Info("update(): setting saved time to " + PlaylistManager.vlcPlayer.time);
-                this.time = PlaylistManager.vlcPlayer.time;
-                this.length = PlaylistManager.vlcPlayer.length;
+                    if (PlaylistManager.vlcPlayer.length != 0)
+                    {
+                        this.length = PlaylistManager.vlcPlayer.length;
+                    }
+                }
+
+                if (PlaylistManager.vlcPlayer.time == 0
+                    && PlaylistManager.vlcPlayer.length == 0
+                    && PlaylistManager.vlcPlayer.state == "stop"
+                    && this.time > 5 && this.length > 5
+                    && this.time > this.length - 30 )
+                {
+                    log.Info("setting watched to true and watching next video()");
+                    this.watched = true;
+                    this.time = 0;
+                    parent.next();
+                }
             }
-            /*
-            log.Debug("this.watched = " + this.watched);
-            log.Debug("this.time = " + this.time);
-            log.Debug("PlaylistManager.vlcPlayer.length = " + PlaylistManager.vlcPlayer.length);
-            log.Debug("PlaylistManager.vlcPlayer.state = " + PlaylistManager.vlcPlayer.state);
-            */
-            if (this.watched == false && PlaylistManager.vlcPlayer.time == 0 && PlaylistManager.vlcPlayer.length == 0 && PlaylistManager.vlcPlayer.state == "stop")
+            else
             {
-                log.Info("setting watched to true and watching next video()");
-                this.watched = true;
-                parent.next();
+
             }
         }
 
         public void pause()
         {
-            if (PlaylistManager.vlcPlayer.started)
+            if (PlaylistManager.vlcPlayer.readStatus())
             {
-                if (PlaylistManager.vlcPlayer.playing)
-                {
-                    update();
-                }
+                update();
                 PlaylistManager.vlcPlayer.togglePause();
             }
             else
