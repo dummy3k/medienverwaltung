@@ -32,8 +32,8 @@
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.Label label4;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,6 +93,15 @@
             label3.Size = new System.Drawing.Size(48, 13);
             label3.TabIndex = 17;
             label3.Text = "Controls:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(9, 72);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(29, 13);
+            label4.TabIndex = 22;
+            label4.Text = "File: ";
             // 
             // notifyIcon1
             // 
@@ -231,9 +240,9 @@
             this.treeViewPlaylistEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeViewPlaylistEntries.Location = new System.Drawing.Point(12, 218);
+            this.treeViewPlaylistEntries.Location = new System.Drawing.Point(9, 148);
             this.treeViewPlaylistEntries.Name = "treeViewPlaylistEntries";
-            this.treeViewPlaylistEntries.Size = new System.Drawing.Size(449, 261);
+            this.treeViewPlaylistEntries.Size = new System.Drawing.Size(449, 331);
             this.treeViewPlaylistEntries.TabIndex = 16;
             this.treeViewPlaylistEntries.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeViewPlaylistEntries.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -243,7 +252,7 @@
             // 
             this.openFileDialog1.DefaultExt = "exe";
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Title = "Please search for vlc.exe";
+            this.openFileDialog1.Title = "VLC binary not found! Please select vlc.exe";
             // 
             // comboBoxPlaylists
             // 
@@ -265,9 +274,9 @@
             this.toolStripButtonImportFromFolder,
             this.toolStripButtonDeleteCurrentPlaylist,
             this.toolStripButtonCheckFiles});
-            this.toolStrip2.Location = new System.Drawing.Point(12, 190);
+            this.toolStrip2.Location = new System.Drawing.Point(9, 120);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(337, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(359, 25);
             this.toolStrip2.TabIndex = 20;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -277,8 +286,8 @@
             this.toolStripButtonImportFromFolder.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImportFromFolder.Image")));
             this.toolStripButtonImportFromFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonImportFromFolder.Name = "toolStripButtonImportFromFolder";
-            this.toolStripButtonImportFromFolder.Size = new System.Drawing.Size(135, 22);
-            this.toolStripButtonImportFromFolder.Text = "import new from folder";
+            this.toolStripButtonImportFromFolder.Size = new System.Drawing.Size(175, 22);
+            this.toolStripButtonImportFromFolder.Text = "import new playlist from folder";
             this.toolStripButtonImportFromFolder.Click += new System.EventHandler(this.toolStripButtonImportFromFolder_Click);
             // 
             // toolStripButtonDeleteCurrentPlaylist
@@ -297,8 +306,8 @@
             this.toolStripButtonCheckFiles.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonCheckFiles.Image")));
             this.toolStripButtonCheckFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCheckFiles.Name = "toolStripButtonCheckFiles";
-            this.toolStripButtonCheckFiles.Size = new System.Drawing.Size(66, 22);
-            this.toolStripButtonCheckFiles.Text = "check files";
+            this.toolStripButtonCheckFiles.Size = new System.Drawing.Size(48, 22);
+            this.toolStripButtonCheckFiles.Text = "update";
             this.toolStripButtonCheckFiles.Click += new System.EventHandler(this.toolStripButtonCheckFiles_Click);
             // 
             // buttonExit
@@ -310,15 +319,6 @@
             this.buttonExit.Text = "exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(9, 72);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(29, 13);
-            label4.TabIndex = 22;
-            label4.Text = "File: ";
             // 
             // labelFile
             // 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
 using System.Web;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MedienverwaltungPlayer
 {
@@ -44,7 +44,7 @@ namespace MedienverwaltungPlayer
                 }
             }
         }
-        public Process vlcProcess { get; set; }
+        public static Process vlcProcess { get; set; }
         public String vlcLocation { get; set; }
         public PlaylistManager playlistManager { get; set; }
 
@@ -53,7 +53,7 @@ namespace MedienverwaltungPlayer
             log.Info("creating VlcPlayer with baseUrl= '" + baseUrl + "'");
 
             this.baseUrl = baseUrl;
-            this.vlcLocation = @"C:\Program Files (x86)\VideoLAN\VLC\vlc.exe";
+            this.vlcLocation = @"C:\Program Files (x86)\VideoLAN\VLC2\vlc.exe";
             resetStatus();
         }
 
@@ -136,9 +136,9 @@ namespace MedienverwaltungPlayer
 
             Process newProcess = Process.Start(vlcLocation, paramList + " \"" + filenameAbsolute + "\"");
 
-            if (this.vlcProcess == null || this.vlcProcess.HasExited)
+            if (VlcPlayer.vlcProcess == null || VlcPlayer.vlcProcess.HasExited)
             {
-                this.vlcProcess = newProcess;
+                VlcPlayer.vlcProcess = newProcess;
             }
             
             if(time != 0) {
@@ -261,21 +261,21 @@ namespace MedienverwaltungPlayer
 
         public Boolean readStatus()
         {
-            if (this.vlcProcess != null)
+            if (VlcPlayer.vlcProcess != null)
             {
-                this.vlcProcess.Refresh();
+                VlcPlayer.vlcProcess.Refresh();
 
-                if (this.vlcProcess.HasExited)
+                if (VlcPlayer.vlcProcess.HasExited)
                 {
-                    this.vlcProcess = findRunningVlcProcess();
+                    VlcPlayer.vlcProcess = findRunningVlcProcess();
                 }
             }
             else
             {
-                this.vlcProcess = findRunningVlcProcess();
+                VlcPlayer.vlcProcess = findRunningVlcProcess();
             }
 
-            if (this.vlcProcess == null)
+            if (VlcPlayer.vlcProcess == null)
             {
                 return false;
             }
@@ -295,6 +295,9 @@ namespace MedienverwaltungPlayer
             this.state = doc.DocumentElement.SelectSingleNode("/root/state").InnerText;
 
             var tag = doc.DocumentElement.SelectSingleNode("/root/information/meta-information/title").FirstChild;
+            var element = (XmlCDataSection)tag;
+
+            var data = element.Data;
 
             this.currentFilename = HttpUtility.HtmlDecode(tag.InnerText);
 

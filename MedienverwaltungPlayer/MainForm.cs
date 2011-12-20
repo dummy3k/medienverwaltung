@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using log4net;
 using System.Threading;
 using log4net.Core;
+using System.Runtime.InteropServices;
 
 namespace MedienverwaltungPlayer
 {
@@ -19,16 +19,22 @@ namespace MedienverwaltungPlayer
     {
         #region ### members ################################################
 
-        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
  
-        private PlaylistManager playlistManager = null;
-        private Boolean shutdown = false;
-        private Playlist comboBoxPlaylistLastSelected = null;
+            private PlaylistManager playlistManager = null;
+            private Boolean shutdown = false;
+            private Playlist comboBoxPlaylistLastSelected = null;
 
-        private Icon iconPlay = null;
-        private Icon iconStop = null;
+            private Icon iconPlay = null;
+            private Icon iconStop = null;
 
-        private Int32 ticks = 1;
+            private Int32 ticks = 1;
+
+            [DllImport("user32.dll")]
+            public static extern int SetForegroundWindow(IntPtr hwnd);
+
+            [DllImport("user32.dll")]
+            static extern bool LockWindowUpdate(IntPtr hWndLock);
 
         #endregion
         #region ### logwatcher #############################################
@@ -181,7 +187,7 @@ namespace MedienverwaltungPlayer
             var minutes = entry.time / 60;
             var seconds = entry.time % 60;
 
-            return String.Format(" ({0:00}:{1:00} or {2:00}%)", minutes, seconds, percent);
+            return String.Format(" ({0:00}:{1:00} or {2:0}%)", minutes, seconds, percent);
         }
 
         public String nodeLabel(PlaylistEntry entry)
@@ -224,14 +230,15 @@ namespace MedienverwaltungPlayer
 
         public void exit()
         {
-            notifyIcon1.Visible = false;
             shutdown = true;
+            Close();
             Application.Exit();
         }
 
         public void rebuildTreeNodes()
         {
             treeViewPlaylistEntries.BeginUpdate();
+            //LockWindowUpdate(treeViewPlaylistEntries.Handle);
             treeViewPlaylistEntries.Nodes.Clear();
 
             if (playlistManager.currentPlaylist == null)
@@ -256,39 +263,52 @@ namespace MedienverwaltungPlayer
                 treeViewPlaylistEntries.Nodes.Add(new TreeNode("No files in playlist"));
             }
 
+            //LockWindowUpdate(IntPtr.Zero);
             treeViewPlaylistEntries.EndUpdate();
-
-            // check for vlc binary
-            if (File.Exists(PlaylistManager.vlcPlayer.vlcLocation) == false)
-            {
-                selectVlcLocation();
-            }
-
             updateStatusForm();
         }
 
-        public void selectVlcLocation()
+        public Boolean checkVlcLocation()
         {
-            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
-
-            PlaylistManager.vlcPlayer.vlcLocation = openFileDialog1.FileName;
-
+            // check for vlc binary
             if (File.Exists(PlaylistManager.vlcPlayer.vlcLocation) == false)
             {
-                selectVlcLocation();
+                var vlcProcess = PlaylistManager.vlcPlayer.findRunningVlcProcess();
+
+                if (vlcProcess != null && File.Exists(vlcProcess.MainModule.FileName))
+                {
+                    PlaylistManager.vlcPlayer.vlcLocation = vlcProcess.MainModule.FileName;
+                    return true;
+                }
+
+                return selectVlcLocation();
             }
+
+            return true;
+        }
+
+        public Boolean selectVlcLocation()
+        {
+            openFileDialog1.CheckFileExists = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return false;
+
+            PlaylistManager.vlcPlayer.vlcLocation = openFileDialog1.FileName;
+            return true;
+
         }
 
         public void updatePlaylistComboBox()
         {
 
             comboBoxPlaylists.BeginUpdate();
+            //LockWindowUpdate(comboBoxPlaylists.Handle);
             comboBoxPlaylists.Items.Clear();
             foreach (var playlist in playlistManager.playlists)
             {
                 var item = playlist;
                 comboBoxPlaylists.Items.Add(item);
             }
+            //LockWindowUpdate(IntPtr.Zero);
             comboBoxPlaylists.EndUpdate();
 
             if (playlistManager.currentPlaylist != null)
@@ -379,7 +399,7 @@ namespace MedienverwaltungPlayer
             if(playlistManager.currentlyPlayedFile() != null) {
                 var fileName = new FileInfo(playlistManager.currentlyPlayedFile()).Name;
 
-                var msg = "'" + fileName.Substring(0, Math.Min(35, fileName.Length)) + (fileName.Length > 35 ? "..." : "") + "'" + formatTime(playlistManager.currentPlaylist.currentPlaylistEntry);
+                var msg = "'" + fileName.Substring(0, Math.Min(30, fileName.Length)) + (fileName.Length > 30 ? "..." : "") + "'" + formatTime(playlistManager.currentPlaylist.currentPlaylistEntry);
 
                 if (PlaylistManager.vlcPlayer.playing)
                 {
@@ -393,7 +413,7 @@ namespace MedienverwaltungPlayer
                     }
                     else
                     {
-                        notifyIcon1.Text = "stopped" + msg;
+                        notifyIcon1.Text = "stopped " + msg;
                     }
                 }
             }
@@ -403,7 +423,6 @@ namespace MedienverwaltungPlayer
         public void createNewPlaylistFromFolderSelection()
         {
             folderBrowserDialog1.Description = "Select base folder for new playlist";
-            folderBrowserDialog1.SelectedPath = @"M:\Video\Dexter Season 1";
             
             if (folderBrowserDialog1.ShowDialog() != DialogResult.OK) return;
             
@@ -421,25 +440,28 @@ namespace MedienverwaltungPlayer
 
         public void play()
         {
+            if (!checkVlcLocation()) return;
             playlistManager.play();
             updateStatusForm();
         }
 
         public void pause()
         {
+            if (!checkVlcLocation()) return;
             playlistManager.pause();
             updateStatusForm();
         }
 
         public void stop()
         {
+            if (!checkVlcLocation()) return;
             playlistManager.stop();
             updateStatusForm();
         }
         
         public void next()
         {
-
+            if (!checkVlcLocation()) return;
             playlistManager.next();
             var nextFile = playlistManager.currentlyPlayedFile();
 
@@ -459,8 +481,9 @@ namespace MedienverwaltungPlayer
 
         public void prev()
         {
-
+            if (!checkVlcLocation()) return;
             playlistManager.prev();
+
             var prevFile = playlistManager.currentlyPlayedFile();
 
             if (prevFile != null)
@@ -512,6 +535,7 @@ namespace MedienverwaltungPlayer
             if (File.Exists(settingsFile))
             {
                 playlistManager = PlaylistManager.load(settingsFile);
+                PlaylistManager.vlcPlayer = playlistManager._vlcPlayer;
                 PlaylistManager.vlcPlayer.resetStatus();
                 rebuildTreeNodes();
             }
@@ -522,6 +546,13 @@ namespace MedienverwaltungPlayer
                 labelFile.Text = "no file selected";
             }
 
+            /*
+            System.Reflection.PropertyInfo aProp = typeof(System.Windows.Forms.Control)
+                    .GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance);
+                                aProp.SetValue(treeViewPlaylistEntries, true, null);
+            */
+
 
             playlistManager.select();
             updatePlaylistComboBox();
@@ -530,7 +561,10 @@ namespace MedienverwaltungPlayer
         private void MainForm_Load(object sender, EventArgs e)
         {
             Hide();
-            PlaylistManager.vlcPlayer.readStatus();
+            if (checkVlcLocation())
+            {
+                PlaylistManager.vlcPlayer.readStatus();
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -646,12 +680,21 @@ namespace MedienverwaltungPlayer
 
             updateStatusForm();
         }
-
+        
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             updateStatusForm();
             Show();
-            Focus();
+
+            try
+            {
+                SetForegroundWindow(this.Handle);
+            }
+            catch (Exception)
+            {
+                
+                // ignore for linux/mono compatibility
+            }
         }
 
         private void buttonPlay_Click(object sender, EventArgs e)

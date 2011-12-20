@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MedienverwaltungPlayer
 {
@@ -12,7 +11,10 @@ namespace MedienverwaltungPlayer
     {
         private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
  
-        public static VlcPlayer vlcPlayer = new VlcPlayer();
+        public VlcPlayer _vlcPlayer = new VlcPlayer();
+
+        public static VlcPlayer vlcPlayer = null;
+
         public List<Playlist> playlists { get; private set; }
         public Playlist currentPlaylist { get; set; }
 
@@ -21,6 +23,7 @@ namespace MedienverwaltungPlayer
         private PlaylistManager()
         {
             this.playlists = new List<Playlist>();
+            PlaylistManager.vlcPlayer = _vlcPlayer;
             
             
         }

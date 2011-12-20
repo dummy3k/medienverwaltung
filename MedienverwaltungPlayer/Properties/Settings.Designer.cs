@@ -22,5 +22,14 @@ namespace MedienverwaltungPlayer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\VideoLAN\\VLC2\\vlc.exe")]
+        public string vlcLocation {
+            get {
+                return ((string)(this["vlcLocation"]));
+            }
+        }
     }
 }
