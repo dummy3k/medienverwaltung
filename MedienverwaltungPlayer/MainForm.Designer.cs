@@ -59,12 +59,17 @@
             this.toolStripButtonCheckFiles = new System.Windows.Forms.ToolStripButton();
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelFile = new System.Windows.Forms.Label();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -181,7 +186,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelFolder.Location = new System.Drawing.Point(62, 49);
             this.labelFolder.Name = "labelFolder";
-            this.labelFolder.Size = new System.Drawing.Size(399, 18);
+            this.labelFolder.Size = new System.Drawing.Size(459, 18);
             this.labelFolder.TabIndex = 3;
             this.labelFolder.Text = "no folder selected";
             // 
@@ -189,7 +194,7 @@
             // 
             this.buttonPlay.Location = new System.Drawing.Point(62, 12);
             this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(51, 23);
+            this.buttonPlay.Size = new System.Drawing.Size(63, 23);
             this.buttonPlay.TabIndex = 6;
             this.buttonPlay.Text = "play";
             this.buttonPlay.UseVisualStyleBackColor = true;
@@ -197,9 +202,9 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(119, 12);
+            this.buttonNext.Location = new System.Drawing.Point(131, 12);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(52, 23);
+            this.buttonNext.Size = new System.Drawing.Size(61, 23);
             this.buttonNext.TabIndex = 7;
             this.buttonNext.Text = "next";
             this.buttonNext.UseVisualStyleBackColor = true;
@@ -207,9 +212,9 @@
             // 
             // buttonPrev
             // 
-            this.buttonPrev.Location = new System.Drawing.Point(177, 12);
+            this.buttonPrev.Location = new System.Drawing.Point(198, 12);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(60, 23);
+            this.buttonPrev.Size = new System.Drawing.Size(77, 23);
             this.buttonPrev.TabIndex = 8;
             this.buttonPrev.Text = "previous";
             this.buttonPrev.UseVisualStyleBackColor = true;
@@ -217,7 +222,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(243, 12);
+            this.buttonStop.Location = new System.Drawing.Point(281, 12);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 14;
@@ -227,7 +232,7 @@
             // 
             // buttonPause
             // 
-            this.buttonPause.Location = new System.Drawing.Point(324, 12);
+            this.buttonPause.Location = new System.Drawing.Point(362, 12);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(75, 23);
             this.buttonPause.TabIndex = 15;
@@ -242,7 +247,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewPlaylistEntries.Location = new System.Drawing.Point(9, 148);
             this.treeViewPlaylistEntries.Name = "treeViewPlaylistEntries";
-            this.treeViewPlaylistEntries.Size = new System.Drawing.Size(449, 331);
+            this.treeViewPlaylistEntries.Size = new System.Drawing.Size(509, 331);
             this.treeViewPlaylistEntries.TabIndex = 16;
             this.treeViewPlaylistEntries.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeViewPlaylistEntries.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -261,7 +266,7 @@
             this.comboBoxPlaylists.FormattingEnabled = true;
             this.comboBoxPlaylists.Location = new System.Drawing.Point(62, 96);
             this.comboBoxPlaylists.Name = "comboBoxPlaylists";
-            this.comboBoxPlaylists.Size = new System.Drawing.Size(399, 21);
+            this.comboBoxPlaylists.Size = new System.Drawing.Size(459, 21);
             this.comboBoxPlaylists.TabIndex = 18;
             this.comboBoxPlaylists.SelectedValueChanged += new System.EventHandler(this.comboBoxPlaylists_SelectedValueChanged);
             this.comboBoxPlaylists.TextChanged += new System.EventHandler(this.comboBoxPlaylists_TextChanged);
@@ -272,11 +277,12 @@
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonImportFromFolder,
+            this.toolStripButton1,
             this.toolStripButtonDeleteCurrentPlaylist,
             this.toolStripButtonCheckFiles});
             this.toolStrip2.Location = new System.Drawing.Point(9, 120);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(359, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(509, 25);
             this.toolStrip2.TabIndex = 20;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -312,9 +318,9 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(405, 12);
+            this.buttonExit.Location = new System.Drawing.Point(443, 12);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(56, 23);
+            this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 21;
             this.buttonExit.Text = "exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -326,15 +332,47 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelFile.Location = new System.Drawing.Point(62, 72);
             this.labelFile.Name = "labelFile";
-            this.labelFile.Size = new System.Drawing.Size(399, 18);
+            this.labelFile.Size = new System.Drawing.Size(459, 18);
             this.labelFile.TabIndex = 23;
             this.labelFile.Text = "no file selected";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(150, 22);
+            this.toolStripButton1.Text = "add files to current playlist";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(108, 48);
+            // 
+            // playToolStripMenuItem
+            // 
+            this.playToolStripMenuItem.Name = "playToolStripMenuItem";
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.playToolStripMenuItem.Text = "Play";
+            this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click_1);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 491);
+            this.ClientSize = new System.Drawing.Size(533, 491);
             this.Controls.Add(this.labelFile);
             this.Controls.Add(label4);
             this.Controls.Add(this.buttonExit);
@@ -351,7 +389,7 @@
             this.Controls.Add(this.labelFolder);
             this.Controls.Add(label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(489, 39);
+            this.MinimumSize = new System.Drawing.Size(549, 39);
             this.Name = "MainForm";
             this.Text = "Medienverwaltung.Playlist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -360,6 +398,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,6 +431,10 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.ToolStripButton toolStripButtonCheckFiles;
         private System.Windows.Forms.Label labelFile;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 

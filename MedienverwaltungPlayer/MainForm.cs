@@ -223,7 +223,7 @@ namespace MedienverwaltungPlayer
             if (playlistManager.currentPlaylist != null)
             {
                 playlistManager.currentPlaylist.check();
-                updateStatusForm();
+                rebuildTreeNodes();
             }
         }
 
@@ -250,6 +250,7 @@ namespace MedienverwaltungPlayer
                 foreach (var entry in playlistManager.currentPlaylist.playlistEntries)
                 {
                     var node = new TreeNode(nodeLabel(entry));
+                    node.ContextMenuStrip = contextMenuStrip2;
                     node.Checked = entry.watched;
                     node.Tag = entry;
                     treeViewPlaylistEntries.Nodes.Add(node);
@@ -286,9 +287,27 @@ namespace MedienverwaltungPlayer
             return true;
         }
 
+        public Boolean addFiles()
+        {
+            if(playlistManager.currentPlaylist == null) {
+                return false;
+            }
+
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.Multiselect = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return false;
+
+            playlistManager.currentPlaylist.addFiles(openFileDialog1.FileNames);
+
+            rebuildTreeNodes();
+
+            return true;
+        }
+
         public Boolean selectVlcLocation()
         {
             openFileDialog1.CheckFileExists = true;
+            openFileDialog1.Multiselect = false;
             if (openFileDialog1.ShowDialog() != DialogResult.OK) return false;
 
             PlaylistManager.vlcPlayer.vlcLocation = openFileDialog1.FileName;
@@ -330,7 +349,10 @@ namespace MedienverwaltungPlayer
             //if (playlistManager.currentPlaylist != null && playlistManager.currentPlaylist.currentPlaylistEntry != null)
             {
                 //labelFile.Text = playlistManager.currentPlaylist.currentPlaylistEntry.filename;
-                labelFile.Text = PlaylistManager.vlcPlayer.currentFilename;
+                if (PlaylistManager.vlcPlayer.currentPath != null && PlaylistManager.vlcPlayer.currentPath != "")
+                {
+                    labelFile.Text = new FileInfo(PlaylistManager.vlcPlayer.currentPath).Name;
+                }
             }
             /*else
             {
@@ -602,6 +624,11 @@ namespace MedienverwaltungPlayer
         {
             createNewPlaylistFromFolderSelection();
         }
+        
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            addFiles();
+        }
 
         private void playToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -666,6 +693,11 @@ namespace MedienverwaltungPlayer
 
             if (entry != null)
             {
+                if (e.Node.Checked == true && entry.watched == false)
+                {
+                    entry.time = 0;
+                }
+
                 entry.watched = e.Node.Checked;
             }
         }
@@ -783,6 +815,48 @@ namespace MedienverwaltungPlayer
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             play();
+        }
+        
+        private void playToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var node = (TreeNode)sender;
+
+            var entry = (PlaylistEntry)node.Tag;
+
+            if (entry != null)
+            {
+                playlistManager.currentPlaylist.play(entry);
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var node = this.treeViewPlaylistEntries.SelectedNode;
+
+            var entry = (PlaylistEntry) node.Tag;
+
+            if (entry != null)
+            {
+                if (playlistManager.currentlyPlayedFile() == entry.path)
+                {
+                    playlistManager.stop();
+                    System.Threading.Thread.Sleep(400);
+
+                    playlistManager.currentPlaylist.currentPlaylistEntry = null;
+
+                }
+
+                File.Delete(entry.path);
+
+                playlistManager.currentPlaylist.playlistEntries.Remove(entry);
+
+                if (playlistManager.currentPlaylist.currentPlaylistEntry == null)
+                {
+                    playlistManager.next();
+                }
+            }
+
+            rebuildTreeNodes();
         }
 
         #endregion

@@ -21,7 +21,7 @@ namespace MedienverwaltungPlayer
         public Int32 time { get; set; }
         public Int32 length { get; private set; }
         public String state { get; private set; }
-        public String currentFilename { get; set; }
+        public String currentPath { get; set; }
 
 
         private Boolean _playing = false;
@@ -61,7 +61,7 @@ namespace MedienverwaltungPlayer
         {
             this.time = 0;
             this.state = null;
-            this.currentFilename = null;
+            this.currentPath = null;
             this.playing = false;
         }
         
@@ -101,7 +101,7 @@ namespace MedienverwaltungPlayer
                 {
                     String filename = new System.IO.FileInfo(filenameAbsolute).Name;
 
-                    if (this.currentFilename == filename)
+                    if (this.currentPath == filenameAbsolute)
                     {
                         return _togglePause();
                     }
@@ -148,7 +148,7 @@ namespace MedienverwaltungPlayer
                 for(int i=0; i*SLEEP_TIME<MAX_WAIT; i++) {
                     System.Threading.Thread.Sleep(SLEEP_TIME);
 
-                    if (readStatus() && this.length > 0 && this.currentFilename == filename)
+                    if (readStatus() && this.length > 0 && this.currentPath == filenameAbsolute)
                     {
                         if (seek(time))
                         {
@@ -176,9 +176,7 @@ namespace MedienverwaltungPlayer
             {
                 if (filenameAbsolute != null)
                 {
-                    String filename = new System.IO.FileInfo(filenameAbsolute).Name;
-
-                    if (this.currentFilename == filename)
+                    if (this.currentPath == filenameAbsolute)
                     {
                         if (state == "stop" || state == "paused")
                         {
@@ -194,7 +192,7 @@ namespace MedienverwaltungPlayer
                     }
                     else
                     {
-                        log.Debug("play(): starting new vlc because current filename '" + this.currentFilename + "' is different from our '" + filename + "'");
+                        log.Debug("play(): starting new vlc because current path '" + (this.currentPath != null && this.currentPath != "" ? new FileInfo(this.currentPath).Name : "(empty)") + "' is different from our '" + new FileInfo(filenameAbsolute).Name + "'");
                         return start(filenameAbsolute, time);
                     }
                 }
@@ -280,15 +278,15 @@ namespace MedienverwaltungPlayer
                 return false;
             }
 
-            var responsecontent = callUrl(baseUrl + "requests/status.xml");
+            var statusXml = callUrl(baseUrl + "requests/status.xml");
 
-            if (responsecontent == null)
+            if (statusXml == null)
             {
                 return false;
             }
 
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(responsecontent);
+            doc.LoadXml(statusXml);
 
             this.time = Int32.Parse(doc.DocumentElement.SelectSingleNode("/root/time").InnerText);
             this.length = Int32.Parse(doc.DocumentElement.SelectSingleNode("/root/length").InnerText);
@@ -299,12 +297,26 @@ namespace MedienverwaltungPlayer
 
             var data = element.Data;
 
-            this.currentFilename = HttpUtility.HtmlDecode(tag.InnerText);
-
             this.playing = this.state == "playing";
 
-            var status = "time: " + time + "/" + length + ". state: " + state + " @ '" + currentFilename + "'";
+            var status = "time: " + time + "/" + length + ". state: " + state + " @ '" + (currentPath != null && currentPath != "" ? new FileInfo(currentPath).Name : "(leer)") + "'";
             log.Info(status);
+            
+            var playlistXml = callUrl(baseUrl + "requests/playlist.xml");
+
+            if (playlistXml != null)
+            {
+                doc = new XmlDocument();
+                doc.LoadXml(playlistXml);
+
+                var leaf = doc.DocumentElement.SelectSingleNode("//leaf[@current='current']");
+                if (leaf != null)
+                {
+                    var val = leaf.Attributes.GetNamedItem("uri").Value;
+                    this.currentPath = HttpUtility.UrlDecode(val.Replace("file:///", "").Replace("file://", "").Replace("/", "\\"));
+                }
+            }
+
             return true;
         }
 

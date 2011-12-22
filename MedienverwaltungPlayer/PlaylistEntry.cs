@@ -12,7 +12,7 @@ namespace MedienverwaltungPlayer
     {
         private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
  
-        public String path { get; private set; }
+        public String path { get; set; }
         public String filename
         {
             get
@@ -58,7 +58,7 @@ namespace MedienverwaltungPlayer
         {
             if (PlaylistManager.vlcPlayer.readStatus())
             {
-                if (PlaylistManager.vlcPlayer.currentFilename == filename)
+                if (PlaylistManager.vlcPlayer.currentPath == this.path)
                 {
                     if (PlaylistManager.vlcPlayer.time != 0)
                     {

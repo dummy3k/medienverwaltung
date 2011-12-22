@@ -34,10 +34,6 @@ namespace MedienverwaltungPlayer
             this.playlistEntries = new List<PlaylistEntry>();
 
             scanDirectory(rootPath);
-
-            this.playlistEntries = (from x in playlistEntries
-                                         orderby x.path ascending
-                                         select x).ToList();
         }
 
         public String currentlyPlayedFile()
@@ -50,13 +46,8 @@ namespace MedienverwaltungPlayer
             return null;
         }
 
-        public void scanDirectory(String path, int lvl = 0)
+        public void addFiles(string[] files)
         {
-            if (path == null || path == "")
-            {
-                return;
-            }
-
             string[] extensions = {".ASX", ".DTS", ".GXF", ".M2V", 
                                       ".M3U", ".M4V", ".MPEG1", ".MPEG2",
                                       ".MTS", ".MXF", ".OGM", ".PLS", 
@@ -75,21 +66,15 @@ namespace MedienverwaltungPlayer
                                   };
 
 
-            string[] files = Directory.GetFiles(path);
-
-            SortedList all = new SortedList();
-
-            foreach (var dirname in Directory.GetDirectories(path))
-            {
-                scanDirectory(Path.Combine(path, dirname), lvl + 1);
-            }
-
-            foreach (var filename in Directory.GetFiles(path))
+            foreach (var path in files)
             {
                 Boolean valid = false;
+
+                var filename = new FileInfo(path).Name;
+
                 foreach (var validExtension in extensions)
                 {
-                    if (filename.EndsWith(validExtension, true, CultureInfo.CurrentCulture))
+                    if (path.EndsWith(validExtension, true, CultureInfo.CurrentCulture))
                     {
                         valid = true;
                     }
@@ -99,9 +84,35 @@ namespace MedienverwaltungPlayer
                 if (!valid) continue;
 
                 log.Debug("adding file '" + filename + "' to playlist '" + name + "'");
-                PlaylistEntry entry = new PlaylistEntry(Path.Combine(path, filename), this);
+                PlaylistEntry entry = new PlaylistEntry(path, this);
                 playlistEntries.Add(entry);
             }
+
+
+            this.playlistEntries = (from x in playlistEntries
+                                    orderby x.path ascending
+                                    select x).ToList();
+
+        }
+        public void scanDirectory(String path, int lvl = 0)
+        {
+            if (path == null || path == "")
+            {
+                return;
+            }
+
+
+
+            string[] files = Directory.GetFiles(path);
+
+            SortedList all = new SortedList();
+
+            foreach (var dirname in Directory.GetDirectories(path))
+            {
+                scanDirectory(Path.Combine(path, dirname), lvl + 1);
+            }
+
+            addFiles(files);
         }
 
         public void deleteEntry(PlaylistEntry entry)
@@ -116,6 +127,12 @@ namespace MedienverwaltungPlayer
 
         public void check()
         {
+            foreach (var existingEntry in playlistEntries)
+            {
+                existingEntry.check();
+                existingEntry.path = existingEntry.path.Replace("/", "\\");
+            }
+
             var updatedEntries = new Playlist(rootPath, name);
 
             foreach (var entry in updatedEntries.playlistEntries)
@@ -139,7 +156,12 @@ namespace MedienverwaltungPlayer
             foreach (var existingEntry in playlistEntries)
             {
                 existingEntry.check();
+                existingEntry.path = existingEntry.path.Replace("/", "\\");
             }
+
+            this.playlistEntries = (from x in playlistEntries
+                                    orderby x.path ascending
+                                    select x).ToList();
         }
 
         public void play()
@@ -198,7 +220,7 @@ namespace MedienverwaltungPlayer
                 {
                     foreach (var entry in playlistEntries)
                     {
-                        if (entry.filename == PlaylistManager.vlcPlayer.currentFilename)
+                        if (entry.path == PlaylistManager.vlcPlayer.currentPath)
                         {
                             currentPlaylistEntry = entry;
                             currentPlaylistEntry.update();
@@ -259,5 +281,6 @@ namespace MedienverwaltungPlayer
             }
             log.Info("prev() found nothing!");
         }
+
     }
 }
