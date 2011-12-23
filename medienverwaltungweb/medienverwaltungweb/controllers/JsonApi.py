@@ -20,15 +20,7 @@ class JsonapiController(BaseController):
         return False
 
     def index(self):
-        identity = request.environ.get('repoze.who.identity')
-        if not identity:
-            # Force skip the StatusCodeRedirect middleware; it was stripping
-            #   the WWW-Authenticate header from the 401 response
-            request.environ['pylons.status_code_redirect'] = True
-            abort(401, 'You are not authenticated')
-
         return 'Hello World'
-
 
     def isbn(self):
         isbn = request.params.get('q')
@@ -57,4 +49,7 @@ class JsonapiController(BaseController):
         #~ c.media_page = paginate.Page(media_query)
 
         return json.dumps(retval)
+
+
+
 

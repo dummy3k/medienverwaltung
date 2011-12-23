@@ -13,10 +13,12 @@ media_table = Table('media', meta,
 users_table = Table('users', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('name', Unicode(50)),
+    Column('pwd_salt', Integer),
+    Column('pwd_hash', Unicode(50)),
     Column('last_login', DateTime),
 )
 
-user_openids_table = Table('user_openids', meta,
+user_openids_table = Table('user_openids', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('user_id', Integer, ForeignKey('users.id')),
     Column('openid', Unicode(50)),

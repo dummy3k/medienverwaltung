@@ -30,18 +30,26 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
 
         for k, v in environ.items():
-            log.debug("environ[%s] = %s" % (k, v))
+            if k.startswith('repoze.'):
+                log.debug("environ[%s] = %s" % (k, v))
         identity = environ.get('repoze.who.identity')
+        log.debug("identity: %s" % identity)
         if identity:
-            openid = identity['repoze.who.userid']
-            log.debug("openid: %s" % openid)
-            openid_model = meta.Session\
-                            .query(model.UserOpenId)\
-                            .filter(model.UserOpenId.openid==openid)\
-                            .first()
-            if openid_model:
-                log.debug("!!!!!!!!!")
-                c.user = openid_model.user
+            #~ if type
+            user_id = identity['repoze.who.userid']
+            log.debug("user_id: %s" % user_id)
+            log.debug("type(user_id): %s" % type(user_id))
+            if type(user_id) == model.User:
+                log.debug("setting c.user to identity['repoze.who.userid']")
+                c.user = user_id
+            else:
+                openid_model = meta.Session\
+                                .query(model.UserOpenId)\
+                                .filter(model.UserOpenId.openid==user_id)\
+                                .first()
+                if openid_model:
+                    log.debug("user is logged via opendid: %s" % user_id)
+                    c.user = openid_model.user
 
         log.debug("__call__(): %s" % environ['pylons.routes_dict'])
         if 'mobile' in environ['pylons.routes_dict']:
