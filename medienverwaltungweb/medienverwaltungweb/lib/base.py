@@ -7,8 +7,9 @@ import logging
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from pylons.i18n import get_lang, set_lang
-from pylons import config
+from pylons import config, request
 from pylons import tmpl_context as c
+from pylons.controllers.util import abort, redirect
 
 import medienverwaltungweb.model as model
 from medienverwaltungweb.model import meta
@@ -53,7 +54,18 @@ class BaseController(WSGIController):
         finally:
             meta.Session.remove()
 
+    def login_user(self):
+        identity = request.environ.get('repoze.who.identity')
+        if not identity:
+            # Force skip the StatusCodeRedirect middleware; it was stripping
+            #   the WWW-Authenticate header from the 401 response
+            request.environ['pylons.status_code_redirect'] = True
+            abort(401, 'You are not authenticated')
 
     def __before__(self):
         log.debug("__before__()")
 
+
+    @property
+    def allow_openid(self):
+        return True
