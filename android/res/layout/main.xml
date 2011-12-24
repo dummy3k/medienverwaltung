@@ -21,8 +21,15 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Api"
-            android:onClick="api"
+            android:text="Fetch Jason"
+            android:onClick="JsonApi"
+            />
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan Result for 3442367263"
+            android:onClick="Scan3442367263"
             />
 
 </LinearLayout>

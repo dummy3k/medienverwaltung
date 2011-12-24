@@ -72,9 +72,11 @@ class LoginController(BaseController):
         meta.Session.commit()
 
         redirect("/")
-        #~ return "success: %s" % openid
 
     def logout_success(self):
         redirect("/")
-        #~ return "logout_success"
 
+    def logout(self):
+        # doesnt really work with basic auth
+        request.environ['repoze.who.api'].forget()
+        redirect("/")
