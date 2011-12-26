@@ -3,7 +3,7 @@ How to install
 
 sudo aptitude install mysql-server phpmyadmin python-mysqldb
 
-a)  sudo aptitude install python-lxml
+a)  sudo aptitude install python-lxml python-imaging
 b)  libxml2-dev libxslt-dev build-essential python-dev
     sudo easy_install lxml
 
@@ -13,6 +13,7 @@ Create the Database:
 ====================
 
 mv_manage_db.py manage manage_local.py --url=mysql://mv_test:password@127.0.0.1/mv_test?charset=utf8
+
 mv_manage_db.py manage manage_local.py --url=sqlite:///production.db
 chmod a+x manage_local.py
 ./manage_local.py version_control
