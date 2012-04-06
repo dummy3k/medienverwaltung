@@ -32,8 +32,8 @@ class UserModelPlugin(object):
             if user_model.pwd_hash == pwd_hash:
                 return user_model
             else:
-                log.debug("bad password '%s' for user '%s'" %\
-                    (password, username))
+                log.debug("bad password '%s' for user '%s', browser %s, db %s" %\
+                    (password, username, pwd_hash, user_model.pwd_hash))
 
 
     #~ def add_metadata(self, environ, identity):
