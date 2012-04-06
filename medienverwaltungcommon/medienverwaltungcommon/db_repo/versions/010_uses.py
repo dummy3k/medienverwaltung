@@ -10,7 +10,7 @@ media_table = Table('media', meta,
 
 # new tables & columns
 
-users_table = Table('users', meta.metadata,
+users_table = Table('users', meta,
     Column('id', Integer, primary_key=True),
     Column('name', Unicode(50)),
     Column('pwd_salt', Integer),
@@ -18,7 +18,7 @@ users_table = Table('users', meta.metadata,
     Column('last_login', DateTime),
 )
 
-user_openids_table = Table('user_openids', meta.metadata,
+user_openids_table = Table('user_openids', meta,
     Column('id', Integer, primary_key=True),
     Column('user_id', Integer, ForeignKey('users.id')),
     Column('openid', Unicode(50)),
