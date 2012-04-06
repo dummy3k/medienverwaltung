@@ -2,8 +2,11 @@ How to install
 ==============
 
 install python 2.7
-install easy install
-install virtualenv
+
+install pip
+http://stackoverflow.com/a/4921215/6297
+
+pip install virtualenv
 
 install mysql server
 create mysql database / user
@@ -17,12 +20,6 @@ run 'local.env\scripts\activate.bat'
 
 \medienverwaltung>cd medienverwaltungcommon
 run 'python setup.py develop' to install dependencies
-
-#    sudo easy_install lxml
-#b)  libxml2-dev libxslt-dev 
-
-#easy_install -U -f http://dl.dropbox.com/u/530973/py/index.html medienverwaltungcommon
-
 
 Create the Database:
 ====================
