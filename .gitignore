@@ -11,6 +11,8 @@
 *.ini
 *.orig
 *,cover
+*.iml
+/.idea
 */local/*
 */dist/*
 */htmlcov/*
