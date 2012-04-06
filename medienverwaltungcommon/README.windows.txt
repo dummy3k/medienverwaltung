@@ -42,6 +42,10 @@ Sqlite:
 \medienverwaltung>
 mv_manage_db.exe manage manage_local.py --url=sqlite:///production.db
 
+MSSQL:
+http://code.google.com/p/pyodbc/downloads/list
+mv_manage_db.exe manage manage_local.py --url=mssql://USER:PASSWORD@HOST/CATALOG?charset=utf8
+
 
 Create Database:
 medienverwaltung>python manage_local.py version_control

@@ -8,7 +8,7 @@ Prerequisite:
 	medienverwaltung\local.env\scripts/activate
 
 	easy_install --allow-hosts=lxml.de,*.python.org lxml==2.3
-    easy_install babel
+    pip install babel
 	
     medienverwaltungweb>python setup.py develop
 
