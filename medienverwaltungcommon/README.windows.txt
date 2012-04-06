@@ -27,8 +27,14 @@ Create the Database:
 
 
 MySQL:
+create database and user:
+SQL> CREATE DATABASE mv;
+SQL> CREATE USER mv@localhost IDENTIFIED BY 'DykQDhpjCWDA3wdg';
+SQL> GRANT ALL ON mv.* TO mv@localhost;
+SQL> FLUSH PRIVILEGES;
+
 \medienverwaltung>
-mv_manage_db.exe manage manage_local.py --url=mysql://mv_test:password@localhost/mv_test?charset=utf8
+mv_manage_db.exe manage manage_local.py --url=mysql://localhost:DykQDhpjCWDA3wdg@localhost/mv?charset=utf8
 
 Sqlite:
 \medienverwaltung>
