@@ -20,7 +20,7 @@ setup(
         "PyRSS2Gen",
         "medienverwaltungcommon",
         "repoze.who",
-        "repoze.who.plugins.openid",
+        #~ "repoze.who.plugins.openid",
     ],
     setup_requires=[
         "PasteScript>=1.6.3",

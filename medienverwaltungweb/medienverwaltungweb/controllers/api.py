@@ -21,11 +21,14 @@ log = logging.getLogger(__name__)
 class ApiController(XMLRPCController):
     def index(self):
         return "API Interface"
-        
+
     def sayhello(self, s):
-        return 'Hello %s' % s
+        return 'Hello Sir %s' % s
     sayhello.signature = [ ['struct', 'string'] ]
 
     def AddMediumByISBN(self, isbn, search_index):
         return amazon.AddMediumByISBN(isbn, search_index)
     AddMediumByISBN.signature = [ ['struct', 'string', 'string'] ]
+
+    def querybarcode(self, q):
+        return "Hello World! 123"

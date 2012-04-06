@@ -4,6 +4,8 @@ import meta
 users_table = Table('users', meta.metadata,
     Column('id', Integer, primary_key=True),
     Column('name', Unicode(50)),
+    Column('pwd_salt', Integer),
+    Column('pwd_hash', Unicode(50)),
     Column('last_login', DateTime),
 )
 

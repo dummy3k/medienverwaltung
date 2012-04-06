@@ -20,7 +20,9 @@ def AddMediumByISBN(isbn, search_index):
     response = {'input_isbn':isbn}
     try:
         api = amazonproduct.API(config['Amazon.AccessKeyID'],
-                                config['Amazon.SecretAccessKey'])
+                                config['Amazon.SecretAccessKey'],
+                                config['Amazon.Locale'],
+                                config['Amazon.AssociateTag'])
 
         #~ log.debug("FOLLOW ME FOLLOW ME FOLLOW ME")
         #~ # Valid Values: SKU | UPC | EAN | ISBN (US only, when search
@@ -35,7 +37,7 @@ def AddMediumByISBN(isbn, search_index):
             id_type = 'EAN'
         else:
             raise Exception("unknown search_index: '%s'" % search_index)
-            
+
         node = api.item_lookup(isbn,
                                IdType=id_type,
                                SearchIndex=search_index,
@@ -130,7 +132,7 @@ def GetTmpMediumByISBN(isbn, search_index):
         id_type = 'EAN'
     else:
         raise Exception("unknown search_index: '%s'" % search_index)
-        
+
     node = api.item_lookup(isbn,
                            IdType=id_type,
                            SearchIndex=search_index,
